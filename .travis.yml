@@ -7,7 +7,7 @@ r:
 env:
   FORCE_AUTOBREW: 'TRUE'
 before_install:
-- git clone https://github.com/nealrichardson/arrow -b force-autobrew
+- git clone --depth=1 https://github.com/nealrichardson/arrow -b force-autobrew
 - cd arrow/r
 - mv tools/autobrew .
 - mv tools/apache-arrow.rb .

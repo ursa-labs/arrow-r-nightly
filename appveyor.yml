@@ -1,0 +1,66 @@
+# Copied from https://github.com/krlmlr/r-appveyor/blob/master/sample.appveyor.yml
+
+environment:
+  TEST_R_WITH_ARROW: TRUE
+
+init:
+  ps: |
+        $ErrorActionPreference = "Stop"
+        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
+        Import-Module '..\appveyor-tool.ps1'
+install:
+  - git clone --depth=1 https://github.com/apache/arrow.git
+  - cd arrow/r
+  - ps: Bootstrap
+  - cd %APPVEYOR_BUILD_FOLDER%/arrow
+
+build_script:
+  - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
+  - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/arrow/ci/appveyor-build-r.sh"
+  - pushd r
+  - travis-tool.sh install_deps
+
+test_script:
+  - travis-tool.sh run_tests
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})write-PACKAGES-win.sh"
+
+on_failure:
+  - travis-tool.sh dump_logs
+
+artifacts:
+  - path: 'arrow\r\*.Rcheck\**\*.log'
+    name: Logs
+
+  - path: 'arrow\r\*.Rcheck\**\*.out'
+    name: Logs
+
+  - path: 'arrow\r\*.Rcheck\**\*.fail'
+    name: Logs
+
+  - path: 'arrow\r\*.Rcheck\**\*.Rout'
+    name: Logs
+
+  - path: 'arrow\r\*_*.tar.gz'
+    name: Source
+
+  - path: 'arrow\r\*_*.zip'
+    name: Binary
+
+  - path: 'arrow\r\PACKAGES*'
+    name: Binary
+
+deploy:
+  - provider: BinTray
+    username: nealrichardson
+    subject: nealrichardson
+    repo: arrow-r
+    package: arrow
+    version: latest
+    publish: true
+    override: true
+    api_key:
+      secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
+    on:
+      branch: master
+    artifact: Binary
