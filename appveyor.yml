@@ -15,6 +15,7 @@ install:
   - copy arrow\ci\appveyor-build-r.sh ci\
   - copy arrow\ci\windows-pkg-arrow-for-r.sh ci\
   - xcopy /S /I arrow\cpp cpp
+  - xcopy /S /I arrow\format format
   - xcopy /S /I arrow\r r
   - cd r
   - ps: Bootstrap
