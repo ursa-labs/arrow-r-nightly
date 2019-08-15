@@ -11,9 +11,9 @@ init:
 install:
   - git clone --depth=1 https://github.com/apache/arrow.git
   - mkdir ci
-  - copy arrow/ci/PKGBUILD ci
-  - copy arrow/ci/appveyor-build-r.sh ci
-  - copy arrow/ci/windows-pkg-arrow-for-r.sh ci
+  - copy arrow\ci\PKGBUILD ci\
+  - copy arrow\ci\appveyor-build-r.sh ci\
+  - copy arrow\ci\windows-pkg-arrow-for-r.sh ci\
   - cd arrow/r
   - ps: Bootstrap
   - cd %APPVEYOR_BUILD_FOLDER%/arrow
