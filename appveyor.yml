@@ -3,7 +3,7 @@
 environment:
   TEST_R_WITH_ARROW: TRUE
   RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
-  R_VERSION: "3.6"
+  RVERSION: "3.6"
 
 init:
   ps: |
@@ -73,7 +73,7 @@ deploy:
   - provider: BinTray
     username: nealrichardson
     subject: nealrichardson
-    repo: "arrow-r/bin/windows/contrib/${R_VERSION}"
+    repo: "arrow-r/bin/windows/contrib/${RVERSION}"
     package: arrow
     version: latest
     publish: true
