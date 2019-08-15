@@ -36,7 +36,7 @@ test_script:
   # - travis-tool.sh run_tests
   # TODO: this didn't work
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
-  - Rscript -e 'cat("foo", file="test.txt")'
+  - ../test.sh
   - dir
   - dir %APPVEYOR_BUILD_FOLDER%
 
