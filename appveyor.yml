@@ -2,6 +2,7 @@
 
 environment:
   TEST_R_WITH_ARROW: TRUE
+  RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
 
 init:
   ps: |
@@ -18,6 +19,7 @@ install:
   - xcopy /S /I arrow\format format
   - xcopy /S /I arrow\r r
   - cd r
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/up-date-description.sh"
   - ps: Bootstrap
   - cd %APPVEYOR_BUILD_FOLDER%
 
