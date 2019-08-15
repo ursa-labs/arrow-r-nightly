@@ -1,0 +1,28 @@
+language: r
+os: osx
+cache: packages
+r:
+- oldrel
+- release
+env:
+  FORCE_AUTOBREW: 'TRUE'
+before_install:
+- git clone https://github.com/nealrichardson/arrow -b force-autobrew
+- cd arrow/r
+- mv tools/autobrew .
+- mv tools/apache-arrow.rb .
+- source ../../up-date-description.sh
+script:
+- R CMD INSTALL --build --install-tests .
+- R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".",
+  type = "mac.binary")'
+- ls
+- cd ../../
+- source up-date-bintray.sh
+deploy:
+  provider: bintray
+  file: bintray.json
+  user: nealrichardson
+  skip_cleanup: true
+  key:
+    secure: ixrrp5duTcP1PByq2ItTpYSnp7AG2Nwq8jt3oWgHSpS5VOMk26HjrfpFiv/uV2S39ZE8cgPft9BfzaB/VecLdPCW4VvjgyJ9jglTj4UG7RbL4vah9XgvLB03chU6Tqg69fYQA61zvundgaklES7OnEpDnC10NctO0ZV74YCnG+30W7OaxXynYzcTSODD6BIFMmwq4KeiWU5t8OMx9uVHeRRgj4ZwNUJA/yBF8DPL7UwDHpT7SzMQFlMTHx/7/xf8Q6DUkAUoKlVrfX8iFiAMEAPH5fRDzNmGTsKrHRl1GhzLUTL4G658M9t5z4HKONVbMm2dsH2Mg43hJQoZ9VNV01BEY9UsCTE2CdfHki7/zXikLJo/KdH8iEWQUQRnEvka0iIy/ObhUKVO9M0+eAJf2VPIq04N7c6JBvpJ69+PbbHEoEABLUx81PxPaOu1oRpL0raBsFRxPlpmtOQ2ft/4FKnK+OTjyd3Rel0VQSgPGEJD6gClvZO7S0Rb7RTP7/gh7paPh0izEb9EeQ9PYdO59SWON7j5VuhgQF9/Vjk5Ibh91C87uAL8rSaZLz1dDkATHmh8nQv0Br7QB73r602gLMeVub8lFsPQ1QKHzi0LkMvgfsrTaVkeKkApd68CiD/XlmKlVTGOJBQJYTvYpwfA0JXT2dhI0Oqosbne3BvBF2Q=
