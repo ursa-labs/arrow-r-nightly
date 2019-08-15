@@ -30,8 +30,8 @@ build_script:
   # - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - ps: echo '@bash.exe test.sh %*' | Out-File -Encoding ASCII .\test.sh.cmd
-  - test.sh
   - pushd r
+  - test.sh
   # - travis-tool.sh install_deps
 
 test_script:
