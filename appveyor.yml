@@ -19,7 +19,8 @@ install:
   - xcopy /S /I arrow\format format
   - xcopy /S /I arrow\r r
   - cd r
-  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/up-date-description.sh"
+  # TODO: fix the next line, it didn't work
+  # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/up-date-description.sh"
   - ps: Bootstrap
   - cd %APPVEYOR_BUILD_FOLDER%
 
@@ -33,30 +34,32 @@ build_script:
 test_script:
   - travis-tool.sh run_tests
   - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
+  - dir
+  - dir %APPVEYOR_BUILD_FOLDER%
 
 on_failure:
   - travis-tool.sh dump_logs
 
 artifacts:
-  - path: 'arrow\r\*.Rcheck\**\*.log'
+  - path: 'r\*.Rcheck\**\*.log'
     name: Logs
 
-  - path: 'arrow\r\*.Rcheck\**\*.out'
+  - path: 'r\*.Rcheck\**\*.out'
     name: Logs
 
-  - path: 'arrow\r\*.Rcheck\**\*.fail'
+  - path: 'r\*.Rcheck\**\*.fail'
     name: Logs
 
-  - path: 'arrow\r\*.Rcheck\**\*.Rout'
+  - path: 'r\*.Rcheck\**\*.Rout'
     name: Logs
 
-  - path: 'arrow\r\*_*.tar.gz'
+  - path: 'r\*_*.tar.gz'
     name: Source
 
-  - path: 'arrow\r\*_*.zip'
+  - path: 'r\*_*.zip'
     name: Binary
 
-  - path: 'arrow\r\PACKAGES*'
+  - path: 'r\PACKAGES*'
     name: Binary
 
 deploy:
