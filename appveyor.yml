@@ -29,6 +29,8 @@ build_script:
   # - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
   # - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
+  - ps: echo '@bash.exe test.sh %*' | Out-File -Encoding ASCII .\test.sh.cmd
+  - test.sh
   - pushd r
   # - travis-tool.sh install_deps
 
@@ -36,7 +38,6 @@ test_script:
   # - travis-tool.sh run_tests
   # TODO: this didn't work
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
-  - ../test.sh
   - dir
   - dir %APPVEYOR_BUILD_FOLDER%
 
