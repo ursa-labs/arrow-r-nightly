@@ -14,9 +14,11 @@ install:
   - copy arrow\ci\PKGBUILD ci\
   - copy arrow\ci\appveyor-build-r.sh ci\
   - copy arrow\ci\windows-pkg-arrow-for-r.sh ci\
-  - cd arrow/r
+  - xcopy /S arrow\cpp cpp
+  - xcopy /S arrow\r r
+  - cd r
   - ps: Bootstrap
-  - cd %APPVEYOR_BUILD_FOLDER%/arrow
+  - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
   - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
