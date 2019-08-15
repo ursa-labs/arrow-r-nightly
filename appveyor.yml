@@ -10,6 +10,10 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 install:
   - git clone --depth=1 https://github.com/apache/arrow.git
+  - mkdir ci
+  - copy arrow/ci/PKGBUILD ci
+  - copy arrow/ci/appveyor-build-r.sh ci
+  - copy arrow/ci/windows-pkg-arrow-for-r.sh ci
   - cd arrow/r
   - ps: Bootstrap
   - cd %APPVEYOR_BUILD_FOLDER%/arrow
@@ -17,13 +21,13 @@ install:
 build_script:
   - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
   - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
-  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/arrow/ci/appveyor-build-r.sh"
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
   - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
-  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})write-PACKAGES-win.sh"
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
 
 on_failure:
   - travis-tool.sh dump_logs
