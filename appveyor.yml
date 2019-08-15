@@ -3,6 +3,7 @@
 environment:
   TEST_R_WITH_ARROW: TRUE
   RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
+  R_VERSION: "3.6"
 
 init:
   ps: |
@@ -25,15 +26,17 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
-  - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
-  - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
-  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
+  # - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
+  # - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
+  # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
-  - travis-tool.sh install_deps
+  # - travis-tool.sh install_deps
 
 test_script:
-  - travis-tool.sh run_tests
-  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
+  # - travis-tool.sh run_tests
+  # TODO: this didn't work
+  # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
+  - Rscript -e 'cat("foo", file="test.txt")'
   - dir
   - dir %APPVEYOR_BUILD_FOLDER%
 
@@ -62,11 +65,15 @@ artifacts:
   - path: 'r\PACKAGES*'
     name: Binary
 
+  - path: 'r\test.txt'
+    name: Binary
+
 deploy:
+  # TODO: how to specify destination path
   - provider: BinTray
     username: nealrichardson
     subject: nealrichardson
-    repo: arrow-r
+    repo: "arrow-r/bin/windows/contrib/${R_VERSION}"
     package: arrow
     version: latest
     publish: true
