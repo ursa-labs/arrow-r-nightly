@@ -4,4 +4,6 @@ upload_file() {
 }
 export -f upload_file
 
-ls "$1" | xargs -n 1 -I{} bash -c "upload_file {}"
+ls $1
+ls "$1"
+ls "$1" | xargs -n 1 bash -c "upload_file $@"
