@@ -21,6 +21,8 @@ script:
 - ls
 - cd ../../
 - source up-date-bintray.sh
+after_success:
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
 deploy:
   provider: bintray
   file: bintray.json
