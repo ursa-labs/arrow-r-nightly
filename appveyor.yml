@@ -73,7 +73,7 @@ artifacts:
 
 on_success:
   - dir
-  - upload.sh '*.md'
+  - upload.sh *.md
   - upload.sh DESCRIPTION
 
 # PUT /content/:subject/:repo/:package/:version/:file_path[?publish=0/1][?override=0/1][?explode=0/1]
