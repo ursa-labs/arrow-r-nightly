@@ -25,8 +25,8 @@ install:
   - cd r
   # TODO: fix the next line, it didn't work
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/up-date-description.sh"
-  - ps: Bootstrap
-  # - cd %APPVEYOR_BUILD_FOLDER%
+  # - ps: Bootstrap
+   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
   # - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
