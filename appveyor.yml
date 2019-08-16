@@ -72,8 +72,6 @@ artifacts:
     name: Binary
 
 on_success:
-  - rscript.sh 'rv <- R.version; cat(paste0(rv$major, ".", unlist(strsplit(rv$minor, ".", fixed=TRUE))[1]))' > rv.txt
-  - set /p RVERSION=<rv.txt
   - dir
   - upload.sh *.md
   - upload.sh DESCRIPTION
