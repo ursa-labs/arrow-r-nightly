@@ -3,7 +3,6 @@
 environment:
   TEST_R_WITH_ARROW: TRUE
   RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
-  RVERSION: "3.6"
   BINTRAY_USER: "nealrichardson"
   BINTRAY_APIKEY:
     secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
@@ -27,19 +26,19 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
-  # - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
-  # - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
-  # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
+  - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
+  - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
   - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
   - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
   - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
   - up-date-description.sh
-  # - travis-tool.sh install_deps
+  - travis-tool.sh install_deps
 
 test_script:
-  # - travis-tool.sh run_tests
-  # - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
+  - travis-tool.sh run_tests
+  - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
   - dir
   - dir %APPVEYOR_BUILD_FOLDER%
 
@@ -73,23 +72,5 @@ artifacts:
 
 on_success:
   - dir
-  - upload.sh *.md
-  - upload.sh DESCRIPTION
-
-# PUT /content/:subject/:repo/:package/:version/:file_path[?publish=0/1][?override=0/1][?explode=0/1]
-
-# deploy:
-#   # TODO: how to specify destination path
-#   - provider: BinTray
-#     username: nealrichardson
-#     subject: nealrichardson
-#     repo: "arrow-r/bin/windows/contrib/${RVERSION}"
-#     package: arrow
-#     version: latest
-#     publish: true
-#     override: true
-#     api_key:
-#       secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
-#     on:
-#       branch: master
-#     artifact: Binary
+  - upload.sh PACKAGES*
+  - upload.sh arrow*.zip
