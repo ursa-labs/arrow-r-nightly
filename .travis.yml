@@ -10,13 +10,7 @@ env:
   FORCE_AUTOBREW: 'TRUE'
 before_install:
 - git clone --depth=1 https://github.com/nealrichardson/arrow -b force-autobrew
-- cd arrow
-# While we're stuck on my branch, pull in changes from upstream so we're still
-# building the latest
-- git remote add upstream https://github.com/apache/arrow
-- git fetch upstream
-- git rebase upstream/master
-- cd r
+- cd arrow/r
 - mv tools/autobrew .
 - mv tools/apache-arrow.rb .
 - source ../../up-date-description.sh
