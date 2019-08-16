@@ -74,7 +74,7 @@ artifacts:
     name: Binary
 
 on_success:
-  - curl -fsS -u -v "%BINTRAY_USER%:%BINTRAY_APIKEY%" -X PUT "https://api.bintray.com/content/nealrichardson/arrow-r/latest/bin/windows/contrib/3.6/test.txt?override=1&publish=1" --data-binary @r\text.txt
+  - curl -fsSv -u "%BINTRAY_USER%:%BINTRAY_APIKEY%" -X PUT "https://api.bintray.com/content/nealrichardson/arrow-r/latest/bin/windows/contrib/3.6/test.txt?override=1&publish=1" --data-binary @r\text.txt
 
 # PUT /content/:subject/:repo/:package/:version/:file_path[?publish=0/1][?override=0/1][?explode=0/1]
 
