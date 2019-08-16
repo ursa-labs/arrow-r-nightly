@@ -1,11 +1,17 @@
-# Copied from https://github.com/krlmlr/r-appveyor/blob/master/sample.appveyor.yml
+# Cf. https://github.com/apache/arrow/blob/master/appveyor.yml
 
 environment:
-  TEST_R_WITH_ARROW: TRUE
-  RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
-  BINTRAY_USER: "nealrichardson"
-  BINTRAY_APIKEY:
-    secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
+  global:
+    TEST_R_WITH_ARROW: TRUE
+    RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
+    BINTRAY_USER: "nealrichardson"
+    BINTRAY_APIKEY:
+      secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
+  matrix:
+    - R_VERSION: devel
+    - R_VERSION: release
+    - R_VERSION: 3.5.3
+    - R_VERSION: 3.4.4
 
 init:
   ps: |
@@ -14,6 +20,8 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 install:
   - git clone --depth=1 https://github.com/apache/arrow.git
+  # The build scripts in apache/arrow assume that they're in a specific location
+  # so we need to copy certain files up a level
   - mkdir ci
   - copy arrow\ci\PKGBUILD ci\
   - copy arrow\ci\appveyor-build-r.sh ci\
@@ -23,6 +31,10 @@ install:
   - xcopy /S /I arrow\r r
   - cd r
   - ps: Bootstrap
+  # Turn these bash scripts into things that are executable
+  - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
+  - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
+  - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
@@ -30,20 +42,24 @@ build_script:
   - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
   - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
-  - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
-  - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
-  - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
+  # Add today's date as the patch version for the R package
   - up-date-description.sh
   - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
+  # Write the PACKAGES manifest
   - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
-  - dir
-  - dir %APPVEYOR_BUILD_FOLDER%
 
 on_failure:
   - travis-tool.sh dump_logs
+
+on_success:
+  # Push to bintray
+  - upload.sh PACKAGES
+  - upload.sh PACKAGES.gz
+  - upload.sh PACKAGES.rds
+  - upload.sh arrow*.zip
 
 artifacts:
   - path: 'r\*.Rcheck\**\*.log'
@@ -66,11 +82,3 @@ artifacts:
 
   - path: 'r\PACKAGES*'
     name: Binary
-
-  - path: 'r\test.txt'
-    name: Binary
-
-on_success:
-  - dir
-  - upload.sh PACKAGES*
-  - upload.sh arrow*.zip
