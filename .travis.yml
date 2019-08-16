@@ -5,7 +5,8 @@ r:
 - 3.4
 - oldrel
 - release
-- devel
+# CRAN doesn't host macOS binaries for r-devel
+# - devel
 env:
   FORCE_AUTOBREW: 'TRUE'
 before_install:

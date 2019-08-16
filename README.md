@@ -11,3 +11,8 @@ install.packages("arrow", repos="https://dl.bintray.com/nealrichardson/arrow-r")
 ```
 
 These daily package builds are not official Apache releases and are not recommended for production use. They may be useful for testing bug fixes and new features under active development.
+
+We currently build binaries for the following OS and versions:
+
+* macOS: R 3.4, 3.5, 3.6
+* Windows: R 3.4, 3.5, 3.6, R-devel (3.7)
