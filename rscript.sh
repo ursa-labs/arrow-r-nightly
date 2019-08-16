@@ -1,2 +1,2 @@
 #! /bin/bash
-Rscript -e '$1'
+Rscript -e "$1"
