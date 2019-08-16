@@ -34,6 +34,7 @@ build_script:
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
   - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
+  - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
   - rscript.sh 'cat("foo", file="test.txt")'
   # - travis-tool.sh install_deps
 
@@ -75,7 +76,7 @@ artifacts:
 
 on_success:
   - dir
-  - curl -fsSv -u "%BINTRAY_USER%:%BINTRAY_APIKEY%" -X PUT "https://api.bintray.com/content/nealrichardson/arrow-r/arrow/latest/bin/windows/contrib/3.6/DESCRIPTION?override=1&publish=1" --data-ascii @DESCRIPTION
+  - upload.sh README*
 
 # PUT /content/:subject/:repo/:package/:version/:file_path[?publish=0/1][?override=0/1][?explode=0/1]
 
