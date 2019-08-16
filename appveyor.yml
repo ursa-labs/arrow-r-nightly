@@ -26,7 +26,7 @@ install:
   # TODO: fix the next line, it didn't work
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/up-date-description.sh"
   - ps: Bootstrap
-  - cd %APPVEYOR_BUILD_FOLDER%
+  # - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
   # - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
@@ -35,14 +35,14 @@ build_script:
   - pushd r
   - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
   - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
-  - rscript.sh 'cat("foo", file="test.txt")'
+  # - rscript.sh 'cat("foo", file="test.txt")'
   # - travis-tool.sh install_deps
 
 test_script:
   # - travis-tool.sh run_tests
   # TODO: this didn't work
   # - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/write-PACKAGES-win.sh"
-  - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
+  # - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
   - dir
   - dir %APPVEYOR_BUILD_FOLDER%
 
