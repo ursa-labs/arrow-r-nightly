@@ -14,7 +14,8 @@ environment:
     - R_VERSION: 3.5.3
     - R_VERSION: release
     - R_VERSION: devel
-
+cache:
+  - c:\RLibrary
 init:
   ps: |
         $ErrorActionPreference = "Stop"
