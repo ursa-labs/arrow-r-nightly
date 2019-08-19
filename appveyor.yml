@@ -8,14 +8,6 @@ environment:
     BINTRAY_APIKEY:
       secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
   matrix:
-    - R_VERSION: 3.0.3
-      PKGTYPE: both
-      CRAN: http://cloud.r-project.org/
-    - R_VERSION: 3.1.3
-      PKGTYPE: both
-      CRAN: http://cloud.r-project.org/
-    - R_VERSION: 3.2.5
-      PKGTYPE: both
     - R_VERSION: 3.3.3
       PKGTYPE: both
     - R_VERSION: 3.4.4
@@ -42,22 +34,20 @@ install:
   - xcopy /S /I arrow\r r
   - cd r
   - ps: Bootstrap
+  - travis-tool.sh install_deps
   # Turn these bash scripts into things that are executable
   - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
   - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
   - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
+  - up-date-description.sh
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
-  - pushd r
-  - travis-tool.sh install_deps
-  - popd
   - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
   - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
   - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
   - pushd r
   # Add today's date as the patch version for the R package
-  - up-date-description.sh
 
 test_script:
   - travis-tool.sh run_tests
