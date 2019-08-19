@@ -9,6 +9,7 @@ r:
 - release
 # CRAN doesn't host macOS binary packages for r-devel
 # - devel
+r_check_args: '--as-cran --install-args="--build"'
 env:
   FORCE_AUTOBREW: 'TRUE'
 before_install:
@@ -17,15 +18,13 @@ before_install:
 - mv tools/autobrew .
 - mv tools/apache-arrow.rb .
 - source ../../up-date-description.sh
-script:
-- R CMD INSTALL --build --install-tests .
-- R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".",
-  type = "mac.binary")'
+after_success:
+- test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
+before_deploy:
+- Rscript -e 'tools::write_PACKAGES(".", type = "mac.binary")'
 - ls
 - cd ../../
 - source up-date-bintray.sh
-after_success:
-- test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov(path="arrow/r")'
 deploy:
   provider: bintray
   file: bintray.json
