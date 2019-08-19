@@ -2,6 +2,8 @@ language: r
 os: osx
 cache: packages
 r:
+- 3.0
+- 3.1
 - 3.2
 - 3.3
 - 3.4
@@ -13,7 +15,7 @@ r_check_args: '--as-cran --install-args="--build"'
 env:
   FORCE_AUTOBREW: 'TRUE'
 before_install:
-- git clone --depth=1 https://github.com/nealrichardson/arrow -b force-autobrew
+- git clone --depth=1 https://github.com/nealrichardson/arrow -b nightly-r
 - cd arrow/r
 - mv tools/autobrew .
 - mv tools/apache-arrow.rb .

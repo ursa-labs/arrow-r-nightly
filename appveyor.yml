@@ -11,10 +11,11 @@ environment:
     - R_VERSION: devel
     - R_VERSION: release
     - R_VERSION: 3.5.3
-    # Apparently this commit is in 3.4.4 on macOS but not Windows, so we fail
-    # https://github.com/wch/r-source/commit/aeed807df6e4017ddac4035eae8bb97c739b625d
-    # https://ci.appveyor.com/project/nealrichardson/arrow-r-nightly-yxl55/build/job/4247xnotuohy1whv#L5325
-    # - R_VERSION: 3.4.4
+    - R_VERSION: 3.4.4
+    - R_VERSION: 3.3.3
+    - R_VERSION: 3.2.5
+    - R_VERSION: 3.1.3
+    - R_VERSION: 3.0.3
 
 init:
   ps: |
