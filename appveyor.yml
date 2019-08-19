@@ -23,7 +23,8 @@ init:
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 install:
-  - git clone --depth=1 https://github.com/apache/arrow.git
+  - git clone --depth=1 https://github.com/nealrichardson/arrow -b nightly-r
+  # - git clone --depth=1 https://github.com/apache/arrow.git
   # The build scripts in apache/arrow assume that they're in a specific location
   # so we need to copy certain files up a level
   - mkdir ci
