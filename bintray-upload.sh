@@ -33,5 +33,5 @@ curl -fsSv -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/${PKG_FILE}
 # Write out the PACKAGES manifest files and upload them too
 Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
 for FILENAME in PACKAGES*; do
-  curl -fsSv -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/${FILENAME}?override=1&publish=1" --data-binary "@$FILENAME"
+  curl -fsS -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/${FILENAME}?override=1&publish=1" --data-binary "@$FILENAME"
 done
