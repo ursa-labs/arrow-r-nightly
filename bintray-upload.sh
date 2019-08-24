@@ -22,16 +22,24 @@ else
     exit 1
   fi
 fi
+
 # Generate the R repository relative path, depending on macOS/Windows
 R_REPO_PATH=$(Rscript -e 'cat(contrib.url("", type="'$PKG_TYPE'"))')
 # Concatenate that with the Bintray API URL
 DST_URL="https://api.bintray.com/content/${BINTRAY_ORG}/${BINTRAY_REPO}/${BINTRAY_PKG}/${BINTRAY_VERSION}${R_REPO_PATH}"
 
+upload_file() {
+  if [ -f "$1" ]; then
+    echo "PUT ${DST_URL}/$1?override=1&publish=1"
+    curl -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/$1?override=1&publish=1" --data-binary "@$1"
+  fi
+}
+
 # Upload the binary package
-curl -fsSv -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/${PKG_FILE}?override=1&publish=1" --data-binary "@$PKG_FILE"
+upload_file $PKG_FILE
 
 # Write out the PACKAGES manifest files and upload them too
 Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
-for FILENAME in PACKAGES*; do
-  curl -fsS -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/${FILENAME}?override=1&publish=1" --data-binary "@$FILENAME"
-done
+upload_file PACKAGES
+upload_file PACKAGES.gz
+upload_file PACKAGES.rds

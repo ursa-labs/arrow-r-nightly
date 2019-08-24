@@ -6,7 +6,7 @@ environment:
     RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
     BINTRAY_USER: "nealrichardson"
     BINTRAY_APIKEY:
-      secure: Jdipuo3I2KJCbAT5kZ/OWKdhbQro7ebfkN87Gd4aZ74ku2orToy7MR+EqRZddzzn
+      secure: bt7FQqKZhZA93YURBaizwiNGU45nl7kUqAPeN/bIiArLypKkbbPs4lGeWjXEx7qF
   matrix:
     # Can't go older than R 3.3 because we need Rtools 3.5
     - R_VERSION: 3.3.3
