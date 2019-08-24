@@ -36,11 +36,8 @@ install:
   - cd r
   - ps: Bootstrap
   - travis-tool.sh install_deps
-  # Turn these bash scripts into things that are executable in Windows-land
-  - ps: echo '@bash.exe ../rscript.sh %*' | Out-File -Encoding ASCII .\rscript.sh.cmd
-  - ps: echo '@bash.exe ../bintray-win-upload.sh %*' | Out-File -Encoding ASCII .\upload.sh.cmd
-  - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
   # Add today's date as the patch version for the R package
+  - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
   - up-date-description.sh
   - cd %APPVEYOR_BUILD_FOLDER%
 
@@ -59,13 +56,8 @@ on_failure:
   - travis-tool.sh dump_logs
 
 on_success:
-  # Write the PACKAGES manifest
-  - rscript.sh 'tools::write_PACKAGES(".", type="win.binary")'
-  # Push to bintray
-  - upload.sh PACKAGES
-  - upload.sh PACKAGES.gz
-  - upload.sh PACKAGES.rds
-  - upload.sh arrow*.zip
+  - ps: echo '@bash.exe ../bintray-upload.sh %*' | Out-File -Encoding ASCII .\upload.cmd
+  - upload
 
 artifacts:
   - path: 'r\*.Rcheck\**\*.log'
