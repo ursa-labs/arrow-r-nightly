@@ -10,11 +10,11 @@ BINTRAY_VERSION=latest
 R_PKG=$BINTRAY_PKG
 
 # Find the binary package file for either macOS or Windows
-PKG_FILE=$(ls ${R_PKG}_*.tgz)
+PKG_FILE=$(ls ${R_PKG}_*.tgz 2> /dev/null)
 if [ "$PKG_FILE" != "" ]; then
   PKG_TYPE="mac.binary.el-capitan"
 else
-  PKG_FILE=$(ls ${R_PKG}_*.zip)
+  PKG_FILE=$(ls ${R_PKG}_*.zip 2> /dev/null)
   if [ "$PKG_FILE" != "" ]; then
     PKG_TYPE="win.binary"
   else
