@@ -4,7 +4,6 @@ environment:
   global:
     TEST_R_WITH_ARROW: TRUE
     RWINLIB_LOCAL: '%APPVEYOR_BUILD_FOLDER%\libarrow.zip'
-    BINTRAY_USER: "nealrichardson"
     BINTRAY_APIKEY:
       secure: bt7FQqKZhZA93YURBaizwiNGU45nl7kUqAPeN/bIiArLypKkbbPs4lGeWjXEx7qF
   matrix:
