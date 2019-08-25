@@ -32,6 +32,8 @@ upload_file() {
   if [ -f "$1" ]; then
     echo "PUT ${DST_URL}/$1?override=1&publish=1"
     curl -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/$1?override=1&publish=1" --data-binary "@$1"
+  else
+    echo "$1 not found"
   fi
 }
 
@@ -39,7 +41,7 @@ upload_file() {
 upload_file $PKG_FILE
 
 # Write out the PACKAGES manifest files and upload them too
-Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
+Rscript --verbose -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
 upload_file PACKAGES
 upload_file PACKAGES.gz
 upload_file PACKAGES.rds
