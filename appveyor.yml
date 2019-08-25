@@ -37,8 +37,7 @@ install:
   - ps: Bootstrap
   - travis-tool.sh install_deps
   # Add today's date as the patch version for the R package
-  - ps: echo '@bash.exe ../up-date-description.sh %*' | Out-File -Encoding ASCII .\up-date-description.sh.cmd
-  - up-date-description.sh
+  - ps: bash up-date-description.sh
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
@@ -56,8 +55,7 @@ on_failure:
   - travis-tool.sh dump_logs
 
 on_success:
-  - ps: echo '@bash.exe ../bintray-upload.sh %*' | Out-File -Encoding ASCII .\upload.cmd
-  - upload
+  - ps: bash bintray-upload.sh
 
 artifacts:
   - path: 'r\*.Rcheck\**\*.log'
