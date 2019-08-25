@@ -36,12 +36,14 @@ install:
   - cd r
   - ps: Bootstrap
   - travis-tool.sh install_deps
+
+before_build:
   # Add today's date as the patch version for the R package
-  - ps: bash up-date-description.sh
-  - cd %APPVEYOR_BUILD_FOLDER%
+  - ps: ../bash up-date-description.sh
 
 build_script:
   # Build the C++ library
+  - cd %APPVEYOR_BUILD_FOLDER%
   - rmdir /s /Q C:\OpenSSL-Win32 C:\OpenSSL-Win64
   - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
   - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/ci/appveyor-build-r.sh"
@@ -55,7 +57,7 @@ on_failure:
   - travis-tool.sh dump_logs
 
 on_success:
-  - ps: bash bintray-upload.sh
+  - ps: bash ../bintray-upload.sh
 
 artifacts:
   - path: 'r\*.Rcheck\**\*.log'
