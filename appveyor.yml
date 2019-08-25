@@ -38,7 +38,7 @@ install:
 
 before_build:
   # Add today's date as the patch version for the R package
-  - ps: ../bash up-date-description.sh
+  - ps: bash ../up-date-description.sh
 
 build_script:
   # Build the C++ library
