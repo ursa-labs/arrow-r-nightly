@@ -41,7 +41,7 @@ upload_file() {
 upload_file $PKG_FILE
 
 # Write out the PACKAGES manifest files and upload them too
-Rscript --verbose -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
+Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
 upload_file PACKAGES
 upload_file PACKAGES.gz
 upload_file PACKAGES.rds
