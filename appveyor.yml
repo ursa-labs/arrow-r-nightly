@@ -76,6 +76,3 @@ artifacts:
 
   - path: 'r\*_*.zip'
     name: Binary
-
-  - path: 'r\PACKAGES*'
-    name: Binary
