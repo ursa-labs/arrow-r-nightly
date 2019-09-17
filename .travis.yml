@@ -18,7 +18,7 @@ before_install:
 - source ../../up-date-description.sh
 script:
 # Use a custom "script" to add travis_wait in order to prevent build timeouts
-- R CMD build .
+- travis_wait R CMD build .
 - travis_wait R CMD check arrow_*.tar.gz --as-cran --install-args="--build"
 after_success:
 - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
