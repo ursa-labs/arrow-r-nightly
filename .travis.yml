@@ -16,7 +16,7 @@ before_install:
 - git clone --depth=1 https://github.com/apache/arrow.git
 - cd arrow/r
 # This script used to be inside r/tools/ but was moved
-- cp ../dev/tasks/homebrew-formulae/apache-arrow-autobrew.rb apache-arrow.rb
+- cp ../dev/tasks/homebrew-formulae/apache-arrow-autobrew.rb apache-arrow.rb || true
 - source ../../up-date-description.sh
 script:
 # Use a custom "script" to add travis_wait in order to prevent build timeouts
