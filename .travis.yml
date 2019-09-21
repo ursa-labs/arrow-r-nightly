@@ -15,8 +15,9 @@ env:
 before_install:
 - git clone --depth=1 https://github.com/apache/arrow.git
 - cd arrow/r
+- git log -n 1 # To show what commit is being built
 # This script used to be inside r/tools/ but was moved
-- cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb apache-arrow.rb || true
+- cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb apache-arrow.rb
 - source ../../up-date-description.sh
 script:
 # Use a custom "script" to add travis_wait in order to prevent build timeouts
