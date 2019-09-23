@@ -13,7 +13,7 @@ env:
   LOCAL_AUTOBREW: "TRUE"
   TEST_R_WITH_ARROW: "TRUE"
 before_install:
-- git clone --depth=1 https://github.com/nealrichardson/arrow.git -b fix-fix
+- git clone --depth=1 https://github.com/apache/arrow.git
 - cd arrow/r
 - git log -n 1 # To show what commit is being built
 # This script used to be inside r/tools/ but was moved
