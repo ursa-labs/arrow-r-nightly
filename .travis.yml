@@ -18,9 +18,6 @@ before_install:
 - git log -n 1 # To show what commit is being built
 # This script used to be inside r/tools/ but was moved
 - cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
-# HACK to disable S3 for now
-- sed -i.bak -E -e "s/ARROW_S3=ON/ARROW_S3=OFF/" tools/apache-arrow.rb
-- rm -f tools/apache-arrow.rb.bak
 - source ../../up-date-description.sh
 script:
 # Use a custom "script" to add travis_wait in order to prevent build timeouts
