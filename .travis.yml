@@ -24,5 +24,5 @@ script:
 - travis_wait R CMD build .
 - travis_wait R CMD check arrow_*.tar.gz --as-cran --install-args="--build"
 after_success:
-- test $TRAVIS_R_VERSION_STRING = "release" && travis_wait Rscript -e 'covr::codecov()'
+- test $TRAVIS_R_VERSION_STRING = "release" && travis_wait Rscript -e 'install.packages("covr"); covr::codecov()'
 - source ../../bintray-upload.sh
