@@ -2,10 +2,10 @@ language: r
 os: osx
 cache: packages
 r:
-- 3.2
-- 3.3
-- 3.4
-- oldrel
+# - 3.2
+# - 3.3
+# - 3.4
+# - oldrel
 - release
 # CRAN doesn't host macOS binary packages for r-devel
 # - devel
