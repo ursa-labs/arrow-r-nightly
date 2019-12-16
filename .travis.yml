@@ -27,4 +27,4 @@ after_success:
 - test $TRAVIS_R_VERSION_STRING = "release" && travis_wait Rscript -e 'install.packages("covr"); covr::codecov()'
 - source ../../bintray-upload.sh
 after_failure:
-- cd /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck && source ../../bintray-upload-errors.sh
+- cd /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck && source /Users/travis/build/ursa-labs/arrow-r-nightly/bintray-upload-errors.sh
