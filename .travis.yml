@@ -6,13 +6,13 @@ r:
 # - 3.3
 # - 3.4
 # - 3.5
-- 3.6.0
-# - 3.6.2
+- release
 # CRAN doesn't host macOS binary packages for r-devel
 # - devel
 env:
   LOCAL_AUTOBREW: "TRUE"
   TEST_R_WITH_ARROW: "TRUE"
+  _R_CHECK_THINGS_IN_TEMP_DIR_: "FALSE"
 before_install:
 - git clone --depth=1 https://github.com/apache/arrow.git
 - cd arrow/r
