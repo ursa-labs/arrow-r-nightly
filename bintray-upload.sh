@@ -11,7 +11,8 @@ R_PKG=$BINTRAY_PKG
 
 # If PKG_FILE is set, we'll just upload that (also have to set REPO_PATH); else
 # find the binary package file for either macOS or Windows, or a source package
-if [ "$PKG_FILE" == "" ]; then
+ls ${R_PKG}_*.*
+if [ "$PKG_FILE" = "" ]; then
   PKG_FILE=$(ls ${R_PKG}_*.tgz 2> /dev/null)
   if [ "$PKG_FILE" != "" ]; then
     PKG_TYPE="mac.binary.el-capitan"
