@@ -25,12 +25,12 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow --depth 100
+          git clone https://github.com/apache/arrow
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
           cd arrow
-          git checkout 'master@{'"$(date -d yesterday +%Y-%m-%d)"' 00:00:00}'
+          git checkout `git rev-list -n 1 --before="$(date -d +%Y-%m-%d) 00:00" master`
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
@@ -47,7 +47,6 @@ jobs:
       - name: Build and upload R source package
         shell: bash
         run: |
-          set -x
           cd arrow/r
           R CMD build --no-build-vignettes .
           PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh
