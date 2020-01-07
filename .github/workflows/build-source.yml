@@ -45,6 +45,7 @@ jobs:
       - name: Build and upload R source package
         shell: bash
         run: |
+          set -x
           cd arrow/r
-          R CMD build --no-build-vignettes . || true 
+          R CMD build --no-build-vignettes .
           source ../../bintray-upload.sh
