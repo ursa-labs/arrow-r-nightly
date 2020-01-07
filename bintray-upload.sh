@@ -12,22 +12,18 @@ R_PKG=$BINTRAY_PKG
 # If PKG_FILE is set, we'll just upload that (also have to set REPO_PATH); else
 # find the binary package file for either macOS or Windows, or a source package
 if [ "$PKG_FILE" = "" ]; then
-  PKG_FILE=$(ls | grep arrow_.*\.tgz)
-  if [ "$PKG_FILE" != "" ]; then
+  if ls ${R_PKG}_*.tgz; then
+    PKG_FILE=$(ls | grep arrow_.*\.tgz)
     PKG_TYPE="mac.binary.el-capitan"
-  else
+  else if ls ${R_PKG}_*.zip; then
     PKG_FILE=$(ls | grep arrow_.*\.zip)
-    if [ "$PKG_FILE" != "" ]; then
-      PKG_TYPE="win.binary"
-    else
-      PKG_FILE=$(ls | grep arrow_.*\.tar.gz)
-      if [ "$PKG_FILE" != "" ]; then
-        PKG_TYPE="source"
-      else
-        echo "R package not found"
-        exit 1
-      fi
-    fi
+    PKG_TYPE="win.binary"
+  else if ls ${R_PKG}_*.tar.gz; then
+    PKG_FILE=$(ls | grep arrow_.*\.tar.gz)
+    PKG_TYPE="source"
+  else
+    echo "R package not found"
+    exit 1
   fi
   # Generate the R repository relative path, depending on macOS/Windows
   REPO_PATH=$(Rscript -e 'cat(contrib.url("", type="'$PKG_TYPE'"))')
