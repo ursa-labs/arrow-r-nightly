@@ -25,7 +25,7 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow -d 100
+          git clone https://github.com/apache/arrow --depth 100
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
