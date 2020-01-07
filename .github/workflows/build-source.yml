@@ -25,7 +25,7 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow
+          git clone https://github.com/apache/arrow -d 100
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
@@ -50,4 +50,4 @@ jobs:
           set -x
           cd arrow/r
           R CMD build --no-build-vignettes .
-          source ../../bintray-upload.sh
+          PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh
