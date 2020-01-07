@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           cd arrow
-          git checkout `git rev-list -n 1 --before="$(date -d +%Y-%m-%d) 00:00" master`
+          git checkout `git rev-list -n 1 --before="00:00" master`
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
