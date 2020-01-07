@@ -9,7 +9,7 @@ on:
       - master
       - linux
     paths:
-      - '.github/build-source.yml'
+      - '.github/workflows/build-source.yml'
       - 'linux/*'
   # On tag too?
 
