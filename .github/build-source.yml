@@ -1,9 +1,9 @@
 name: Build source packages
 
 on:
-  schedule:
-    - cron: |
-        0 */12 * * *
+  # schedule:
+  #   - cron: |
+  #       0 */12 * * *
   push:
     branches:
       - master
