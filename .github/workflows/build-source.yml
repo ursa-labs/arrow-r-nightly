@@ -27,7 +27,6 @@ jobs:
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
-          set -x
           cd arrow
           git checkout 'master@{'"$(date -d yesterday +%Y-%m-%d)"' 00:00:00}'
           cd r
@@ -36,19 +35,16 @@ jobs:
       - name: Build and upload cpp bundle
         shell: bash
         run: |
-          set -x
           cd arrow
           VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
-          echo $VERSION
           zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt LICENSE.txt NOTICE.txt
           # TODO: add BINTRAY_APIKEY to secrets
-          cd cpp
-          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../../bintray-upload.sh
+          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Build and upload R source package
         shell: bash
         run: |
           cd arrow/r
-          R CMD build --no-build-vignettes .
+          R CMD build .
           source ../../bintray-upload.sh
