@@ -5,8 +5,9 @@ on:
     - cron: |
         0 */12 * * *
   push:
-    # branches:
-    #   - master
+    branches:
+      - master
+      - linux
     paths:
       - '.github/build-source.yml'
       - 'linux/*'
