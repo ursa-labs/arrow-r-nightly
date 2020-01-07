@@ -1,0 +1,49 @@
+name: Build source packages
+
+on:
+  schedule:
+    - cron: |
+        0 */12 * * *
+  push:
+    # branches:
+    #   - master
+    paths:
+      - '.github/build-source.yml'
+      - 'linux/*'
+  # On tag too?
+
+jobs:
+  r-hub:
+    name: Source packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+      - name: Checkout arrow at date and update R package version
+        shell: bash
+        run: |
+          cd arrow
+          git checkout 'master@{'"$(date -d yesterday +%Y-%m-%d)"' 00:00:00}'
+          cd r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      - name: Build and upload cpp bundle
+        shell: bash
+        run: |
+          cd arrow
+          VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
+          zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt LICENSE.txt NOTICE.txt
+          # TODO: add BINTRAY_APIKEY to secrets
+          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../../bintray-upload.sh
+      - name: Install R
+        uses: r-lib/actions/setup-r@master
+      - name: Build and upload R source package
+        shell: bash
+        run: |
+          cd arrow/r
+          R CMD build --no-build-vignettes .
+          source ../../bintray-upload.sh

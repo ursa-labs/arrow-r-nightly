@@ -1,5 +1,12 @@
 # Cf. https://github.com/apache/arrow/blob/master/appveyor.yml
 
+skip_commits:
+  files:
+    .github/*
+    linux/*
+    README.md
+    .gitignore
+
 environment:
   global:
     TEST_R_WITH_ARROW: TRUE
