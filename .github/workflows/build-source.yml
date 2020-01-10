@@ -35,6 +35,8 @@ jobs:
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
       - name: Build and upload cpp bundle
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
         shell: bash
         run: |
           cd arrow
@@ -45,6 +47,8 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Build and upload R source package
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
         shell: bash
         run: |
           cd arrow/r

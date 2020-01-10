@@ -41,7 +41,7 @@ DST_URL="https://api.bintray.com/content/${BINTRAY_ORG}/${BINTRAY_REPO}/${BINTRA
 upload_file() {
   if [ -f "$1" ]; then
     echo "PUT ${DST_URL}/$1?override=1&publish=1"
-    # curl -sS -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/$1?override=1&publish=1" --data-binary "@$1"
+    curl -sS -u "${BINTRAY_USER}:${BINTRAY_APIKEY}" -X PUT "${DST_URL}/$1?override=1&publish=1" --data-binary "@$1"
   else
     echo "$1 not found"
   fi
