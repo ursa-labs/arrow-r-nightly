@@ -1,0 +1,54 @@
+name: Build binary C++ libraries
+
+on:
+  schedule:
+    - cron: |
+        0 */12 * * *
+  push:
+    paths:
+      - '.github/workflows/build-binary.yml'
+      - 'linux/*'
+      - bintray-upload.sh
+      - up-date-description.sh
+  # On tag too?
+
+jobs:
+  source:
+    name: Ubuntu Binary C++
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu: ["18.04"]
+    env:
+      UBUNTU: ${{ matrix.ubuntu }}
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow
+        shell: bash
+        run: |
+          cd linux
+          # git clone https://github.com/apache/arrow
+          git clone https://github.com/nealrichardson/arrow
+          cd arrow
+          git checkout r-manylinux
+      - name: Build
+        shell: bash
+        run: |
+          cd linux
+          docker-compose build ubuntu
+          docker-compose run ubuntu
+      - name: Bundle and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          cd linux/arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          PKG_FILE="arrow-${VERSION}.zip"
+          cd libarrow/dist
+          zip -r $PKG_FILE lib/*.a include/
+          REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU source ../bintray-upload.sh
