@@ -3,7 +3,7 @@ name: Build source packages
 on:
   schedule:
     - cron: |
-        0 */12 * * *
+        0 */20 * * *
   push:
     paths:
       - '.github/workflows/build-source.yml'
@@ -13,7 +13,7 @@ on:
   # On tag too?
 
 jobs:
-  r-hub:
+  source:
     name: Source packages
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,6 @@ jobs:
           cd arrow
           VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
           zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt LICENSE.txt NOTICE.txt
-          # TODO: add BINTRAY_APIKEY to secrets
           PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
       - name: Install R
         uses: r-lib/actions/setup-r@master
