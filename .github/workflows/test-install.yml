@@ -1,0 +1,26 @@
+name: Test installation from Bintray
+
+on:
+  schedule:
+    - cron: |
+        0 */23 * * *
+  push:
+    paths:
+      - '.github/workflows/test-install.yml'
+      - 'linux/*'
+  # On tag too?
+
+jobs:
+  source:
+    name: Source packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Install R
+        uses: r-lib/actions/setup-r@master
+      - name: Install arrow from binatray
+        env:
+          # Test source build so be sure not to download a binary
+          LIBARROW_BINARY_DISTRO: "FALSE"
+        run: Rscript linux/install-arrow.R
