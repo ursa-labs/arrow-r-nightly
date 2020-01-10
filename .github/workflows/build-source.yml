@@ -7,7 +7,6 @@ on:
   push:
     paths:
       - '.github/workflows/build-source.yml'
-      - 'linux/*'
       - bintray-upload.sh
       - up-date-description.sh
   # On tag too?

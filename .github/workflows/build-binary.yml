@@ -50,5 +50,6 @@ jobs:
           VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
           PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
-          zip -r $PKG_FILE lib/*.a include/
-          REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU source ../bintray-upload.sh
+          # These files were created by the docker user so we have to sudo to get them
+          sudo zip -r $PKG_FILE lib/*.a include/
+          REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU sudo source ../bintray-upload.sh
