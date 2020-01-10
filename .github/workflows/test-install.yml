@@ -1,4 +1,4 @@
-name: Build source packages
+name: Test installation from Bintray
 
 on:
   schedule:
@@ -23,4 +23,4 @@ jobs:
         env:
           # Test source build so be sure not to download a binary
           LIBARROW_BINARY_DISTRO: "FALSE"
-        run: Rscript -f linux/install-arrow.R
+        run: Rscript linux/install-arrow.R
