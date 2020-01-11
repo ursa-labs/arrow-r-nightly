@@ -53,4 +53,4 @@ jobs:
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
           export REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU
-          sudo -E bash ../bintray-upload.sh
+          sudo -E bash ../../../../../bintray-upload.sh
