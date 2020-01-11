@@ -48,7 +48,7 @@ jobs:
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../../up-date-description.sh
           VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
-          PKG_FILE="arrow-${VERSION}.zip"
+          export PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
