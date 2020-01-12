@@ -25,14 +25,13 @@ jobs:
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
-      - name: Clone apache/arrow
+      - name: Clone apache/arrow and checkout at date
         shell: bash
         run: |
           cd linux
-          # git clone https://github.com/apache/arrow
-          git clone https://github.com/nealrichardson/arrow
+          git clone https://github.com/apache/arrow
           cd arrow
-          git checkout r-manylinux
+          git checkout `git rev-list -n 1 --before="00:00" master`
       - name: Build
         shell: bash
         run: |
