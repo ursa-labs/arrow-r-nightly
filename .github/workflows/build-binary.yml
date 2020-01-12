@@ -1,0 +1,55 @@
+name: Build binary C++ libraries
+
+on:
+  schedule:
+    - cron: |
+        0 */12 * * *
+  push:
+    paths:
+      - '.github/workflows/build-binary.yml'
+      - 'linux/*'
+      - bintray-upload.sh
+      - up-date-description.sh
+  # On tag too?
+
+jobs:
+  source:
+    name: Ubuntu Binary C++
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu: ["18.04"]
+    env:
+      UBUNTU: ${{ matrix.ubuntu }}
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          cd linux
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+      - name: Build
+        shell: bash
+        run: |
+          cd linux
+          docker-compose build ubuntu
+          docker-compose run ubuntu
+      - name: Bundle and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          cd linux/arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          export PKG_FILE="arrow-${VERSION}.zip"
+          cd libarrow/dist
+          # These files were created by the docker user so we have to sudo to get them
+          sudo -E zip -r $PKG_FILE lib/*.a include/
+          export REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU
+          sudo -E bash ../../../../../bintray-upload.sh

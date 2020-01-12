@@ -7,7 +7,6 @@ on:
   push:
     paths:
       - '.github/workflows/build-source.yml'
-      - 'linux/*'
       - bintray-upload.sh
       - up-date-description.sh
   # On tag too?
@@ -22,14 +21,12 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          # git clone https://github.com/apache/arrow
-          git clone https://github.com/nealrichardson/arrow
+          git clone https://github.com/apache/arrow
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
           cd arrow
-          # git checkout `git rev-list -n 1 --before="00:00" master`
-          git checkout r-manylinux
+          git checkout `git rev-list -n 1 --before="00:00" master`
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh

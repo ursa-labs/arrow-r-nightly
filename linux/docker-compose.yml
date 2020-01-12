@@ -1,0 +1,45 @@
+# The environment variables referenced from this docker-compose can be set by
+# defining them before running docker-compose.
+#
+# The defaults are set in the .env file.
+
+version: '3.5'
+
+services:
+  ubuntu:
+    # Usage:
+    #   UBUNTU=16.04 docker-compose build ubuntu
+    #   UBUNTU=16.04 docker-compose run ubuntu
+    image: ursalab/ubuntu-${UBUNTU}
+    build:
+      context: .
+      dockerfile: apt.Dockerfile
+      cache_from:
+        - ursalab/ubuntu-${UBUNTU}
+      args:
+        base: ubuntu:${UBUNTU}
+    shm_size: 2G
+    volumes:
+      - ./arrow:/arrow:delegated
+    command: >
+      /bin/bash -c "
+        cd /arrow && r/inst/build_arrow_static.sh"
+
+  debian:
+    # Usage:
+    #   DEBIAN=9 docker-compose build debian
+    #   DEBIAN=9 docker-compose run debian
+    image: ursalab/debian-${DEBIAN}
+    build:
+      context: .
+      dockerfile: apt.Dockerfile
+      cache_from:
+        - ursalab/debian-${DEBIAN}
+      args:
+        base: debian:${DEBIAN}
+    shm_size: 2G
+    volumes:
+      - ./arrow:/arrow:delegated
+    command: >
+      /bin/bash -c "
+        cd /arrow && r/inst/build_arrow_static.sh"
