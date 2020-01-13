@@ -3,6 +3,7 @@ FROM ${base}
 
 RUN yum install -y \
         bison \
+        diffutils \
         flex \
         gcc-c++ \
         make \
