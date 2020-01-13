@@ -5,7 +5,7 @@
 This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions.
 These builds are triggered daily. Binary packages generated from those jobs are then pushed to a Bintray repository at https://dl.bintray.com/ursalabs/arrow-r.
 
-To install the latest version, use this Bintray repository as the first entry in your `"repos"` argument, like
+To install the latest version, use this Bintray repository as the first entry in your `"repos"` argument, ahead of your CRAN mirror, like
 
 ```r
 install.packages("arrow", repos = c("https://dl.bintray.com/ursalabs/arrow-r", getOption("repos")))
