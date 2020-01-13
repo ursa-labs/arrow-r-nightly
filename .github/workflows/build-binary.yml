@@ -95,7 +95,7 @@ jobs:
           cd libarrow/dist
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
-          export REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU
+          export REPO_PATH=/libarrow/bin/debian-$DEBIAN
           sudo -E bash ../../../../../bintray-upload.sh
   centos:
     name: CentOS Binary C++
@@ -104,7 +104,6 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - "6"
           - "7"
           - "8"
     env:
@@ -138,5 +137,5 @@ jobs:
           cd libarrow/dist
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
-          export REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU
+          export REPO_PATH=/libarrow/bin/centos-$CENTOS
           sudo -E bash ../../../../../bintray-upload.sh

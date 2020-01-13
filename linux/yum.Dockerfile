@@ -4,8 +4,6 @@ FROM ${base}
 RUN yum install -y \
         bison \
         flex \
-        g++ \
-        gcc \
         gcc-c++ \
         make \
         wget \
