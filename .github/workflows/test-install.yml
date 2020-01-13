@@ -45,6 +45,8 @@ jobs:
         run: |
           set -ex
           cd linux
-          docker run -v $(pwd):/linux $DOCKER_IMAGE \
+          docker run \
             -e LIBARROW_BUILD=FALSE \
+            -v $(pwd):/linux \
+            $DOCKER_IMAGE \
             /bin/bash -c "Rscript linux/install-arrow.R"
