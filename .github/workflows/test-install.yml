@@ -42,10 +42,9 @@ jobs:
       - name: Install arrow from binatray
         env:
           DOCKER_IMAGE: ${{ matrix.image }}
-          # Make sure we hit a prebuilt binary
-          LIBARROW_BUILD: "FALSE"
         run: |
           set -ex
           cd linux
           docker run -v $(pwd):/linux $DOCKER_IMAGE \
+            -e LIBARROW_BUILD=FALSE \
             /bin/bash -c "Rscript linux/install-arrow.R"
