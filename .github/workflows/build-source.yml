@@ -21,12 +21,14 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow
+          # git clone https://github.com/apache/arrow
+          git clone https://github.com/nealrichardson/arrow
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          # git checkout `git rev-list -n 1 --before="00:00" master`
+          git checkout 1-800-collect
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
