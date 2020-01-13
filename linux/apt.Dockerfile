@@ -7,6 +7,7 @@ RUN apt-get update && \
         flex \
         g++ \
         gcc \
+        make \
         wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -15,3 +16,5 @@ RUN apt-get update && \
 ARG cmake=3.16.2
 RUN wget -nv -O - https://github.com/Kitware/CMake/releases/download/v${cmake}/cmake-${cmake}-Linux-x86_64.tar.gz | tar -xzf - -C /opt
 ENV PATH=/opt/cmake-${cmake}-Linux-x86_64/bin:$PATH
+
+ENV ARROW_R_DEV=TRUE

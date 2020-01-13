@@ -17,3 +17,4 @@ ENV PATH=/opt/cmake-${cmake}-Linux-x86_64/bin:$PATH
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
 ENV EXTRA_CMAKE_FLAGS="-DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX"
+ENV ARROW_R_DEV=TRUE
