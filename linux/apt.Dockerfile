@@ -7,6 +7,7 @@ RUN apt-get update && \
         flex \
         g++ \
         gcc \
+        wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
