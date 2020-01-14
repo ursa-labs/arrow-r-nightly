@@ -1,4 +1,4 @@
-name: Test installation from Bintray
+name: Test binary installation from Bintray
 
 on:
   schedule:
@@ -6,24 +6,12 @@ on:
         0 */23 * * *
   push:
     paths:
-      - '.github/workflows/test-install.yml'
-      - 'linux/*'
+      - '.github/workflows/test-binary.yml'
+      - 'linux/install-arrow.R'
+      - 'linux/distro-map.csv'
   # On tag too?
 
 jobs:
-  source:
-    name: Source packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout arrow-r-nightly
-        uses: actions/checkout@v1
-      - name: Install R
-        uses: r-lib/actions/setup-r@master
-      - name: Install arrow from binatray
-        env:
-          # Test source build so be sure not to download a binary
-          LIBARROW_BINARY_DISTRO: "FALSE"
-        run: Rscript linux/install-arrow.R
   binary:
     name: Binary packages
     runs-on: ubuntu-latest
@@ -31,11 +19,12 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - "rhub/ubuntu-gcc-release"
+          - "rhub/ubuntu-gcc-release" # ubuntu-16.04
           - "rstudio/r-base:3.6-bionic"
           - "rstudio/r-base:3.6-centos7"
           - "rstudio/r-base:3.6-centos8"
           - "rocker/r-ver" # for debian:stretch (9)
+          - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to centos-8
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
@@ -49,4 +38,4 @@ jobs:
             -e LIBARROW_BUILD=FALSE \
             -v $(pwd):/linux \
             $DOCKER_IMAGE \
-            /bin/bash -c "Rscript linux/install-arrow.R"
+            /bin/bash -c "PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R"
