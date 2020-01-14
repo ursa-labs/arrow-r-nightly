@@ -43,3 +43,22 @@ services:
     command: >
       /bin/bash -c "
         cd /arrow && r/inst/build_arrow_static.sh"
+
+  centos:
+    # Usage:
+    #   CENTOS=7 docker-compose build centos
+    #   CENTOS=7 docker-compose run centos
+    image: ursalab/centos-${CENTOS}
+    build:
+      context: .
+      dockerfile: yum.Dockerfile
+      cache_from:
+        - ursalab/centos-${CENTOS}
+      args:
+        base: centos:centos${CENTOS}
+    shm_size: 2G
+    volumes:
+      - ./arrow:/arrow:delegated
+    command: >
+      /bin/bash -c "
+        cd /arrow && r/inst/build_arrow_static.sh"

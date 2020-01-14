@@ -13,15 +13,17 @@ on:
   # On tag too?
 
 jobs:
-  source:
+  ubuntu:
     name: Ubuntu Binary C++
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        ubuntu: ["18.04"]
+        version:
+          - "16.04"
+          - "18.04"
     env:
-      UBUNTU: ${{ matrix.ubuntu }}
+      UBUNTU: ${{ matrix.version }}
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
@@ -52,4 +54,88 @@ jobs:
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
           export REPO_PATH=/libarrow/bin/ubuntu-$UBUNTU
+          sudo -E bash ../../../../../bintray-upload.sh
+  debian:
+    name: Debian Binary C++
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - "9"
+          - "10"
+    env:
+      DEBIAN: ${{ matrix.version }}
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          cd linux
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+      - name: Build
+        shell: bash
+        run: |
+          cd linux
+          docker-compose build debian
+          docker-compose run debian
+      - name: Bundle and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          cd linux/arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          export PKG_FILE="arrow-${VERSION}.zip"
+          cd libarrow/dist
+          # These files were created by the docker user so we have to sudo to get them
+          sudo -E zip -r $PKG_FILE lib/*.a include/
+          export REPO_PATH=/libarrow/bin/debian-$DEBIAN
+          sudo -E bash ../../../../../bintray-upload.sh
+  centos:
+    name: CentOS Binary C++
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - "7"
+          - "8"
+    env:
+      CENTOS: ${{ matrix.version }}
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          cd linux
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+      - name: Build
+        shell: bash
+        run: |
+          cd linux
+          docker-compose build centos
+          docker-compose run centos
+      - name: Bundle and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          cd linux/arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          export PKG_FILE="arrow-${VERSION}.zip"
+          cd libarrow/dist
+          # These files were created by the docker user so we have to sudo to get them
+          sudo -E zip -r $PKG_FILE lib/*.a include/
+          export REPO_PATH=/libarrow/bin/centos-$CENTOS
           sudo -E bash ../../../../../bintray-upload.sh
