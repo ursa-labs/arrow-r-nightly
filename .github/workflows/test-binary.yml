@@ -38,4 +38,4 @@ jobs:
             -e LIBARROW_BUILD=FALSE \
             -v $(pwd):/linux \
             $DOCKER_IMAGE \
-            /bin/bash -c "Rscript linux/install-arrow.R"
+            /bin/bash -c "PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R"
