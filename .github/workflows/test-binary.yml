@@ -3,7 +3,7 @@ name: Test binary installation from Bintray
 on:
   schedule:
     - cron: |
-        0 */23 * * *
+        0 23 * * *
   push:
     paths:
       - '.github/workflows/test-binary.yml'

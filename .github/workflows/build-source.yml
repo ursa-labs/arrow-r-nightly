@@ -3,7 +3,7 @@ name: Build source packages
 on:
   schedule:
     - cron: |
-        0 */20 * * *
+        0 20 * * *
   push:
     paths:
       - '.github/workflows/build-source.yml'
