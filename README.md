@@ -2,10 +2,10 @@
 
 [![Build Status](https://travis-ci.org/ursa-labs/arrow-r-nightly.png?branch=master)](https://travis-ci.org/ursa-labs/arrow-r-nightly)
 [![Build status](https://ci.appveyor.com/api/projects/status/ume8udm5r26u2c9l/branch/master?svg=true)](https://ci.appveyor.com/project/nealrichardson/arrow-r-nightly-yxl55/branch/master)
-[![Linux binary build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions)
-[![Linux source build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20source%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions)
-[![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions)
-[![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions)
+[![Linux binary build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+binary+C%2B%2B+libraries")
+[![Linux source build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20source%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+source+packages")
+[![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+binary+installation+from+Bintray")
+[![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+source+installation+from+Bintray")
 [![codecov](https://codecov.io/gh/ursa-labs/arrow-r-nightly/branch/master/graph/badge.svg)](https://codecov.io/gh/ursa-labs/arrow-r-nightly)
 
 This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions.
