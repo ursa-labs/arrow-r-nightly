@@ -41,6 +41,8 @@ install:
   - copy arrow\ci\PKGBUILD ci\
   - copy arrow\ci\appveyor-build-r.sh ci\
   - copy arrow\ci\windows-pkg-arrow-for-r.sh ci\
+  - copy arrow\LICENSE.txt LICENSE.txt
+  - copy arrow\NOTICE.txt NOTICE.txt
   - xcopy /S /I arrow\cpp cpp
   - xcopy /S /I arrow\format format
   - xcopy /S /I arrow\r r
