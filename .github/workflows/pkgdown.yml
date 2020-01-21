@@ -1,0 +1,44 @@
+name: Daily pkgdown site
+
+on:
+  schedule:
+    - cron: |
+        0 20 * * *
+  push:
+    paths:
+      - '.github/workflows/pkgdown.yml'
+
+jobs:
+  pkgdown:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@master
+      - name: Clone apache/arrow
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+      - name: Checkout arrow at date and update R package version
+        shell: bash
+        run: |
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      - name: Install dependencies
+        run: |
+          cd arrow/r
+          Rscript -e 'install.packages("remotes")' \
+                  -e 'remotes::install_deps(dependencies = TRUE)' \
+                  -e 'remotes::install_github("jimhester/pkgdown@github-actions-deploy")'
+      - name: Install package
+        env:
+          LOCAL_AUTOBREW: "TRUE"
+        run: R CMD INSTALL arrow/r
+      - name: Deploy package
+        run: |
+          cd arrow/r
+          Rscript -e "pkgdown:::deploy_local(new_process = FALSE, remote_url = 'https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git')"
