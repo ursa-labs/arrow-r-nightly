@@ -43,14 +43,14 @@ jobs:
       - name: Install dependencies
         run: |
           cd arrow/r
-          Rscript -e 'install.packages(c("remotes", "pkgdown"))' \
+          Rscript -e 'options(install.packages.check.source = "no"); install.packages(c("remotes", "pkgdown"))' \
                   -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Install package
         run: Rscript -e 'install.packages("arrow", repos = "https://dl.bintray.com/ursalabs/arrow-r")'
       - name: Deploy package
         run: |
           cd arrow/r
-          Rscript -e "pkgdown::build_site()"
+          Rscript -e "pkgdown::build_site(install = FALSE)"
           cd docs
           if [ "$(git status --porcelain)" != "" ]; then
             # There are changes to the built site
