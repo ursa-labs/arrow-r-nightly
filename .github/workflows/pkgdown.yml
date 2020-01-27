@@ -46,9 +46,7 @@ jobs:
           Rscript -e 'install.packages(c("remotes", "pkgdown"))' \
                   -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Install package
-        env:
-          LOCAL_AUTOBREW: "TRUE"
-        run: R CMD INSTALL arrow/r
+        run: Rscript -e 'install.packages("arrow", repos = "https://dl.bintray.com/ursalabs/arrow-r")'
       - name: Deploy package
         run: |
           cd arrow/r
