@@ -44,12 +44,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies and package
-        run: |
-          Rscript -e 'options(install.packages.check.source = "no")'
-          Rscript linux/install-arrow.R
-          cd arrow/r
-          Rscript -e 'install.packages(c("remotes", "pkgdown"))' \
-                  -e 'remotes::install_deps(dependencies = TRUE)'
+        run: Rscript linux/install-with-pkgdown.R
       - name: Build and deploy site
         run: |
           cd arrow/r
