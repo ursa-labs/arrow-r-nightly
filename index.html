@@ -227,7 +227,7 @@ R CMD INSTALL .</code></pre>
 <a href="#editing-rcpp-code" class="anchor"></a>Editing Rcpp code</h3>
 <p>The <code>arrow</code> package uses some customized tools on top of <code>Rcpp</code> to prepare its C++ code in <code>src/</code>. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>TRUE</code> (optionally, add it to your<code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation.</p>
 <p>The codegen.R script has these additional dependencies:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"romainfrancois/decor"</span>)</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"romainfrancois/decor"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"glue"</span>)</span></code></pre></div>
 <p>We use Google C++ style in our C++ code. Check for style errors with</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
