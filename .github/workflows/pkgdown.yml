@@ -10,7 +10,7 @@ on:
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Clone apache/arrow
@@ -24,7 +24,7 @@ jobs:
           git checkout `git rev-list -n 1 --before="00:00" master`
           cd r
           cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
-          export DATE=$(date -v -1d +%Y%m%d)
+          export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
       - name: Set up gh-pages branch to push to
         shell: bash
@@ -43,13 +43,13 @@ jobs:
           fi
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
-      - name: Install dependencies
+      - name: Install dependencies and package
         run: |
+          Rscript -e 'options(install.packages.check.source = "no")''
+          Rscript linux/install-arrow.R
           cd arrow/r
-          Rscript -e 'options(install.packages.check.source = "no"); install.packages(c("remotes", "pkgdown"))' \
+          Rscript -e 'install.packages(c("remotes", "pkgdown"))' \
                   -e 'remotes::install_deps(dependencies = TRUE)'
-      - name: Install package
-        run: Rscript -e 'install.packages("arrow", repos = "https://dl.bintray.com/ursalabs/arrow-r")'
       - name: Build and deploy site
         run: |
           cd arrow/r
@@ -57,7 +57,7 @@ jobs:
           cd docs
           if [ "$(git status --porcelain)" != "" ]; then
             # There are changes to the built site
-            export DATE=$(date -v -1d +%Y%m%d)
+            export DATE=$(date -d yesterday +%Y%m%d)
             git add --all
             git commit -m "Updating pkgdown site (${DATE})"
             git push origin gh-pages
