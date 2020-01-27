@@ -28,12 +28,23 @@ jobs:
           cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
+      - name: Set up gh-pages branch to push to
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd arrow/r
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/ursa-labs/arrow-r-nightly.git docs
+          cd docs
+          TARGET_BRANCH=gh-pages
+          if ! git checkout --track origin/${TARGET_BRANCH}; then
+            git checkout -b ${TARGET_BRANCH} remotes/origin/gh-pages
+          fi
       - name: Install dependencies
         run: |
           cd arrow/r
-          Rscript -e 'install.packages("remotes")' \
-                  -e 'remotes::install_deps(dependencies = TRUE)' \
-                  -e 'remotes::install_github("jimhester/pkgdown@github-actions-deploy")'
+          Rscript -e 'install.packages(c("remotes", "pkgdown"))' \
+                  -e 'remotes::install_deps(dependencies = TRUE)'
       - name: Install package
         env:
           LOCAL_AUTOBREW: "TRUE"
@@ -41,4 +52,14 @@ jobs:
       - name: Deploy package
         run: |
           cd arrow/r
-          Rscript -e "pkgdown:::deploy_local(new_process = FALSE, remote_url = 'https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git')"
+          Rscript -e "pkgdown::build_site()"
+          cd docs
+          if [ "$(git status --porcelain)" != "" ]; then
+            # There are changes to the built site
+            export DATE=$(date -d yesterday +%Y%m%d)
+            git add --all
+            git commit -m "Updating pkgdown site (${DATE})"
+            git push origin gh-pages
+          else
+            echo "No changes to the built site"
+          fi
