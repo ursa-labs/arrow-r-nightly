@@ -38,6 +38,8 @@ jobs:
           if ! git checkout gh-pages; then
             git checkout -b gh-pages
           fi
+          # So that pkgdown recognizes that it can write here
+          touch pkgdown.yml
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
