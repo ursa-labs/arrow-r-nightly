@@ -13,8 +13,6 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@master
-      - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
       - name: Clone apache/arrow
         shell: bash
         run: |
@@ -37,9 +35,11 @@ jobs:
           git clone https://x-access-token:${GITHUB_TOKEN}@github.com/ursa-labs/arrow-r-nightly.git docs
           cd docs
           TARGET_BRANCH=gh-pages
-          if ! git checkout --track origin/${TARGET_BRANCH}; then
-            git checkout -b ${TARGET_BRANCH} remotes/origin/gh-pages
+          if ! git checkout gh-pages; then
+            git checkout -b gh-pages
           fi
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
         run: |
           cd arrow/r
