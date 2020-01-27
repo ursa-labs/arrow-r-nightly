@@ -1,3 +1,6 @@
+branches:
+  only:
+  - master
 language: r
 os: osx
 cache: packages
