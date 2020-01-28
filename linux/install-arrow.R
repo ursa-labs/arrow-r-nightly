@@ -1,4 +1,4 @@
-source("https://raw.githubusercontent.com/apache/arrow/3a0abf03c07473a84123e4805157348d24e80220/ci/etc/rprofile")
+source("https://raw.githubusercontent.com/apache/arrow/master/ci/etc/rprofile")
 install.packages(
   "arrow",
   repos = c("https://dl.bintray.com/ursalabs/arrow-r", getOption("repos")),
