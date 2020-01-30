@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.1.20200128</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.15.1.20200129</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@
       <th>col_select</th>
       <td><p>A character vector of column names to keep, as in the
 "select" argument to <code>data.table::fread()</code>, or a
-<a href='https://rdrr.io/pkg/tidyselect/man/vars_select.html'>tidy selection specification</a>
+<a href='https://tidyselect.r-lib.org/reference/vars_select.html'>tidy selection specification</a>
 of columns, as used in <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>.</p></td>
     </tr>
     <tr>
@@ -212,7 +212,7 @@ of columns, as used in <code><a href='https://dplyr.tidyverse.org/reference/sele
 <span class='fu'><a href='write_feather.html'>write_feather</a></span>(<span class='no'>iris</span>, <span class='no'>tf</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] 150   5</div><div class='input'><span class='co'># Can select columns</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/tidyselect/man/select_helpers.html'>starts_with</a></span>(<span class='st'>"Sepal"</span>))
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>starts_with</a></span>(<span class='st'>"Sepal"</span>))
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
