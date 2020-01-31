@@ -6,7 +6,6 @@ os: osx
 cache: packages
 fortran: false
 r:
-- 3.2
 - 3.3
 - 3.4
 - 3.5
@@ -32,6 +31,6 @@ script:
 after_success:
 - test $TRAVIS_R_VERSION_STRING = "release" && travis_wait Rscript -e 'install.packages("covr"); covr::codecov()'
 - source ../../bintray-upload.sh
-- cd /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck && source /Users/travis/build/ursa-labs/arrow-r-nightly/bintray-upload-mac-logs.sh
+- cat /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck/00install.out
 after_failure:
-- cd /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck && source /Users/travis/build/ursa-labs/arrow-r-nightly/bintray-upload-mac-logs.sh
+- cat /Users/travis/build/ursa-labs/arrow-r-nightly/arrow/r/arrow.Rcheck/00install.out
