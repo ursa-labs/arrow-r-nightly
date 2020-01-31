@@ -17,9 +17,9 @@ environment:
       secure: bt7FQqKZhZA93YURBaizwiNGU45nl7kUqAPeN/bIiArLypKkbbPs4lGeWjXEx7qF
   matrix:
     # Can't go older than R 3.3 because we need Rtools 3.5
-    - R_VERSION: 3.3.3
-      PKGTYPE: both
-    - R_VERSION: 3.4.4
+    # - R_VERSION: 3.3.3
+    #   PKGTYPE: both
+    # - R_VERSION: 3.4.4
     - R_VERSION: 3.5.3
     - R_VERSION: release
     - R_VERSION: devel

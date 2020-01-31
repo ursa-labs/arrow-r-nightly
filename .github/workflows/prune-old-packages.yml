@@ -1,0 +1,26 @@
+name: Remove old packages
+
+on:
+  schedule:
+    - cron: |
+        0 2 * * *
+  push:
+    paths:
+      - '.github/workflows/prune-old-packages.yml'
+      - 'prune-old-packages.R'
+
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: r-lib/actions/setup-r@master
+      - name: Install dependencies
+        run: Rscript -e 'source("https://raw.githubusercontent.com/apache/arrow/master/ci/etc/rprofile"); install.packages(c("httr", "dplyr"))'
+      - name: Delete old packages
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          MAX_AGE: 30
+          MAX_REQUESTS: 17
+        run: Rscript prune-old-packages.R
