@@ -6,8 +6,9 @@ os: osx
 cache: packages
 fortran: false
 r:
-- 3.3
-- 3.4
+# - 3.2
+# - 3.3
+# - 3.4
 - 3.5
 - release
 # CRAN doesn't host macOS binary packages for r-devel

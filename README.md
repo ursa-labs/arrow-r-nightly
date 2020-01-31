@@ -22,8 +22,8 @@ These daily package builds are not official Apache releases and are not recommen
 
 We currently build binary R packages for the following OS and versions:
 
-* macOS: R 3.3, 3.4, 3.5, 3.6
-* Windows: R 3.3, 3.4, 3.5, 3.6, R-devel (4.0)
+* macOS: R 3.5, 3.6
+* Windows: R 3.5, 3.6, R-devel (4.0)
 
 We also build C++ static binaries for these Linux distributions and versions:
 
@@ -32,5 +32,7 @@ We also build C++ static binaries for these Linux distributions and versions:
 * CentOS: 7, 8
 
 Additional distribution-versions are supported by mapping them to binary builds that we know to work for them, such as Fedora to CentOS. See [distro-map.csv](https://github.com/ursa-labs/arrow-r-nightly/blob/master/linux/distro-map.csv) for a complete list.
+
+Daily builds are kept for 30 days.
 
 The `pkgdown` documentation site is also built daily. See https://ursalabs.org/arrow-r-nightly/.
