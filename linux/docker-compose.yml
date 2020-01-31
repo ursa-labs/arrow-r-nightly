@@ -8,16 +8,16 @@ version: '3.5'
 services:
   ubuntu:
     # Usage:
-    #   UBUNTU=16.04 docker-compose build ubuntu
-    #   UBUNTU=16.04 docker-compose run ubuntu
-    image: ursalab/ubuntu-${UBUNTU}
+    #   VERSION=16.04 docker-compose build ubuntu
+    #   VERSION=16.04 docker-compose run ubuntu
+    image: ursalab/ubuntu-${VERSION}
     build:
       context: .
       dockerfile: apt.Dockerfile
       cache_from:
-        - ursalab/ubuntu-${UBUNTU}
+        - ursalab/ubuntu-${VERSION}
       args:
-        base: ubuntu:${UBUNTU}
+        base: ubuntu:${VERSION}
     shm_size: 2G
     volumes:
       - ./arrow:/arrow:delegated
@@ -27,16 +27,16 @@ services:
 
   debian:
     # Usage:
-    #   DEBIAN=9 docker-compose build debian
-    #   DEBIAN=9 docker-compose run debian
-    image: ursalab/debian-${DEBIAN}
+    #   VERSION=9 docker-compose build debian
+    #   VERSION=9 docker-compose run debian
+    image: ursalab/debian-${VERSION}
     build:
       context: .
       dockerfile: apt.Dockerfile
       cache_from:
-        - ursalab/debian-${DEBIAN}
+        - ursalab/debian-${VERSION}
       args:
-        base: debian:${DEBIAN}
+        base: debian:${VERSION}
     shm_size: 2G
     volumes:
       - ./arrow:/arrow:delegated
@@ -46,16 +46,16 @@ services:
 
   centos:
     # Usage:
-    #   CENTOS=7 docker-compose build centos
-    #   CENTOS=7 docker-compose run centos
-    image: ursalab/centos-${CENTOS}
+    #   VERSION=7 docker-compose build centos
+    #   VERSION=7 docker-compose run centos
+    image: ursalab/centos-${VERSION}
     build:
       context: .
       dockerfile: yum.Dockerfile
       cache_from:
-        - ursalab/centos-${CENTOS}
+        - ursalab/centos-${VERSION}
       args:
-        base: centos:centos${CENTOS}
+        base: centos:centos${VERSION}
     shm_size: 2G
     volumes:
       - ./arrow:/arrow:delegated
