@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200208</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200209</span>
       </span>
     </div>
 
@@ -173,6 +173,7 @@
 <li>
 <code>write_feather</code>, <code>write_arrow</code> and <code>write_parquet</code> now return their input similar to <code>write_*</code> functions from <code>readr</code> (<a href='https://github.com/apache/arrow/issues/6387'>#6387</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
 <li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types.</li>
+<li>Can now infer the type of an R <code>list</code> and create a ListArray when all list elements are the same type (<a href='https://github.com/apache/arrow/issues/6275'>#6275</a>, <a href='https://github.com/michaelchirico'>@michaelchirico</a>)</li>
 </ul>
 </div>
     <div id="arrow-0160" class="section level1">
