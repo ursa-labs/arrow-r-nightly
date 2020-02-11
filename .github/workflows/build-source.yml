@@ -21,15 +21,16 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow
+          git clone https://github.com/nealrichardson/arrow
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
-          cd r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
+          git checkout 0.16.0-rpkg
+          # git checkout `git rev-list -n 1 --before="00:00" master`
+          # cd r
+          # export DATE=$(date -d yesterday +%Y%m%d)
+          # source ../../up-date-description.sh
       - name: Build and upload cpp bundle
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
