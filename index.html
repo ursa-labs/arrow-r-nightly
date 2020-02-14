@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200212</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200213</span>
       </span>
     </div>
 
@@ -135,63 +135,23 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>)</span></code></pre></div>
-<p>Conda users on Linux and macOS can install <code>arrow</code> from conda-forge with</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>conda install <span class="op">-</span>c conda<span class="op">-</span>forge r<span class="op">-</span>arrow</span></code></pre></div>
-<p>Installing a released version of the <code>arrow</code> package should require no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will download necessary C++ dependencies automatically on most common Linux distributions. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
+<p>Installing a released version of the <code>arrow</code> package should require no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will download necessary C++ dependencies if you set the environment variable <code>LIBARROW_DOWNLOAD=true</code>. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 <p>If you install the <code>arrow</code> package from source and the C++ library is not found, the R package functions will notify you that Arrow is not available. Call</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>arrow<span class="op">::</span><span class="kw"><a href="https://arrow.apache.org/docs/r//reference/install_arrow.html">install_arrow</a></span>()</span></code></pre></div>
-<p>for version- and platform-specific guidance on installing the Arrow C++ library.</p>
-</div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(arrow, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">24</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>tab &lt;-<span class="st"> </span>Table<span class="op">$</span><span class="kw">create</span>(</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">10</span>),</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"b"</span>, <span class="st">"c"</span>), <span class="dv">5</span>))</span>
-<span id="cb4-8"><a href="#cb4-8"></a>)</span>
-<span id="cb4-9"><a href="#cb4-9"></a>tab</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Table</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 10 rows x 3 columns</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; $x &lt;int32&gt;</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; $y &lt;double&gt;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; $z &lt;dictionary&lt;values=string, indices=int8&gt;&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>tab<span class="op">$</span>x</span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; ChunkedArray</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; &lt;int32&gt;</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; [</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt;   1,</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt;   2,</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt;   3,</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt;   4,</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt;   5,</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt;   6,</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt;   7,</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt;   8,</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt;   9,</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt;   10</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; ]</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(tab)</span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;     x            y z</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; 1   1 -0.545880758 b</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; 2   2  0.536585304 c</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; 3   3  0.419623149 b</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; 4   4 -0.583627199 c</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; 5   5  0.847460017 b</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; 6   6  0.266021979 c</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; 7   7  0.444585270 b</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; 8   8 -0.466495124 c</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt; 9   9 -0.848370044 b</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; 10 10  0.002311942 c</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>arrow<span class="op">::</span><span class="kw"><a href="https://arrow.apache.org/docs/r//reference/install_arrow.html">install_arrow</a></span>()</span></code></pre></div>
+<p>to retry installation with dependencies.</p>
+<p>Note that <code><a href="reference/install_arrow.html">install_arrow()</a></code> is available as a standalone script, so you can access it for convenience without first installing the package:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="reference/install_arrow.html">install_arrow</a></span>()</span></code></pre></div>
+<p>Conda users on Linux and macOS can install <code>arrow</code> from conda-forge with</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>conda install <span class="op">-</span>c conda<span class="op">-</span>forge r<span class="op">-</span>arrow</span></code></pre></div>
 </div>
 <div id="installing-a-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-a-development-version" class="anchor"></a>Installing a development version</h2>
 <p>Binary R packages for macOS and Windows are built daily and hosted at <a href="https://dl.bintray.com/ursalabs/arrow-r/" class="uri">https://dl.bintray.com/ursalabs/arrow-r/</a>. To install from there:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>, <span class="dt">repos =</span> <span class="st">"https://dl.bintray.com/ursalabs/arrow-r"</span>)</span></code></pre></div>
+<p>Or</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/install_arrow.html">install_arrow</a></span>(<span class="dt">nightly =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>These daily package builds are not official Apache releases and are not recommended for production use. They may be useful for testing bug fixes and new features under active development.</p>
 </div>
 <div id="developing" class="section level2">
@@ -213,10 +173,10 @@ R CMD INSTALL .</code></pre>
 <p>If you need to set any compilation flags while building the Rcpp extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
 <pre class="shell"><code>export ARROW_R_CXXFLAGS=-fno-omit-frame-pointer</code></pre>
 <p>If the package fails to install/load with an error like this:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">**</span><span class="st"> </span>testing <span class="cf">if</span> installed package can be loaded from temporary location</span>
-<span id="cb9-2"><a href="#cb9-2"></a>Error<span class="op">:</span><span class="st"> </span>package or namespace load failed <span class="cf">for</span> <span class="st">'arrow'</span> <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/dynload.html">dyn.load</a></span>(file, <span class="dt">DLLpath =</span> DLLpath, ...)<span class="op">:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>unable to load shared object <span class="st">'/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so'</span><span class="op">:</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">dlopen</span>(<span class="op">/</span>Users<span class="op">/</span>you<span class="op">/</span>R<span class="op">/</span>00LOCK<span class="op">-</span>r<span class="op">/</span>00new<span class="op">/</span>arrow<span class="op">/</span>libs<span class="op">/</span>arrow.so, <span class="dv">6</span>)<span class="op">:</span><span class="st"> </span>Library not loaded<span class="op">:</span><span class="st"> </span><span class="er">@</span>rpath<span class="op">/</span>libarrow.<span class="fl">14.</span>dylib</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">**</span><span class="st"> </span>testing <span class="cf">if</span> installed package can be loaded from temporary location</span>
+<span id="cb10-2"><a href="#cb10-2"></a>Error<span class="op">:</span><span class="st"> </span>package or namespace load failed <span class="cf">for</span> <span class="st">'arrow'</span> <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/dynload.html">dyn.load</a></span>(file, <span class="dt">DLLpath =</span> DLLpath, ...)<span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>unable to load shared object <span class="st">'/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so'</span><span class="op">:</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">dlopen</span>(<span class="op">/</span>Users<span class="op">/</span>you<span class="op">/</span>R<span class="op">/</span>00LOCK<span class="op">-</span>r<span class="op">/</span>00new<span class="op">/</span>arrow<span class="op">/</span>libs<span class="op">/</span>arrow.so, <span class="dv">6</span>)<span class="op">:</span><span class="st"> </span>Library not loaded<span class="op">:</span><span class="st"> </span><span class="er">@</span>rpath<span class="op">/</span>libarrow.<span class="fl">14.</span>dylib</span></code></pre></div>
 <p>try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g. <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
 <p>When installing from source, if the R and C++ library versions do not match, installation may fail. If you’ve previously installed the libraries and want to upgrade the R package, you’ll need to update the Arrow C++ library first.</p>
 <p>For any other build/configuration challenges, see the <a href="https://arrow.apache.org/docs/developers/cpp.html#building">C++ developer guide</a> and <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code>.</p>
@@ -225,25 +185,24 @@ R CMD INSTALL .</code></pre>
 <a href="#editing-rcpp-code" class="anchor"></a>Editing Rcpp code</h3>
 <p>The <code>arrow</code> package uses some customized tools on top of <code>Rcpp</code> to prepare its C++ code in <code>src/</code>. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>TRUE</code> (optionally, add it to your<code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation.</p>
 <p>The codegen.R script has these additional dependencies:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"romainfrancois/decor"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"glue"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"romainfrancois/decor"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"glue"</span>)</span></code></pre></div>
 <p>We use Google C++ style in our C++ code. Check for style errors with</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
 <p>Fix any style issues before committing with</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
 <p>The lint script requires Python 3 and <code>clang-format-7</code>. If the command isn’t found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-7) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@7)/bin/clang-format ./lint.sh</code></p>
 </div>
 <div id="useful-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#useful-functions" class="anchor"></a>Useful functions</h3>
 <p>Within an R session, these can help with package development:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>devtools<span class="op">::</span><span class="kw">load_all</span>() <span class="co"># Load the dev package</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="dt">filter=</span><span class="st">"^regexp$"</span>) <span class="co"># Run the test suite, optionally filtering file names</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>devtools<span class="op">::</span><span class="kw">document</span>() <span class="co"># Update roxygen documentation</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>rmarkdown<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="st">"README.Rmd"</span>) <span class="co"># To rebuild README.md</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>() <span class="co"># To preview the documentation website</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>devtools<span class="op">::</span><span class="kw">check</span>() <span class="co"># All package checks; see also below</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>covr<span class="op">::</span><span class="kw">package_coverage</span>() <span class="co"># See test coverage statistics</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>devtools<span class="op">::</span><span class="kw">load_all</span>() <span class="co"># Load the dev package</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="dt">filter=</span><span class="st">"^regexp$"</span>) <span class="co"># Run the test suite, optionally filtering file names</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>devtools<span class="op">::</span><span class="kw">document</span>() <span class="co"># Update roxygen documentation</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>() <span class="co"># To preview the documentation website</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>devtools<span class="op">::</span><span class="kw">check</span>() <span class="co"># All package checks; see also below</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>covr<span class="op">::</span><span class="kw">package_coverage</span>() <span class="co"># See test coverage statistics</span></span></code></pre></div>
 <p>Any of those can be run from the command line by wrapping them in <code>R -e '$COMMAND'</code>. There’s also a <code>Makefile</code> to help with some common tasks from the command line (<code>make test</code>, <code>make doc</code>, <code>make clean</code>, etc.)</p>
 </div>
 <div id="full-package-validation" class="section level3">

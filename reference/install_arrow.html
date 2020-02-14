@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Help installing the Arrow C++ library — install_arrow • Arrow R Package</title>
+<title>Install or upgrade the Arrow library — install_arrow • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,10 @@
 
 
 
-<meta property="og:title" content="Help installing the Arrow C++ library — install_arrow" />
-<meta property="og:description" content="Binary package installations should come with a working Arrow C++ library,
-but when installing from source, you'll need to obtain the C++ library
-first. This function offers guidance on how to get the C++ library depending
-on your operating system and package version." />
+<meta property="og:title" content="Install or upgrade the Arrow library — install_arrow" />
+<meta property="og:description" content="Use this function to install the latest release of arrow, to switch to or
+from a nightly development version, or on Linux to try reinstalling with
+all necessary C++ dependencies." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -82,7 +81,7 @@ on your operating system and package version." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200212</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200213</span>
       </span>
     </div>
 
@@ -166,33 +165,73 @@ on your operating system and package version." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Help installing the Arrow C++ library</h1>
+    <h1>Install or upgrade the Arrow library</h1>
     <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/install-arrow.R'><code>R/install-arrow.R</code></a></small>
     <div class="hidden name"><code>install_arrow.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Binary package installations should come with a working Arrow C++ library,
-but when installing from source, you'll need to obtain the C++ library
-first. This function offers guidance on how to get the C++ library depending
-on your operating system and package version.</p>
+    <p>Use this function to install the latest release of <code>arrow</code>, to switch to or
+from a nightly development version, or on Linux to try reinstalling with
+all necessary C++ dependencies.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install_arrow</span>()</pre>
+    <pre class="usage"><span class='fu'>install_arrow</span>(
+  <span class='kw'>nightly</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>binary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>use_system</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='no'>...</span>
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>nightly</th>
+      <td><p>logical: Should we install a development version of the
+package, or should we install from CRAN (the default).</p></td>
+    </tr>
+    <tr>
+      <th>binary</th>
+      <td><p>On Linux, value to set for the environment variable
+<code>LIBARROW_BINARY</code>, which governs how C++ binaries are used, if at all.
+The default value, <code>TRUE</code>, tells the installation script to detect the
+Linux distribution and version and find an appropriate C++ library. <code>FALSE</code>
+would tell the script not to retrieve a binary and instead build Arrow C++
+from source. Other valid values are strings corresponding to a Linux
+distribution-version, to override the value that would be detected.
+See <code><a href='../articles/install.html'>vignette("install", package = "arrow")</a></code> for further details.</p></td>
+    </tr>
+    <tr>
+      <th>use_system</th>
+      <td><p>logical: Should we use <code>pkg-config</code> to look for Arrow
+system packages? Default is <code>FALSE</code>. If <code>TRUE</code>, source installation may be
+faster, but there is a risk of version mismatch.</p></td>
+    </tr>
+    <tr>
+      <th>repos</th>
+      <td><p>character vector of base URLs of the repositories to install
+from (passed to <code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages()</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages()</a></code></p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>install_arrow</span>()</div><div class='output co'>#&gt; <span class='message'>It appears you already have Arrow installed successfully: are you trying to install a different version of the library?</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>Refer to the R package README &lt;https://github.com/apache/arrow/blob/master/r/README.md&gt; and `vignette('install', package = 'arrow')` for further details.</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>If you have other trouble, or if you think this message could be improved, please report an issue here: &lt;https://issues.apache.org/jira/projects/ARROW/issues&gt;</span></div></pre>
+    <div class='dont-index'><p><code><a href='arrow_available.html'>arrow_available()</a></code> to see if the package was configured with
+necessary C++ dependencies. <code><a href='../articles/install.html'>vignette("install", package = "arrow")</a></code> for
+more ways to tune installation on Linux.</p></div>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>
