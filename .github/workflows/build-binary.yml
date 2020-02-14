@@ -39,7 +39,7 @@ jobs:
           cd arrow
           # Check out the release branch instead
           # git checkout `git rev-list -n 1 --before="00:00" master`
-          git checkout 0.16.0-rpkg
+          git checkout 0.16.0.2-rpkg
       - name: Build
         shell: bash
         run: |
