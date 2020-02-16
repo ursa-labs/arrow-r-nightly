@@ -81,7 +81,7 @@ all necessary C++ dependencies." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200214</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200215</span>
       </span>
     </div>
 
@@ -178,8 +178,8 @@ all necessary C++ dependencies.</p>
 
     <pre class="usage"><span class='fu'>install_arrow</span>(
   <span class='kw'>nightly</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>binary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>use_system</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>binary</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LIBARROW_BINARY"</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>use_system</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ARROW_USE_PKG_CONFIG"</span>, <span class='fl'>FALSE</span>),
   <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
   <span class='no'>...</span>
 )</pre>

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200214</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200215</span>
       </span>
     </div>
 
@@ -171,9 +171,12 @@
 </h1>
 <ul>
 <li>
-<code>write_feather</code>, <code>write_arrow</code> and <code>write_parquet</code> now return their input similar to <code>write_*</code> functions from <code>readr</code> (<a href='https://github.com/apache/arrow/issues/6387'>#6387</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
-<li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types.</li>
+<code><a href="../reference/install_arrow.html">install_arrow()</a></code> now installs the latest release of <code>arrow</code>, including Linux dependencies, either for CRAN releases or for development builds (if <code>nightly = TRUE</code>)</li>
+<li>Package installation on Linux no longer downloads C++ dependencies unless the <code>LIBARROW_DOWNLOAD</code> or <code>NOT_CRAN</code> enviroment variable is set</li>
+<li>
+<code><a href="../reference/write_feather.html">write_feather()</a></code>, <code><a href="../reference/write_arrow.html">write_arrow()</a></code> and <code><a href="../reference/write_parquet.html">write_parquet()</a></code> now return their input, similar to the <code>write_*</code> functions in the <code>readr</code> package (<a href='https://github.com/apache/arrow/issues/6387'>#6387</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
 <li>Can now infer the type of an R <code>list</code> and create a ListArray when all list elements are the same type (<a href='https://github.com/apache/arrow/issues/6275'>#6275</a>, <a href='https://github.com/michaelchirico'>@michaelchirico</a>)</li>
+<li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types.</li>
 </ul>
 </div>
     <div id="arrow-0160" class="section level1">
