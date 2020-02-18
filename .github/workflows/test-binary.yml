@@ -36,6 +36,7 @@ jobs:
           cd linux
           docker run \
             -e LIBARROW_BUILD=FALSE \
+            -e LIBARROW_DOWNLOAD=TRUE \
             -v $(pwd):/linux \
             $DOCKER_IMAGE \
             /bin/bash -c "PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R"
