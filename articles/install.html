@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200217</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200219</span>
       </span>
     </div>
 
@@ -223,20 +223,20 @@ freadahead.c:92:3: error: #error "Please port gnulib freadahead.c to your platfo
 <div id="summary-of-build-environment-variables" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summary-of-build-environment-variables" class="anchor"></a>Summary of build environment variables</h2>
-<p>By default, these are all unset.</p>
+<p>By default, these are all unset. All boolean variables are case-insensitive.</p>
 <ul>
 <li>
-<code>ARROW_USE_PKG_CONFIG</code>: If set to <code>FALSE</code>, the configure script won’t look for Arrow libraries on your system and instead will look to download/build them. Use this if you have a version mismatch between installed system libraries and the version of the R package you’re installing.</li>
+<code>ARROW_USE_PKG_CONFIG</code>: If set to <code>false</code>, the configure script won’t look for Arrow libraries on your system and instead will look to download/build them. Use this if you have a version mismatch between installed system libraries and the version of the R package you’re installing.</li>
 <li>
-<code>LIBARROW_DOWNLOAD</code>: Unless set to <code>TRUE</code> (case insensitive), the build script will not attempt to download C++ binary or source bundles. If you’re in a checkout of the <code>apache/arrow</code> git repository and want to build the C++ library from the local source, make this <code>FALSE</code>.</li>
+<code>LIBARROW_DOWNLOAD</code>: Unless set to <code>true</code>, the build script will not attempt to download C++ binary or source bundles. If you’re in a checkout of the <code>apache/arrow</code> git repository and want to build the C++ library from the local source, make this <code>FALSE</code>.</li>
 <li>
-<code>LIBARROW_BUILD</code>: If set to <code>FALSE</code> (case insensitive), the build script will not attempt to build the C++ from source. This means you will only get a working <code>arrow</code> R package if a prebuilt binary is found. Use this if you want to avoid compiling the C++ library, which may be slow and resource-intensive, and ensure that you only use a prebuilt binary.</li>
+<code>LIBARROW_BUILD</code>: If set to <code>false</code>, the build script will not attempt to build the C++ from source. This means you will only get a working <code>arrow</code> R package if a prebuilt binary is found. Use this if you want to avoid compiling the C++ library, which may be slow and resource-intensive, and ensure that you only use a prebuilt binary.</li>
 <li>
-<code>LIBARROW_BINARY</code>: If set to <code>FALSE</code> (case insensitive), the script will not download a binary, but it may still download a source bundle. You may also set it to some other string, a related “distro-version” that has binaries built that work for your OS.</li>
+<code>LIBARROW_BINARY</code>: If set to <code>false</code>, the script will not download a binary, but it may still download a source bundle. You may also set it to some other string, a related “distro-version” that has binaries built that work for your OS.</li>
 <li>
 <code>NOT_CRAN</code>: If this variable is set to <code>true</code>, as the <code>devtools</code> package does, the build script will attempt to download and/or build the Arrow C++ library, if necessary, even when running <code>R CMD check</code>. Otherwise, it will only download/build C++ if you’re not running <code>R CMD check</code>. The purpose of this protection is to avoid expensive compilation in automated testing environments (unless you opt-in).</li>
 <li>
-<code>ARROW_R_DEV</code>: If set to <code>TRUE</code>, more verbose messaging will be printed in the build script. This variable also is needed if you’re modifying <code>Rcpp</code> code in the package: see “Editing Rcpp code” in the README.</li>
+<code>ARROW_R_DEV</code>: If set to <code>true</code>, more verbose messaging will be printed in the build script. This variable also is needed if you’re modifying <code>Rcpp</code> code in the package: see “Editing Rcpp code” in the README.</li>
 <li>
 <code>DEBUG_DIR</code>: If the C++ library building from source fails (<code>cmake</code>), there may be messages telling you to check some log file in the build directory. However, when the library is built during R package installation, that location is in a temp directory that is already deleted. To capture those logs, set this variable to an absolute (not relative) path and the log files will be copied there. The directory will be created if it does not exist.</li>
 </ul>
