@@ -81,7 +81,7 @@ composed from multiple record batches or chunked arrays." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200219</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200220</span>
       </span>
     </div>
 
@@ -236,10 +236,11 @@ vector or Arrow boolean-type <code>(Chunked)Array</code> <code>i</code> is <code
 the schema of the record batch.</p></li>
 </ul>
 
-<p>There are also some active bindings</p><ul>
+<p>There are also some active bindings:</p><ul>
 <li><p><code>$num_columns</code></p></li>
 <li><p><code>$num_rows</code></p></li>
 <li><p><code>$schema</code></p></li>
+<li><p><code>$metadata</code>: Returns the key-value metadata of the <code>Schema</code></p></li>
 <li><p><code>$columns</code>: Returns a list of <code>ChunkedArray</code>s</p></li>
 </ul>
 

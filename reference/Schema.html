@@ -86,7 +86,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200219</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200220</span>
       </span>
     </div>
 
@@ -205,6 +205,9 @@ ensure a specific schema rather than inferring it from the various files.</p>
 <li><p><code>$ToString()</code>: convert to a string</p></li>
 <li><p><code>$field(i)</code>: returns the field at index <code>i</code> (0-based)</p></li>
 <li><p><code>$GetFieldByName(x)</code>: returns the field with name <code>x</code></p></li>
+<li><p><code>$WithMetadata(metadata)</code>: returns a new <code>Schema</code> with the key-value
+<code>metadata</code> set. Note that all list elements in <code>metadata</code> will be coerced
+to <code>character</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
