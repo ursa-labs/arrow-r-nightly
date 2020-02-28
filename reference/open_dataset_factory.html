@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new read/write memory mapped file of a given size — mmap_create • Arrow R Package</title>
+<title>Create a DatasetFactory — open_dataset_factory • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Create a new read/write memory mapped file of a given size — mmap_create" />
-<meta property="og:description" content="Create a new read/write memory mapped file of a given size" />
+<meta property="og:title" content="Create a DatasetFactory — open_dataset_factory" />
+<meta property="og:description" content="A Dataset can constructed using one or more DatasetFactorys.
+This function helps you construct a DatasetFactory that you can pass to
+open_dataset()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -163,33 +165,94 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new read/write memory mapped file of a given size</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/io.R'><code>R/io.R</code></a></small>
-    <div class="hidden name"><code>mmap_create.Rd</code></div>
+    <h1>Create a DatasetFactory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dataset.R'><code>R/dataset.R</code></a></small>
+    <div class="hidden name"><code>open_dataset_factory.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a new read/write memory mapped file of a given size</p>
+    <p>A <a href='Dataset.html'>Dataset</a> can constructed using one or more <a href='Dataset.html'>DatasetFactory</a>s.
+This function helps you construct a <code>DatasetFactory</code> that you can pass to
+<code><a href='open_dataset.html'>open_dataset()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mmap_create</span>(<span class='no'>path</span>, <span class='no'>size</span>)</pre>
+    <pre class="usage"><span class='fu'>open_dataset_factory</span>(
+  <span class='no'>path</span>,
+  <span class='kw'>children</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"local"</span>),
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>),
+  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>allow_non_existent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>file path</p></td>
+      <td><p>A string file path containing data files</p></td>
     </tr>
     <tr>
-      <th>size</th>
-      <td><p>size in bytes</p></td>
+      <th>children</th>
+      <td><p>A list of <code>DatasetFactory</code> objects whose datasets should be
+unified. If this argument is specified other arguments will be ignored.</p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A string identifier for the filesystem corresponding to
+<code>path</code>. Currently only "local" is supported.</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>A string identifier of the format of the files in <code>path</code>.
+Currently supported options are "parquet", "arrow", and "ipc" (an alias for
+the Arrow file format)</p></td>
+    </tr>
+    <tr>
+      <th>partitioning</th>
+      <td><p>One of</p><ul>
+<li><p>A <code>Schema</code>, in which case the file paths relative to <code>sources</code> will be
+parsed, and path segments will be matched with the schema fields. For
+example, <code><a href='Schema.html'>schema(year = int16(), month = int8())</a></code> would create partitions
+for file paths like "2019/01/file.parquet", "2019/02/file.parquet", etc.</p></li>
+<li><p>A character vector that defines the field names corresponding to those
+path segments (that is, you're providing the names that would correspond
+to a <code>Schema</code> but the types will be autodetected)</p></li>
+<li><p>A <code>HivePartitioning</code> or <code>HivePartitioningFactory</code>, as returned
+by <code><a href='hive_partition.html'>hive_partition()</a></code> which parses explicit or autodetected fields from
+Hive-style path segments</p></li>
+<li><p><code>NULL</code> for no partitioning</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>allow_non_existent</th>
+      <td><p>logical: is <code>path</code> allowed to not exist? Default
+<code>FALSE</code>. See <a href='FileSelector.html'>FileSelector</a>.</p></td>
+    </tr>
+    <tr>
+      <th>recursive</th>
+      <td><p>logical: should files be discovered in subdirectories of
+<code>path</code>? Default <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to the <a href='FileSystem.html'>FileSystem</a> <code>$create()</code> method</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <a href='InputStream.html'>arrow::io::MemoryMappedFile</a></p>
+    <p>A <code>DatasetFactory</code> object. Pass this to <code><a href='open_dataset.html'>open_dataset()</a></code>,
+in a list potentially with other <code>DatasetFactory</code> objects, to create
+a <code>Dataset</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If you would only have a single <code>DatasetFactory</code> (for example, you have a
+single directory containing Parquet files), you can call <code><a href='open_dataset.html'>open_dataset()</a></code>
+directly. Use <code>open_dataset_factory()</code> when you
+want to combine different directories, file systems, or file formats.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -197,6 +260,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

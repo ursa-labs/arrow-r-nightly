@@ -100,9 +100,6 @@
     <loc>https://arrow.apache.org/docs/r//reference/Schema.html</loc>
   </url>
   <url>
-    <loc>https://arrow.apache.org/docs/r//reference/Source.html</loc>
-  </url>
-  <url>
     <loc>https://arrow.apache.org/docs/r//reference/Table.html</loc>
   </url>
   <url>
@@ -157,7 +154,7 @@
     <loc>https://arrow.apache.org/docs/r//reference/open_dataset.html</loc>
   </url>
   <url>
-    <loc>https://arrow.apache.org/docs/r//reference/open_source.html</loc>
+    <loc>https://arrow.apache.org/docs/r//reference/open_dataset_factory.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/read_delim_arrow.html</loc>

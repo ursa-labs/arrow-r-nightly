@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define Partitioning for a Source — Partitioning • Arrow R Package</title>
+<title>Define Partitioning for a Dataset — Partitioning • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Define Partitioning for a Source — Partitioning" />
-<meta property="og:description" content="Pass a Partitioning object to a FileSystemSourceFactory's $create()
+<meta property="og:title" content="Define Partitioning for a Dataset — Partitioning" />
+<meta property="og:description" content="Pass a Partitioning object to a FileSystemDatasetFactory's $create()
 method to indicate how the file's paths should be interpreted to define
 partitioning.
 DirectoryPartitioning describes how to interpret raw path segments, in
@@ -47,7 +47,7 @@ HivePartitioning is for Hive-style partitioning, which embeds field
 names and values in path segments, such as
 &quot;/year=2019/month=2/data.parquet&quot;. Because fields are named in the path
 segments, order does not matter.
-PartitioningFactory subclasses instruct the SourceFactory to detect
+PartitioningFactory subclasses instruct the DatasetFactory to detect
 partition features from the file paths." />
 <meta name="twitter:card" content="summary" />
 
@@ -91,7 +91,7 @@ partition features from the file paths." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200226</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200227</span>
       </span>
     </div>
 
@@ -175,13 +175,13 @@ partition features from the file paths." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define Partitioning for a Source</h1>
+    <h1>Define Partitioning for a Dataset</h1>
     <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dataset.R'><code>R/dataset.R</code></a></small>
     <div class="hidden name"><code>Partitioning.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pass a <code>Partitioning</code> object to a <a href='Source.html'>FileSystemSourceFactory</a>'s <code>$create()</code>
+    <p>Pass a <code>Partitioning</code> object to a <a href='Dataset.html'>FileSystemDatasetFactory</a>'s <code>$create()</code>
 method to indicate how the file's paths should be interpreted to define
 partitioning.</p>
 <p><code>DirectoryPartitioning</code> describes how to interpret raw path segments, in
@@ -192,7 +192,7 @@ partitions for file paths like "2019/01/file.parquet",
 names and values in path segments, such as
 "/year=2019/month=2/data.parquet". Because fields are named in the path
 segments, order does not matter.</p>
-<p><code>PartitioningFactory</code> subclasses instruct the <code>SourceFactory</code> to detect
+<p><code>PartitioningFactory</code> subclasses instruct the <code>DatasetFactory</code> to detect
 partition features from the file paths.</p>
     </div>
 
@@ -208,7 +208,7 @@ function <code><a href='hive_partition.html'>hive_partition(...)</a></code> is s
 <code>HivePartitioning$create(schema(...))</code>.</p>
 <p>With <code>DirectoryPartitioningFactory$create()</code>, you can provide just the
 names of the path segments (in our example, <code><a href='https://rdrr.io/r/base/c.html'>c("year", "month")</a></code>), and
-the <code>SourceFactory</code> will infer the data types for those partition variables.
+the <code>DatasetFactory</code> will infer the data types for those partition variables.
 <code>HivePartitioningFactory$create()</code> takes no arguments: both variable names
 and their types can be inferred from the file paths. <code><a href='hive_partition.html'>hive_partition()</a></code> with
 no arguments returns a <code>HivePartitioningFactory</code>.</p>
