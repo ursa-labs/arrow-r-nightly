@@ -41,11 +41,6 @@ multiple files. This sharding of data may indicate partitioning, which
 can accelerate queries that only touch some partitions (files).
 A Dataset contains one or more Fragments, such as files, of potentially
 differing type and partitioning.
-DatasetFactory is used to create a Dataset, inspect the Schema of the
-fragments contained in it, and declare a partitioning.
-FileSystemDatasetFactory is a subclass of DatasetFactory for
-discovering files in the local file system, the only currently supported
-file system.
 The Dataset$create() method instantiates a Dataset which wraps child Datasets.
 It takes the following arguments:
 children: a list of Dataset objects
@@ -54,7 +49,11 @@ schema: a Schema
 
 DatasetFactory is used to provide finer control over the creation of Datasets.
 Start a new scan of the data
-Return the Dataset's Schema" />
+Return the Dataset's Schema
+Return the Dataset's type.
+Return the files contained in this FileSystemDataset
+Return the format of files in this Dataset
+Return the UnionDataset's child Datasets" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -97,7 +96,7 @@ Return the Dataset's Schema" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200227</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200228</span>
       </span>
     </div>
 
@@ -191,12 +190,7 @@ Return the Dataset's Schema" />
 multiple files. This sharding of data may indicate partitioning, which
 can accelerate queries that only touch some partitions (files).</p>
 <p>A <code>Dataset</code> contains one or more <code>Fragments</code>, such as files, of potentially
-differing type and partitioning.
-<code>DatasetFactory</code> is used to create a <code>Dataset</code>, inspect the <a href='Schema.html'>Schema</a> of the
-fragments contained in it, and declare a partitioning.
-<code>FileSystemDatasetFactory</code> is a subclass of <code>DatasetFactory</code> for
-discovering files in the local file system, the only currently supported
-file system.</p>
+differing type and partitioning.</p>
 <p>The <code>Dataset$create()</code> method instantiates a <code>Dataset</code> which wraps child Datasets.
 It takes the following arguments:</p><ul>
 <li><p><code>children</code>: a list of Dataset objects</p></li>
@@ -206,6 +200,10 @@ It takes the following arguments:</p><ul>
 <p><code>DatasetFactory</code> is used to provide finer control over the creation of <code>Dataset</code>s.</p>
 <p>Start a new scan of the data</p>
 <p>Return the Dataset's <code>Schema</code></p>
+<p>Return the Dataset's type.</p>
+<p>Return the files contained in this <code>FileSystemDataset</code></p>
+<p>Return the format of files in this <code>Dataset</code></p>
+<p>Return the UnionDataset's child <code>Dataset</code>s</p>
     </div>
 
 
@@ -217,8 +215,17 @@ It takes the following arguments:</p><ul>
 
     
 
-<p>For the <code>DatasetFactory$create()</code> factory method, see <code><a href='open_dataset_factory.html'>open_dataset_factory()</a></code>, an
-alias for it.</p>
+<p><code>DatasetFactory</code> is used to create a <code>Dataset</code>, inspect the <a href='Schema.html'>Schema</a> of the
+fragments contained in it, and declare a partitioning.
+<code>FileSystemDatasetFactory</code> is a subclass of <code>DatasetFactory</code> for
+discovering files in the local file system, the only currently supported
+file system.</p>
+<p>For the <code>DatasetFactory$create()</code> factory method, see <code><a href='dataset_factory.html'>dataset_factory()</a></code>, an
+alias for it. A <code>DatasetFactory</code> has:</p><ul>
+<li><p><code>$Inspect()</code>: Returns a common <a href='Schema.html'>Schema</a> for all data discovered by the factory.</p></li>
+<li><p><code>$Finish(schema)</code>: Returns a <code>Dataset</code></p></li>
+</ul>
+
 <p><code>FileSystemDatasetFactory$create()</code> is a lower-level factory method and
 takes the following arguments:</p><ul>
 <li><p><code>filesystem</code>: A <a href='FileSystem.html'>FileSystem</a></p></li>
@@ -238,9 +245,13 @@ the Arrow file format)</p></li>
 <li><p><code>$schema</code>: Active binding, returns the <a href='Schema.html'>Schema</a> of the Dataset</p></li>
 </ul>
 
-<p>A <code>DatasetFactory</code> has:</p><ul>
-<li><p><code>$Inspect()</code>: Returns a common <a href='Schema.html'>Schema</a> for all data discovered by the factory.</p></li>
-<li><p><code>$Finish(schema)</code>: Returns a <code>Dataset</code></p></li>
+<p><code>FileSystemDataset</code> has the following methods:</p><ul>
+<li><p><code>$files</code>: Active binding, returns the files of the <code>FileSystemDataset</code></p></li>
+<li><p><code>$format</code>: Active binding, returns the <a href='FileFormat.html'>FileFormat</a> of the <code>FileSystemDataset</code></p></li>
+</ul>
+
+<p><code>UnionDataset</code> has the following methods:</p><ul>
+<li><p><code>$children</code>: Active binding, returns all child <code>Dataset</code>s.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

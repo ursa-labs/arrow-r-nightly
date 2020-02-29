@@ -127,6 +127,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/data-type.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/dataset_factory.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/default_memory_pool.html</loc>
   </url>
   <url>
@@ -152,9 +155,6 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/open_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r//reference/open_dataset_factory.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/read_delim_arrow.html</loc>

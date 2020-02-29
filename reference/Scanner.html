@@ -81,7 +81,7 @@ ScannerBuilder, from a Dataset's $NewScan() method, to construct one." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200227</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200228</span>
       </span>
     </div>
 
@@ -189,6 +189,9 @@ by <code>cols</code>, a character vector of column names</p></li>
 <li><p><code>$UseThreads(threads)</code>: logical: should the scan use multithreading?
 The method's default input is <code>TRUE</code>, but you must call the method to enable
 multithreading because the scanner default is <code>FALSE</code>.</p></li>
+<li><p><code>$BatchSize(batch_size)</code>: integer: Maximum row count of scanned record
+batches, default is 32K. If scanned record batches are overflowing memory
+then this method can be called to reduce their size.</p></li>
 <li><p><code>$schema</code>: Active binding, returns the <a href='Schema.html'>Schema</a> of the Dataset</p></li>
 <li><p><code>$Finish()</code>: Returns a <code>Scanner</code></p></li>
 </ul>
