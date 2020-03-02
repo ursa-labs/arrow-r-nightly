@@ -81,7 +81,7 @@ of these functions don't take arguments, but a few do." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200229</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200301</span>
       </span>
     </div>
 
@@ -281,7 +281,11 @@ class. <code>date64()</code> has a "ms" unit.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bool</span>()</div><div class='output co'>#&gt; <span class='error'>Error in Boolean__initialize(): Cannot call Boolean__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'><span class='fu'>struct</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'>int32</span>(), <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span>())</div><div class='output co'>#&gt; <span class='error'>Error in Int32__initialize(): Cannot call Int32__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'><span class='fu'>timestamp</span>(<span class='st'>"ms"</span>, <span class='kw'>timezone</span> <span class='kw'>=</span> <span class='st'>"CEST"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Timestamp__initialize(unit, timezone): Cannot call Timestamp__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'><span class='fu'>time64</span>(<span class='st'>"ns"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Time64__initialize(unit): Cannot call Time64__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'># }
+<span class='fu'>bool</span>()</div><div class='output co'>#&gt; Boolean
+#&gt; bool</div><div class='input'><span class='fu'>struct</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'>int32</span>(), <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span>())</div><div class='output co'>#&gt; StructType
+#&gt; struct&lt;a: int32, b: double&gt;</div><div class='input'><span class='fu'>timestamp</span>(<span class='st'>"ms"</span>, <span class='kw'>timezone</span> <span class='kw'>=</span> <span class='st'>"CEST"</span>)</div><div class='output co'>#&gt; Timestamp
+#&gt; timestamp[ms, tz=CEST]</div><div class='input'><span class='fu'>time64</span>(<span class='st'>"ns"</span>)</div><div class='output co'>#&gt; Time64
+#&gt; time64[ns]</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
