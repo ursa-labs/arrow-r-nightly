@@ -22,5 +22,5 @@ jobs:
       - name: Install arrow from binatray
         env:
           # Test source build so be sure not to download a binary
-          LIBARROW_BINARY_DISTRO: "FALSE"
+          LIBARROW_BINARY: "FALSE"
         run: Rscript linux/install-arrow.R
