@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>class DictionaryType — DictionaryType • Arrow R Package</title>
+<title>FileSystem entry info — FileInfo • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="class DictionaryType — DictionaryType" />
-<meta property="og:description" content="class DictionaryType" />
+<meta property="og:title" content="FileSystem entry info — FileInfo" />
+<meta property="og:description" content="FileSystem entry info" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -163,13 +163,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>class DictionaryType</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dictionary.R'><code>R/dictionary.R</code></a></small>
-    <div class="hidden name"><code>DictionaryType.Rd</code></div>
+    <h1>FileSystem entry info</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/filesystem.R'><code>R/filesystem.R</code></a></small>
+    <div class="hidden name"><code>FileInfo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>class DictionaryType</p>
+    <p>FileSystem entry info</p>
     </div>
 
 
@@ -178,14 +178,31 @@
 
     
 
+<ul>
+<li><p><code>base_name()</code> : The file base name (component after the last directory
+separator).</p></li>
+<li><p><code>extension()</code> : The file extension</p></li>
+</ul>
 
-<p>TODO</p>
+    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+
+    
+
+<ul>
+<li><p><code>$type</code>: The file type</p></li>
+<li><p><code>$path</code>: The full file path in the filesystem</p></li>
+<li><p><code>$size</code>: The size in bytes, if available.  Only regular files are
+guaranteed to have a size.</p></li>
+<li><p><code>$mtime</code>: The time of last modification, if available.</p></li>
+</ul>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#methods">Methods</a></li>
+      <li><a href="#active-bindings">Active bindings</a></li>
     </ul>
 
   </div>
