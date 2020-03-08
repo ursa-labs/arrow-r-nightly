@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200306</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200307</span>
       </span>
     </div>
 
@@ -203,7 +203,28 @@ with columns filtered by a character vector of column names or a
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"v0.7.1.parquet"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"arrow"</span>)
-<span class='no'>pq</span> <span class='kw'>&lt;-</span> <span class='no'>ParquetFileReader</span>$<span class='fu'>create</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; <span class='error'>Error in io___MemoryMappedFile__Open(path, mode): Cannot call io___MemoryMappedFile__Open(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'><span class='no'>pq</span>$<span class='fu'>GetSchema</span>()</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'pq' not found</span></div><div class='input'><span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='no'>pq</span>$<span class='fu'>ReadTable</span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>starts_with</a></span>(<span class='st'>"c"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'pq' not found</span></div><div class='input'><span class='no'>tab</span>$<span class='no'>schema</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'tab' not found</span></div><div class='input'># }
+<span class='no'>pq</span> <span class='kw'>&lt;-</span> <span class='no'>ParquetFileReader</span>$<span class='fu'>create</span>(<span class='no'>f</span>)
+<span class='no'>pq</span>$<span class='fu'>GetSchema</span>()</div><div class='output co'>#&gt; Schema
+#&gt; carat: double
+#&gt; cut: string
+#&gt; color: string
+#&gt; clarity: string
+#&gt; depth: double
+#&gt; table: double
+#&gt; price: int64
+#&gt; x: double
+#&gt; y: double
+#&gt; z: double
+#&gt; __index_level_0__: int64
+#&gt; 
+#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='no'>pq</span>$<span class='fu'>ReadTable</span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>starts_with</a></span>(<span class='st'>"c"</span>))
+<span class='no'>tab</span>$<span class='no'>schema</span></div><div class='output co'>#&gt; Schema
+#&gt; carat: double
+#&gt; cut: string
+#&gt; color: string
+#&gt; clarity: string
+#&gt; 
+#&gt; See $metadata for additional Schema metadata</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
