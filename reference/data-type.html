@@ -81,7 +81,7 @@ of these functions don't take arguments, but a few do." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200308</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200309</span>
       </span>
     </div>
 
@@ -208,6 +208,8 @@ of these functions don't take arguments, but a few do.</p>
 
 <span class='fu'>utf8</span>()
 
+<span class='fu'>binary</span>(<span class='kw'>byte_width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
 <span class='fu'>string</span>()
 
 <span class='fu'>date32</span>()
@@ -231,6 +233,12 @@ of these functions don't take arguments, but a few do.</p>
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>byte_width</th>
+      <td><p>For <code>binary()</code>, an optional integer width to create a
+<code>FixedSizeBinary</code> type. The default <code>NULL</code> results in a <code>BinaryType</code> with
+variable width.</p></td>
+    </tr>
     <tr>
       <th>unit</th>
       <td><p>For time/timestamp types, the time unit. <code>time32()</code> can take
