@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200309</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200310</span>
       </span>
     </div>
 
@@ -206,19 +206,6 @@ dlopen(/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so, 6): Library not loaded: 
 <h2 class="hasAnchor">
 <a href="#building-c-from-source" class="anchor"></a>Building C++ from source</h2>
 <p>If building the C++ library from source fails, check the error message. The install script attempts to install any necessary build dependencies, but it’s possible that some operating systems may require additional ones. You may be able to install them and retry. Regardless, if the C++ library fails to compile, please <a href="https://issues.apache.org/jira/projects/ARROW/issues">report an issue</a> so that we can attempt to improve the script.</p>
-<div id="known-c-build-issues" class="section level3">
-<h3 class="hasAnchor">
-<a href="#known-c-build-issues" class="anchor"></a>Known C++ build issues</h3>
-<ol style="list-style-type: decimal">
-<li>
-<code>m4</code> (build dependency for <code>flex</code> and <code>bison</code>, which are build dependencies for <code>thrift</code>) fails to build with a message like:</li>
-</ol>
-<pre><code>freadahead.c: In function 'freadahead':
-freadahead.c:92:3: error: #error "Please port gnulib freadahead.c to your platform! Look at the definition of fflush, fread, ungetc on your system, then report this to bug-gnulib."</code></pre>
-<p>This has been observed on CentOS 8 (Docker image <code>rstudio/r-base:3.6-centos8</code>) and Fedora (<code>rhub/fedora-clang-devel</code>).</p>
-<p>A solution is to install <code>m4</code> using your system package manager; if that’s an option for you, you may as well just install <code>flex</code> and <code>bison</code> and avoid this build step entirely.</p>
-<!-- TODO: try applying https://src.fedoraproject.org/rpms/m4/raw/master/f/m4-1.4.18-glibc-change-work-around.patch on centos and fedora? -->
-</div>
 </div>
 <div id="summary-of-build-environment-variables" class="section level2">
 <h2 class="hasAnchor">
