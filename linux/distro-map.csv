@@ -3,3 +3,8 @@ fedora-28,centos-8
 fedora-29,centos-8
 fedora-30,centos-8
 fedora-31,centos-8
+rhel-8,centos-8
+fedora-19,centos-7
+fedora-20,centos-7
+rhel-7,centos-7
+debian-11,centos-8
