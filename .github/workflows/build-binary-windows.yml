@@ -6,7 +6,7 @@ on:
         0 12 * * *
   push:
     paths:
-      - '.github/workflows/build-windows-binary.yml'
+      - '.github/workflows/build-binary-windows.yml'
       - bintray-upload.sh
       - up-date-description.sh
   # On tag too?
