@@ -1,0 +1,54 @@
+name: Build Windows C++ libraries
+
+on:
+  schedule:
+    - cron: |
+        0 12 * * *
+  push:
+    paths:
+      - '.github/workflows/build-windows-binary.yml'
+      - bintray-upload.sh
+      - up-date-description.sh
+  # On tag too?
+
+jobs:
+  windows:
+    name: C++ Binary Windows RTools ${{ matrix.rtools }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # TODO: test on rtools40
+        rtools: [35]
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: numworks/setup-msys2@v1
+        with:
+          update: true
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: ${{ matrix.rtools }}
+      - name: Build Arrow C++
+        run: msys2do cd arrow && ci/scripts/r_windows_build.sh
+      - name: Upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          pushd arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          popd
+          export PKG_FILE="arrow-${VERSION}.zip"
+          mv arrow/libarrow.zip $PKG_FILE
+          export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
+          sudo -E bash bintray-upload.sh
