@@ -30,14 +30,17 @@ jobs:
       - name: Clone apache/arrow and checkout at date
         shell: bash
         run: |
-          git clone https://github.com/apache/arrow
+          git clone https://github.com/nealrichardson/arrow
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          git checkout r-windows-nightlies
+          #git checkout `git rev-list -n 1 --before="00:00" master`
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: ${{ matrix.rtools }}
       - name: Build Arrow C++
-        run: msys2do cd arrow && ci/scripts/r_windows_build.sh
+        env:
+          ARROW_HOME: "arrow"
+        run: msys2do arrow/ci/scripts/r_windows_build.sh
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
