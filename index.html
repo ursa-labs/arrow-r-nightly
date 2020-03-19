@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200317</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200318</span>
       </span>
     </div>
 
@@ -191,7 +191,7 @@ R CMD INSTALL .</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
 <p>Fix any style issues before committing with</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
-<p>The lint script requires Python 3 and <code>clang-format-7</code>. If the command isn’t found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-7) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@7)/bin/clang-format ./lint.sh</code></p>
+<p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isn’t found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-8) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@8)/bin/clang-format ./lint.sh</code></p>
 </div>
 <div id="useful-functions" class="section level3">
 <h3 class="hasAnchor">
