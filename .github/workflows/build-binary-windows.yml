@@ -54,5 +54,5 @@ jobs:
 
           # Upload
           tools::write_PACKAGES(".", type = "win.binary")
-          path <- contrib.url("", type = "binary")
-          system(sprintf("export REPO_PATH=%s && source bintray_upload.sh", path))
+          Sys.setenv(REPO_PATH=contrib.url("", type = "binary"))
+          system("source bintray_upload.sh")
