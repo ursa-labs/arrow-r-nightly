@@ -31,10 +31,11 @@ jobs:
       - name: Install R package dependencies
         shell: Rscript {0}
         run: |
-          options(pkgType="win.binary")
-          install.packages("remotes")
-          remotes::install_deps("arrow/r", dependencies = TRUE)
-      - name: Check/build
+          install.packages("arrow",
+            type = "win.binary",
+            repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
+          )
+      - name: Build/check
         shell: Rscript {0}
         run: |
           Sys.setenv(MAKEFLAGS = paste0("-j", parallel::detectCores()))
