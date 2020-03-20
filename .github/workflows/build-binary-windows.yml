@@ -55,4 +55,4 @@ jobs:
           # Upload
           tools::write_PACKAGES(".", type = "win.binary")
           Sys.setenv(REPO_PATH=contrib.url("", type = "binary"))
-          system("bash bintray_upload.sh")
+          system("bash bintray-upload.sh")
