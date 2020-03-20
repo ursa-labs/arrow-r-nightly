@@ -36,16 +36,23 @@ jobs:
             repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
           )
       - name: Build/check
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
         shell: Rscript {0}
         run: |
-          print(getwd())
+          # Build
           Sys.setenv(MAKEFLAGS = paste0("-j", parallel::detectCores()))
           install.packages("arrow",
             type = "source",
             repos = "https://dl.bintray.com/ursalabs/arrow-r",
             INSTALL_opts="--build"
           )
-          print(dir())
+
+          # Test
           library(arrow)
           read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
-          system("bash bintray-upload.sh")
+
+          # Upload
+          tools::write_PACKAGES(".", type = "win.binary")
+          path <- contrib.url("", type = "binary")
+          system(sprintf("export REPO_PATH=%s && source bintray_upload.sh", path))

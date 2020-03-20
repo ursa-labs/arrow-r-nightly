@@ -30,7 +30,7 @@ if [ "$PKG_FILE" = "" ]; then
     fi
   fi
 fi
-if [ "$PKG_TYPE" != "" ]; then
+if [ "$REPO_PATH" = "" ]; then
   # Generate the R repository relative path, depending on macOS/Windows
   REPO_PATH=$(Rscript -e 'cat(contrib.url("", type="'$PKG_TYPE'"))')
 fi
@@ -50,7 +50,7 @@ upload_file() {
 # Upload the binary package
 upload_file $PKG_FILE
 
-if [ "$PKG_TYPE" != "" ]; then
+if [ "$PKG_TYPE" != "" ] && [ ! -f "PACKAGES" ]; then
   # Write out the PACKAGES manifest files and upload them too
   Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
   upload_file PACKAGES
