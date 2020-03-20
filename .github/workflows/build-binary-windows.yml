@@ -45,6 +45,6 @@ jobs:
           )
           library(arrow)
           read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
-        - name: Upload to bintray
-          shell: bash
-          run: source bintray-upload.sh
+      - name: Upload to bintray
+        shell: bash
+        run: source bintray-upload.sh
