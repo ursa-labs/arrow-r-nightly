@@ -1,9 +1,9 @@
-name: Build Windows C++ libraries
+name: Build Windows binary packages
 
 on:
   schedule:
     - cron: |
-        0 12 * * *
+        0 22 * * *
   push:
     paths:
       - '.github/workflows/build-binary-windows.yml'
@@ -13,43 +13,38 @@ on:
 
 jobs:
   windows:
-    name: C++ Binary Windows RTools ${{ matrix.rtools }}
+    name: Windows R ${{ matrix.r_version }} RTools ${{ matrix.rtools }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
         # TODO: test on rtools40
         rtools: [35]
+        r_version: ["3.5"] #, "3.6", "devel"]
     steps:
-      - run: git config --global core.autocrlf false
-      - uses: numworks/setup-msys2@v1
-        with:
-          update: true
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v2
-      - name: Clone apache/arrow and checkout at date
-        shell: bash
-        run: |
-          git clone https://github.com/nealrichardson/arrow
-          cd arrow
-          git checkout r-windows-nightlies
-          #git checkout `git rev-list -n 1 --before="00:00" master`
-          cd r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: ${{ matrix.rtools }}
-      - name: Build Arrow C++
-        env:
-          ARROW_HOME: "arrow"
-        run: msys2do arrow/ci/scripts/r_windows_build.sh
-      - name: Upload
-        env:
-          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
-        shell: bash
+          r-version: ${{ matrix.r_version }}
+      - name: Install R package dependencies
+        shell: Rscript {0}
         run: |
-          cd build
-          export PKG_FILE=$(ls arrow-*.zip)
-          export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
-          source ../bintray-upload.sh
+          options(pkgType="win.binary")
+          install.packages("remotes")
+          remotes::install_deps("arrow/r", dependencies = TRUE)
+      - name: Check/build
+        shell: Rscript {0}
+        run: |
+          Sys.setenv(MAKEFLAGS = paste0("-j", parallel::detectCores()))
+          install.packages("arrow",
+            type = "source",
+            repos = "https://dl.bintray.com/ursalabs/arrow-r",
+            INSTALL_opts="--build"
+          )
+          library(arrow)
+          read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
+        - name: Upload to bintray
+          shell: bash
+          run: source bintray-upload.sh
