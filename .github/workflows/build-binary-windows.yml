@@ -52,4 +52,4 @@ jobs:
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
           export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
-          sudo -E bash ../bintray-upload.sh
+          source ../bintray-upload.sh
