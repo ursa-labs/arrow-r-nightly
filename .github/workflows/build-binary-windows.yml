@@ -38,14 +38,18 @@ jobs:
       - name: Build/check
         shell: Rscript {0}
         run: |
+          print(getwd())
           Sys.setenv(MAKEFLAGS = paste0("-j", parallel::detectCores()))
           install.packages("arrow",
             type = "source",
             repos = "https://dl.bintray.com/ursalabs/arrow-r",
             INSTALL_opts="--build"
           )
+          print(dir())
           library(arrow)
           read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
       - name: Upload to bintray
         shell: bash
-        run: source bintray-upload.sh
+        run: |
+          ls -alh
+          source bintray-upload.sh
