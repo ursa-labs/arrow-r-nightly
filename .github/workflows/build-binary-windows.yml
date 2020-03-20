@@ -34,6 +34,9 @@ jobs:
           cd arrow
           git checkout r-windows-nightlies
           #git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: ${{ matrix.rtools }}
@@ -46,12 +49,7 @@ jobs:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
         shell: bash
         run: |
-          pushd arrow/r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
-          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
-          popd
-          export PKG_FILE="arrow-${VERSION}.zip"
-          mv arrow/libarrow.zip $PKG_FILE
+          cd build
+          export PKG_FILE=$(ls arrow-*.zip)
           export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
-          sudo -E bash bintray-upload.sh
+          sudo -E bash ../bintray-upload.sh
