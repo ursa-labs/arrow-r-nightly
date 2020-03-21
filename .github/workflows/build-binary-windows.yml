@@ -35,6 +35,7 @@ jobs:
             type = "win.binary",
             repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
           )
+          remove.packages("arrow")
       - name: Build/check
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
@@ -55,4 +56,7 @@ jobs:
           # Upload
           tools::write_PACKAGES(".", type = "win.binary")
           Sys.setenv(REPO_PATH=contrib.url("", type = "binary"))
-          system("bash bintray-upload.sh")
+          status <- system("bash bintray-upload.sh")
+          if (status > 0) {
+            stop("Upload failed")
+          }
