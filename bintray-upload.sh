@@ -50,9 +50,11 @@ upload_file() {
 # Upload the binary package
 upload_file $PKG_FILE
 
-if [ "$PKG_TYPE" != "" ] && [ ! -f "PACKAGES" ]; then
+if [ "$PKG_TYPE" != "" ]; then
   # Write out the PACKAGES manifest files and upload them too
-  Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
+  if [ ! -f "PACKAGES" ]; then
+    Rscript -e 'tools::write_PACKAGES(".", type = substr("'$PKG_TYPE'", 1, 10))'
+  fi
   upload_file PACKAGES
   upload_file PACKAGES.gz
   upload_file PACKAGES.rds
