@@ -80,7 +80,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200320</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200321</span>
       </span>
     </div>
 
@@ -298,9 +298,9 @@ Note that "uncompressed" columns may still have dictionary encoding.</p>
 
 <span class='co'># using compression</span>
 <span class='no'>tf2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".gz.parquet"</span>)
-<span class='fu'>write_parquet</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='no'>tf2</span>, <span class='kw'>compression</span> <span class='kw'>=</span> <span class='st'>"gzip"</span>, <span class='kw'>compression_level</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-
-<span class='co'># }</span></div></pre>
+<span class='fu'>write_parquet</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='no'>tf2</span>, <span class='kw'>compression</span> <span class='kw'>=</span> <span class='st'>"gzip"</span>, <span class='kw'>compression_level</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='error'>Error in parquet___arrow___FileWriter__WriteTable(self, table, chunk_size): NotImplemented: Gzip codec support not built</span></div><div class='input'>
+# }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

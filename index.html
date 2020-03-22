@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200320</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200321</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>)</span></code></pre></div>
-<p>Installing a released version of the <code>arrow</code> package should require no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will download necessary C++ dependencies if you set the environment variable <code>LIBARROW_DOWNLOAD=true</code>. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
+<p>Installing a released version of the <code>arrow</code> package should require no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will also build necessary C++ dependencies. For a faster, more complete installation, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 <p>If you install the <code>arrow</code> package from source and the C++ library is not found, the R package functions will notify you that Arrow is not available. Call</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>arrow<span class="op">::</span><span class="kw"><a href="https://arrow.apache.org/docs/r//reference/install_arrow.html">install_arrow</a></span>()</span></code></pre></div>
 <p>to retry installation with dependencies.</p>
@@ -148,7 +148,7 @@
 <div id="installing-a-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-a-development-version" class="anchor"></a>Installing a development version</h2>
-<p>Binary R packages for macOS and Windows are built daily and hosted at <a href="https://dl.bintray.com/ursalabs/arrow-r/" class="uri">https://dl.bintray.com/ursalabs/arrow-r/</a>. To install from there:</p>
+<p>Development versions of the package (binary and source) are built daily and hosted at <a href="https://dl.bintray.com/ursalabs/arrow-r/" class="uri">https://dl.bintray.com/ursalabs/arrow-r/</a>. To install from there:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>, <span class="dt">repos =</span> <span class="st">"https://dl.bintray.com/ursalabs/arrow-r"</span>)</span></code></pre></div>
 <p>Or</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/install_arrow.html">install_arrow</a></span>(<span class="dt">nightly =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
