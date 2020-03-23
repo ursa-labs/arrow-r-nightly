@@ -1,8 +1,8 @@
 # Nightly R package builds for Apache Arrow
 
 [![Build Status](https://travis-ci.org/ursa-labs/arrow-r-nightly.svg?branch=master)](https://travis-ci.org/ursa-labs/arrow-r-nightly)
-[![Build status](https://ci.appveyor.com/api/projects/status/ume8udm5r26u2c9l/branch/master?svg=true)](https://ci.appveyor.com/project/nealrichardson/arrow-r-nightly-yxl55/branch/master)
-[![Linux binary build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+binary+C%2B%2B+libraries")
+[![Windows binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20Windows%20binary%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+Windows+binary+packages")
+[![C++ binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+binary+C%2B%2B+libraries")
 [![Linux source build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20source%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+source+packages")
 [![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+binary+installation+from+Bintray")
 [![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+source+installation+from+Bintray")

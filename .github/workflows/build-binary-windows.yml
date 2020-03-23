@@ -1,0 +1,62 @@
+name: Build Windows binary packages
+
+on:
+  schedule:
+    - cron: |
+        0 22 * * *
+  push:
+    paths:
+      - '.github/workflows/build-binary-windows.yml'
+      - bintray-upload.sh
+      - up-date-description.sh
+  # On tag too?
+
+jobs:
+  windows:
+    name: Windows R ${{ matrix.r_version }} RTools ${{ matrix.rtools }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # TODO: test on rtools40
+        rtools: [35]
+        r_version: ["3.5", "3.6", "devel"]
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: ${{ matrix.rtools }}
+          r-version: ${{ matrix.r_version }}
+      - name: Install R package dependencies
+        shell: Rscript {0}
+        run: |
+          install.packages("arrow",
+            type = "win.binary",
+            repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
+          )
+          remove.packages("arrow")
+      - name: Build/check
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: Rscript {0}
+        run: |
+          # Build
+          Sys.setenv(MAKEFLAGS = paste0("-j", parallel::detectCores()))
+          install.packages("arrow",
+            type = "source",
+            repos = "https://dl.bintray.com/ursalabs/arrow-r",
+            INSTALL_opts="--build"
+          )
+
+          # Test
+          library(arrow)
+          read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
+
+          # Upload
+          tools::write_PACKAGES(".", type = "win.binary")
+          Sys.setenv(REPO_PATH=contrib.url("", type = "binary"))
+          status <- system("bash bintray-upload.sh")
+          if (status > 0) {
+            stop("Upload failed")
+          }

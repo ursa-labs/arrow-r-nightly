@@ -13,7 +13,7 @@ on:
   # On tag too?
 
 jobs:
-  binaries:
+  linux:
     name: C++ Binary ${{ matrix.config.os }}-${{ matrix.config.version }}
     runs-on: ubuntu-latest
     strategy:
@@ -30,7 +30,7 @@ jobs:
       VERSION: ${{ matrix.config.version }}
     steps:
       - name: Checkout arrow-r-nightly
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Clone apache/arrow and checkout at date
         shell: bash
         run: |
@@ -59,3 +59,43 @@ jobs:
           sudo -E zip -r $PKG_FILE lib/*.a include/
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           sudo -E bash ../../../../../bintray-upload.sh
+  windows:
+    name: C++ Binary Windows RTools ${{ matrix.rtools }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # TODO: test on rtools40
+        rtools: [35]
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: numworks/setup-msys2@v1
+        with:
+          update: true
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: ${{ matrix.rtools }}
+      - name: Build Arrow C++
+        env:
+          ARROW_HOME: "arrow"
+        run: msys2do arrow/ci/scripts/r_windows_build.sh
+      - name: Upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: bash
+        run: |
+          cd build
+          export PKG_FILE=$(ls arrow-*.zip)
+          export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
+          source ../bintray-upload.sh
