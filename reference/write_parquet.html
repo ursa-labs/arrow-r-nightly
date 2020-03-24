@@ -80,7 +80,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200322</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200323</span>
       </span>
     </div>
 
@@ -190,7 +190,8 @@ This function enables you to write Parquet files from R.</p>
   <span class='kw'>use_deprecated_int96_timestamps</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>coerce_timestamps</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>allow_truncated_timestamps</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>arrow_properties</span> <span class='kw'>=</span> <span class='no'>ParquetArrowWriterProperties</span>$<span class='fu'>create</span>(<span class='kw'>use_deprecated_int96_timestamps</span>
+
+    <span class='kw'>arrow_properties</span> <span class='kw'>=</span> <span class='no'>ParquetArrowWriterProperties</span>$<span class='fu'>create</span>(<span class='kw'>use_deprecated_int96_timestamps</span>
     <span class='kw'>=</span> <span class='no'>use_deprecated_int96_timestamps</span>, <span class='kw'>coerce_timestamps</span> <span class='kw'>=</span> <span class='no'>coerce_timestamps</span>,
     <span class='kw'>allow_truncated_timestamps</span> <span class='kw'>=</span> <span class='no'>allow_truncated_timestamps</span>)
 )</pre>
@@ -297,10 +298,11 @@ Note that "uncompressed" columns may still have dictionary encoding.</p>
 <span class='fu'>write_parquet</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='no'>tf1</span>)
 
 <span class='co'># using compression</span>
-<span class='no'>tf2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".gz.parquet"</span>)
-<span class='fu'>write_parquet</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='no'>tf2</span>, <span class='kw'>compression</span> <span class='kw'>=</span> <span class='st'>"gzip"</span>, <span class='kw'>compression_level</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='error'>Error in parquet___arrow___FileWriter__WriteTable(self, table, chunk_size): NotImplemented: Gzip codec support not built</span></div><div class='input'>
-# }
-</div></pre>
+<span class='kw'>if</span> (<span class='fu'><a href='codec_is_available.html'>codec_is_available</a></span>(<span class='st'>"gzip"</span>)) {
+  <span class='no'>tf2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".gz.parquet"</span>)
+  <span class='fu'>write_parquet</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='no'>tf2</span>, <span class='kw'>compression</span> <span class='kw'>=</span> <span class='st'>"gzip"</span>, <span class='kw'>compression_level</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+}
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -81,7 +81,7 @@ open_dataset()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200322</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200323</span>
       </span>
     </div>
 
@@ -181,7 +181,7 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
   <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"local"</span>),
   <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>),
   <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>allow_non_existent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>allow_not_found</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>
 )</pre>
@@ -224,7 +224,7 @@ Hive-style path segments</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>allow_non_existent</th>
+      <th>allow_not_found</th>
       <td><p>logical: is <code>x</code> allowed to not exist? Default
 <code>FALSE</code>. See <a href='FileSelector.html'>FileSelector</a>.</p></td>
     </tr>
