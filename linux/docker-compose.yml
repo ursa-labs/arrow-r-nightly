@@ -23,6 +23,7 @@ services:
       - ./arrow:/arrow:delegated
     environment:
       ARROW_DEPENDENCY_SOUCE: "BUNDLED"
+      LIBARROW_MINIMAL: "false"
     command: >
       /bin/bash -c "
         cd /arrow && r/inst/build_arrow_static.sh"
@@ -44,6 +45,7 @@ services:
       - ./arrow:/arrow:delegated
     environment:
       ARROW_DEPENDENCY_SOUCE: "BUNDLED"
+      LIBARROW_MINIMAL: "false"
     command: >
       /bin/bash -c "
         cd /arrow && r/inst/build_arrow_static.sh"
@@ -65,6 +67,7 @@ services:
       - ./arrow:/arrow:delegated
     environment:
       ARROW_DEPENDENCY_SOUCE: "BUNDLED"
+      LIBARROW_MINIMAL: "false"
     command: >
       /bin/bash -c "
         cd /arrow && r/inst/build_arrow_static.sh"
