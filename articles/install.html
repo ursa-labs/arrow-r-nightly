@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200324</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200325</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
     
     
 <p>On macOS and Windows, when you <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("arrow")</a></code>, you get a binary package that contains Arrow’s C++ dependencies along with it. On Linux, <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> retrieves a source package that has to be compiled locally, and C++ dependencies need to be resolved as well. Generally for R packages with C++ dependencies, this requires either installing system packages, which you may not have privileges to do, or building the C++ dependencies separately, which introduces all sorts of additional ways for things to go wrong.</p>
-<p>Our goal is to make <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("arrow")</a></code> “just work” for as many Linux distributions, versions, and configurations as possible. This document describes how it works and the options for fine-tuning Linux installation. The intended audience for this document is <code>arrow</code> R package users on Linux, not developers. If you’re contributing to the Arrow project, you’ll probably want to manage your C++ installation more directly. Note also that if you use <code>conda</code> to manage your R environment, this document does not apply. You can <code>conda install -c conda-forge r-arrow</code> and you’ll get the latest official release of the R package along with any C++ dependencies.</p>
+<p>Our goal is to make <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("arrow")</a></code> “just work” for as many Linux distributions, versions, and configurations as possible. This document describes how it works and the options for fine-tuning Linux installation. The intended audience for this document is <code>arrow</code> R package users on Linux, not developers. If you’re contributing to the Arrow project, you’ll probably want to manage your C++ installation more directly. Note also that if you use <code>conda</code> to manage your R environment, this document does not apply. You can <code>conda install -c conda-forge --strict-channel-priority r-arrow</code> and you’ll get the latest official release of the R package along with any C++ dependencies.</p>
 <div id="installation-basics" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation-basics" class="anchor"></a>Installation basics</h1>
