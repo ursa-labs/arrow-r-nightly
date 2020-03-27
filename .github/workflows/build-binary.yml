@@ -10,7 +10,6 @@ on:
       - 'linux/*'
       - bintray-upload.sh
       - up-date-description.sh
-  # On tag too?
 
 jobs:
   binaries:
