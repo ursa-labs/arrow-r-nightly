@@ -9,15 +9,21 @@ all_files_url <- "https://api.bintray.com/packages/ursalabs/arrow-r/arrow/files"
 
 get_patch_version <- function(paths) {
   # For URLs containing arrow version x.y.z.p, return p, or 0 if version is x.y.z
-  versions <- numeric_version(sub("^.*/arrow[-_]([0-9\\.]+)\\.[tz].*$", "\\1", paths))
-  vapply(versions, function(v) {
-    v <- unlist(v)
-    if (length(v) > 3) {
-      return(v[4])
-    } else {
-      return(0L)
-    }
-  }, integer(1))
+  pattern <- "^.*/arrow[-_]([0-9\\.]+)\\.[tz].*$"
+  has_version <- grepl(pattern, paths)
+  out <- rep(0L, length(paths))
+  out[has_version] <- vapply(numeric_version(sub(pattern, "\\1", paths[has_version])),
+    function(v) {
+      v <- unlist(v)
+      if (length(v) > 3) {
+        return(v[4])
+      } else {
+        return(0L)
+      }
+    },
+    integer(1)
+  )
+  out
 }
 
 files <- all_files_url %>%
