@@ -23,6 +23,7 @@ services:
       - ./arrow:/arrow:delegated
     command: >
       /bin/bash -c "
+        export ARROW_BOOST_URL=https://dl.bintray.com/nealrichardson/arrow-boost/boost_1_71_0.tar.gz &&
         cd /arrow && r/inst/build_arrow_static.sh"
 
   debian:
@@ -42,6 +43,7 @@ services:
       - ./arrow:/arrow:delegated
     command: >
       /bin/bash -c "
+        export ARROW_BOOST_URL=https://dl.bintray.com/nealrichardson/arrow-boost/boost_1_71_0.tar.gz &&
         cd /arrow && r/inst/build_arrow_static.sh"
 
   centos:
@@ -61,4 +63,5 @@ services:
       - ./arrow:/arrow:delegated
     command: >
       /bin/bash -c "
+        export ARROW_BOOST_URL=https://dl.bintray.com/nealrichardson/arrow-boost/boost_1_71_0.tar.gz &&
         cd /arrow && r/inst/build_arrow_static.sh"
