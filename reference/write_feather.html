@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200325</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200331</span>
       </span>
     </div>
 
@@ -172,24 +172,56 @@
     <p>Write data in the Feather format</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_feather</span>(<span class='no'>x</span>, <span class='no'>sink</span>)</pre>
+    <pre class="usage"><span class='fu'>write_feather</span>(
+  <span class='no'>x</span>,
+  <span class='no'>sink</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>chunk_size</span> <span class='kw'>=</span> <span class='fl'>65536L</span>,
+  <span class='kw'>compression</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"lz4"</span>, <span class='st'>"uncompressed"</span>, <span class='st'>"zstd"</span>),
+  <span class='kw'>compression_level</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>data.frame</code> or RecordBatch</p></td>
+      <td><p><code>data.frame</code>, <code>RecordBatch</code>, or <code>Table</code></p></td>
     </tr>
     <tr>
       <th>sink</th>
-      <td><p>A file path or an OutputStream</p></td>
+      <td><p>A file path or an <code>OutputStream</code></p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>integer Feather file version. Version 2 is the current.
+Version 1 is the more limited legacy format.</p></td>
+    </tr>
+    <tr>
+      <th>chunk_size</th>
+      <td><p>For V2 files, the number of rows that each chunk of data
+should have in the file. Use a smaller <code>chunk_size</code> when you need faster
+random row access. Default is 64K. This option is not supported for V1.</p></td>
+    </tr>
+    <tr>
+      <th>compression</th>
+      <td><p>Name of compression codec to use, if any. Default is
+"lz4" if LZ4 is available in your build of the Arrow C++ library, otherwise
+"uncompressed". "zstd" is the other available codec and generally has better
+compression ratios in exchange for slower read and write performance
+See <code><a href='codec_is_available.html'>codec_is_available()</a></code>. This option is not supported for V1.</p></td>
+    </tr>
+    <tr>
+      <th>compression_level</th>
+      <td><p>If <code>compression</code> is "zstd", you may
+specify an integer compression level. If omitted, the compression codec's
+default compression level is used.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the input <code>x</code> invisibly.</p>
+    <p>The input <code>x</code>, invisibly.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>

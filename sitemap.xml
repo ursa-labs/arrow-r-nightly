@@ -31,10 +31,7 @@
     <loc>https://arrow.apache.org/docs/r//reference/Expression.html</loc>
   </url>
   <url>
-    <loc>https://arrow.apache.org/docs/r//reference/FeatherTableReader.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r//reference/FeatherTableWriter.html</loc>
+    <loc>https://arrow.apache.org/docs/r//reference/FeatherReader.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/Field.html</loc>

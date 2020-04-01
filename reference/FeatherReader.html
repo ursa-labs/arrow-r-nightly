@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compressed stream classes — compression • Arrow R Package</title>
+<title>FeatherReader class — FeatherReader • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,10 @@
 
 
 
-<meta property="og:title" content="Compressed stream classes — compression" />
-<meta property="og:description" content="CompressedInputStream and CompressedOutputStream
-allow you to apply a compression Codec to an
-input or output stream." />
+<meta property="og:title" content="FeatherReader class — FeatherReader" />
+<meta property="og:description" content="This class enables you to interact with Feather files. Create
+one to connect to a file or other InputStream, and call Read() on it to
+make an arrow::Table. See its usage in read_feather()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -165,15 +165,15 @@ input or output stream." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compressed stream classes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/compression.R'><code>R/compression.R</code></a></small>
-    <div class="hidden name"><code>compression.Rd</code></div>
+    <h1>FeatherReader class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/feather.R'><code>R/feather.R</code></a></small>
+    <div class="hidden name"><code>FeatherReader.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>CompressedInputStream</code> and <code>CompressedOutputStream</code>
-allow you to apply a compression <a href='Codec.html'>Codec</a> to an
-input or output stream.</p>
+    <p>This class enables you to interact with Feather files. Create
+one to connect to a file or other InputStream, and call <code>Read()</code> on it to
+make an <code><a href='Table.html'>arrow::Table</a></code>. See its usage in <code><a href='read_feather.html'>read_feather()</a></code>.</p>
     </div>
 
 
@@ -183,19 +183,25 @@ input or output stream.</p>
     
 
 
-<p>The <code>CompressedInputStream$create()</code> and <code>CompressedOutputStream$create()</code>
-factory methods instantiate the object and take the following arguments:</p><ul>
-<li><p><code>stream</code> An <a href='InputStream.html'>InputStream</a> or <a href='OutputStream.html'>OutputStream</a>, respectively</p></li>
-<li><p><code>codec</code> A <code>Codec</code>, either a <a href='Codec.html'>Codec</a> instance or a string</p></li>
-<li><p><code>compression_level</code> compression level for when the <code>codec</code> argument is given as a string</p></li>
+<p>The <code>FeatherReader$create()</code> factory method instantiates the object and
+takes the following arguments:</p><ul>
+<li><p><code>file</code> A character file name, raw vector, or Arrow file connection object
+(e.g. <code>RandomAccessFile</code>).</p></li>
+<li><p><code>mmap</code> Logical: whether to memory-map the file (default <code>TRUE</code>)</p></li>
+<li><p><code>...</code> Additional arguments, currently ignored</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 
+<ul>
+<li><p><code>$Read(columns)</code>: Returns a <code>Table</code> of the selected columns, a vector of
+integer indices</p></li>
+<li><p><code>$version</code>: Active binding, returns <code>1</code> or <code>2</code>, according to the Feather
+file version</p></li>
+</ul>
 
-<p>Methods are inherited from <a href='InputStream.html'>InputStream</a> and <a href='OutputStream.html'>OutputStream</a>, respectively</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
