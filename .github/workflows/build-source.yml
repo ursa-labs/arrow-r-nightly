@@ -47,10 +47,5 @@ jobs:
         shell: bash
         run: |
           cd arrow/r
-          # When there are vignettes, R CMD build will build-and-install
-          # the package in order to build the vignettes. That will be slow and wasteful.
-          # Set these env vars so that it builds with no C++.
-          export LIBARROW_BUILD=false
-          export LIBARROW_DOWNLOAD=false
-          R CMD build .
+          R CMD build --no-build-vignettes .
           PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh
