@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/pkgdown.yml'
+      - 'linux/install-with-pkgdown.R'
 
 jobs:
   pkgdown:
