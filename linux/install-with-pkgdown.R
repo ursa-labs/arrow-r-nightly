@@ -3,7 +3,5 @@ options(
   install.packages.check.source = "no",
   repos = c("https://dl.bintray.com/ursalabs/arrow-r", getOption("repos"))
 )
-install.packages("arrow", dependencies = TRUE, verbose = TRUE)
-# install.packages("pkgdown", verbose = TRUE)
-install.packages("remotes")
-remotes::install_github("r-lib/pkgdown@v1.4.1")
+install.packages(c("remotes", "pkgdown"), verbose = TRUE)
+remotes::install_deps("arrow/r", dependencies = TRUE, verbose = TRUE)
