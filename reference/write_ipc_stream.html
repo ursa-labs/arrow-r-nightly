@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ParquetFileWriter class — ParquetFileWriter • Arrow R Package</title>
+<title>Write Arrow IPC stream format — write_ipc_stream • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="ParquetFileWriter class — ParquetFileWriter" />
-<meta property="og:description" content="This class enables you to interact with Parquet files." />
+<meta property="og:title" content="Write Arrow IPC stream format — write_ipc_stream" />
+<meta property="og:description" content="Apache Arrow defines two formats for serializing data for interprocess communication (IPC):
+a &quot;stream&quot; format and a &quot;file&quot; format, known as Feather. write_ipc_stream()
+and write_feather() write those formats, respectively." />
 
 
 
@@ -169,30 +171,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ParquetFileWriter class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/parquet.R'><code>R/parquet.R</code></a></small>
-    <div class="hidden name"><code>ParquetFileWriter.Rd</code></div>
+    <h1>Write Arrow IPC stream format</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/ipc_stream.R'><code>R/ipc_stream.R</code></a>, <a href='https://github.com/apache/arrow/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>write_ipc_stream.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This class enables you to interact with Parquet files.</p>
+    <p>Apache Arrow defines two formats for <a href='https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc'>serializing data for interprocess communication (IPC)</a>:
+a "stream" format and a "file" format, known as Feather. <code>write_ipc_stream()</code>
+and <code>write_feather()</code> write those formats, respectively.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>write_ipc_stream</span>(<span class='no'>x</span>, <span class='no'>sink</span>, <span class='no'>...</span>)
 
+<span class='fu'>write_arrow</span>(<span class='no'>x</span>, <span class='no'>sink</span>, <span class='no'>...</span>)</pre>
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>data.frame</code>, RecordBatch, or Table</p></td>
+    </tr>
+    <tr>
+      <th>sink</th>
+      <td><p>A string file path or OutputStream</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>extra parameters passed to <code>write_feather()</code>.</p></td>
+    </tr>
+    </table>
 
-    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p><code>x</code>, invisibly.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-<p>The <code>ParquetFileWriter$create()</code> factory method instantiates the object and
-takes the following arguments:</p><ul>
-<li><p><code>schema</code> A Schema</p></li>
-<li><p><code>sink</code> An arrow::io::OutputStream or a string which is interpreted as a file path</p></li>
-<li><p><code>properties</code> An instance of ParquetWriterProperties</p></li>
-<li><p><code>arrow_properties</code> An instance of <code>ParquetArrowWriterProperties</code></p></li>
-</ul>
+    <p><code>write_arrow()</code>, a wrapper around <code>write_ipc_stream()</code> and <code>write_feather()</code>
+with some nonstandard behavior, is deprecated. You should explicitly choose
+the function that will write the desired IPC format (stream or file) since
+either can be written to a file or <code>OutputStream</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><code>write_feather()</code> for writing IPC files. <code>write_to_raw()</code> to
+serialize data to a buffer.
+RecordBatchWriter for a lower-level interface.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
