@@ -142,6 +142,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/install_arrow.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/install_pyarrow.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/make_readable_file.html</loc>
   </url>
   <url>
