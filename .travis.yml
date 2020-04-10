@@ -28,7 +28,7 @@ script:
 - travis_wait R CMD build --no-build-vignettes .
 # Don't run --as-cran because CRAN doesn't on macOS (also autobrew chokes on R 3.6.2)
 # See https://issues.apache.org/jira/browse/ARROW-7416
-- travis_wait R CMD check arrow_*.tar.gz --ignore-vignettes --install-args="--build"
+- travis_wait R CMD check arrow_*.tar.gz --no-manual --ignore-vignettes --install-args="--build"
 after_success:
 - test $TRAVIS_R_VERSION_STRING = "release" && travis_wait Rscript -e 'install.packages("covr"); covr::codecov()'
 - source ../../bintray-upload.sh
