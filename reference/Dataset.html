@@ -45,12 +45,7 @@ multiple files. This sharding of data may indicate partitioning, which
 can accelerate queries that only touch some partitions (files).
 A Dataset contains one or more Fragments, such as files, of potentially
 differing type and partitioning.
-The Dataset$create() method instantiates a Dataset which wraps child Datasets.
-It takes the following arguments:
-children: a list of Dataset objects
-schema: a Schema
-
-
+For Dataset$create(), see open_dataset(), which is an alias for it.
 DatasetFactory is used to provide finer control over the creation of Datasets." />
 
 
@@ -93,7 +88,7 @@ DatasetFactory is used to provide finer control over the creation of Datasets." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200408</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200409</span>
       </span>
     </div>
 
@@ -191,12 +186,7 @@ multiple files. This sharding of data may indicate partitioning, which
 can accelerate queries that only touch some partitions (files).</p>
 <p>A <code>Dataset</code> contains one or more <code>Fragments</code>, such as files, of potentially
 differing type and partitioning.</p>
-<p>The <code>Dataset$create()</code> method instantiates a <code>Dataset</code> which wraps child Datasets.
-It takes the following arguments:</p><ul>
-<li><p><code>children</code>: a list of Dataset objects</p></li>
-<li><p><code>schema</code>: a Schema</p></li>
-</ul>
-
+<p>For <code>Dataset$create()</code>, see <code>open_dataset()</code>, which is an alias for it.</p>
 <p><code>DatasetFactory</code> is used to provide finer control over the creation of <code>Dataset</code>s.</p>
     </div>
 
@@ -233,7 +223,10 @@ the Arrow file format)</p></li>
 
 <p>A <code>Dataset</code> has the following methods:</p><ul>
 <li><p><code>$NewScan()</code>: Returns a ScannerBuilder for building a query</p></li>
-<li><p><code>$schema</code>: Active binding, returns the Schema of the Dataset</p></li>
+<li><p><code>$schema</code>: Active binding that returns the Schema of the Dataset; you
+may also replace the dataset's schema by using <code>ds$schema &lt;- new_schema</code>.
+This method currently supports only adding, removing, or reordering
+fields in the schema: you cannot alter or cast the field types.</p></li>
 </ul>
 
 <p><code>FileSystemDataset</code> has the following methods:</p><ul>

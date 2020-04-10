@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>class DictionaryType — DictionaryType • Arrow R Package</title>
+<title>Apply a function to a stream of RecordBatches — map_batches • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,12 @@
 
 
 
-<meta property="og:title" content="class DictionaryType — DictionaryType" />
-<meta property="og:description" content="class DictionaryType" />
+<meta property="og:title" content="Apply a function to a stream of RecordBatches — map_batches" />
+<meta property="og:description" content="As an alternative to calling collect() on a Dataset query, you can
+use this function to access the stream of RecordBatches in the Dataset.
+This lets you aggregate on each chunk and pull the intermediate results into
+a data.frame for further aggregation, even if you couldn't fit the whole
+Dataset result in memory." />
 
 
 
@@ -169,23 +173,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>class DictionaryType</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dictionary.R'><code>R/dictionary.R</code></a></small>
-    <div class="hidden name"><code>DictionaryType.Rd</code></div>
+    <h1>Apply a function to a stream of RecordBatches</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dataset.R'><code>R/dataset.R</code></a></small>
+    <div class="hidden name"><code>map_batches.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>class DictionaryType</p>
+    <p>As an alternative to calling <code>collect()</code> on a <code>Dataset</code> query, you can
+use this function to access the stream of <code>RecordBatch</code>es in the <code>Dataset</code>.
+This lets you aggregate on each chunk and pull the intermediate results into
+a <code>data.frame</code> for further aggregation, even if you couldn't fit the whole
+<code>Dataset</code> result in memory.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>map_batches</span>(<span class='no'>X</span>, <span class='no'>FUN</span>, <span class='no'>...</span>, <span class='kw'>.data.frame</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>X</th>
+      <td><p>A <code>Dataset</code> or <code>arrow_dplyr_query</code> object, as returned by the
+<code>dplyr</code> methods on <code>Dataset</code>.</p></td>
+    </tr>
+    <tr>
+      <th>FUN</th>
+      <td><p>A function or <code>purrr</code>-style lambda expression to apply to each
+batch</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code>FUN</code></p></td>
+    </tr>
+    <tr>
+      <th>.data.frame</th>
+      <td><p>logical: collect the resulting chunks into a single
+<code>data.frame</code>? Default <code>TRUE</code></p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-
-<p>TODO</p>
+    <p>This is experimental and not recommended for production use.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200408</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200409</span>
       </span>
     </div>
 
@@ -196,6 +196,7 @@
 <ul>
 <li>Dataset reading benefits from many speedups and fixes in the C++ library</li>
 <li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (<a href='https://github.com/apache/arrow/issues/6635'>#6635</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
+<li>Combine multiple datasets into a single queryable <code>UnionDataset</code> with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> method</li>
 <li>Dataset filtering now treats <code>NA</code> as <code>FALSE</code>, consistent with <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>
 </li>
 <li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types</li>

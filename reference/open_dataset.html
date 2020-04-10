@@ -86,7 +86,7 @@ Dataset, then use dplyr methods to query it." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200408</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200409</span>
       </span>
     </div>
 
@@ -193,8 +193,11 @@ can accelerate queries that only touch some partitions (files). Call
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sources</th>
-      <td><p>Either a string path to a directory containing data files,
-or a list of <code>DatasetFactory</code> objects as created by <code>dataset_factory()</code>.</p></td>
+      <td><p>Either:</p><ul>
+<li><p>a string path to a directory containing data files</p></li>
+<li><p>a list of <code>Dataset</code> objects as created by this function</p></li>
+<li><p>a list of <code>DatasetFactory</code> objects as created by <code>dataset_factory()</code>.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>schema</th>
@@ -204,18 +207,20 @@ will be inferred from the data sources.</p></td>
     <tr>
       <th>partitioning</th>
       <td><p>When <code>sources</code> is a file path, one of</p><ul>
-<li><p>A <code>Schema</code>, in which case the file paths relative to <code>sources</code> will be
+<li><p>a <code>Schema</code>, in which case the file paths relative to <code>sources</code> will be
 parsed, and path segments will be matched with the schema fields. For
 example, <code>schema(year = int16(), month = int8())</code> would create partitions
 for file paths like "2019/01/file.parquet", "2019/02/file.parquet", etc.</p></li>
-<li><p>A character vector that defines the field names corresponding to those
+<li><p>a character vector that defines the field names corresponding to those
 path segments (that is, you're providing the names that would correspond
 to a <code>Schema</code> but the types will be autodetected)</p></li>
-<li><p>A <code>HivePartitioning</code> or <code>HivePartitioningFactory</code>, as returned
+<li><p>a <code>HivePartitioning</code> or <code>HivePartitioningFactory</code>, as returned
 by <code>hive_partition()</code> which parses explicit or autodetected fields from
 Hive-style path segments</p></li>
 <li><p><code>NULL</code> for no partitioning</p></li>
-</ul></td>
+</ul>
+
+<p>The default is to autodetect Hive-style partitions.</p></td>
     </tr>
     <tr>
       <th>...</th>

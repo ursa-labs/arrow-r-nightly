@@ -148,6 +148,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/make_readable_file.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/map_batches.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/mmap_create.html</loc>
   </url>
   <url>
