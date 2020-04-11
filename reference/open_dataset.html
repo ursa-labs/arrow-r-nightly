@@ -86,7 +86,7 @@ Dataset, then use dplyr methods to query it." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200409</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200410</span>
       </span>
     </div>
 
@@ -186,7 +186,13 @@ can accelerate queries that only touch some partitions (files). Call
 <code>Dataset</code>, then use <code>dplyr</code> methods to query it.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>open_dataset</span>(<span class='no'>sources</span>, <span class='kw'>schema</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='fu'>hive_partition</span>(), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>open_dataset</span>(
+  <span class='no'>sources</span>,
+  <span class='kw'>schema</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='fu'>hive_partition</span>(),
+  <span class='kw'>unify_schemas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,6 +227,17 @@ Hive-style path segments</p></li>
 </ul>
 
 <p>The default is to autodetect Hive-style partitions.</p></td>
+    </tr>
+    <tr>
+      <th>unify_schemas</th>
+      <td><p>logical: should all data fragments (files, <code>Dataset</code>s)
+be scanned in order to create a unified schema from them? If <code>FALSE</code>, only
+the first fragment will be inspected for its schema. Use this
+fast path when you know and trust that all fragments have an identical schema.
+The default is <code>FALSE</code> when creating a dataset from a file path (because
+there may be many files and scanning may be slow) but <code>TRUE</code> when <code>sources</code>
+is a list of <code>Dataset</code>s (because there should be few <code>Dataset</code>s in the list
+and their <code>Schema</code>s are already in memory).</p></td>
     </tr>
     <tr>
       <th>...</th>

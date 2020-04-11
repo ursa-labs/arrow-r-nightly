@@ -190,6 +190,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/type.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/unify_schemas.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/write_feather.html</loc>
   </url>
   <url>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FeatherReader class — FeatherReader • Arrow R Package</title>
+<title>Combine and harmonize schemas — unify_schemas • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="FeatherReader class — FeatherReader" />
-<meta property="og:description" content="This class enables you to interact with Feather files. Create
-one to connect to a file or other InputStream, and call Read() on it to
-make an arrow::Table. See its usage in read_feather()." />
+<meta property="og:title" content="Combine and harmonize schemas — unify_schemas" />
+<meta property="og:description" content="Combine and harmonize schemas" />
 
 
 
@@ -171,44 +169,36 @@ make an arrow::Table. See its usage in read_feather()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FeatherReader class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/feather.R'><code>R/feather.R</code></a></small>
-    <div class="hidden name"><code>FeatherReader.Rd</code></div>
+    <h1>Combine and harmonize schemas</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/schema.R'><code>R/schema.R</code></a></small>
+    <div class="hidden name"><code>unify_schemas.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This class enables you to interact with Feather files. Create
-one to connect to a file or other InputStream, and call <code>Read()</code> on it to
-make an <code>arrow::Table</code>. See its usage in <code>read_feather()</code>.</p>
+    <p>Combine and harmonize schemas</p>
     </div>
 
+    <pre class="usage"><span class='fu'>unify_schemas</span>(<span class='no'>...</span>, <span class='kw'>schemas</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>...</span>))</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Schemas to unify</p></td>
+    </tr>
+    <tr>
+      <th>schemas</th>
+      <td><p>Alternatively, a list of schemas</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>A <code>Schema</code> with the union of fields contained in the inputs</p>
 
-
-<p>The <code>FeatherReader$create()</code> factory method instantiates the object and
-takes the following arguments:</p><ul>
-<li><p><code>file</code> A character file name, raw vector, or Arrow file connection object
-(e.g. <code>RandomAccessFile</code>).</p></li>
-<li><p><code>mmap</code> Logical: whether to memory-map the file (default <code>TRUE</code>)</p></li>
-<li><p><code>...</code> Additional arguments, currently ignored</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-
-<ul>
-<li><p><code>$Read(columns)</code>: Returns a <code>Table</code> of the selected columns, a vector of
-integer indices</p></li>
-<li><p><code>$version</code>: Active binding, returns <code>1</code> or <code>2</code>, according to the Feather
-file version</p></li>
-</ul>
-
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
