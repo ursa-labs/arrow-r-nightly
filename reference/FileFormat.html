@@ -84,7 +84,7 @@ file formats (ParquetFileFormat and IpcFileFormat)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200412</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200413</span>
       </span>
     </div>
 
@@ -190,8 +190,8 @@ file formats (<code>ParquetFileFormat</code> and <code>IpcFileFormat</code>).</p
 
 <p><code>FileFormat$create()</code> takes the following arguments:</p><ul>
 <li><p><code>format</code>: A string identifier of the format of the files in <code>path</code>.
-Currently supported options are "parquet", "arrow", and "ipc" (an alias for
-the Arrow file format)</p></li>
+Currently "parquet" and "ipc"/"arrow"/"feather" (aliases for each other)
+are supported. For Feather, only version 2 files are supported.</p></li>
 <li><p><code>...</code>: Additional format-specific options
 format="parquet":</p><ul>
 <li><p><code>use_buffered_stream</code>: Read files through buffered input streams rather than

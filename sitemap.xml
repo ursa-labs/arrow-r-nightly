@@ -121,6 +121,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/compression.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/cpu_count.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/data-type.html</loc>
   </url>
   <url>
@@ -185,6 +188,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r//reference/set_cpu_count.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/type.html</loc>

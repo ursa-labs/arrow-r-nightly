@@ -84,7 +84,7 @@ open_dataset()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200412</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200413</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
     <pre class="usage"><span class='fu'>dataset_factory</span>(
   <span class='no'>x</span>,
   <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"local"</span>),
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>),
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>, <span class='st'>"feather"</span>),
   <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>allow_not_found</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -210,8 +210,8 @@ grouped. If this argument is specified it will be used to construct a
     <tr>
       <th>format</th>
       <td><p>A string identifier of the format of the files in <code>x</code>.
-Currently supported options are "parquet", "arrow", and "ipc" (an alias for
-the Arrow file format)</p></td>
+Currently "parquet" and "ipc"/"arrow"/"feather" (aliases for each other)
+are supported. For Feather, only version 2 files are supported.</p></td>
     </tr>
     <tr>
       <th>partitioning</th>
