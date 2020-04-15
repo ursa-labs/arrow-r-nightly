@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200413</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.0.20200414</span>
       </span>
     </div>
 
@@ -160,16 +160,16 @@
 <div id="developing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#developing" class="anchor"></a>Developing</h2>
-<p>Windows and macOS users who wish to contribute to the R package and donât need to alter the Arrow C++ library may be able to obtain a recent version of the library without building from source. On macOS, you may install the C++ library using <a href="https://brew.sh/">Homebrew</a>:</p>
+<p>Windows and macOS users who wish to contribute to the R package and don’t need to alter the Arrow C++ library may be able to obtain a recent version of the library without building from source. On macOS, you may install the C++ library using <a href="https://brew.sh/">Homebrew</a>:</p>
 <pre class="shell"><code># For the released version:
 brew install apache-arrow
 # Or for a development version, you can try:
 brew install apache-arrow --HEAD</code></pre>
 <p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows-35/">nightly bintray repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
-<p>If you need to alter both the Arrow C++ library and the R package code, or if you canât get a binary version of the latest C++ library elsewhere, youâll need to build it from source too.</p>
+<p>If you need to alter both the Arrow C++ library and the R package code, or if you can’t get a binary version of the latest C++ library elsewhere, you’ll need to build it from source too.</p>
 <p>First, install the C++ library. See the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">developer guide</a> for details.</p>
 <p>Note that after any change to the C++ library, you must reinstall it and run <code>make clean</code> or <code>git clean -fdx .</code> to remove any cached object code in the <code>r/src/</code> directory before reinstalling the R package. This is only necessary if you make changes to the C++ library source; you do not need to manually purge object files if you are only editing R or Rcpp code inside <code>r/</code>.</p>
-<p>Once youâve built the C++ library, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
+<p>Once you’ve built the C++ library, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
 <pre class="shell"><code>cd ../../r
 R -e 'install.packages(c("devtools", "roxygen2", "pkgdown", "covr")); devtools::install_dev_deps()'
 R CMD INSTALL .</code></pre>
@@ -180,8 +180,8 @@ R CMD INSTALL .</code></pre>
 <span id="cb10-2"><a href="#cb10-2"></a>Error<span class="op">:</span><span class="st"> </span>package or namespace load failed <span class="cf">for</span> <span class="st">'arrow'</span> <span class="cf">in</span> <span class="kw">dyn.load</span>(file, <span class="dt">DLLpath =</span> DLLpath, ...)<span class="op">:</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>unable to load shared object <span class="st">'/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so'</span><span class="op">:</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="kw">dlopen</span>(<span class="op">/</span>Users<span class="op">/</span>you<span class="op">/</span>R<span class="op">/</span>00LOCK<span class="op">-</span>r<span class="op">/</span>00new<span class="op">/</span>arrow<span class="op">/</span>libs<span class="op">/</span>arrow.so, <span class="dv">6</span>)<span class="op">:</span><span class="st"> </span>Library not loaded<span class="op">:</span><span class="st"> </span><span class="er">@</span>rpath<span class="op">/</span>libarrow.<span class="fl">14.</span>dylib</span></code></pre></div>
-<p>try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g.Â <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
-<p>When installing from source, if the R and C++ library versions do not match, installation may fail. If youâve previously installed the libraries and want to upgrade the R package, youâll need to update the Arrow C++ library first.</p>
+<p>try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g. <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
+<p>When installing from source, if the R and C++ library versions do not match, installation may fail. If you’ve previously installed the libraries and want to upgrade the R package, you’ll need to update the Arrow C++ library first.</p>
 <p>For any other build/configuration challenges, see the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">C++ developer guide</a> and <code>vignette("install", package = "arrow")</code>.</p>
 <div id="editing-rcpp-code" class="section level3">
 <h3 class="hasAnchor">
@@ -194,7 +194,7 @@ R CMD INSTALL .</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
 <p>Fix any style issues before committing with</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
-<p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isnât found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-8) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@8)/bin/clang-format ./lint.sh</code></p>
+<p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isn’t found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-8) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@8)/bin/clang-format ./lint.sh</code></p>
 </div>
 <div id="useful-functions" class="section level3">
 <h3 class="hasAnchor">
@@ -206,7 +206,7 @@ R CMD INSTALL .</code></pre>
 <span class="kw pkg">pkgdown</span><span class="kw ns">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>() <span class="co"># To preview the documentation website</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">check</span>() <span class="co"># All package checks; see also below</span>
 <span class="kw pkg">covr</span><span class="kw ns">::</span><span class="fu">package_coverage</span>() <span class="co"># See test coverage statistics</span></pre></div>
-<p>Any of those can be run from the command line by wrapping them in <code>R -e '$COMMAND'</code>. Thereâs also a <code>Makefile</code> to help with some common tasks from the command line (<code>make test</code>, <code>make doc</code>, <code>make clean</code>, etc.)</p>
+<p>Any of those can be run from the command line by wrapping them in <code>R -e '$COMMAND'</code>. There’s also a <code>Makefile</code> to help with some common tasks from the command line (<code>make test</code>, <code>make doc</code>, <code>make clean</code>, etc.)</p>
 </div>
 <div id="full-package-validation" class="section level3">
 <h3 class="hasAnchor">
@@ -265,7 +265,7 @@ R CMD check arrow_*.tar.gz --as-cran</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
