@@ -37,7 +37,7 @@ jobs:
           cd linux
           git clone https://github.com/apache/arrow
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          git checkout apache-arrow-0.17.0
       - name: Build
         shell: bash
         run: |
@@ -50,8 +50,6 @@ jobs:
         shell: bash
         run: |
           cd linux/arrow/r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../../up-date-description.sh
           VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
           export PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
@@ -79,10 +77,8 @@ jobs:
         run: |
           git clone https://github.com/apache/arrow
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          git checkout apache-arrow-0.17.0
           cd r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: ${{ matrix.rtools }}
