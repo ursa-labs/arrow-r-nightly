@@ -84,7 +84,7 @@ open_dataset()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.0.20200419</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.0.20200420</span>
       </span>
     </div>
 
@@ -184,11 +184,9 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
 
     <pre class="usage"><span class='fu'>dataset_factory</span>(
   <span class='no'>x</span>,
-  <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"local"</span>),
+  <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>, <span class='st'>"feather"</span>),
   <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>allow_not_found</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>
 )</pre>
 
@@ -204,8 +202,8 @@ grouped. If this argument is specified it will be used to construct a
     </tr>
     <tr>
       <th>filesystem</th>
-      <td><p>A string identifier for the filesystem corresponding to
-<code>x</code>. Currently only "local" is supported.</p></td>
+      <td><p>A FileSystem object; if omitted, the <code>FileSystem</code> will
+be detected from <code>x</code></p></td>
     </tr>
     <tr>
       <th>format</th>
@@ -230,18 +228,8 @@ Hive-style path segments</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>allow_not_found</th>
-      <td><p>logical: is <code>x</code> allowed to not exist? Default
-<code>FALSE</code>. See FileSelector.</p></td>
-    </tr>
-    <tr>
-      <th>recursive</th>
-      <td><p>logical: should files be discovered in subdirectories of
-<code>x</code>? Default <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to the FileSystem <code>$create()</code> method</p></td>
+      <td><p>Additional arguments, currently ignored</p></td>
     </tr>
     </table>
 
