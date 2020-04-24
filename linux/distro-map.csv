@@ -8,3 +8,6 @@ fedora-19,centos-7
 fedora-20,centos-7
 rhel-7,centos-7
 debian-11,centos-8
+ubuntu-18.10,ubuntu-18.04
+ubuntu-19.04,ubuntu-18.04
+ubuntu-19.10,ubuntu-18.04
