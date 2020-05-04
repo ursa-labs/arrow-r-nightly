@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: "3.6"
       - name: Install dependencies
         run: Rscript -e 'source("https://raw.githubusercontent.com/apache/arrow/master/ci/etc/rprofile"); install.packages(c("httr", "dplyr"))'
       - name: Delete old packages

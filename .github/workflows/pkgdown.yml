@@ -45,6 +45,8 @@ jobs:
             touch pkgdown.yml
           fi
       - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: "3.6"
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies and package
         run: Rscript linux/install-with-pkgdown.R
