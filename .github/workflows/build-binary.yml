@@ -87,7 +87,7 @@ jobs:
         shell: bash
         env:
           ARROW_HOME: "arrow"
-        run: C:\rtools40\usr\bin\bash --login -c "cd $GITHUB_WORKSPACE && arrow/ci/scripts/r_windows_build.sh"
+        run: arrow/ci/scripts/r_windows_build.sh
       # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
@@ -99,7 +99,7 @@ jobs:
         env:
           ARROW_HOME: "arrow"
           RTOOLS_VERSION: 35
-        run: C:\rtools40\usr\bin\bash --login -c "cd $GITHUB_WORKSPACE && arrow/ci/scripts/r_windows_build.sh"
+        run: arrow/ci/scripts/r_windows_build.sh
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
