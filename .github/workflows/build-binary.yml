@@ -60,20 +60,14 @@ jobs:
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           sudo -E bash ../../../../../bintray-upload.sh
   windows:
-    name: C++ Binary Windows RTools ${{ matrix.rtools }}
+    name: C++ Binary Windows RTools (35 and 40)
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # TODO: test on rtools40
-        rtools: [35]
     steps:
       - run: git config --global core.autocrlf false
-      - uses: numworks/setup-msys2@v1
-        with:
-          update: true
-      - name: Checkout arrow-r-nightly
+      - name: Checkout Arrow
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Clone apache/arrow and checkout at date
         shell: bash
         run: |
@@ -83,13 +77,29 @@ jobs:
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
+      # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
-          rtools-version: ${{ matrix.rtools }}
-      - name: Build Arrow C++
+          rtools-version: 40
+          r-version: '4.0'
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools40
+        shell: bash
         env:
           ARROW_HOME: "arrow"
-        run: msys2do arrow/ci/scripts/r_windows_build.sh
+        run: C:\rtools40\usr\bin\bash --login -c "cd $GITHUB_WORKSPACE && arrow/ci/scripts/r_windows_build.sh"
+      # First build with the new toolchain
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: 35
+          r-version: '3.6'
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools35
+        shell: bash
+        env:
+          ARROW_HOME: "arrow"
+          RTOOLS_VERSION: 35
+        run: C:\rtools40\usr\bin\bash --login -c "cd $GITHUB_WORKSPACE && arrow/ci/scripts/r_windows_build.sh"
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
@@ -97,5 +107,6 @@ jobs:
         run: |
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
-          export REPO_PATH=/libarrow/bin/windows-${{ matrix.rtools }}
+          # TODO: change the package to look for this without -35
+          export REPO_PATH=/libarrow/bin/windows-35
           source ../bintray-upload.sh
