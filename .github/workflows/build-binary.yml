@@ -101,7 +101,9 @@ jobs:
         env:
           ARROW_HOME: "arrow"
           RTOOLS_VERSION: 35
-        run: arrow/ci/scripts/r_windows_build.sh
+        run: |
+          pacman --noconfirm -Rcsu mingw-w64-{i686,x86_64}-{gcc,cmake,thrift,snappy,zlib,lz4,zstd}
+          arrow/ci/scripts/r_windows_build.sh
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
