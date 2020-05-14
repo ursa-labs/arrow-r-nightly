@@ -90,7 +90,13 @@ jobs:
         env:
           ARROW_HOME: "arrow"
         run: arrow/ci/scripts/r_windows_build.sh
-      # First build with the new toolchain
+      - name: Clean up so we can build again
+        shell: bash
+        run: |
+          rm -rf pkg
+          rm -rf src
+          pacman --noconfirm -R mingw-w64-{i686,x86_64}-{cmake,boost,openssl,thrift,snappy,lz4,zstd}
+      # Now build with the old toolchain
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: 35
@@ -101,11 +107,7 @@ jobs:
         env:
           ARROW_HOME: "arrow"
           RTOOLS_VERSION: 35
-        run: |
-          rm -rf pkg
-          rm -rf src
-          pacman --noconfirm -R mingw-w64-{i686,x86_64}-{cmake,boost,openssl,thrift,snappy,lz4,zstd}
-          arrow/ci/scripts/r_windows_build.sh
+        run: arrow/ci/scripts/r_windows_build.sh
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
@@ -113,6 +115,5 @@ jobs:
         run: |
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
-          # TODO: change the package to look for this without -35
-          export REPO_PATH=/libarrow/bin/windows-35
+          export REPO_PATH=/libarrow/bin/windows
           source ../bintray-upload.sh
