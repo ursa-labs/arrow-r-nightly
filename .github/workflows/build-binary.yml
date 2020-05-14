@@ -102,7 +102,13 @@ jobs:
           ARROW_HOME: "arrow"
           RTOOLS_VERSION: 35
         run: |
+          rm -rf pkg
+          rm -rf src
           pacman --noconfirm -Rcsu mingw-w64-{i686,x86_64}-{gcc,cmake,thrift,snappy,zlib,lz4,zstd}
+          curl https://raw.githubusercontent.com/r-windows/rtools-backports/master/pacman.conf > /etc/pacman.conf
+          pacman --noconfirm -Scc
+          pacman --noconfirm -Syyu
+          pacman --noconfirm --needed -S mingw-w64-{i686,x86_64}-toolchain
           arrow/ci/scripts/r_windows_build.sh
       - name: Upload
         env:
