@@ -13,29 +13,27 @@ on:
 
 jobs:
   windows:
-    name: Windows R ${{ matrix.r_version }} RTools ${{ matrix.rtools }}
+    name: Windows R ${{ matrix.r_version }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        # TODO: test on rtools40
-        rtools: [35]
         r_version:
-          - "3.5"
+          # - "3.5"
           - "3.6"
+          - "4.0"
           # - "devel" # CRAN binary package list doesn't match the version devel thinks it is
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
         with:
-          rtools-version: ${{ matrix.rtools }}
           r-version: ${{ matrix.r_version }}
       - name: Install R package dependencies
         shell: Rscript {0}
         run: |
           install.packages("arrow",
-            type = "win.binary",
+            type = "binary",
             repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
           )
           remove.packages("arrow")
