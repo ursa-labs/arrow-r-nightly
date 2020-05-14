@@ -19,7 +19,8 @@ jobs:
       matrix:
         platform:
           - windows-latest
-          - macOS-latest
+          # We need to build on an older version of macOS than GHA provides
+          # - macOS-latest
         r_version:
           # - "3.5"
           - "3.6"

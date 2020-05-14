@@ -1,3 +1,16 @@
-branches:
-  only:
-  - master
+language: r
+os: osx
+cache: packages
+fortran: false
+r:
+# - 3.2
+# - 3.3
+# - 3.4
+# - 3.5
+- 3.6
+- 4.0
+env:
+  LOCAL_AUTOBREW: "TRUE"
+  TEST_R_WITH_ARROW: "TRUE"
+script:
+- Rscript -f build-binary-and-upload.R
