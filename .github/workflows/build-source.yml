@@ -47,5 +47,6 @@ jobs:
         shell: bash
         run: |
           cd arrow/r
+          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
           R CMD build --no-build-vignettes .
           PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh

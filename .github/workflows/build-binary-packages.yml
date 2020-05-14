@@ -1,0 +1,38 @@
+name: Build binary R packages
+
+on:
+  schedule:
+    - cron: |
+        0 22 * * *
+  push:
+    paths:
+      - '.github/workflows/build-binary-packages.yml'
+      - bintray-upload.sh
+      - build-binary-and-upload.R
+
+jobs:
+  package:
+    name: ${{ matrix.platform }} ${{ matrix.r_version }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - windows-latest
+          - macOS-latest
+        r_version:
+          # - "3.5"
+          - "3.6"
+          - "4.0"
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.r_version }}
+          Ncpus: 2
+      - name: Build and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: Rscript -f {0}
+        run: build-binary-and-upload.R
