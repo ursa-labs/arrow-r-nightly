@@ -15,4 +15,4 @@ env:
 install:
 - pwd
 script:
-- Rscript -f build-binary-and-upload.R
+- Rscript build-binary-and-upload.R
