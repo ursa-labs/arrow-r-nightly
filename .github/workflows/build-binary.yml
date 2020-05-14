@@ -71,11 +71,9 @@ jobs:
       - name: Clone apache/arrow and checkout at date
         shell: bash
         run: |
-          git clone https://github.com/nealrichardson/arrow
+          git clone https://github.com/apache/arrow
           cd arrow
-          # Temporarily comment this out so we get the new code in master with rtools40
-          #git checkout `git rev-list -n 1 --before="00:00" master`
-          git checkout rtools40-followup
+          git checkout `git rev-list -n 1 --before="00:00" master`
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
