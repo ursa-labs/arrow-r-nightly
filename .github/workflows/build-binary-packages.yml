@@ -34,5 +34,5 @@ jobs:
       - name: Build and upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
-        shell: Rscript -f {0}
+        shell: Rscript {0}
         run: build-binary-and-upload.R
