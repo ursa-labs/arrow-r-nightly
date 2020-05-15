@@ -13,6 +13,8 @@ env:
   LOCAL_AUTOBREW: "TRUE"
   TEST_R_WITH_ARROW: "TRUE"
 install:
+# This does nothing; you just have to provide an `install` step for language: r
+# if there is no DESCRIPTION file found
 - pwd
 script:
 - Rscript build-binary-and-upload.R

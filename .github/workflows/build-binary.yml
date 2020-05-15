@@ -1,9 +1,9 @@
-name: Build binary C++ libraries
+name: Binary C++ libraries
 
 on:
   schedule:
     - cron: |
-        0 12 * * *
+        0 1 * * *
   push:
     paths:
       - '.github/workflows/build-binary.yml'

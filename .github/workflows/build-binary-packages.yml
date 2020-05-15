@@ -1,9 +1,9 @@
-name: Build binary R packages
+name: Binary Windows R packages
 
 on:
   schedule:
     - cron: |
-        0 22 * * *
+        0 5 * * *
   push:
     paths:
       - '.github/workflows/build-binary-packages.yml'

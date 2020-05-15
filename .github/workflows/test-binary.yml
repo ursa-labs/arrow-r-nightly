@@ -1,4 +1,4 @@
-name: Test binary installation from Bintray
+name: Test binary installation
 
 on:
   schedule:

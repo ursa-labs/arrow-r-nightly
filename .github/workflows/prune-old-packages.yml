@@ -3,7 +3,7 @@ name: Remove old packages
 on:
   schedule:
     - cron: |
-        0 2 * * *
+        0 20 * * *
   push:
     paths:
       - '.github/workflows/prune-old-packages.yml'
