@@ -1,4 +1,4 @@
-name: Build source packages
+name: Source packages
 
 on:
   schedule:
@@ -20,12 +20,12 @@ jobs:
       - name: Clone apache/arrow
         shell: bash
         run: |
-          git clone https://github.com/nealrichardson/arrow
+          git clone https://github.com/apache/arrow
       - name: Checkout arrow at date and update R package version
         shell: bash
         run: |
           cd arrow
-          git checkout r-install-binary
+          git checkout master
           # git checkout `git rev-list -n 1 --before="00:00" master`
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
@@ -48,5 +48,10 @@ jobs:
         run: |
           cd arrow/r
           cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
+          # Pin the git commit in the formula to match
+          cd tools
+          sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
+          rm -f apache-arrow.rb.bak
+          cd ..
           R CMD build --no-build-vignettes .
           PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh
