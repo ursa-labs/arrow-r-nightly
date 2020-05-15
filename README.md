@@ -7,7 +7,6 @@
 [![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+binary+installation")
 [![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+source+installation")
 [![Daily pkgdown site](https://github.com/ursa-labs/arrow-r-nightly/workflows/Daily%20pkgdown%20site/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Daily+pkgdown+site")
-[![codecov](https://codecov.io/gh/ursa-labs/arrow-r-nightly/branch/master/graph/badge.svg)](https://codecov.io/gh/ursa-labs/arrow-r-nightly)
 
 This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions.
 These builds are triggered daily. Binary packages generated from those jobs are then pushed to a Bintray repository at https://dl.bintray.com/ursalabs/arrow-r.
