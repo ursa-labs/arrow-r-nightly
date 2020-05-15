@@ -1,0 +1,39 @@
+name: Binary Windows R packages
+
+on:
+  schedule:
+    - cron: |
+        0 5 * * *
+  push:
+    paths:
+      - '.github/workflows/build-binary-packages.yml'
+      - bintray-upload.sh
+      - build-binary-and-upload.R
+
+jobs:
+  package:
+    name: ${{ matrix.platform }} ${{ matrix.r_version }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - windows-latest
+          # We need to build on an older version of macOS than GHA provides
+          # - macOS-latest
+        r_version:
+          # - "3.5"
+          - "3.6"
+          - "4.0"
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.r_version }}
+          Ncpus: 2
+      - name: Build and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+        shell: Rscript {0}
+        run: source("build-binary-and-upload.R")

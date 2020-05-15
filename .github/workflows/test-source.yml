@@ -1,4 +1,4 @@
-name: Test source installation from Bintray
+name: Test source installation
 
 on:
   schedule:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Install R
         uses: r-lib/actions/setup-r@master
-      - name: Install arrow from binatray
+      - name: Install arrow from bintray
         env:
           # Test source build so be sure not to download a binary
           LIBARROW_BINARY: "FALSE"

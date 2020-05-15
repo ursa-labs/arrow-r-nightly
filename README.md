@@ -1,11 +1,11 @@
 # Nightly R package builds for Apache Arrow
 
 [![Build Status](https://travis-ci.org/ursa-labs/arrow-r-nightly.svg?branch=master)](https://travis-ci.org/ursa-labs/arrow-r-nightly)
-[![Windows binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20Windows%20binary%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+Windows+binary+packages")
-[![C++ binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+binary+C%2B%2B+libraries")
+[![Windows binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Binary%20Windows%R%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Binary+Windows+R+packages")
+[![C++ binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Binary+C%2B%2B+libraries")
 [![Linux source build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20source%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+source+packages")
-[![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+binary+installation+from+Bintray")
-[![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation%20from%20Bintray/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+source+installation+from+Bintray")
+[![Linux binary test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20binary%20installation/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+binary+installation")
+[![Linux source test](https://github.com/ursa-labs/arrow-r-nightly/workflows/Test%20source%20installation/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Test+source+installation")
 [![Daily pkgdown site](https://github.com/ursa-labs/arrow-r-nightly/workflows/Daily%20pkgdown%20site/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Daily+pkgdown+site")
 [![codecov](https://codecov.io/gh/ursa-labs/arrow-r-nightly/branch/master/graph/badge.svg)](https://codecov.io/gh/ursa-labs/arrow-r-nightly)
 
@@ -22,8 +22,8 @@ These daily package builds are not official Apache releases and are not recommen
 
 We currently build binary R packages for the following OS and versions:
 
-* macOS: R 3.5, 3.6
-* Windows: R 3.5, 3.6, R-devel (4.0)
+* macOS: R 3.6, 4.0
+* Windows: R 3.6, 4.0
 
 We also build C++ static binaries for these Linux distributions and versions:
 
