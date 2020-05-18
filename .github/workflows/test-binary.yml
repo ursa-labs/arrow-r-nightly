@@ -23,7 +23,8 @@ jobs:
           - "rstudio/r-base:3.6-bionic"
           - "rstudio/r-base:3.6-centos7"
           - "rstudio/r-base:3.6-centos8"
-          - "rocker/r-ver" # for debian:stretch (9)
+          - "rocker/r-ver:3.6.3" # for debian:buster (10)
+          - "rocker/r-ver" # ubuntu-20.04
           - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to centos-8
     steps:
       - name: Checkout arrow-r-nightly
