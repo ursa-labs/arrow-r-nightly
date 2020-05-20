@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.0.20200518</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200519</span>
       </span>
     </div>
 
@@ -172,12 +172,35 @@
       <small>Source: <a href='https://github.com/apache/arrow/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="arrow-01709000" class="section level1">
-<h1 class="page-header" data-toc-text="0.17.0.9000">
-<a href="#arrow-01709000" class="anchor"></a>arrow 0.17.0.9000<small> Unreleased </small>
+    <div id="arrow-01719000" class="section level1">
+<h1 class="page-header" data-toc-text="0.17.1.9000">
+<a href="#arrow-01719000" class="anchor"></a>arrow 0.17.1.9000<small> Unreleased </small>
+</h1>
+<div id="datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#datasets" class="anchor"></a>Datasets</h2>
+<ul>
+<li>Read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Currently requires a special C++ library build with additional dependencies; that is, this is not available in CRAN releases or in nightly packages.</li>
+<li>CSV and other text-delimited datasets are now supported</li>
+</ul>
+</div>
+<div id="other" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other" class="anchor"></a>Other</h2>
+<ul>
+<li>Linux installation: some tweaks to OS detection for binaries, some updates to known installation issues in the vignette.</li>
+</ul>
+</div>
+</div>
+    <div id="arrow-0171" class="section level1">
+<h1 class="page-header" data-toc-text="0.17.1">
+<a href="#arrow-0171" class="anchor"></a>arrow 0.17.1<small> 2020-05-19 </small>
 </h1>
 <ul>
 <li>Updates for compatibility with <code>dplyr</code> 1.0</li>
+<li>
+<code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">reticulate::r_to_py()</a></code> conversion now correctly works automatically, without having to call the method yourself</li>
+<li>Assorted bug fixes in the C++ library around Parquet reading</li>
 </ul>
 </div>
     <div id="arrow-0170" class="section level1">
@@ -198,9 +221,9 @@
 <p>The 0.17 Apache Arrow release includes a C data interface that allows exchanging Arrow data in-process at the C level without copying and without libraries having a build or runtime dependency on each other. This enables us to use <code>reticulate</code> to share data between R and Python (<code>pyarrow</code>) efficiently.</p>
 <p>See <code>vignette("python", package = "arrow")</code> for details.</p>
 </div>
-<div id="datasets" class="section level2">
+<div id="datasets-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#datasets" class="anchor"></a>Datasets</h2>
+<a href="#datasets-1" class="anchor"></a>Datasets</h2>
 <ul>
 <li>Dataset reading benefits from many speedups and fixes in the C++ library</li>
 <li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (<a href='https://github.com/apache/arrow/issues/6635'>#6635</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
