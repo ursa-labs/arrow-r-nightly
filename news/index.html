@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200520</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200522</span>
       </span>
     </div>
 
@@ -188,6 +188,10 @@
 <h2 class="hasAnchor">
 <a href="#other" class="anchor"></a>Other</h2>
 <ul>
+<li>Schema metadata is now exposed as a named list, and it can be modified by assignment like <code>batch$metadata$new_key &lt;- "new value"</code>
+</li>
+<li>Tables and RecordBatches have additional data.frame-like methods, including <code><a href="https://rdrr.io/r/base/dimnames.html">dimnames()</a></code> and <code><a href="https://rdrr.io/r/base/list.html">as.list()</a></code>
+</li>
 <li>Linux installation: some tweaks to OS detection for binaries, some updates to known installation issues in the vignette.</li>
 </ul>
 </div>

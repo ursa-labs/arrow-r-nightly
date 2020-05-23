@@ -89,7 +89,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200520</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200522</span>
       </span>
     </div>
 
@@ -226,7 +226,9 @@ to <code>character</code>.</p></li>
 <li><p><code>$fields</code>: returns the list of <code>Field</code>s in the <code>Schema</code>, suitable for
 iterating over</p></li>
 <li><p><code>$HasMetadata</code>: logical: does this <code>Schema</code> have extra metadata?</p></li>
-<li><p><code>$metadata</code>: returns the extra metadata, if present, else <code>NULL</code></p></li>
+<li><p><code>$metadata</code>: returns the key-value metadata as a named list.
+Modify or replace by assigning in (<code>sch$metadata &lt;- new_metadata</code>).
+All list elements are coerced to string.</p></li>
 </ul>
 
 

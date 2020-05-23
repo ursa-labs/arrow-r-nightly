@@ -84,7 +84,7 @@ a sequence of fields, each a contiguous Arrow Array." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200520</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200522</span>
       </span>
     </div>
 
@@ -250,6 +250,9 @@ the schema of the record batch.</p></li>
 <li><p><code>$num_columns</code></p></li>
 <li><p><code>$num_rows</code></p></li>
 <li><p><code>$schema</code></p></li>
+<li><p><code>$metadata</code>: Returns the key-value metadata of the <code>Schema</code> as a named list.
+Modify or replace by assigning in (<code>batch$metadata &lt;- new_metadata</code>).
+All list elements are coerced to string.</p></li>
 <li><p><code>$columns</code>: Returns a list of <code>Array</code>s</p></li>
 </ul>
 
