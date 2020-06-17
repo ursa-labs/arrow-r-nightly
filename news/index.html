@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200615</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200616</span>
       </span>
     </div>
 
@@ -180,19 +180,23 @@
 <h2 class="hasAnchor">
 <a href="#datasets" class="anchor"></a>Datasets</h2>
 <ul>
-<li>Read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Currently requires a special C++ library build with additional dependencies; that is, this is not available in CRAN releases or in nightly packages.</li>
 <li>CSV and other text-delimited datasets are now supported</li>
+<li>Read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Note that this currently requires a special C++ library build with additional dependencies; that is, this is not yet available in CRAN releases or in nightly packages.</li>
+<li>When reading individual CSV and JSON files, compression is automatically detected from the file extension</li>
 </ul>
 </div>
 <div id="other" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other" class="anchor"></a>Other</h2>
 <ul>
+<li>Initial support for C++ aggregation methods: <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> and <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> are implemented for <code>Array</code> and <code>ChunkedArray</code>
+</li>
 <li>Schema metadata is now exposed as a named list, and it can be modified by assignment like <code>batch$metadata$new_key &lt;- "new value"</code>
 </li>
 <li>Tables and RecordBatches have additional data.frame-like methods, including <code><a href="https://rdrr.io/r/base/dimnames.html">dimnames()</a></code> and <code><a href="https://rdrr.io/r/base/list.html">as.list()</a></code>
 </li>
 <li>Linux installation: some tweaks to OS detection for binaries, some updates to known installation issues in the vignette.</li>
+<li>Various streamlining efforts to reduce library size and compile time.</li>
 </ul>
 </div>
 </div>

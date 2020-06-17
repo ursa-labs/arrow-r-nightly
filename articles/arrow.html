@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200615</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200616</span>
       </span>
     </div>
 
@@ -135,14 +135,17 @@
     
     
 <p>The Apache Arrow C++ library provides rich, powerful features for working with columnar data. The <code>arrow</code> R package provides both a low-level interface to the C++ library and some higher-level, R-flavored tools for working with it. This vignette provides an overview of how the pieces fit together, and it describes the conventions that the classes and methods follow in R.</p>
-<div id="multi-file-datasets" class="section level1">
+<div id="features" class="section level1">
 <h1 class="hasAnchor">
-<a href="#multi-file-datasets" class="anchor"></a>Multi-file datasets</h1>
+<a href="#features" class="anchor"></a>Features</h1>
+<div id="multi-file-datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multi-file-datasets" class="anchor"></a>Multi-file datasets</h2>
 <p>The <code>arrow</code> package lets you work efficiently with large, multi-file datasets using <code>dplyr</code> methods. See <code>vignette("dataset", package = "arrow")</code> for an overview.</p>
 </div>
-<div id="reading-and-writing-files" class="section level1">
-<h1 class="hasAnchor">
-<a href="#reading-and-writing-files" class="anchor"></a>Reading and writing files</h1>
+<div id="reading-and-writing-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reading-and-writing-files" class="anchor"></a>Reading and writing files</h2>
 <p><code>arrow</code> provides some simple functions for using the Arrow C++ library to read and write files. These functions are designed to drop into your normal R workflow without requiring any knowledge of the Arrow C++ library and use naming conventions and arguments that follow popular R packages, particularly <code>readr</code>. The readers return <code>data.frame</code>s (or if you use the <code>tibble</code> package, they will act like <code>tbl_df</code>s), and the writers take <code>data.frame</code>s.</p>
 <p>Importantly, <code>arrow</code> provides basic read and write support for the <a href="https://parquet.apache.org/">Apache Parquet</a> columnar data file format, without having to set up a database.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">arrow</span>)
@@ -155,23 +158,246 @@
 <p>The <code>arrow</code> package also includes a faster and more robust implementation of the <a href="https://github.com/wesm/feather">Feather</a> file format, providing <code><a href="https://arrow.apache.org/docs/r//reference/read_feather.html">read_feather()</a></code> and <code><a href="https://arrow.apache.org/docs/r//reference/write_feather.html">write_feather()</a></code>. This implementation depends on the same underlying C++ library as the Python version does, resulting in more reliable and consistent behavior across the two languages, as well as <a href="https://wesmckinney.com/blog/feather-arrow-future/">improved performance</a>.</p>
 <p>In addition to these readers and writers, the <code>arrow</code> package has wrappers for other readers in the C++ library; see <code><a href="https://arrow.apache.org/docs/r//reference/read_delim_arrow.html">?read_csv_arrow</a></code> and <code><a href="https://arrow.apache.org/docs/r//reference/read_json_arrow.html">?read_json_arrow</a></code>. These readers are being developed to optimize for the memory layout of the Arrow columnar format and are not intended as a direct replacement for existing R CSV readers (<code>base::read.csv</code>, <code>readr::read_csv</code>, <code>data.table::fread</code>) that return an R <code>data.frame</code>.</p>
 </div>
-<div id="working-with-arrow-data-in-python" class="section level1">
-<h1 class="hasAnchor">
-<a href="#working-with-arrow-data-in-python" class="anchor"></a>Working with Arrow data in Python</h1>
+<div id="working-with-arrow-data-in-python" class="section level2">
+<h2 class="hasAnchor">
+<a href="#working-with-arrow-data-in-python" class="anchor"></a>Working with Arrow data in Python</h2>
 <p>Using <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>, <code>arrow</code> lets you share data between R and Python (<code>pyarrow</code>) efficiently, enabling you to take advantage of the vibrant ecosystem of Python packages that build on top of Apache Arrow. See <code>vignette("python", package = "arrow")</code> for details.</p>
 </div>
-<div id="access-to-arrow-messages-buffers-and-streams" class="section level1">
-<h1 class="hasAnchor">
-<a href="#access-to-arrow-messages-buffers-and-streams" class="anchor"></a>Access to Arrow messages, buffers, and streams</h1>
+<div id="access-to-arrow-messages-buffers-and-streams" class="section level2">
+<h2 class="hasAnchor">
+<a href="#access-to-arrow-messages-buffers-and-streams" class="anchor"></a>Access to Arrow messages, buffers, and streams</h2>
 <p>The <code>arrow</code> package also provides many lower-level bindings to the C++ library, which enable you to access and manipulate Arrow objects. You can use these to build connectors to other applications and services that use Arrow. One example is Spark: the <a href="https://spark.rstudio.com/"><code>sparklyr</code></a> package has support for using Arrow to move data to and from Spark, yielding <a href="http://arrow.apache.org/blog/2019/01/25/r-spark-improvements/">significant performance gains</a>.</p>
 </div>
-<div id="class-structure-and-package-conventions" class="section level1">
+</div>
+<div id="internals" class="section level1">
 <h1 class="hasAnchor">
-<a href="#class-structure-and-package-conventions" class="anchor"></a>Class structure and package conventions</h1>
+<a href="#internals" class="anchor"></a>Internals</h1>
+<div id="mapping-of-r-arrow-types" class="section level2">
+<h2 class="hasAnchor">
+<a href="#mapping-of-r-arrow-types" class="anchor"></a>Mapping of R &lt;–&gt; Arrow types</h2>
+<p>Arrow has a rich data type system that includes direct parallels with R’s data types and much more.</p>
+<p>In the tables, entries with a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> are not currently implemented.</p>
+<div id="r-to-arrow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#r-to-arrow" class="anchor"></a>R to Arrow</h3>
+<table class="table">
+<thead><tr class="header">
+<th>R type</th>
+<th>Arrow type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>logical</td>
+<td>boolean</td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>int32</td>
+</tr>
+<tr class="odd">
+<td>double (“numeric”)</td>
+<td>float64</td>
+</tr>
+<tr class="even">
+<td>character</td>
+<td>utf8</td>
+</tr>
+<tr class="odd">
+<td>factor</td>
+<td>dictionary</td>
+</tr>
+<tr class="even">
+<td>raw</td>
+<td>uint8</td>
+</tr>
+<tr class="odd">
+<td>Date</td>
+<td>date32</td>
+</tr>
+<tr class="even">
+<td>POSIXct</td>
+<td>timestamp</td>
+</tr>
+<tr class="odd">
+<td>POSIXlt</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>data.frame</td>
+<td>struct</td>
+</tr>
+<tr class="odd">
+<td>list<sup>+</sup>
+</td>
+<td>list</td>
+</tr>
+<tr class="even">
+<td>bit64::integer64</td>
+<td>int64</td>
+</tr>
+<tr class="odd">
+<td>difftime</td>
+<td>time32</td>
+</tr>
+<tr class="even">
+<td>vctrs::vctrs_unspecified</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<p><sup>+</sup>: Only lists where all elements are the same type are able to be translated to Arrow list type (which is a “list of” some type).</p>
+</div>
+<div id="arrow-to-r" class="section level3">
+<h3 class="hasAnchor">
+<a href="#arrow-to-r" class="anchor"></a>Arrow to R</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Arrow type</th>
+<th>R type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>boolean</td>
+<td>logical</td>
+</tr>
+<tr class="even">
+<td>int8</td>
+<td>integer</td>
+</tr>
+<tr class="odd">
+<td>int16</td>
+<td>integer</td>
+</tr>
+<tr class="even">
+<td>int32</td>
+<td>integer</td>
+</tr>
+<tr class="odd">
+<td>int64</td>
+<td>bit64::integer64</td>
+</tr>
+<tr class="even">
+<td>uint8</td>
+<td>integer</td>
+</tr>
+<tr class="odd">
+<td>uint16</td>
+<td>integer</td>
+</tr>
+<tr class="even">
+<td>uint32</td>
+<td>double</td>
+</tr>
+<tr class="odd">
+<td>uint64</td>
+<td>double</td>
+</tr>
+<tr class="even">
+<td>float16</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>float32</td>
+<td>double</td>
+</tr>
+<tr class="even">
+<td>float64</td>
+<td>double</td>
+</tr>
+<tr class="odd">
+<td>utf8</td>
+<td>character</td>
+</tr>
+<tr class="even">
+<td>binary</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>fixed_size_binary</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>date32</td>
+<td>Date</td>
+</tr>
+<tr class="odd">
+<td>date64</td>
+<td>POSIXct</td>
+</tr>
+<tr class="even">
+<td>time32</td>
+<td>hms::difftime</td>
+</tr>
+<tr class="odd">
+<td>time64</td>
+<td>hms::difftime</td>
+</tr>
+<tr class="even">
+<td>timestamp</td>
+<td>POSIXct</td>
+</tr>
+<tr class="odd">
+<td>duration</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>decimal</td>
+<td>double</td>
+</tr>
+<tr class="odd">
+<td>dictionary</td>
+<td>factor<sup>++</sup>
+</td>
+</tr>
+<tr class="even">
+<td>list</td>
+<td>list</td>
+</tr>
+<tr class="odd">
+<td>fixed_size_list</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>struct</td>
+<td>data.frame</td>
+</tr>
+<tr class="odd">
+<td>null</td>
+<td>vctrs::vctrs_unspecified</td>
+</tr>
+<tr class="even">
+<td>map</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>union</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>large_utf8</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>large_binary</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>large_list</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><sup>++</sup>: Due to the limitation of R <code>factor</code>s, Arrow <code>dictionary</code> values are coerced to string when translated to R if they are not already strings.</p>
+</div>
+</div>
+<div id="class-structure-and-package-conventions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#class-structure-and-package-conventions" class="anchor"></a>Class structure and package conventions</h2>
 <p>C++ is an object-oriented language, so the core logic of the Arrow library is encapsulated in classes and methods. In the R package, these classes are implemented as <code>R6</code> reference classes, most of which are exported from the namespace.</p>
 <p>In order to match the C++ naming conventions, the <code>R6</code> classes are in TitleCase, e.g. <code>RecordBatch</code>. This makes it easy to look up the relevant C++ implementations in the <a href="https://github.com/apache/arrow/tree/master/cpp">code</a> or <a href="https://arrow.apache.org/docs/cpp/">documentation</a>. To simplify things in R, the C++ library namespaces are generally dropped or flattened; that is, where the C++ library has <code>arrow::io::FileOutputStream</code>, it is just <code>FileOutputStream</code> in the R package. One exception is for the file readers, where the namespace is necessary to disambiguate. So <code>arrow::csv::TableReader</code> becomes <code>CsvTableReader</code>, and <code>arrow::json::TableReader</code> becomes <code>JsonTableReader</code>.</p>
 <p>Some of these classes are not meant to be instantiated directly; they may be base classes or other kinds of helpers. For those that you should be able to create, use the <code>$create()</code> method to instantiate an object. For example, <code>rb &lt;- RecordBatch$create(int = 1:10, dbl = as.numeric(1:10))</code> will create a <code>RecordBatch</code>. Many of these factory methods that an R user might most often encounter also have a <code>snake_case</code> alias, in order to be more familiar for contemporary R users. So <code><a href="https://arrow.apache.org/docs/r//reference/RecordBatch.html">record_batch(int = 1:10, dbl = as.numeric(1:10))</a></code> would do the same as <code>RecordBatch$create()</code> above.</p>
 <p>The typical user of the <code>arrow</code> R package may never deal directly with the <code>R6</code> objects. We provide more R-friendly wrapper functions as a higher-level interface to the C++ library. An R user can call <code><a href="https://arrow.apache.org/docs/r//reference/read_parquet.html">read_parquet()</a></code> without knowing or caring that they’re instantiating a <code>ParquetFileReader</code> object and calling the <code>$ReadFile()</code> method on it. The classes are there and available to the advanced programmer who wants fine-grained control over how the C++ library is used.</p>
+</div>
 </div>
   </div>
 
