@@ -86,7 +86,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200618</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200619</span>
       </span>
     </div>
 
@@ -228,10 +228,10 @@ Arrow Table otherwise</p>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
 <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>tf</span>))
-<span class='fu'>write_feather</span>(<span class='no'>iris</span>, <span class='no'>tf</span>)
+<span class='fu'>write_feather</span>(<span class='no'>mtcars</span>, <span class='no'>tf</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] 150   5</div><div class='input'><span class='co'># Can select columns</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='fu'>starts_with</span>(<span class='st'>"Sepal"</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] 32 11</div><div class='input'><span class='co'># Can select columns</span>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='fu'>starts_with</span>(<span class='st'>"d"</span>))
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -86,7 +86,7 @@ For guidance on how to use these classes, see the examples section." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200618</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200619</span>
       </span>
     </div>
 
@@ -227,7 +227,7 @@ cases. <code>write_to_raw()</code> is a version that serializes data to a buffer
 <span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
 <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>tf</span>))
 
-<span class='no'>batch</span> <span class='kw'>&lt;-</span> <span class='fu'>record_batch</span>(<span class='no'>iris</span>)
+<span class='no'>batch</span> <span class='kw'>&lt;-</span> <span class='fu'>record_batch</span>(<span class='no'>chickwts</span>)
 
 <span class='co'># This opens a connection to the file in Arrow</span>
 <span class='no'>file_obj</span> <span class='kw'>&lt;-</span> <span class='no'>FileOutputStream</span>$<span class='fu'>create</span>(<span class='no'>tf</span>)
@@ -252,7 +252,7 @@ cases. <code>write_to_raw()</code> is a version that serializes data to a buffer
 <span class='co'># Call as.data.frame to turn that Table into an R data.frame</span>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>tab</span>)
 <span class='co'># This should be the same data we sent</span>
-<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='no'>df</span>, <span class='no'>iris</span>, <span class='kw'>check.attributes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># Unlike the Writers, we don't have to close RecordBatchReaders,</span>
+<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='no'>df</span>, <span class='no'>chickwts</span>, <span class='kw'>check.attributes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># Unlike the Writers, we don't have to close RecordBatchReaders,</span>
 <span class='co'># but we do still need to close the file connection</span>
 <span class='no'>read_file_obj</span>$<span class='fu'><a href='https://rdrr.io/r/base/connections.html'>close</a></span>()
 <span class='co'># }</span></div></pre>
