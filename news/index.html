@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200630</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200701</span>
       </span>
     </div>
 
@@ -197,6 +197,9 @@
 </li>
 <li>Linux installation: some tweaks to OS detection for binaries, some updates to known installation issues in the vignette.</li>
 <li>Various streamlining efforts to reduce library size and compile time.</li>
+<li>
+<code>read_arrow</code> and <code>write_arrow</code> are now deprecated; use the <code>read/write_feather()</code> and <code>read/write_ipc_stream()</code> functions depending on whether you’re working with the Arrow IPC file or stream format, respectively.</li>
+<li>Previously deprecated <code>FileStats</code>, <code>read_record_batch</code>, and <code>read_table</code> have been removed.</li>
 </ul>
 </div>
 </div>

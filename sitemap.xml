@@ -184,9 +184,6 @@
     <loc>https://arrow.apache.org/docs/r//reference/read_parquet.html</loc>
   </url>
   <url>
-    <loc>https://arrow.apache.org/docs/r//reference/read_record_batch.html</loc>
-  </url>
-  <url>
     <loc>https://arrow.apache.org/docs/r//reference/read_schema.html</loc>
   </url>
   <url>
