@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200704</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200705</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dataset.html">Working with Arrow Dataset and dplyr</a>
+      <a href="../articles/dataset.html">Working with Arrow Datasets and dplyr</a>
     </li>
     <li>
       <a href="../articles/install.html">Installing the Arrow Package on Linux</a>
@@ -176,9 +176,9 @@
 <h1 class="page-header" data-toc-text="0.17.1.9000">
 <a href="#arrow-01719000" class="anchor"></a>arrow 0.17.1.9000<small> Unreleased </small>
 </h1>
-<div id="dataset" class="section level2">
+<div id="datasets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dataset" class="anchor"></a>Dataset</h2>
+<a href="#datasets" class="anchor"></a>Datasets</h2>
 <ul>
 <li>CSV and other text-delimited datasets are now supported</li>
 <li>Read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Note that this currently requires a special C++ library build with additional dependencies; that is, this is not yet available in CRAN releases or in nightly packages.</li>
@@ -232,12 +232,12 @@
 <p>The 0.17 Apache Arrow release includes a C data interface that allows exchanging Arrow data in-process at the C level without copying and without libraries having a build or runtime dependency on each other. This enables us to use <code>reticulate</code> to share data between R and Python (<code>pyarrow</code>) efficiently.</p>
 <p>See <code>vignette("python", package = "arrow")</code> for details.</p>
 </div>
-<div id="dataset-1" class="section level2">
+<div id="datasets-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dataset-1" class="anchor"></a>Dataset</h2>
+<a href="#datasets-1" class="anchor"></a>Datasets</h2>
 <ul>
 <li>Dataset reading benefits from many speedups and fixes in the C++ library</li>
-<li>Dataset has a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (<a href='https://github.com/apache/arrow/issues/6635'>#6635</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
+<li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (<a href='https://github.com/apache/arrow/issues/6635'>#6635</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
 <li>Combine multiple datasets into a single queryable <code>UnionDataset</code> with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> method</li>
 <li>Dataset filtering now treats <code>NA</code> as <code>FALSE</code>, consistent with <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>
 </li>
@@ -289,7 +289,7 @@
 <div id="multi-file-datasets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multi-file-datasets" class="anchor"></a>Multi-file datasets</h2>
-<p>This release includes a <code>dplyr</code> interface to Arrow Dataset, which let you work efficiently with large, multi-file datasets as a single entity. Explore a directory of data files with <code>open_dataset()</code> and then use <code>dplyr</code> methods to <code>select()</code>, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, etc. Work will be done where possible in Arrow memory. When necessary, data is pulled into R for further computation. <code>dplyr</code> methods are conditionally loaded if you have <code>dplyr</code> available; it is not a hard dependency.</p>
+<p>This release includes a <code>dplyr</code> interface to Arrow Datasets, which let you work efficiently with large, multi-file datasets as a single entity. Explore a directory of data files with <code>open_dataset()</code> and then use <code>dplyr</code> methods to <code>select()</code>, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, etc. Work will be done where possible in Arrow memory. When necessary, data is pulled into R for further computation. <code>dplyr</code> methods are conditionally loaded if you have <code>dplyr</code> available; it is not a hard dependency.</p>
 <p>See <code>vignette("dataset", package = "arrow")</code> for details.</p>
 </div>
 <div id="linux-installation" class="section level2">
