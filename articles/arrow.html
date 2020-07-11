@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200709</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200710</span>
       </span>
     </div>
 
@@ -197,7 +197,8 @@
 </tr>
 <tr class="even">
 <td>character</td>
-<td>utf8</td>
+<td>utf8<sup>1</sup>
+</td>
 </tr>
 <tr class="odd">
 <td>factor</td>
@@ -224,7 +225,7 @@
 <td>struct</td>
 </tr>
 <tr class="odd">
-<td>list<sup>+</sup>
+<td>list<sup>2</sup>
 </td>
 <td>list</td>
 </tr>
@@ -242,7 +243,8 @@
 </tr>
 </tbody>
 </table>
-<p><sup>+</sup>: Only lists where all elements are the same type are able to be translated to Arrow list type (which is a “list of” some type).</p>
+<p><sup>1</sup>: If the character vector exceeds 2GB of strings, it will be converted to a <code>large_utf8</code> Arrow type</p>
+<p><sup>2</sup>: Only lists where all elements are the same type are able to be translated to Arrow list type (which is a “list of” some type).</p>
 </div>
 <div id="arrow-to-r" class="section level3">
 <h3 class="hasAnchor">
@@ -271,7 +273,7 @@
 </tr>
 <tr class="odd">
 <td>int64</td>
-<td>integer<sup>++</sup>
+<td>integer<sup>3</sup>
 </td>
 </tr>
 <tr class="even">
@@ -284,12 +286,12 @@
 </tr>
 <tr class="even">
 <td>uint32</td>
-<td>integer<sup>++</sup>
+<td>integer<sup>3</sup>
 </td>
 </tr>
 <tr class="odd">
 <td>uint64</td>
-<td>integer<sup>++</sup>
+<td>integer<sup>3</sup>
 </td>
 </tr>
 <tr class="even">
@@ -310,11 +312,13 @@
 </tr>
 <tr class="even">
 <td>binary</td>
-<td>vctrs::vctrs_list_of(raw)</td>
+<td>arrow_binary <sup>5</sup>
+</td>
 </tr>
 <tr class="odd">
 <td>fixed_size_binary</td>
-<td>-</td>
+<td>arrow_fixed_size_binary <sup>5</sup>
+</td>
 </tr>
 <tr class="even">
 <td>date32</td>
@@ -346,16 +350,18 @@
 </tr>
 <tr class="odd">
 <td>dictionary</td>
-<td>factor<sup>+++</sup>
+<td>factor<sup>4</sup>
 </td>
 </tr>
 <tr class="even">
 <td>list</td>
-<td>vctrs::vctrs_list_of</td>
+<td>arrow_list <sup>6</sup>
+</td>
 </tr>
 <tr class="odd">
 <td>fixed_size_list</td>
-<td>-</td>
+<td>arrow_fixed_size_list <sup>6</sup>
+</td>
 </tr>
 <tr class="even">
 <td>struct</td>
@@ -379,16 +385,20 @@
 </tr>
 <tr class="odd">
 <td>large_binary</td>
-<td>vctrs::vctrs_list_of(raw)</td>
+<td>arrow_large_binary <sup>5</sup>
+</td>
 </tr>
 <tr class="even">
 <td>large_list</td>
-<td>vctrs::vctrs_list_of</td>
+<td>arrow_large_list <sup>6</sup>
+</td>
 </tr>
 </tbody>
 </table>
-<p><sup>++</sup>: These integer types may contain values that exceed the range of R’s <code>integer</code> type (32-bit signed integer). When they do, <code>uint32</code> and <code>uint64</code> are converted to <code>double</code> (“numeric”) and <code>int64</code> is converted to <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html">bit64::integer64</a></code>.</p>
-<p><sup>+++</sup>: Due to the limitation of R <code>factor</code>s, Arrow <code>dictionary</code> values are coerced to string when translated to R if they are not already strings.</p>
+<p><sup>3</sup>: These integer types may contain values that exceed the range of R’s <code>integer</code> type (32-bit signed integer). When they do, <code>uint32</code> and <code>uint64</code> are converted to <code>double</code> (“numeric”) and <code>int64</code> is converted to <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html">bit64::integer64</a></code>.</p>
+<p><sup>4</sup>: Due to the limitation of R <code>factor</code>s, Arrow <code>dictionary</code> values are coerced to string when translated to R if they are not already strings.</p>
+<p><sup>5</sup>: <code>arrow*_binary</code> classes are implemented as lists of raw vectors.</p>
+<p><sup>6</sup>: <code>arrow*_list</code> classes are implemented as subclasses of <code>vctrs_list_of</code> with a <code>ptype</code> attribute set to what an empty Array of the value type converts to.</p>
 </div>
 <div id="r-object-attributes" class="section level3">
 <h3 class="hasAnchor">
