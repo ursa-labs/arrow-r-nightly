@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200711</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200712</span>
       </span>
     </div>
 
@@ -159,7 +159,8 @@
     <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"nyc-taxi"</span>, <span class="no">year</span>, <span class="no">month</span>))
     <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(
       <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">bucket</span>, <span class="no">year</span>, <span class="no">month</span>, <span class="st">"data.parquet"</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"/"</span>),
-      <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"nyc-taxi"</span>, <span class="no">year</span>, <span class="no">month</span>, <span class="st">"data.parquet"</span>)
+      <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"nyc-taxi"</span>, <span class="no">year</span>, <span class="no">month</span>, <span class="st">"data.parquet"</span>),
+      <span class="kw">mode</span> <span class="kw">=</span> <span class="st">'wb'</span>
     )
   }
 }</pre></body></html></div>
