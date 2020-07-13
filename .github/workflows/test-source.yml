@@ -24,3 +24,9 @@ jobs:
           # Test source build so be sure not to download a binary
           LIBARROW_BINARY: "FALSE"
         run: Rscript linux/install-arrow.R
+      - name: Retry with verbosity if that failed
+        env:
+          LIBARROW_BINARY: "FALSE"
+          ARROW_R_DEV: "TRUE"
+        run: Rscript linux/install-arrow.R
+        if: failure()
