@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200712</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200713</span>
       </span>
     </div>
 
@@ -244,7 +244,7 @@ dlopen(/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so, 6): Library not loaded: 
 <li>
 <code>ARROW_R_DEV</code>: If set to <code>true</code>, more verbose messaging will be printed in the build script. This variable also is needed if you’re modifying <code>Rcpp</code> code in the package: see “Editing Rcpp code” in the README.</li>
 <li>
-<code>DEBUG_DIR</code>: If the C++ library building from source fails (<code>cmake</code>), there may be messages telling you to check some log file in the build directory. However, when the library is built during R package installation, that location is in a temp directory that is already deleted. To capture those logs, set this variable to an absolute (not relative) path and the log files will be copied there. The directory will be created if it does not exist.</li>
+<code>LIBARROW_DEBUG_DIR</code>: If the C++ library building from source fails (<code>cmake</code>), there may be messages telling you to check some log file in the build directory. However, when the library is built during R package installation, that location is in a temp directory that is already deleted. To capture those logs, set this variable to an absolute (not relative) path and the log files will be copied there. The directory will be created if it does not exist.</li>
 </ul>
 </div>
 </div>
