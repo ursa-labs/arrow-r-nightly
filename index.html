@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200714</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.17.1.20200715</span>
       </span>
     </div>
 
@@ -187,19 +187,17 @@ R CMD INSTALL .</code></pre>
 <h3 class="hasAnchor">
 <a href="#editing-rcpp-code" class="anchor"></a>Editing Rcpp code</h3>
 <p>The <code>arrow</code> package uses some customized tools on top of <code>Rcpp</code> to prepare its C++ code in <code>src/</code>. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>TRUE</code> (optionally, add it to your<code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation.</p>
-<p>The codegen.R script has these additional dependencies:</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"glue"</span>)</pre></div>
 <p>We use Google C++ style in our C++ code. Check for style errors with</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
 <p>Fix any style issues before committing with</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>.<span class="op">/</span>lint.sh <span class="op">--</span>fix</span></code></pre></div>
 <p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isn’t found, you can explicitly provide the path to it like <code>CLANG_FORMAT=$(which clang-format-8) ./lint.sh</code>. On macOS, you can get this by installing LLVM via Homebrew and running the script as <code>CLANG_FORMAT=$(brew --prefix llvm@8)/bin/clang-format ./lint.sh</code></p>
 </div>
 <div id="useful-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#useful-functions" class="anchor"></a>Useful functions</h3>
 <p>Within an R session, these can help with package development:</p>
-<div class="sourceCode" id="cb14"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">load_all</span>() <span class="co"># Load the dev package</span>
+<div class="sourceCode" id="cb13"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">load_all</span>() <span class="co"># Load the dev package</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">test</span>(<span class="kw">filter</span><span class="kw">=</span><span class="st">"^regexp$"</span>) <span class="co"># Run the test suite, optionally filtering file names</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">document</span>() <span class="co"># Update roxygen documentation</span>
 <span class="kw pkg">pkgdown</span><span class="kw ns">::</span><span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>() <span class="co"># To preview the documentation website</span>
