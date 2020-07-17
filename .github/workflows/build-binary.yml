@@ -37,7 +37,8 @@ jobs:
           cd linux
           git clone https://github.com/apache/arrow
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          # bc0649541859095ee77d03a7b891ea8d6e2fd641 is head of apache-arrow-1.0.0
+          git checkout bc0649541859095ee77d03a7b891ea8d6e2fd641
       - name: Build
         shell: bash
         run: |
@@ -50,8 +51,8 @@ jobs:
         shell: bash
         run: |
           cd linux/arrow/r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../../up-date-description.sh
+          # export DATE=$(date -d yesterday +%Y%m%d)
+          # source ../../../up-date-description.sh
           VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
           export PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
