@@ -21,8 +21,9 @@ read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
 on_windows <- tolower(Sys.info()[["sysname"]]) == "windows"
 tools::write_PACKAGES(".", type = ifelse(on_windows, "win.binary", "mac.binary"))
 
-Sys.setenv(REPO_PATH=contrib.url("", type = "binary"))
-status <- system("bash bintray-upload.sh")
+Sys.setenv(REPO_PATH = contrib.url("", type = "binary"))
+bash <- ifelse(on_windows, "C:/rtools40/usr/bin/bash.exe", "bash")
+status <- system(paste(bash, "bintray-upload.sh"))
 if (status > 0) {
   stop("Upload failed")
 }
