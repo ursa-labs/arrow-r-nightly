@@ -22,7 +22,7 @@ on_windows <- tolower(Sys.info()[["sysname"]]) == "windows"
 tools::write_PACKAGES(".", type = ifelse(on_windows, "win.binary", "mac.binary"))
 
 Sys.setenv(REPO_PATH = contrib.url("", type = "binary"))
-bash <- ifelse(on_windows, "C:/rtools40/usr/bin/bash.exe", "bash")
+bash <- ifelse(on_windows, '"C:\\Program Files\\Git\\bin\\bash.EXE"', "bash")
 status <- system(paste(bash, "bintray-upload.sh"))
 if (status > 0) {
   stop("Upload failed")
