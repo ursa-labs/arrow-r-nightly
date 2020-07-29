@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.20200727</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.20200728</span>
       </span>
     </div>
 
@@ -176,6 +176,13 @@
 <h1 class="page-header" data-toc-text="1.0.0.9000">
 <a href="#arrow-1009000" class="anchor"></a>arrow 1.0.0.9000<small> Unreleased </small>
 </h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>The <code>version</code> option to <code>write_parquet()</code> is now correctly implemented.</li>
+</ul>
+</div>
 </div>
     <div id="arrow-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
@@ -228,8 +235,7 @@
 <ul>
 <li>Non-UTF-8 strings (common on Windows) are correctly coerced to UTF-8 when passing to Arrow memory and appropriately re-localized when converting to R</li>
 <li>The <code>coerce_timestamps</code> option to <code>write_parquet()</code> is now correctly implemented.</li>
-<li>Creating a Dictionary array respects the <code>type</code> definition if provided by the user<br>
-</li>
+<li>Creating a Dictionary array respects the <code>type</code> definition if provided by the user</li>
 <li>
 <code>read_arrow</code> and <code>write_arrow</code> are now deprecated; use the <code>read/write_feather()</code> and <code>read/write_ipc_stream()</code> functions depending on whether you’re working with the Arrow IPC file or stream format, respectively.</li>
 <li>Previously deprecated <code>FileStats</code>, <code>read_record_batch</code>, and <code>read_table</code> have been removed.</li>
