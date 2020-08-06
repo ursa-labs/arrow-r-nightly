@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Is the C++ Arrow library available? — arrow_available • Arrow R Package</title>
+<title>Write a dataset — write_dataset • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Is the C++ Arrow library available? — arrow_available" />
-<meta property="og:description" content="You won't generally need to call this function, but it's here in case it
-helps for development purposes." />
+<meta property="og:title" content="Write a dataset — write_dataset" />
+<meta property="og:description" content="This function allows you to write a dataset. By writing to more efficient
+binary storage formats, and by specifying relevant partitioning, you can
+make it much faster to read and query." />
 
 
 
@@ -170,27 +171,65 @@ helps for development purposes." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Is the C++ Arrow library available?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/arrow-package.R'><code>R/arrow-package.R</code></a></small>
-    <div class="hidden name"><code>arrow_available.Rd</code></div>
+    <h1>Write a dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/dataset-write.R'><code>R/dataset-write.R</code></a></small>
+    <div class="hidden name"><code>write_dataset.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>You won't generally need to call this function, but it's here in case it
-helps for development purposes.</p>
+    <p>This function allows you to write a dataset. By writing to more efficient
+binary storage formats, and by specifying relevant partitioning, you can
+make it much faster to read and query.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>arrow_available</span>()</pre>
+    <pre class="usage"><span class='fu'>write_dataset</span>(
+  <span class='no'>dataset</span>,
+  <span class='no'>path</span>,
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='no'>dataset</span>$<span class='no'>format</span>$<span class='no'>type</span>,
+  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span>(<span class='no'>dataset</span>),
+  <span class='kw'>hive_style</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dataset</th>
+      <td><p>Dataset or <code>arrow_dplyr_query</code>. If a <code>arrow_dplyr_query</code>,
+note that <code>select()</code> or <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries are not currently supported.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>string path to a directory to write to (directory will be
+created if it does not exist)</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>file format to write the dataset to. Currently only "feather"
+(aka "ipc") is supported.</p></td>
+    </tr>
+    <tr>
+      <th>partitioning</th>
+      <td><p><code>Partitioning</code> or a character vector of columns to
+use as partition keys (to be written as path segments). Default is to
+use the current <code>group_by()</code> columns.</p></td>
+    </tr>
+    <tr>
+      <th>hive_style</th>
+      <td><p>logical: write partition segments as Hive-style
+(<code>key1=value1/key2=value2/file.ext</code>) or as just bare values. Default is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments, passed to <code>dataset$write()</code></p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>TRUE</code> or <code>FALSE</code> depending on whether the package was installed
-with the Arrow C++ library. If <code>FALSE</code>, you'll need to install the C++
-library and then reinstall the R package. See <code>install_arrow()</code> for help.</p>
+    <p>The input <code>dataset</code>, invisibly</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>arrow_available</span>()</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
