@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.20200819</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200820</span>
       </span>
     </div>
 
@@ -172,9 +172,44 @@
       <small>Source: <a href='https://github.com/apache/arrow/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="arrow-1009000" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0.9000">
-<a href="#arrow-1009000" class="anchor"></a>arrow 1.0.0.9000<small> Unreleased </small>
+    <div id="arrow-1019000" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.1.9000">
+<a href="#arrow-1019000" class="anchor"></a>arrow 1.0.1.9000<small> Unreleased </small>
+</h1>
+<div id="datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#datasets" class="anchor"></a>Datasets</h2>
+<ul>
+<li>
+<code>write_dataset()</code> to Feather files with partitioning</li>
+<li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code>, and take (<code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>) methods. <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> is optimized but the others may not be performant.</li>
+<li>
+<code>collect()</code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
+</li>
+</ul>
+</div>
+<div id="computation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#computation" class="anchor"></a>Computation</h2>
+<ul>
+<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>, <code>!</code>) operations, along with <code>is.na</code> and <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code>, on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
+<li>
+<code>dplyr</code> filter expressions on Arrow Tables and RecordBatches are now evaluated in the C++ library, rather than by pulling data into R and evaluating. This yields significant performance improvements.</li>
+<li>
+<code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> (<code>nrow</code>) for dplyr queries on Table/RecordBatch is now supported</li>
+</ul>
+</div>
+<div id="packaging" class="section level2">
+<h2 class="hasAnchor">
+<a href="#packaging" class="anchor"></a>Packaging</h2>
+<ul>
+<li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages</li>
+</ul>
+</div>
+</div>
+    <div id="arrow-101" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.1">
+<a href="#arrow-101" class="anchor"></a>arrow 1.0.1<small> Unreleased </small>
 </h1>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
@@ -214,9 +249,9 @@
 <li>In the 1.0 release, the Arrow IPC metadata version is increased from V4 to V5. By default, <code>RecordBatch{File,Stream}Writer</code> will write V5, but you can specify an alternate <code>metadata_version</code>. For convenience, if you know the consumer you’re writing to cannot read V5, you can set the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code> to write V4 without changing any other code.</li>
 </ul>
 </div>
-<div id="datasets" class="section level2">
+<div id="datasets-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#datasets" class="anchor"></a>Datasets</h2>
+<a href="#datasets-1" class="anchor"></a>Datasets</h2>
 <ul>
 <li>CSV and other text-delimited datasets are now supported</li>
 <li>With a custom C++ build, it is possible to read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Note that this currently requires a special C++ library build with additional dependencies–this is not yet available in CRAN releases or in nightly packages.</li>
@@ -289,9 +324,9 @@
 <p>The 0.17 Apache Arrow release includes a C data interface that allows exchanging Arrow data in-process at the C level without copying and without libraries having a build or runtime dependency on each other. This enables us to use <code>reticulate</code> to share data between R and Python (<code>pyarrow</code>) efficiently.</p>
 <p>See <code>vignette("python", package = "arrow")</code> for details.</p>
 </div>
-<div id="datasets-1" class="section level2">
+<div id="datasets-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#datasets-1" class="anchor"></a>Datasets</h2>
+<a href="#datasets-2" class="anchor"></a>Datasets</h2>
 <ul>
 <li>Dataset reading benefits from many speedups and fixes in the C++ library</li>
 <li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (<a href='https://github.com/apache/arrow/issues/6635'>#6635</a>, <a href='https://github.com/boshek'>@boshek</a>)</li>
