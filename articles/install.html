@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200823</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200824</span>
       </span>
     </div>
 
@@ -239,7 +239,7 @@ dlopen(/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so, 6): Library not loaded: 
 <li>
 <code>NOT_CRAN</code>: If this variable is set to <code>true</code>, as the <code>devtools</code> package does, the build script will set <code>LIBARROW_BINARY=true</code> and <code>LIBARROW_MINIMAL=false</code> unless those environment variables are already set. This provides for a more complete and fast installation experience for users who already have <code>NOT_CRAN=true</code> as part of their workflow, without requiring additional environment variables to be set.</li>
 <li>
-<code>ARROW_R_DEV</code>: If set to <code>true</code>, more verbose messaging will be printed in the build script. This variable also is needed if you’re modifying <code>Rcpp</code> code in the package: see “Editing Rcpp code” in the README.</li>
+<code>ARROW_R_DEV</code>: If set to <code>true</code>, more verbose messaging will be printed in the build script. This variable also is needed if you’re modifying C++ code in the package: see “Editing C++ code” in the README.</li>
 <li>
 <code>LIBARROW_DEBUG_DIR</code>: If the C++ library building from source fails (<code>cmake</code>), there may be messages telling you to check some log file in the build directory. However, when the library is built during R package installation, that location is in a temp directory that is already deleted. To capture those logs, set this variable to an absolute (not relative) path and the log files will be copied there. The directory will be created if it does not exist.</li>
 <li>

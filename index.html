@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200823</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200824</span>
       </span>
     </div>
 
@@ -168,12 +168,12 @@ brew install apache-arrow --HEAD</code></pre>
 <p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows/">nightly bintray repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
 <p>If you need to alter both the Arrow C++ library and the R package code, or if you can’t get a binary version of the latest C++ library elsewhere, you’ll need to build it from source too.</p>
 <p>First, install the C++ library. See the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">developer guide</a> for details.</p>
-<p>Note that after any change to the C++ library, you must reinstall it and run <code>make clean</code> or <code>git clean -fdx .</code> to remove any cached object code in the <code>r/src/</code> directory before reinstalling the R package. This is only necessary if you make changes to the C++ library source; you do not need to manually purge object files if you are only editing R or Rcpp code inside <code>r/</code>.</p>
+<p>Note that after any change to the C++ library, you must reinstall it and run <code>make clean</code> or <code>git clean -fdx .</code> to remove any cached object code in the <code>r/src/</code> directory before reinstalling the R package. This is only necessary if you make changes to the C++ library source; you do not need to manually purge object files if you are only editing R or C++ code inside <code>r/</code>.</p>
 <p>Once you’ve built the C++ library, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
 <pre class="shell"><code>cd ../../r
 R -e 'install.packages(c("devtools", "roxygen2", "pkgdown", "covr")); devtools::install_dev_deps()'
 R CMD INSTALL .</code></pre>
-<p>If you need to set any compilation flags while building the Rcpp extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
+<p>If you need to set any compilation flags while building the C++ extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
 <pre class="shell"><code>export ARROW_R_CXXFLAGS=-fno-omit-frame-pointer</code></pre>
 <p>If the package fails to install/load with an error like this:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">**</span><span class="st"> </span>testing <span class="cf">if</span> installed package can be loaded from temporary location</span>
@@ -183,10 +183,10 @@ R CMD INSTALL .</code></pre>
 <p>try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g. <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
 <p>When installing from source, if the R and C++ library versions do not match, installation may fail. If you’ve previously installed the libraries and want to upgrade the R package, you’ll need to update the Arrow C++ library first.</p>
 <p>For any other build/configuration challenges, see the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">C++ developer guide</a> and <code>vignette("install", package = "arrow")</code>.</p>
-<div id="editing-rcpp-code" class="section level3">
+<div id="editing-c-code" class="section level3">
 <h3 class="hasAnchor">
-<a href="#editing-rcpp-code" class="anchor"></a>Editing Rcpp code</h3>
-<p>The <code>arrow</code> package uses some customized tools on top of <code>Rcpp</code> to prepare its C++ code in <code>src/</code>. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>TRUE</code> (optionally, add it to your<code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation.</p>
+<a href="#editing-c-code" class="anchor"></a>Editing C++ code</h3>
+<p>The <code>arrow</code> package uses some customized tools on top of <code>cpp11</code> to prepare its C++ code in <code>src/</code>. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>TRUE</code> (optionally, add it to your<code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation.</p>
 <p>We use Google C++ style in our C++ code. Check for style errors with</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>.<span class="op">/</span>lint.sh</span></code></pre></div>
 <p>Fix any style issues before committing with</p>
