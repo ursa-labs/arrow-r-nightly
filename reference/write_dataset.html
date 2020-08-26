@@ -84,7 +84,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200824</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200825</span>
       </span>
     </div>
 
@@ -186,6 +186,7 @@ make it much faster to read and query.</p>
   <span class='no'>dataset</span>,
   <span class='no'>path</span>,
   <span class='kw'>format</span> <span class='kw'>=</span> <span class='no'>dataset</span>$<span class='no'>format</span>$<span class='no'>type</span>,
+  <span class='kw'>schema</span> <span class='kw'>=</span> <span class='no'>dataset</span>$<span class='no'>schema</span>,
   <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span>(<span class='no'>dataset</span>),
   <span class='kw'>hive_style</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>
@@ -196,8 +197,11 @@ make it much faster to read and query.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataset</th>
-      <td><p>Dataset or <code>arrow_dplyr_query</code>. If a <code>arrow_dplyr_query</code>,
-note that <code>select()</code> or <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries are not currently supported.</p></td>
+      <td><p>Dataset, RecordBatch, Table, <code>arrow_dplyr_query</code>, or
+<code>data.frame</code>. If an <code>arrow_dplyr_query</code> or <code>grouped_df</code>,
+<code>schema</code> and <code>partitioning</code> will be taken from the result of any <code>select()</code>
+and <code>group_by()</code> operations done on the dataset. Note that <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries
+are not currently supported, and <code>select</code>-ed columns may not be renamed.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -208,6 +212,11 @@ created if it does not exist)</p></td>
       <th>format</th>
       <td><p>file format to write the dataset to. Currently only "feather"
 (aka "ipc") is supported.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>Schema containing a subset of columns, possibly reordered,
+in <code>dataset</code>. Default is <code>dataset$schema</code>, i.e. all columns.</p></td>
     </tr>
     <tr>
       <th>partitioning</th>

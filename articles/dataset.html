@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200824</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200825</span>
       </span>
     </div>
 
@@ -177,7 +177,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>The first step is to create our Dataset object, pointing at the directory of data.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset</a></span>(<span class="st">"nyc-taxi"</span>, <span class="kw">partitioning</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"year"</span>, <span class="st">"month"</span>))</pre></body></html></div>
-<p>The default file format for <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> is Parquet; if we had a directory of Arrow format files, we could include <code>format = "arrow"</code> in the call. Future versions will support more file formats, including CSV/delimited text data and JSON.</p>
+<p>The default file format for <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> is Parquet; if we had a directory of Arrow format files, we could include <code>format = "arrow"</code> in the call. Other supported formats include: “feather” (an alias for “arrow”, as Feather v2 is the Arrow file format), “csv”, “tsv” (for tab-delimited), and “text” for generic text-delimited files. For text files, you can pass any parsing options (“delim”, “quote”, etc.) to <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> that you would otherwise pass to <code><a href="https://arrow.apache.org/docs/r//reference/read_delim_arrow.html">read_csv_arrow()</a></code>.</p>
 <p>The <code>partitioning</code> argument lets us specify how the file paths provide information about how the dataset is chunked into different files. Our files in this example have file paths like</p>
 <pre><code>2009/01/data.parquet
 2009/02/data.parquet
@@ -271,12 +271,52 @@ year=2009/month=02/data.parquet
 <p>Second, all work is pushed down to the individual data files, and depending on the file format, chunks of data within the files. As a result, we can select a window of data from a much larger dataset by collecting the smaller slices from each file–we don’t have to load the whole dataset in memory in order to slice from it.</p>
 <p>Third, because of partitioning, we can ignore some files entirely. In this example, by filtering <code>year == 2015</code>, all files corresponding to other years are immediately excluded: we don’t have to load them in order to find that no rows match the filter. Relatedly, since Parquet files contain row groups with statistics on the data within, there may be entire chunks of data we can avoid scanning because they have no rows where <code>total_amount &gt; 100</code>.</p>
 </div>
-<div id="going-farther" class="section level2">
+<div id="more-dataset-options" class="section level2">
 <h2 class="hasAnchor">
-<a href="#going-farther" class="anchor"></a>Going farther</h2>
+<a href="#more-dataset-options" class="anchor"></a>More dataset options</h2>
 <p>There are a few ways you can control the Dataset creation to adapt to special use cases. For one, you can specify a <code>schema</code> argument to declare the columns and their data types. This is useful if you have data files that have different storage schema (for example, a column could be <code>int32</code> in one and <code>int8</code> in another) and you want to ensure that the resulting Dataset has a specific type. To be clear, it’s not necessary to specify a schema, even in this example of mixed integer types, because the Dataset constructor will reconcile differences like these. The schema specification just lets you declare what you want the result to be.</p>
 <p>Similarly, you can provide a Schema in the <code>partitioning</code> argument of <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> in order to declare the types of the virtual columns that define the partitions. This would be useful, in our taxi dataset example, if you wanted to keep “month” as a string instead of an integer for some reason.</p>
 <p>Another feature of Datasets is that they can be composed of multiple data sources. That is, you may have a directory of partitioned Parquet files in one location, and in another directory, files that haven’t been partitioned. In the future, when there is support for cloud storage and other file formats, this would mean you could point to an S3 bucked of Parquet data and a directory of CSVs on the local file system and query them together as a single dataset. To create a multi-source dataset, provide a list of datasets to <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> instead of a file path, or simply concatenate them like <code>big_dataset &lt;- c(ds1, ds2)</code>.</p>
+</div>
+<div id="writing-datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#writing-datasets" class="anchor"></a>Writing datasets</h2>
+<p>As you can see, querying a large dataset can be made quite fast by storage in an efficient binary columnar format like Parquet or Feather and partitioning based on columns commonly used for filtering. However, we don’t always get our data delivered to us that way. Sometimes we start with one giant CSV. Our first step in analyzing data is cleaning is up and reshaping it into a more usable form.</p>
+<p>The <code><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset()</a></code> function allows you to take a Dataset or other tabular data object—an Arrow <code>Table</code> or <code>RecordBatch</code>, or an R <code>data.frame</code>—and write it to a different file format, partitioned into multiple files.</p>
+<p>Assume we have a version of the NYC Taxi data as CSV:</p>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">ds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset</a></span>(<span class="st">"nyc-taxi/csv/"</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"csv"</span>)</pre></body></html></div>
+<p>We can write it to a new location and translate the files to the Feather format by calling <code><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset()</a></code> on it:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset</a></span>(<span class="no">ds</span>, <span class="st">"nyc-taxi/feather"</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"feather"</span>)</pre></body></html></div>
+<p>Next, let’s imagine that the “payment_type” column is something we often filter on, so we want to partition the data by that variable. By doing so we ensure that a filter like <code>payment_type == 3</code> will touch only a subset of files where payment_type is always 3.</p>
+<p>One natural way to express the columns you want to partition on is to use the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> method:</p>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">ds</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">payment_type</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset</a></span>(<span class="st">"nyc-taxi/feather"</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"feather"</span>)</pre></body></html></div>
+<p>This will write files to a directory tree that looks like this:</p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"tree nyc-taxi/feather"</span>)
+
+<span class="co"># feather</span>
+<span class="co"># ├── payment_type=1</span>
+<span class="co"># │   ├── dat_0.ipc</span>
+<span class="co"># │   ├── dat_1.ipc</span>
+<span class="co"># │   ├── dat_2.ipc</span>
+<span class="co"># │   ├── dat_3.ipc</span>
+<span class="co"># │   ├── dat_4.ipc</span>
+<span class="co"># │   └── dat_5.ipc</span>
+<span class="co"># ├── payment_type=2</span>
+<span class="co"># │   ├── dat_0.ipc</span>
+<span class="co"># ...</span>
+<span class="co"># └── payment_type=5</span>
+<span class="co">#     └── dat_2.ipc</span>
+<span class="co">#</span>
+<span class="co"># 5 directories, 25 files</span></pre></body></html></div>
+<p>Note that the directory names are <code>payment_type=1</code> and similar: this is the Hive-style partitioning described above. This means that when we call <code><a href="https://arrow.apache.org/docs/r//reference/open_dataset.html">open_dataset()</a></code> on this directory, we don’t have to declare what the partitions are because they can be read from the file paths. (To instead write bare values for partition segments, i.e. <code>1</code> rather than <code>payment_type=1</code>, call <code><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset()</a></code> with <code>hive_style = FALSE</code>.)</p>
+<p>The other thing we can do when writing datasets is select a subset of and/or reorder columns. Suppose we never care about <code>vendor_id</code>, and being a string column, it can take up a lot of space when we read it in, so let’s drop it:</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">ds</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">payment_type</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">vendor_id</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://arrow.apache.org/docs/r//reference/write_dataset.html">write_dataset</a></span>(<span class="st">"nyc-taxi/feather"</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"feather"</span>)</pre></body></html></div>
+<p>Note that you cannot currently rename columns when writing, nor can you <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> and write a subset of the data.</p>
 </div>
   </div>
 
