@@ -5,8 +5,8 @@
 BINTRAY_USER=nealrichardson
 BINTRAY_ORG=ursalabs # aka "subject"
 BINTRAY_REPO="arrow-r"
-BINTRAY_PKG=arrow
-BINTRAY_VERSION=v2020
+BINTRAY_PKG=arrow2020
+BINTRAY_VERSION=latest
 R_PKG=$BINTRAY_PKG
 
 # If PKG_FILE is set, we'll just upload that (also have to set REPO_PATH or PKG_TYPE);
