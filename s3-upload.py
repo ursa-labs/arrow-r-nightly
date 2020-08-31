@@ -24,8 +24,11 @@ if __name__ == '__main__':
         dest_file = source_file
     if dest_file[0] == "/":
         # Prune a leading slash, S3 doesn't handle this gracefully
-        dest_file = destfile[1:]
-    print("Uploading " + dest_file)
-    with open(source_file, 'rb') as data:
-        boto3.resource('s3').Bucket(BUCKET).put_object(Key=dest_file, Body=data)
-    print("Done!")
+        dest_file = dest_file[1:]
+    if "--dry-run" in sys.argv:
+        print("Dry run: would upload " + source_file + " to " + dest_file)
+    else:
+        print("Uploading " + dest_file)
+        with open(source_file, 'rb') as data:
+            boto3.resource('s3').Bucket(BUCKET).put_object(Key=dest_file, Body=data)
+        print("Done!")
