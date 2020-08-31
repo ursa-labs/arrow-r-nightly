@@ -28,7 +28,7 @@ read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
 
 # Upload
 tools::write_PACKAGES(".", type = ifelse(on_windows, "win.binary", "mac.binary"))
-
+python <- ifelse(on_windows, "python", "python3")
 repo_path <- contrib.url("", type = "binary")
 for (f in c("arrow_*.*", "PACKAGES", "PACKAGES.gz", "PACKAGES.rds")) {
   status <- system(paste(python, "s3-upload.py", f, repo_path))
