@@ -16,7 +16,7 @@ if (!on_windows) {
 }
 install.packages("arrow",
   type = "source",
-  repos = "https://dl.bintray.com/ursalabs/arrow-r",
+  repos = "https://arrow-r-nightly.s3.us-east-1.amazonaws.com",
   INSTALL_opts = INSTALL_opts
 )
 
@@ -27,9 +27,10 @@ read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
 # Upload
 tools::write_PACKAGES(".", type = ifelse(on_windows, "win.binary", "mac.binary"))
 
-Sys.setenv(REPO_PATH = contrib.url("", type = "binary"))
-bash <- ifelse(on_windows, '"C:\\Program Files\\Git\\bin\\bash.EXE"', "bash")
-status <- system(paste(bash, "bintray-upload.sh"))
-if (status > 0) {
-  stop("Upload failed")
+repo_path <- contrib.url("", type = "binary")
+for (f in c("arrow_*.*", "PACKAGES", "PACKAGES.gz", "PACKAGES.rds")) {
+  status <- system(paste(python, "s3-upload.py", f, repo_path))
+  if (status > 0) {
+    stop("Upload failed")
+  }
 }
