@@ -22,6 +22,9 @@ if __name__ == '__main__':
         dest_file = sys.argv[2] + "/" + os.path.basename(source_file)
     else:
         dest_file = source_file
+    if dest_file[0] == "/"
+        # Prune a leading slash, S3 doesn't handle this gracefully
+        dest_file = destfile[1:]
     print("Uploading " + dest_file)
     with open(source_file, 'rb') as data:
         boto3.resource('s3').Bucket(BUCKET).put_object(Key=dest_file, Body=data)
