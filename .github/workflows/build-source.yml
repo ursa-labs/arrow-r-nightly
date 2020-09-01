@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/build-source.yml'
       - s3-upload.py
+      - bintray-upload.sh
       - up-date-description.sh
 
 jobs:
@@ -38,6 +39,7 @@ jobs:
           python -m pip install boto3
       - name: Build and upload cpp bundle
         env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
@@ -45,7 +47,9 @@ jobs:
           cd arrow
           VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
           zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt cpp/README.md LICENSE.txt NOTICE.txt .env
-          python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
+          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
+          # Or to upload to S3:
+          # python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Build and upload R source package
@@ -60,6 +64,8 @@ jobs:
           cd tools
           sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
           rm -f apache-arrow.rb.bak
+          # NOTE: if you want to change the source of the libarrow files away
+          # from bintray, sed linuxlibs.R and winlibs.R
           cd ..
           R CMD build --no-build-vignettes .
           Rscript -e 'tools::write_PACKAGES(".", type = "source")'

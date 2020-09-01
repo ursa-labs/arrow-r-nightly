@@ -8,11 +8,15 @@
 # Assumes AWS credentials are set outside of this
 # (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY)
 # and that that user has access to write to the BUCKET specified below
+#
+# You could use aws cli instead, but boto3 installs better across platforms
+# (i.e. Windows)
 
 import os
 import sys
 
 import boto3
+
 
 BUCKET = 'arrow-r-nightly'
 

@@ -9,6 +9,7 @@ on:
       - '.github/workflows/build-binary.yml'
       - 'linux/*'
       - s3-upload.py
+      - bintray-upload.sh
       - up-date-description.sh
   # On tag too?
 
@@ -67,9 +68,9 @@ jobs:
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/*.a include/
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
-          python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
-          # This is in case we want to keep putting the CRAN release C++ binaries on bintray
-          # sudo -E bash ../../../../../bintray-upload.sh
+          sudo -E bash ../../../../../bintray-upload.sh
+          # Or, upload to S3
+          # python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows:
     name: C++ Binary Windows RTools (35 and 40)
     runs-on: windows-latest
@@ -126,6 +127,7 @@ jobs:
           python -m pip install boto3
       - name: Upload
         env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
@@ -133,4 +135,6 @@ jobs:
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
           export REPO_PATH=/libarrow/bin/windows
-          python ../s3-upload.py $PKG_FILE $REPO_PATH
+          source ../bintray-upload.sh
+          # Or, upload to S3
+          # python ../s3-upload.py $PKG_FILE $REPO_PATH
