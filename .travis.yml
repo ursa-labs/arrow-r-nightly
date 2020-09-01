@@ -2,6 +2,7 @@ language: r
 os: osx
 cache: packages
 fortran: false
+latex: false
 r:
 # - 3.2
 # - 3.3
