@@ -3,9 +3,7 @@ on_windows <- tolower(Sys.info()[["sysname"]]) == "windows"
 # Install dependencies by installing (yesterday's) binary, then removing it
 install.packages("arrow",
   type = "binary",
-  repos = "https://cloud.r-project.org"
-  # Don't try bintray while we're migrating things
-  # repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
+  repos = c("https://arrow-r-nightly.s3.amazonaws.com", "https://cloud.r-project.org")
 )
 remove.packages("arrow")
 
