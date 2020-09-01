@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/build-binary.yml'
       - 'linux/*'
+      - s3-upload.py
       - bintray-upload.sh
       - up-date-description.sh
   # On tag too?
@@ -44,9 +45,18 @@ jobs:
           cd linux
           docker-compose build ${{ matrix.config.os }}
           docker-compose run ${{ matrix.config.os }}
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
       - name: Bundle and upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
         run: |
           cd linux/arrow/r
@@ -59,6 +69,8 @@ jobs:
           sudo -E zip -r $PKG_FILE lib/*.a include/
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           sudo -E bash ../../../../../bintray-upload.sh
+          # Or, upload to S3
+          # python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows:
     name: C++ Binary Windows RTools (35 and 40)
     runs-on: windows-latest
@@ -106,12 +118,23 @@ jobs:
           ARROW_HOME: "arrow"
           RTOOLS_VERSION: 35
         run: arrow/ci/scripts/r_windows_build.sh
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
       - name: Upload
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
         run: |
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
           export REPO_PATH=/libarrow/bin/windows
           source ../bintray-upload.sh
+          # Or, upload to S3
+          # python ../s3-upload.py $PKG_FILE $REPO_PATH

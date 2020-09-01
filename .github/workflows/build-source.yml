@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/build-source.yml'
+      - s3-upload.py
       - bintray-upload.sh
       - up-date-description.sh
 
@@ -29,20 +30,32 @@ jobs:
           cd r
           export DATE=$(date -d yesterday +%Y%m%d)
           source ../../up-date-description.sh
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
       - name: Build and upload cpp bundle
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
         run: |
           cd arrow
           VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
           zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt cpp/README.md LICENSE.txt NOTICE.txt .env
           PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
+          # Or to upload to S3:
+          # python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Build and upload R source package
         env:
-          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
         run: |
           cd arrow/r
@@ -51,6 +64,12 @@ jobs:
           cd tools
           sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
           rm -f apache-arrow.rb.bak
+          # NOTE: if you want to change the source of the libarrow files away
+          # from bintray, sed linuxlibs.R and winlibs.R
           cd ..
           R CMD build --no-build-vignettes .
-          PKG_FILE=arrow_*.tar.gz PKG_TYPE=source source ../../bintray-upload.sh
+          Rscript -e 'tools::write_PACKAGES(".", type = "source")'
+          python ../../s3-upload.py arrow_*.tar.gz src/contrib
+          python ../../s3-upload.py PACKAGES src/contrib
+          python ../../s3-upload.py PACKAGES.gz src/contrib
+          python ../../s3-upload.py PACKAGES.rds src/contrib

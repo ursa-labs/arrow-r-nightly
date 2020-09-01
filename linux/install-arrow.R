@@ -1,7 +1,7 @@
 source("https://raw.githubusercontent.com/apache/arrow/master/ci/etc/rprofile")
 install.packages(
   "arrow",
-  repos = c("https://dl.bintray.com/ursalabs/arrow-r", getOption("repos")),
+  repos = c("https://arrow-r-nightly.s3.amazonaws.com", getOption("repos")),
   verbose = TRUE
 )
 

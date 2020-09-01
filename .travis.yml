@@ -2,6 +2,7 @@ language: r
 os: osx
 cache: packages
 fortran: false
+latex: false
 r:
 # - 3.2
 # - 3.3
@@ -17,4 +18,5 @@ install:
 # if there is no DESCRIPTION file found
 - pwd
 script:
+- python3 -m pip install boto3
 - Rscript build-binary-and-upload.R

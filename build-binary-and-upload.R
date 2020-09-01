@@ -3,7 +3,7 @@ on_windows <- tolower(Sys.info()[["sysname"]]) == "windows"
 # Install dependencies by installing (yesterday's) binary, then removing it
 install.packages("arrow",
   type = "binary",
-  repos = c("https://dl.bintray.com/ursalabs/arrow-r", "https://cloud.r-project.org")
+  repos = c("https://arrow-r-nightly.s3.amazonaws.com", "https://cloud.r-project.org")
 )
 remove.packages("arrow")
 
@@ -16,7 +16,7 @@ if (!on_windows) {
 }
 install.packages("arrow",
   type = "source",
-  repos = "https://dl.bintray.com/ursalabs/arrow-r",
+  repos = "https://arrow-r-nightly.s3.amazonaws.com",
   INSTALL_opts = INSTALL_opts
 )
 
@@ -26,10 +26,12 @@ read_parquet(system.file("v0.7.1.parquet", package = "arrow"))
 
 # Upload
 tools::write_PACKAGES(".", type = ifelse(on_windows, "win.binary", "mac.binary"))
-
-Sys.setenv(REPO_PATH = contrib.url("", type = "binary"))
-bash <- ifelse(on_windows, '"C:\\Program Files\\Git\\bin\\bash.EXE"', "bash")
-status <- system(paste(bash, "bintray-upload.sh"))
-if (status > 0) {
-  stop("Upload failed")
+python <- ifelse(on_windows, "python", "python3")
+repo_path <- contrib.url("", type = "binary")
+pkg_file <- dir(pattern = "^arrow_")
+for (f in c(pkg_file, "PACKAGES", "PACKAGES.gz", "PACKAGES.rds")) {
+  status <- system(paste(python, "s3-upload.py", f, repo_path))
+  if (status > 0) {
+    stop("Upload failed")
+  }
 }

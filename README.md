@@ -9,13 +9,17 @@
 [![Daily pkgdown site](https://github.com/ursa-labs/arrow-r-nightly/workflows/Daily%20pkgdown%20site/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Daily+pkgdown+site")
 
 This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions.
-These builds are triggered daily. Binary packages generated from those jobs are then pushed to a Bintray repository at https://dl.bintray.com/ursalabs/arrow-r.
+These builds are triggered daily. C++ libraries are deployed to
+https://dl.bintray.com/ursalabs/arrow-r, and R packages generated from those jobs
+are pushed to a package repository at https://arrow-r-nightly.s3.amazonaws.com.
 
-To install the latest version, use this Bintray repository as the first entry in your `"repos"` argument, ahead of your CRAN mirror, like
+To install the latest version, use this repository as the first entry in your `"repos"` argument, ahead of your CRAN mirror, like
 
 ```r
-install.packages("arrow", repos = c("https://dl.bintray.com/ursalabs/arrow-r", getOption("repos")))
+install.packages("arrow", repos = c("https://arrow-r-nightly.s3.amazonaws.com", getOption("repos")))
 ```
+
+> Note: nightly packages were previously hosted at https://dl.bintray.com/ursalabs/arrow-r. Note the new URL.
 
 These daily package builds are not official Apache releases and are not recommended for production use. They may be useful for testing bug fixes and new features under active development.
 
