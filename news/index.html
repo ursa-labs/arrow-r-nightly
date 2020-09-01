@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200830</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200831</span>
       </span>
     </div>
 
@@ -181,7 +181,7 @@
 <a href="#datasets" class="anchor"></a>Datasets</h2>
 <ul>
 <li>
-<code>write_dataset()</code> to Feather files with partitioning. See the end of <code>vignette("dataset", package = "arrow")</code> for discussion and examples.</li>
+<code>write_dataset()</code> to Feather or Parquet files with partitioning. See the end of <code>vignette("dataset", package = "arrow")</code> for discussion and examples.</li>
 <li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code>, and take (<code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>) methods. <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> is optimized but the others may not be performant.</li>
 <li>
 <code>collect()</code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>

@@ -84,7 +84,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200830</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200831</span>
       </span>
     </div>
 
@@ -210,8 +210,9 @@ created if it does not exist)</p></td>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>file format to write the dataset to. Currently only "feather"
-(aka "ipc") is supported.</p></td>
+      <td><p>file format to write the dataset to. Currently supported
+formats are "feather" (aka "ipc") and "parquet". Default is to write to the
+same format as <code>dataset</code>.</p></td>
     </tr>
     <tr>
       <th>schema</th>
@@ -231,7 +232,8 @@ use the current <code>group_by()</code> columns.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments, passed to <code>dataset$write()</code></p></td>
+      <td><p>additional format-specific arguments. For available Parquet
+options, see <code>write_parquet()</code>.</p></td>
     </tr>
     </table>
 
