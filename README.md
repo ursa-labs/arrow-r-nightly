@@ -1,6 +1,6 @@
 # Nightly R package builds for Apache Arrow
 
-[![Build Status](https://travis-ci.org/ursa-labs/arrow-r-nightly.svg?branch=master)](https://travis-ci.org/ursa-labs/arrow-r-nightly)
+[![Build Status](https://travis-ci.com/ursa-labs/arrow-r-nightly.svg?branch=master)](https://travis-ci.com/ursa-labs/arrow-r-nightly)
 [![Windows binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Binary%20Windows%20R%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Binary+Windows+R+packages")
 [![C++ binaries](https://github.com/ursa-labs/arrow-r-nightly/workflows/Binary%20C++%20libraries/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Binary+C%2B%2B+libraries")
 [![Linux source build](https://github.com/ursa-labs/arrow-r-nightly/workflows/Build%20source%20packages/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions?query=workflow%3A"Build+source+packages")
