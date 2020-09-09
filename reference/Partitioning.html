@@ -94,7 +94,7 @@ partition features from the file paths." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -187,11 +187,11 @@ partition features from the file paths." />
     </div>
 
     <div class="ref-description">
-    <p>Pass a <code>Partitioning</code> object to a FileSystemDatasetFactory's <code>$create()</code>
+    <p>Pass a <code>Partitioning</code> object to a <a href='Dataset.html'>FileSystemDatasetFactory</a>'s <code>$create()</code>
 method to indicate how the file's paths should be interpreted to define
 partitioning.</p>
 <p><code>DirectoryPartitioning</code> describes how to interpret raw path segments, in
-order. For example, <code>schema(year = int16(), month = int8())</code> would define
+order. For example, <code><a href='Schema.html'>schema(year = int16(), month = int8())</a></code> would define
 partitions for file paths like "2019/01/file.parquet",
 "2019/02/file.parquet", etc.</p>
 <p><code>HivePartitioning</code> is for Hive-style partitioning, which embeds field
@@ -209,14 +209,14 @@ partition features from the file paths.</p>
     
 
 <p>Both <code>DirectoryPartitioning$create()</code> and <code>HivePartitioning$create()</code>
-methods take a Schema as a single input argument. The helper
-function <code>hive_partition(...)</code> is shorthand for
+methods take a <a href='Schema.html'>Schema</a> as a single input argument. The helper
+function <code><a href='hive_partition.html'>hive_partition(...)</a></code> is shorthand for
 <code>HivePartitioning$create(schema(...))</code>.</p>
 <p>With <code>DirectoryPartitioningFactory$create()</code>, you can provide just the
 names of the path segments (in our example, <code><a href='https://rdrr.io/r/base/c.html'>c("year", "month")</a></code>), and
 the <code>DatasetFactory</code> will infer the data types for those partition variables.
 <code>HivePartitioningFactory$create()</code> takes no arguments: both variable names
-and their types can be inferred from the file paths. <code>hive_partition()</code> with
+and their types can be inferred from the file paths. <code><a href='hive_partition.html'>hive_partition()</a></code> with
 no arguments returns a <code>HivePartitioningFactory</code>.</p>
 
   </div>
@@ -234,7 +234,7 @@ no arguments returns a <code>HivePartitioningFactory</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

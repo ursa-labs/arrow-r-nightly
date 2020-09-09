@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -140,9 +140,13 @@
 <h1 class="hasAnchor">
 <a href="#installation-basics" class="anchor"></a>Installation basics</h1>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>)
+</pre></div>
 <p>Daily development builds, which are not official releases, can be installed from the Ursa Labs repository:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>, <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"https://dl.bintray.com/ursalabs/arrow-r"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"arrow"</span>, repos = <span class="st">"https://dl.bintray.com/ursalabs/arrow-r"</span>)
+</pre></div>
 <p>There currently are no daily <code>conda</code> builds.</p>
 <p>You can also install the R package from a git checkout:</p>
 <pre class="shell"><code>git clone https://github.com/apache/arrow
@@ -154,9 +158,11 @@ R CMD INSTALL .</code></pre>
 <pre class="shell"><code>export LIBARROW_MINIMAL=false</code></pre>
 <p>to build the Arrow libraries with optional features such as compression libraries enabled. This will increase the build time but provides many useful features. Prebuilt binaries are built with this flag enabled, so you get the full functionality by using them as well.</p>
 <p>Both of these variables are also set this way if you have the <code>NOT_CRAN=true</code> environment variable set.</p>
-<p>If you already have <code>arrow</code> installed and want to upgrade to a different version, install a development build, or try to reinstall and fix issues with Linux C++ binaries, you can call <code>install_arrow()</code>. This function is part of the <code>arrow</code> package, and it is also available as a standalone script, so you can access it for convenience without first installing the package:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R"</span>)</pre></body></html></div>
-<p><code>install_arrow()</code> will install from CRAN, while <code>install_arrow(nightly = TRUE)</code> will give you a development build. <code>install_arrow()</code> does not require environment variables to be set in order to satisfy C++ dependencies.</p>
+<p>If you already have <code>arrow</code> installed and want to upgrade to a different version, install a development build, or try to reinstall and fix issues with Linux C++ binaries, you can call <code><a href="../reference/install_arrow.html">install_arrow()</a></code>. This function is part of the <code>arrow</code> package, and it is also available as a standalone script, so you can access it for convenience without first installing the package:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">"https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R"</span>)
+</pre></div>
+<p><code><a href="../reference/install_arrow.html">install_arrow()</a></code> will install from CRAN, while <code><a href="../reference/install_arrow.html">install_arrow(nightly = TRUE)</a></code> will give you a development build. <code><a href="../reference/install_arrow.html">install_arrow()</a></code> does not require environment variables to be set in order to satisfy C++ dependencies.</p>
 <!-- TODO: does remotes::install_github("apache/arrow/r") work now? -->
 </div>
 <div id="how-dependencies-are-resolved" class="section level1">
@@ -178,14 +184,14 @@ R CMD INSTALL .</code></pre>
 <a href="#package-installed-without-c-dependencies" class="anchor"></a>Package installed without C++ dependencies</h2>
 <p>If you get an error like</p>
 <pre><code>Cannot call io___MemoryMappedFile__Open(). Please use arrow::install_arrow() to install required runtime libraries.</code></pre>
-<p>for every <code>arrow</code> function you call, that means that installing the package failed to retrieve or build C++ libraries compatible with the current version of the R package. <code>install_arrow()</code> provides some convenience wrappers around the various environment variables described below and has defaults that should isolate the package installation and make it more likely to succeed. See its help page for details.</p>
+<p>for every <code>arrow</code> function you call, that means that installing the package failed to retrieve or build C++ libraries compatible with the current version of the R package. <code><a href="../reference/install_arrow.html">install_arrow()</a></code> provides some convenience wrappers around the various environment variables described below and has defaults that should isolate the package installation and make it more likely to succeed. See its help page for details.</p>
 <p>As of version 0.17, it is expected that C++ dependencies should be built successfully on all Linux distributions, so if you see this message because the C++ libraries errored while building, please <a href="https://issues.apache.org/jira/projects/ARROW/issues">report an issue</a>.</p>
 </div>
 <div id="using-system-libraries" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-system-libraries" class="anchor"></a>Using system libraries</h2>
 <p>If a system library or other installed Arrow is found but it doesn’t match the R package version (for example, you have libarrow 0.14 on your system and are installing R package 0.15.1), it is likely that the R bindings will fail to compile. Because the Apache Arrow project is under active development, is it essential that versions of the C++ and R libraries match. When <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("arrow")</a></code> has to download the C++ libraries, the install script ensures that you fetch the C++ libraries that correspond to your R package version. However, if you are using Arrow libraries already on your system, version match isn’t guaranteed.</p>
-<p>To fix version mismatch, you can either update your system packages to match the R package version, or set the environment variable <code>ARROW_USE_PKG_CONFIG=FALSE</code> to tell the configure script not to look for system Arrow packages. (The latter is the default of <code>install_arrow()</code>.) System packages are available corresponding to all CRAN releases but not for nightly or dev versions, so depending on the R package version you’re installing, system packages may not be an option.</p>
+<p>To fix version mismatch, you can either update your system packages to match the R package version, or set the environment variable <code>ARROW_USE_PKG_CONFIG=FALSE</code> to tell the configure script not to look for system Arrow packages. (The latter is the default of <code><a href="../reference/install_arrow.html">install_arrow()</a></code>.) System packages are available corresponding to all CRAN releases but not for nightly or dev versions, so depending on the R package version you’re installing, system packages may not be an option.</p>
 <p>Note also that once you have a working R package installation based on system (shared) libraries, if you update your system Arrow, you’ll need to reinstall the R package to match its version. Similarly, if you’re using Arrow system libraries, running <code><a href="https://rdrr.io/r/utils/update.packages.html">update.packages()</a></code> after a new release of the <code>arrow</code> package will likely fail unless you first update the system packages.</p>
 </div>
 <div id="using-a-local-arrow-c-build" class="section level2">
@@ -274,7 +280,7 @@ R_ORG=rhub R_IMAGE=ubuntu-gcc-release R_TAG=latest docker-compose run r</code></
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

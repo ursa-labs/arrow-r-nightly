@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -141,24 +141,28 @@
 <div id="multi-file-datasets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multi-file-datasets" class="anchor"></a>Multi-file datasets</h2>
-<p>The <code>arrow</code> package lets you work efficiently with large, multi-file datasets using <code>dplyr</code> methods. See <code>vignette("dataset", package = "arrow")</code> for an overview.</p>
+<p>The <code>arrow</code> package lets you work efficiently with large, multi-file datasets using <code>dplyr</code> methods. See <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for an overview.</p>
 </div>
 <div id="reading-and-writing-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading-and-writing-files" class="anchor"></a>Reading and writing files</h2>
 <p><code>arrow</code> provides some simple functions for using the Arrow C++ library to read and write files. These functions are designed to drop into your normal R workflow without requiring any knowledge of the Arrow C++ library and use naming conventions and arguments that follow popular R packages, particularly <code>readr</code>. The readers return <code>data.frame</code>s (or if you use the <code>tibble</code> package, they will act like <code>tbl_df</code>s), and the writers take <code>data.frame</code>s.</p>
 <p>Importantly, <code>arrow</code> provides basic read and write support for the <a href="https://parquet.apache.org/">Apache Parquet</a> columnar data file format.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">arrow</span>)
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://arrow.apache.org/docs/r//reference/read_parquet.html">read_parquet</a></span>(<span class="st">"path/to/file.parquet"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/apache/arrow">arrow</a></span>)
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"path/to/file.parquet"</span>)
+</pre></div>
 <p>Just as you can read, you can write Parquet files:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://arrow.apache.org/docs/r//reference/write_parquet.html">write_parquet</a></span>(<span class="no">df</span>, <span class="st">"path/to/different_file.parquet"</span>)</pre></body></html></div>
-<p>The <code>arrow</code> package also includes a faster and more robust implementation of the <a href="https://github.com/wesm/feather">Feather</a> file format, providing <code><a href="https://arrow.apache.org/docs/r//reference/read_feather.html">read_feather()</a></code> and <code><a href="https://arrow.apache.org/docs/r//reference/write_feather.html">write_feather()</a></code>. This implementation depends on the same underlying C++ library as the Python version does, resulting in more reliable and consistent behavior across the two languages, as well as <a href="https://wesmckinney.com/blog/feather-arrow-future/">improved performance</a>. <code>arrow</code> also by default writes the Feather V2 format, which supports a wider range of data types, as well as compression.</p>
-<p>For CSV and line-delimited JSON, there are <code><a href="https://arrow.apache.org/docs/r//reference/read_delim_arrow.html">read_csv_arrow()</a></code> and <code><a href="https://arrow.apache.org/docs/r//reference/read_json_arrow.html">read_json_arrow()</a></code>, respectively. While <code><a href="https://arrow.apache.org/docs/r//reference/read_delim_arrow.html">read_csv_arrow()</a></code> currently has fewer parsing options for dealing with every CSV format variation in the wild, for the files it can read, it is often significantly faster than other R CSV readers, such as <code>base::read.csv</code>, <code>readr::read_csv</code>, and <code>data.table::fread</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/write_parquet.html">write_parquet</a></span>(<span class="kw">df</span>, <span class="st">"path/to/different_file.parquet"</span>)
+</pre></div>
+<p>The <code>arrow</code> package also includes a faster and more robust implementation of the <a href="https://github.com/wesm/feather">Feather</a> file format, providing <code><a href="../reference/read_feather.html">read_feather()</a></code> and <code><a href="../reference/write_feather.html">write_feather()</a></code>. This implementation depends on the same underlying C++ library as the Python version does, resulting in more reliable and consistent behavior across the two languages, as well as <a href="https://wesmckinney.com/blog/feather-arrow-future/">improved performance</a>. <code>arrow</code> also by default writes the Feather V2 format, which supports a wider range of data types, as well as compression.</p>
+<p>For CSV and line-delimited JSON, there are <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> and <code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>, respectively. While <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> currently has fewer parsing options for dealing with every CSV format variation in the wild, for the files it can read, it is often significantly faster than other R CSV readers, such as <code>base::read.csv</code>, <code>readr::read_csv</code>, and <code>data.table::fread</code>.</p>
 </div>
 <div id="working-with-arrow-data-in-python" class="section level2">
 <h2 class="hasAnchor">
 <a href="#working-with-arrow-data-in-python" class="anchor"></a>Working with Arrow data in Python</h2>
-<p>Using <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>, <code>arrow</code> lets you share data between R and Python (<code>pyarrow</code>) efficiently, enabling you to take advantage of the vibrant ecosystem of Python packages that build on top of Apache Arrow. See <code>vignette("python", package = "arrow")</code> for details.</p>
+<p>Using <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>, <code>arrow</code> lets you share data between R and Python (<code>pyarrow</code>) efficiently, enabling you to take advantage of the vibrant ecosystem of Python packages that build on top of Apache Arrow. See <code><a href="../articles/python.html">vignette("python", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="access-to-arrow-messages-buffers-and-streams" class="section level2">
 <h2 class="hasAnchor">
@@ -413,8 +417,8 @@
 <a href="#class-structure-and-package-conventions" class="anchor"></a>Class structure and package conventions</h2>
 <p>C++ is an object-oriented language, so the core logic of the Arrow library is encapsulated in classes and methods. In the R package, these classes are implemented as <code>R6</code> reference classes, most of which are exported from the namespace.</p>
 <p>In order to match the C++ naming conventions, the <code>R6</code> classes are in TitleCase, e.g. <code>RecordBatch</code>. This makes it easy to look up the relevant C++ implementations in the <a href="https://github.com/apache/arrow/tree/master/cpp">code</a> or <a href="https://arrow.apache.org/docs/cpp/">documentation</a>. To simplify things in R, the C++ library namespaces are generally dropped or flattened; that is, where the C++ library has <code>arrow::io::FileOutputStream</code>, it is just <code>FileOutputStream</code> in the R package. One exception is for the file readers, where the namespace is necessary to disambiguate. So <code>arrow::csv::TableReader</code> becomes <code>CsvTableReader</code>, and <code>arrow::json::TableReader</code> becomes <code>JsonTableReader</code>.</p>
-<p>Some of these classes are not meant to be instantiated directly; they may be base classes or other kinds of helpers. For those that you should be able to create, use the <code>$create()</code> method to instantiate an object. For example, <code>rb &lt;- RecordBatch$create(int = 1:10, dbl = as.numeric(1:10))</code> will create a <code>RecordBatch</code>. Many of these factory methods that an R user might most often encounter also have a <code>snake_case</code> alias, in order to be more familiar for contemporary R users. So <code><a href="https://arrow.apache.org/docs/r//reference/RecordBatch.html">record_batch(int = 1:10, dbl = as.numeric(1:10))</a></code> would do the same as <code>RecordBatch$create()</code> above.</p>
-<p>The typical user of the <code>arrow</code> R package may never deal directly with the <code>R6</code> objects. We provide more R-friendly wrapper functions as a higher-level interface to the C++ library. An R user can call <code><a href="https://arrow.apache.org/docs/r//reference/read_parquet.html">read_parquet()</a></code> without knowing or caring that they’re instantiating a <code>ParquetFileReader</code> object and calling the <code>$ReadFile()</code> method on it. The classes are there and available to the advanced programmer who wants fine-grained control over how the C++ library is used.</p>
+<p>Some of these classes are not meant to be instantiated directly; they may be base classes or other kinds of helpers. For those that you should be able to create, use the <code>$create()</code> method to instantiate an object. For example, <code>rb &lt;- RecordBatch$create(int = 1:10, dbl = as.numeric(1:10))</code> will create a <code>RecordBatch</code>. Many of these factory methods that an R user might most often encounter also have a <code>snake_case</code> alias, in order to be more familiar for contemporary R users. So <code><a href="../reference/RecordBatch.html">record_batch(int = 1:10, dbl = as.numeric(1:10))</a></code> would do the same as <code>RecordBatch$create()</code> above.</p>
+<p>The typical user of the <code>arrow</code> R package may never deal directly with the <code>R6</code> objects. We provide more R-friendly wrapper functions as a higher-level interface to the C++ library. An R user can call <code><a href="../reference/read_parquet.html">read_parquet()</a></code> without knowing or caring that they’re instantiating a <code>ParquetFileReader</code> object and calling the <code>$ReadFile()</code> method on it. The classes are there and available to the advanced programmer who wants fine-grained control over how the C++ library is used.</p>
 </div>
 </div>
   </div>
@@ -434,7 +438,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

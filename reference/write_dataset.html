@@ -84,7 +84,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -183,13 +183,13 @@ make it much faster to read and query.</p>
     </div>
 
     <pre class="usage"><span class='fu'>write_dataset</span>(
-  <span class='no'>dataset</span>,
-  <span class='no'>path</span>,
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='no'>dataset</span>$<span class='no'>format</span>$<span class='no'>type</span>,
-  <span class='kw'>schema</span> <span class='kw'>=</span> <span class='no'>dataset</span>$<span class='no'>schema</span>,
-  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span>(<span class='no'>dataset</span>),
-  <span class='kw'>hive_style</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>dataset</span>,
+  <span class='kw'>path</span>,
+  format = <span class='kw'>dataset</span><span class='op'>$</span><span class='kw'>format</span><span class='op'>$</span><span class='kw'>type</span>,
+  schema = <span class='kw'>dataset</span><span class='op'>$</span><span class='kw'>schema</span>,
+  partitioning = <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span>(<span class='kw'>dataset</span>),
+  hive_style = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -197,7 +197,7 @@ make it much faster to read and query.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataset</th>
-      <td><p>Dataset, RecordBatch, Table, <code>arrow_dplyr_query</code>, or
+      <td><p><a href='Dataset.html'>Dataset</a>, <a href='RecordBatch.html'>RecordBatch</a>, <a href='Table.html'>Table</a>, <code>arrow_dplyr_query</code>, or
 <code>data.frame</code>. If an <code>arrow_dplyr_query</code> or <code>grouped_df</code>,
 <code>schema</code> and <code>partitioning</code> will be taken from the result of any <code>select()</code>
 and <code>group_by()</code> operations done on the dataset. Note that <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries
@@ -216,7 +216,7 @@ same format as <code>dataset</code>.</p></td>
     </tr>
     <tr>
       <th>schema</th>
-      <td><p>Schema containing a subset of columns, possibly reordered,
+      <td><p><a href='Schema.html'>Schema</a> containing a subset of columns, possibly reordered,
 in <code>dataset</code>. Default is <code>dataset$schema</code>, i.e. all columns.</p></td>
     </tr>
     <tr>
@@ -233,7 +233,7 @@ use the current <code>group_by()</code> columns.</p></td>
     <tr>
       <th>...</th>
       <td><p>additional format-specific arguments. For available Parquet
-options, see <code>write_parquet()</code>.</p></td>
+options, see <code><a href='write_parquet.html'>write_parquet()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -256,7 +256,7 @@ options, see <code>write_parquet()</code>.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

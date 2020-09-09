@@ -86,7 +86,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@ This function reads both the original, limited specification of the format
 and the version 2 specification, which is the Apache Arrow IPC file format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_feather</span>(<span class='no'>file</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>as_data_frame</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>read_feather</span>(<span class='kw'>file</span>, col_select = <span class='kw'>NULL</span>, as_data_frame = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,7 +194,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format.</p>
     <tr>
       <th>file</th>
       <td><p>A character file name, <code>raw</code> vector, or an Arrow input stream.
-If a file name, a memory-mapped Arrow InputStream will be opened and
+If a file name, a memory-mapped Arrow <a href='InputStream.html'>InputStream</a> will be opened and
 closed when finished. If an input stream is provided, it will be left
 open.</p></td>
     </tr>
@@ -208,31 +208,33 @@ of columns, as used in <code><a href='https://dplyr.tidyverse.org/reference/sele
     <tr>
       <th>as_data_frame</th>
       <td><p>Should the function return a <code>data.frame</code> (default) or
-an Arrow Table?</p></td>
+an Arrow <a href='Table.html'>Table</a>?</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional parameters, passed to FeatherReader$create()</p></td>
+      <td><p>additional parameters, passed to <a href='FeatherReader.html'>FeatherReader$create()</a></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> if <code>as_data_frame</code> is <code>TRUE</code> (the default), or an
-Arrow Table otherwise</p>
+Arrow <a href='Table.html'>Table</a> otherwise</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>FeatherReader and RecordBatchReader for lower-level access to reading Arrow IPC data.</p></div>
+    <div class='dont-index'><p><a href='FeatherReader.html'>FeatherReader</a> and <a href='RecordBatchReader.html'>RecordBatchReader</a> for lower-level access to reading Arrow IPC data.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>tf</span>))
-<span class='fu'>write_feather</span>(<span class='no'>mtcars</span>, <span class='no'>tf</span>)
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; [1] 32 11</div><div class='input'><span class='co'># Can select columns</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='no'>tf</span>, <span class='kw'>col_select</span> <span class='kw'>=</span> <span class='fu'>starts_with</span>(<span class='st'>"d"</span>))
-<span class='co'># }</span></div></pre>
+<span class='kw'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
+<span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>tf</span>))
+<span class='fu'><a href='write_feather.html'>write_feather</a></span>(<span class='kw'>mtcars</span>, <span class='kw'>tf</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='kw'>tf</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>df</span>)
+</div><div class='output co'>#&gt; [1] 32 11</div><div class='input'><span class='co'># Can select columns</span>
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'>read_feather</span>(<span class='kw'>tf</span>, col_select = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span>(<span class='st'>"d"</span>))
+<span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -248,7 +250,7 @@ Arrow Table otherwise</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

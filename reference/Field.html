@@ -84,7 +84,7 @@ Schemas." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -178,11 +178,11 @@ Schemas." />
 
     <div class="ref-description">
     <p><code>field()</code> lets you create an <code>arrow::Field</code> that maps a
-DataType to a column name. Fields are contained in
-Schemas.</p>
+<a href='data-type.html'>DataType</a> to a column name. Fields are contained in
+<a href='Schema.html'>Schemas</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>field</span>(<span class='no'>name</span>, <span class='no'>type</span>, <span class='no'>metadata</span>)</pre>
+    <pre class="usage"><span class='fu'>field</span>(<span class='kw'>name</span>, <span class='kw'>type</span>, <span class='kw'>metadata</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,7 +193,7 @@ Schemas.</p>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>logical type, instance of DataType</p></td>
+      <td><p>logical type, instance of <a href='DataType.html'>DataType</a></p></td>
     </tr>
     <tr>
       <th>metadata</th>
@@ -213,8 +213,9 @@ Schemas.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>field</span>(<span class='st'>"x"</span>, <span class='fu'>int32</span>())</div><div class='output co'>#&gt; Field
-#&gt; x: int32</div><div class='input'># }
+<span class='fu'>field</span>(<span class='st'>"x"</span>, <span class='fu'><a href='data-type.html'>int32</a></span>())
+</div><div class='output co'>#&gt; Field
+#&gt; x: int32</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -231,7 +232,7 @@ Schemas.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

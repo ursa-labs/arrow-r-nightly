@@ -84,7 +84,7 @@ composed from multiple record batches or chunked arrays." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -177,8 +177,8 @@ composed from multiple record batches or chunked arrays." />
     </div>
 
     <div class="ref-description">
-    <p>A Table is a sequence of chunked arrays. They
-have a similar interface to record batches, but they can be
+    <p>A Table is a sequence of <a href='ChunkedArray.html'>chunked arrays</a>. They
+have a similar interface to <a href='RecordBatch.html'>record batches</a>, but they can be
 composed from multiple record batches or chunked arrays.</p>
     </div>
 
@@ -191,9 +191,9 @@ composed from multiple record batches or chunked arrays.</p>
 
 <p>The <code>Table$create()</code> function takes the following arguments:</p><ul>
 <li><p><code>...</code> arrays, chunked arrays, or R vectors, with names; alternatively,
-an unnamed series of record batches may also be provided,
+an unnamed series of <a href='RecordBatch.html'>record batches</a> may also be provided,
 which will be stacked as rows in the table.</p></li>
-<li><p><code>schema</code> a Schema, or <code>NULL</code> (the default) to infer the schema from
+<li><p><code>schema</code> a <a href='Schema.html'>Schema</a>, or <code>NULL</code> (the default) to infer the schema from
 the data in <code>...</code></p></li>
 </ul>
 
@@ -202,12 +202,12 @@ the data in <code>...</code></p></li>
     
 
 <p>Tables are data-frame-like, and many methods you expect to work on
-a <code>data.frame</code> are implemented for <code>Table</code>. This includes <code>[</code>, <code>[[</code>,
-<code>$</code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
+a <code>data.frame</code> are implemented for <code>Table</code>. This includes <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code>,
+<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
 the data from an Arrow table into R with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>. See the
 examples.</p>
-<p>A caveat about the <code>$</code> method: because <code>Table</code> is an <code>R6</code> object,
-<code>$</code> is also used to access the object's methods (see below). Methods take
+<p>A caveat about the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> method: because <code>Table</code> is an <code>R6</code> object,
+<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> is also used to access the object's methods (see below). Methods take
 precedence over the table's columns. So, <code>tab$Slice</code> would return the
 "Slice" method function even if there were a column in the table called
 "Slice".</p>
@@ -233,7 +233,7 @@ coerced to an R vector before taking.</p></li>
 <li><p><code>$Filter(i, keep_na = TRUE)</code>: return an <code>Table</code> with rows at positions where logical
 vector or Arrow boolean-type <code>(Chunked)Array</code> <code>i</code> is <code>TRUE</code>.</p></li>
 <li><p><code>$serialize(output_stream, ...)</code>: Write the table to the given
-OutputStream</p></li>
+<a href='OutputStream.html'>OutputStream</a></p></li>
 <li><p><code>$cast(target_schema, safe = TRUE, options = cast_options(safe))</code>: Alter
 the schema of the record batch.</p></li>
 </ul>
@@ -251,9 +251,13 @@ All list elements are coerced to string.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='no'>Table</span>$<span class='fu'>create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>mtcars</span>), <span class='no'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>tab</span>))</div><div class='output co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
-#&gt; [11] "gear" "carb"</div><div class='input'><span class='no'>tab</span>$<span class='no'>mpg</span></div><div class='output co'>#&gt; ChunkedArray
+<span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(name = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>mtcars</span>), <span class='kw'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>tab</span>)
+</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>tab</span>))
+</div><div class='output co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>tab</span>)
+</div><div class='output co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
+#&gt; [11] "gear" "carb"</div><div class='input'><span class='kw'>tab</span><span class='op'>$</span><span class='kw'>mpg</span>
+</div><div class='output co'>#&gt; ChunkedArray
 #&gt; [
 #&gt;   [
 #&gt;     21,
@@ -278,7 +282,8 @@ All list elements are coerced to string.</p></li>
 #&gt;     15,
 #&gt;     21.4
 #&gt;   ]
-#&gt; ]</div><div class='input'><span class='no'>tab</span><span class='kw'>[[</span><span class='st'>"cyl"</span>]]</div><div class='output co'>#&gt; ChunkedArray
+#&gt; ]</div><div class='input'><span class='kw'>tab</span>[[<span class='st'>"cyl"</span>]]
+</div><div class='output co'>#&gt; ChunkedArray
 #&gt; [
 #&gt;   [
 #&gt;     6,
@@ -303,14 +308,15 @@ All list elements are coerced to string.</p></li>
 #&gt;     8,
 #&gt;     4
 #&gt;   ]
-#&gt; ]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>tab</span>[<span class='fl'>4</span>:<span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"wt"</span>)])</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
+#&gt; ]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>tab</span>[<span class='fl'>4</span><span class='op'>:</span><span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"wt"</span>)])
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
 #&gt;    gear    hp    wt
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     3   110  3.22
 #&gt; </span><span style='color: #555555;'>2</span><span>     3   175  3.44
 #&gt; </span><span style='color: #555555;'>3</span><span>     3   105  3.46
 #&gt; </span><span style='color: #555555;'>4</span><span>     3   245  3.57
-#&gt; </span><span style='color: #555555;'>5</span><span>     4    62  3.19</div><div class='input'># }
+#&gt; </span><span style='color: #555555;'>5</span><span>     4    62  3.19</div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -327,7 +333,7 @@ All list elements are coerced to string.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

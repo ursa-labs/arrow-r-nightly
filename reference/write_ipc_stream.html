@@ -84,7 +84,7 @@ and write_feather() write those formats, respectively." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -179,27 +179,27 @@ and write_feather() write those formats, respectively." />
     <div class="ref-description">
     <p>Apache Arrow defines two formats for <a href='https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc'>serializing data for interprocess communication (IPC)</a>:
 a "stream" format and a "file" format, known as Feather. <code>write_ipc_stream()</code>
-and <code>write_feather()</code> write those formats, respectively.</p>
+and <code><a href='write_feather.html'>write_feather()</a></code> write those formats, respectively.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_arrow</span>(<span class='no'>x</span>, <span class='no'>sink</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>write_arrow</span>(<span class='kw'>x</span>, <span class='kw'>sink</span>, <span class='kw'>...</span>)
 
-<span class='fu'>write_ipc_stream</span>(<span class='no'>x</span>, <span class='no'>sink</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>write_ipc_stream</span>(<span class='kw'>x</span>, <span class='kw'>sink</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>data.frame</code>, RecordBatch, or Table</p></td>
+      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
     </tr>
     <tr>
       <th>sink</th>
-      <td><p>A string file path or OutputStream</p></td>
+      <td><p>A string file path or <a href='OutputStream.html'>OutputStream</a></p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra parameters passed to <code>write_feather()</code>.</p></td>
+      <td><p>extra parameters passed to <code><a href='write_feather.html'>write_feather()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -208,15 +208,15 @@ and <code>write_feather()</code> write those formats, respectively.</p>
     <p><code>x</code>, invisibly.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>write_arrow()</code>, a wrapper around <code>write_ipc_stream()</code> and <code>write_feather()</code>
+    <p><code>write_arrow()</code>, a wrapper around <code>write_ipc_stream()</code> and <code><a href='write_feather.html'>write_feather()</a></code>
 with some nonstandard behavior, is deprecated. You should explicitly choose
 the function that will write the desired IPC format (stream or file) since
 either can be written to a file or <code>OutputStream</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>write_feather()</code> for writing IPC files. <code>write_to_raw()</code> to
+    <div class='dont-index'><p><code><a href='write_feather.html'>write_feather()</a></code> for writing IPC files. <code><a href='write_to_raw.html'>write_to_raw()</a></code> to
 serialize data to a buffer.
-RecordBatchWriter for a lower-level interface.</p></div>
+<a href='RecordBatchWriter.html'>RecordBatchWriter</a> for a lower-level interface.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -233,7 +233,7 @@ RecordBatchWriter for a lower-level interface.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

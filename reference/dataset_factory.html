@@ -84,7 +84,7 @@ open_dataset()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -177,17 +177,17 @@ open_dataset()." />
     </div>
 
     <div class="ref-description">
-    <p>A Dataset can constructed using one or more DatasetFactorys.
+    <p>A <a href='Dataset.html'>Dataset</a> can constructed using one or more <a href='Dataset.html'>DatasetFactory</a>s.
 This function helps you construct a <code>DatasetFactory</code> that you can pass to
-<code>open_dataset()</code>.</p>
+<code><a href='open_dataset.html'>open_dataset()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dataset_factory</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>filesystem</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>, <span class='st'>"feather"</span>, <span class='st'>"csv"</span>, <span class='st'>"tsv"</span>, <span class='st'>"text"</span>),
-  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  filesystem = <span class='kw'>NULL</span>,
+  format = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"parquet"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span>, <span class='st'>"feather"</span>, <span class='st'>"csv"</span>, <span class='st'>"tsv"</span>, <span class='st'>"text"</span>),
+  partitioning = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -202,12 +202,12 @@ grouped. If this argument is specified it will be used to construct a
     </tr>
     <tr>
       <th>filesystem</th>
-      <td><p>A FileSystem object; if omitted, the <code>FileSystem</code> will
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> object; if omitted, the <code>FileSystem</code> will
 be detected from <code>x</code></p></td>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>A FileFormat object, or a string identifier of the format of
+      <td><p>A <a href='FileFormat.html'>FileFormat</a> object, or a string identifier of the format of
 the files in <code>x</code>. Currently supported values:</p><ul>
 <li><p>"parquet"</p></li>
 <li><p>"ipc"/"arrow"/"feather", all aliases for each other; for Feather, note that
@@ -225,13 +225,13 @@ it is assumed to be "text".</p></td>
       <td><p>One of</p><ul>
 <li><p>A <code>Schema</code>, in which case the file paths relative to <code>sources</code> will be
 parsed, and path segments will be matched with the schema fields. For
-example, <code>schema(year = int16(), month = int8())</code> would create partitions
+example, <code><a href='Schema.html'>schema(year = int16(), month = int8())</a></code> would create partitions
 for file paths like "2019/01/file.parquet", "2019/02/file.parquet", etc.</p></li>
 <li><p>A character vector that defines the field names corresponding to those
 path segments (that is, you're providing the names that would correspond
 to a <code>Schema</code> but the types will be autodetected)</p></li>
 <li><p>A <code>HivePartitioning</code> or <code>HivePartitioningFactory</code>, as returned
-by <code>hive_partition()</code> which parses explicit or autodetected fields from
+by <code><a href='hive_partition.html'>hive_partition()</a></code> which parses explicit or autodetected fields from
 Hive-style path segments</p></li>
 <li><p><code>NULL</code> for no partitioning</p></li>
 </ul></td>
@@ -241,19 +241,19 @@ Hive-style path segments</p></li>
       <td><p>Additional format-specific options, passed to
 <code>FileFormat$create()</code>. For CSV options, note that you can specify them either
 with the Arrow C++ library naming ("delimiter", "quoting", etc.) or the
-<code>readr</code>-style naming used in <code>read_csv_arrow()</code> ("delim", "quote", etc.)</p></td>
+<code>readr</code>-style naming used in <code><a href='read_delim_arrow.html'>read_csv_arrow()</a></code> ("delim", "quote", etc.)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>DatasetFactory</code> object. Pass this to <code>open_dataset()</code>,
+    <p>A <code>DatasetFactory</code> object. Pass this to <code><a href='open_dataset.html'>open_dataset()</a></code>,
 in a list potentially with other <code>DatasetFactory</code> objects, to create
 a <code>Dataset</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If you would only have a single <code>DatasetFactory</code> (for example, you have a
-single directory containing Parquet files), you can call <code>open_dataset()</code>
+single directory containing Parquet files), you can call <code><a href='open_dataset.html'>open_dataset()</a></code>
 directly. Use <code>dataset_factory()</code> when you
 want to combine different directories, file systems, or file formats.</p>
 
@@ -272,7 +272,7 @@ want to combine different directories, file systems, or file formats.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

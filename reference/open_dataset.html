@@ -86,7 +86,7 @@ Dataset, then use dplyr methods to query it." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -187,11 +187,11 @@ can accelerate queries that only touch some partitions (files). Call
     </div>
 
     <pre class="usage"><span class='fu'>open_dataset</span>(
-  <span class='no'>sources</span>,
-  <span class='kw'>schema</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>partitioning</span> <span class='kw'>=</span> <span class='fu'>hive_partition</span>(),
-  <span class='kw'>unify_schemas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  <span class='kw'>sources</span>,
+  schema = <span class='kw'>NULL</span>,
+  partitioning = <span class='fu'><a href='hive_partition.html'>hive_partition</a></span>(),
+  unify_schemas = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -202,12 +202,12 @@ can accelerate queries that only touch some partitions (files). Call
       <td><p>Either:</p><ul>
 <li><p>a string path to a directory containing data files</p></li>
 <li><p>a list of <code>Dataset</code> objects as created by this function</p></li>
-<li><p>a list of <code>DatasetFactory</code> objects as created by <code>dataset_factory()</code>.</p></li>
+<li><p>a list of <code>DatasetFactory</code> objects as created by <code><a href='dataset_factory.html'>dataset_factory()</a></code>.</p></li>
 </ul></td>
     </tr>
     <tr>
       <th>schema</th>
-      <td><p>Schema for the dataset. If <code>NULL</code> (the default), the schema
+      <td><p><a href='Schema.html'>Schema</a> for the dataset. If <code>NULL</code> (the default), the schema
 will be inferred from the data sources.</p></td>
     </tr>
     <tr>
@@ -215,13 +215,13 @@ will be inferred from the data sources.</p></td>
       <td><p>When <code>sources</code> is a file path, one of</p><ul>
 <li><p>a <code>Schema</code>, in which case the file paths relative to <code>sources</code> will be
 parsed, and path segments will be matched with the schema fields. For
-example, <code>schema(year = int16(), month = int8())</code> would create partitions
+example, <code><a href='Schema.html'>schema(year = int16(), month = int8())</a></code> would create partitions
 for file paths like "2019/01/file.parquet", "2019/02/file.parquet", etc.</p></li>
 <li><p>a character vector that defines the field names corresponding to those
 path segments (that is, you're providing the names that would correspond
 to a <code>Schema</code> but the types will be autodetected)</p></li>
 <li><p>a <code>HivePartitioning</code> or <code>HivePartitioningFactory</code>, as returned
-by <code>hive_partition()</code> which parses explicit or autodetected fields from
+by <code><a href='hive_partition.html'>hive_partition()</a></code> which parses explicit or autodetected fields from
 Hive-style path segments</p></li>
 <li><p><code>NULL</code> for no partitioning</p></li>
 </ul>
@@ -241,7 +241,7 @@ and their <code>Schema</code>s are already in memory).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed to <code>dataset_factory()</code> when
+      <td><p>additional arguments passed to <code><a href='dataset_factory.html'>dataset_factory()</a></code> when
 <code>sources</code> is a file path, otherwise ignored. These may include "format" to
 indicate the file format, or other format-specific options.</p></td>
     </tr>
@@ -249,11 +249,11 @@ indicate the file format, or other format-specific options.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Dataset R6 object. Use <code>dplyr</code> methods on it to query the data,
-or call <code>$NewScan()</code> to construct a query directly.</p>
+    <p>A <a href='Dataset.html'>Dataset</a> R6 object. Use <code>dplyr</code> methods on it to query the data,
+or call <code><a href='Scanner.html'>$NewScan()</a></code> to construct a query directly.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>vignette("dataset", package = "arrow")</code></p></div>
+    <div class='dont-index'><p><code><a href='../articles/dataset.html'>vignette("dataset", package = "arrow")</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -270,7 +270,7 @@ or call <code>$NewScan()</code> to construct a query directly.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

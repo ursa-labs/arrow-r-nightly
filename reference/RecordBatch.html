@@ -84,7 +84,7 @@ a sequence of fields, each a contiguous Arrow Array." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -178,11 +178,11 @@ a sequence of fields, each a contiguous Arrow Array." />
 
     <div class="ref-description">
     <p>A record batch is a collection of equal-length arrays matching
-a particular Schema. It is a table-like data structure that is semantically
-a sequence of fields, each a contiguous Arrow Array.</p>
+a particular <a href='Schema.html'>Schema</a>. It is a table-like data structure that is semantically
+a sequence of <a href='Field.html'>fields</a>, each a contiguous Arrow <a href='array.html'>Array</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>record_batch</span>(<span class='no'>...</span>, <span class='kw'>schema</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>record_batch</span>(<span class='kw'>...</span>, schema = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +196,7 @@ mixture of data.frames and vectors, the inputs will be autospliced together
     </tr>
     <tr>
       <th>schema</th>
-      <td><p>a Schema, or <code>NULL</code> (the default) to infer the schema from
+      <td><p>a <a href='Schema.html'>Schema</a>, or <code>NULL</code> (the default) to infer the schema from
 the data in <code>...</code>. When providing an Arrow IPC buffer, <code>schema</code> is required.</p></td>
     </tr>
     </table>
@@ -206,12 +206,12 @@ the data in <code>...</code>. When providing an Arrow IPC buffer, <code>schema</
     
 
 <p>Record batches are data-frame-like, and many methods you expect to work on
-a <code>data.frame</code> are implemented for <code>RecordBatch</code>. This includes <code>[</code>, <code>[[</code>,
-<code>$</code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
+a <code>data.frame</code> are implemented for <code>RecordBatch</code>. This includes <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code>,
+<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
 the data from an Arrow record batch into R with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>. See the
 examples.</p>
-<p>A caveat about the <code>$</code> method: because <code>RecordBatch</code> is an <code>R6</code> object,
-<code>$</code> is also used to access the object's methods (see below). Methods take
+<p>A caveat about the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> method: because <code>RecordBatch</code> is an <code>R6</code> object,
+<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> is also used to access the object's methods (see below). Methods take
 precedence over the table's columns. So, <code>batch$Slice</code> would return the
 "Slice" method function even if there were a column in the table called
 "Slice".</p>
@@ -255,9 +255,13 @@ All list elements are coerced to string.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>batch</span> <span class='kw'>&lt;-</span> <span class='fu'>record_batch</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>mtcars</span>), <span class='no'>mtcars</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>batch</span>)</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>batch</span>))</div><div class='output co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>batch</span>)</div><div class='output co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
-#&gt; [11] "gear" "carb"</div><div class='input'><span class='no'>batch</span>$<span class='no'>mpg</span></div><div class='output co'>#&gt; Array
+<span class='kw'>batch</span> <span class='op'>&lt;-</span> <span class='fu'>record_batch</span>(name = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>mtcars</span>), <span class='kw'>mtcars</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>batch</span>)
+</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>batch</span>))
+</div><div class='output co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>batch</span>)
+</div><div class='output co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
+#&gt; [11] "gear" "carb"</div><div class='input'><span class='kw'>batch</span><span class='op'>$</span><span class='kw'>mpg</span>
+</div><div class='output co'>#&gt; Array
 #&gt; &lt;double&gt;
 #&gt; [
 #&gt;   21,
@@ -281,7 +285,8 @@ All list elements are coerced to string.</p></li>
 #&gt;   19.7,
 #&gt;   15,
 #&gt;   21.4
-#&gt; ]</div><div class='input'><span class='no'>batch</span><span class='kw'>[[</span><span class='st'>"cyl"</span>]]</div><div class='output co'>#&gt; Array
+#&gt; ]</div><div class='input'><span class='kw'>batch</span>[[<span class='st'>"cyl"</span>]]
+</div><div class='output co'>#&gt; Array
 #&gt; &lt;double&gt;
 #&gt; [
 #&gt;   6,
@@ -305,14 +310,15 @@ All list elements are coerced to string.</p></li>
 #&gt;   6,
 #&gt;   8,
 #&gt;   4
-#&gt; ]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>batch</span>[<span class='fl'>4</span>:<span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"wt"</span>)])</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
+#&gt; ]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>batch</span>[<span class='fl'>4</span><span class='op'>:</span><span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"wt"</span>)])
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
 #&gt;    gear    hp    wt
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     3   110  3.22
 #&gt; </span><span style='color: #555555;'>2</span><span>     3   175  3.44
 #&gt; </span><span style='color: #555555;'>3</span><span>     3   105  3.46
 #&gt; </span><span style='color: #555555;'>4</span><span>     3   245  3.57
-#&gt; </span><span style='color: #555555;'>5</span><span>     4    62  3.19</div><div class='input'># }
+#&gt; </span><span style='color: #555555;'>5</span><span>     4    62  3.19</div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -329,7 +335,7 @@ All list elements are coerced to string.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

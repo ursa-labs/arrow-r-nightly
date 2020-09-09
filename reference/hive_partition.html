@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -180,20 +180,20 @@
 "/year=2019/month=2/data.parquet".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hive_partition</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>hive_partition</span>(<span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>named list of data types, passed to <code>schema()</code></p></td>
+      <td><p>named list of <a href='data-type.html'>data types</a>, passed to <code><a href='Schema.html'>schema()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A HivePartitioning, or a <code>HivePartitioningFactory</code> if
+    <p>A <a href='Partitioning.html'>HivePartitioning</a>, or a <code>HivePartitioningFactory</code> if
 calling <code>hive_partition()</code> with no arguments.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -202,7 +202,8 @@ calling <code>hive_partition()</code> with no arguments.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>hive_partition</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='fu'>int16</span>(), <span class='kw'>month</span> <span class='kw'>=</span> <span class='fu'>int8</span>())</div><div class='output co'>#&gt; HivePartitioning</div><div class='input'># }
+<span class='fu'>hive_partition</span>(year = <span class='fu'><a href='data-type.html'>int16</a></span>(), month = <span class='fu'><a href='data-type.html'>int8</a></span>())
+</div><div class='output co'>#&gt; HivePartitioning</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -219,7 +220,7 @@ calling <code>hive_partition()</code> with no arguments.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

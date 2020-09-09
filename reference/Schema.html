@@ -89,7 +89,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200907</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
       </span>
     </div>
 
@@ -182,24 +182,24 @@ Many Arrow objects, including Table and Dataset, have a $schema method
     </div>
 
     <div class="ref-description">
-    <p>A <code>Schema</code> is a list of Fields, which map names to
-Arrow data types. Create a <code>Schema</code> when you
+    <p>A <code>Schema</code> is a list of <a href='Field.html'>Field</a>s, which map names to
+Arrow <a href='data-type.html'>data types</a>. Create a <code>Schema</code> when you
 want to convert an R <code>data.frame</code> to Arrow but don't want to rely on the
 default mapping of R types to Arrow types, such as when you want to choose a
-specific numeric precision, or when creating a Dataset and you want to
+specific numeric precision, or when creating a <a href='Dataset.html'>Dataset</a> and you want to
 ensure a specific schema rather than inferring it from the various files.</p>
-<p>Many Arrow objects, including Table and Dataset, have a <code>$schema</code> method
+<p>Many Arrow objects, including <a href='Table.html'>Table</a> and <a href='Dataset.html'>Dataset</a>, have a <code>$schema</code> method
 (active binding) that lets you access their schema.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>schema</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>schema</span>(<span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>named list of data types</p></td>
+      <td><p>named list of <a href='data-type.html'>data types</a></p></td>
     </tr>
     </table>
 
@@ -234,14 +234,16 @@ All list elements are coerced to string.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>col1</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw'>col2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span>))
-<span class='no'>tab1</span> <span class='kw'>&lt;-</span> <span class='no'>Table</span>$<span class='fu'>create</span>(<span class='no'>df</span>)
-<span class='no'>tab1</span>$<span class='no'>schema</span></div><div class='output co'>#&gt; Schema
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(col1 = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, col2 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span>))
+<span class='kw'>tab1</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>)
+<span class='kw'>tab1</span><span class='op'>$</span><span class='kw'>schema</span>
+</div><div class='output co'>#&gt; Schema
 #&gt; col1: int32
-#&gt; col2: double</div><div class='input'><span class='no'>tab2</span> <span class='kw'>&lt;-</span> <span class='no'>Table</span>$<span class='fu'>create</span>(<span class='no'>df</span>, <span class='kw'>schema</span> <span class='kw'>=</span> <span class='fu'>schema</span>(<span class='kw'>col1</span> <span class='kw'>=</span> <span class='fu'>int8</span>(), <span class='kw'>col2</span> <span class='kw'>=</span> <span class='fu'>float32</span>()))
-<span class='no'>tab2</span>$<span class='no'>schema</span></div><div class='output co'>#&gt; Schema
+#&gt; col2: double</div><div class='input'><span class='kw'>tab2</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>, schema = <span class='fu'>schema</span>(col1 = <span class='fu'><a href='data-type.html'>int8</a></span>(), col2 = <span class='fu'><a href='data-type.html'>float32</a></span>()))
+<span class='kw'>tab2</span><span class='op'>$</span><span class='kw'>schema</span>
+</div><div class='output co'>#&gt; Schema
 #&gt; col1: int8
-#&gt; col2: float</div><div class='input'># }
+#&gt; col2: float</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -258,7 +260,7 @@ All list elements are coerced to string.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
