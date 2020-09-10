@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200908</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200909</span>
       </span>
     </div>
 
@@ -192,7 +192,8 @@
 <h2 class="hasAnchor">
 <a href="#computation" class="anchor"></a>Computation</h2>
 <ul>
-<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>) operations, along with <code>is.na</code> and <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code>, on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
+<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>) operations, along with <code>is.na</code>, <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> and <code>match</code> (called <code><a href="../reference/match_arrow.html">match_arrow()</a></code>), on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
+<li>Aggregation methods <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>, and <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> are implemented for Arrays and ChunkedArrays.</li>
 <li>
 <code>dplyr</code> filter expressions on Arrow Tables and RecordBatches are now evaluated in the C++ library, rather than by pulling data into R and evaluating. This yields significant performance improvements.</li>
 <li>
