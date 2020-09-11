@@ -83,7 +83,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200909</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200910</span>
       </span>
     </div>
 
@@ -107,6 +107,9 @@ This function enables you to write Parquet files from R." />
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/dataset.html">Working with Arrow Datasets and dplyr</a>
+    </li>
+    <li>
+      <a href="../articles/fs.html">Working with Cloud Storage (S3)</a>
     </li>
     <li>
       <a href="../articles/install.html">Installing the Arrow Package on Linux</a>
@@ -204,7 +207,8 @@ This function enables you to write Parquet files from R.</p>
     </tr>
     <tr>
       <th>sink</th>
-      <td><p>an <a href='OutputStream.html'>arrow::io::OutputStream</a> or a string which is interpreted as a file path</p></td>
+      <td><p>an <a href='OutputStream.html'>arrow::io::OutputStream</a> or a string
+interpreted as a file path or URI</p></td>
     </tr>
     <tr>
       <th>chunk_size</th>
