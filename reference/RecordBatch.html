@@ -84,7 +84,7 @@ a sequence of fields, each a contiguous Arrow Array." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200910</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200911</span>
       </span>
     </div>
 
@@ -230,9 +230,8 @@ the following R6 methods that map onto the underlying C++ methods:</p><ul>
 <li><p><code>$names()</code>: Get all column names (called by <code><a href='https://rdrr.io/r/base/names.html'>names(batch)</a></code>)</p></li>
 <li><p><code>$GetColumnByName(name)</code>: Extract an <code>Array</code> by string name</p></li>
 <li><p><code>$RemoveColumn(i)</code>: Drops a column from the batch by integer position</p></li>
-<li><p><code>$select(spec)</code>: Return a new record batch with a selection of columns.
-This supports the usual <code>character</code>, <code>numeric</code>, and <code>logical</code> selection
-methods as well as "tidy select" expressions.</p></li>
+<li><p><code>$selectColumns(indices)</code>: Return a new record batch with a selection of columns. Supports
+0-based integer indices and character vectors.</p></li>
 <li><p><code>$Slice(offset, length = NULL)</code>: Create a zero-copy view starting at the
 indicated integer offset and going for the given length, or to the end
 of the table if <code>NULL</code>, the default.</p></li>

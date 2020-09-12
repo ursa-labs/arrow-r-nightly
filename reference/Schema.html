@@ -89,7 +89,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200910</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200911</span>
       </span>
     </div>
 
@@ -242,11 +242,15 @@ All list elements are coerced to string.</p></li>
 <span class='kw'>tab1</span><span class='op'>$</span><span class='kw'>schema</span>
 </div><div class='output co'>#&gt; Schema
 #&gt; col1: int32
-#&gt; col2: double</div><div class='input'><span class='kw'>tab2</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>, schema = <span class='fu'>schema</span>(col1 = <span class='fu'><a href='data-type.html'>int8</a></span>(), col2 = <span class='fu'><a href='data-type.html'>float32</a></span>()))
+#&gt; col2: double
+#&gt; 
+#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='kw'>tab2</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>, schema = <span class='fu'>schema</span>(col1 = <span class='fu'><a href='data-type.html'>int8</a></span>(), col2 = <span class='fu'><a href='data-type.html'>float32</a></span>()))
 <span class='kw'>tab2</span><span class='op'>$</span><span class='kw'>schema</span>
 </div><div class='output co'>#&gt; Schema
 #&gt; col1: int8
-#&gt; col2: float</div><div class='input'><span class='co'># }</span>
+#&gt; col2: float
+#&gt; 
+#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
