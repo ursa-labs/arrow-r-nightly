@@ -84,7 +84,7 @@ composed from multiple record batches or chunked arrays." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200914</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200915</span>
       </span>
     </div>
 
@@ -224,8 +224,7 @@ the following R6 methods that map onto the underlying C++ methods:</p><ul>
 <li><p><code>$ColumnNames()</code>: Get all column names (called by <code><a href='https://rdrr.io/r/base/names.html'>names(tab)</a></code>)</p></li>
 <li><p><code>$GetColumnByName(name)</code>: Extract a <code>ChunkedArray</code> by string name</p></li>
 <li><p><code>$field(i)</code>: Extract a <code>Field</code> from the table schema by integer position</p></li>
-<li><p><code>$SelectColumns(indices)</code>: Return new <code>Table</code> with specified columns. Supports
-0-based integer indices and character vectors.</p></li>
+<li><p><code>$SelectColumns(indices)</code>: Return new <code>Table</code> with specified columns, expressed as 0-based integers.</p></li>
 <li><p><code>$Slice(offset, length = NULL)</code>: Create a zero-copy view starting at the
 indicated integer offset and going for the given length, or to the end
 of the table if <code>NULL</code>, the default.</p></li>
@@ -335,7 +334,7 @@ All list elements are coerced to string.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
