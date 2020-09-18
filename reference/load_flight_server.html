@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Schema class — Schema • Arrow R Package</title>
+<title>Load a Python Flight server — load_flight_server • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,15 +39,8 @@
 
 
 
-<meta property="og:title" content="Schema class — Schema" />
-<meta property="og:description" content="A Schema is a list of Fields, which map names to
-Arrow data types. Create a Schema when you
-want to convert an R data.frame to Arrow but don't want to rely on the
-default mapping of R types to Arrow types, such as when you want to choose a
-specific numeric precision, or when creating a Dataset and you want to
-ensure a specific schema rather than inferring it from the various files.
-Many Arrow objects, including Table and Dataset, have a $schema method
-(active binding) that lets you access their schema." />
+<meta property="og:title" content="Load a Python Flight server — load_flight_server" />
+<meta property="og:description" content="Load a Python Flight server" />
 
 
 
@@ -182,79 +175,32 @@ Many Arrow objects, including Table and Dataset, have a $schema method
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Schema class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/schema.R'><code>R/schema.R</code></a></small>
-    <div class="hidden name"><code>Schema.Rd</code></div>
+    <h1>Load a Python Flight server</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/flight.R'><code>R/flight.R</code></a></small>
+    <div class="hidden name"><code>load_flight_server.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A <code>Schema</code> is a list of <a href='Field.html'>Field</a>s, which map names to
-Arrow <a href='data-type.html'>data types</a>. Create a <code>Schema</code> when you
-want to convert an R <code>data.frame</code> to Arrow but don't want to rely on the
-default mapping of R types to Arrow types, such as when you want to choose a
-specific numeric precision, or when creating a <a href='Dataset.html'>Dataset</a> and you want to
-ensure a specific schema rather than inferring it from the various files.</p>
-<p>Many Arrow objects, including <a href='Table.html'>Table</a> and <a href='Dataset.html'>Dataset</a>, have a <code>$schema</code> method
-(active binding) that lets you access their schema.</p>
+    <p>Load a Python Flight server</p>
     </div>
 
-    <pre class="usage"><span class='fu'>schema</span>(<span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>load_flight_server</span>(<span class='kw'>name</span>, path = <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(package = <span class='st'>"arrow"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>named list of <a href='data-type.html'>data types</a></p></td>
+      <th>name</th>
+      <td><p>string Python module name</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>file system path where the Python module is found. Default is
+to look in the <code>inst/</code> directory for included modules.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    
-
-<ul>
-<li><p><code>$ToString()</code>: convert to a string</p></li>
-<li><p><code>$field(i)</code>: returns the field at index <code>i</code> (0-based)</p></li>
-<li><p><code>$GetFieldByName(x)</code>: returns the field with name <code>x</code></p></li>
-<li><p><code>$WithMetadata(metadata)</code>: returns a new <code>Schema</code> with the key-value
-<code>metadata</code> set. Note that all list elements in <code>metadata</code> will be coerced
-to <code>character</code>.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
-
-    
-
-<ul>
-<li><p><code>$names</code>: returns the field names (called in <code><a href='https://rdrr.io/r/base/names.html'>names(Schema)</a></code>)</p></li>
-<li><p><code>$num_fields</code>: returns the number of fields (called in <code><a href='https://rdrr.io/r/base/length.html'>length(Schema)</a></code>)</p></li>
-<li><p><code>$fields</code>: returns the list of <code>Field</code>s in the <code>Schema</code>, suitable for
-iterating over</p></li>
-<li><p><code>$HasMetadata</code>: logical: does this <code>Schema</code> have extra metadata?</p></li>
-<li><p><code>$metadata</code>: returns the key-value metadata as a named list.
-Modify or replace by assigning in (<code>sch$metadata &lt;- new_metadata</code>).
-All list elements are coerced to string.</p></li>
-</ul>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(col1 = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, col2 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span>))
-<span class='kw'>tab1</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>)
-<span class='kw'>tab1</span><span class='op'>$</span><span class='kw'>schema</span>
-</div><div class='output co'>#&gt; Schema
-#&gt; col1: int32
-#&gt; col2: double
-#&gt; 
-#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='kw'>tab2</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>, schema = <span class='fu'>schema</span>(col1 = <span class='fu'><a href='data-type.html'>int8</a></span>(), col2 = <span class='fu'><a href='data-type.html'>float32</a></span>()))
-<span class='kw'>tab2</span><span class='op'>$</span><span class='kw'>schema</span>
-</div><div class='output co'>#&gt; Schema
-#&gt; col1: int8
-#&gt; col2: float
-#&gt; 
-#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='co'># }</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
