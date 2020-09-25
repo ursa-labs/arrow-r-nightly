@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200923</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
       </span>
     </div>
 
@@ -205,10 +205,24 @@ takes the following arguments:</p><ul>
     
 
 <ul>
-<li><p><code>$ReadTable(col_select)</code>: get an <code><a href='Table.html'>arrow::Table</a></code> from the file, possibly
-with columns filtered by a character vector of column names or a
-<code>tidyselect</code> specification.</p></li>
+<li><p><code>$ReadTable(column_indices)</code>: get an <code><a href='Table.html'>arrow::Table</a></code> from the file. The optional
+<code>column_indices=</code> argument is a 0-based integer vector indicating which columns to retain.</p></li>
+<li><p><code>$ReadRowGroup(i, column_indices)</code>: get an <code><a href='Table.html'>arrow::Table</a></code> by reading the <code>i</code>th row group (0-based).
+The optional <code>column_indices=</code> argument is a 0-based integer vector indicating which columns to retain.</p></li>
+<li><p><code>$ReadRowGroups(row_groups, column_indices)</code>: get an <code><a href='Table.html'>arrow::Table</a></code> by reading several row groups (0-based integers).
+The optional <code>column_indices=</code> argument is a 0-based integer vector indicating which columns to retain.</p></li>
 <li><p><code>$GetSchema()</code>: get the <code><a href='Schema.html'>arrow::Schema</a></code> of the data in the file</p></li>
+<li><p><code>$ReadColumn(i)</code>: read the <code>i</code>th column (0-based) as a <a href='ChunkedArray.html'>ChunkedArray</a>.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+
+    
+
+<ul>
+<li><p><code>$num_rows</code>: number of rows.</p></li>
+<li><p><code>$num_columns</code>: number of columns.</p></li>
+<li><p><code>$num_row_groups</code>: number of row groups.</p></li>
 </ul>
 
 
@@ -232,7 +246,7 @@ with columns filtered by a character vector of column names or a
 #&gt; 
 #&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='co'>if</span> (<span class='fu'><a href='codec_is_available.html'>codec_is_available</a></span>(<span class='st'>"snappy"</span>)) {
   <span class='co'># This file has compressed data columns</span>
-  <span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='kw'>pq</span><span class='op'>$</span><span class='fu'>ReadTable</span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span>(<span class='st'>"c"</span>))
+  <span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='kw'>pq</span><span class='op'>$</span><span class='fu'>ReadTable</span>()
   <span class='kw'>tab</span><span class='op'>$</span><span class='kw'>schema</span>
 }
 </div><div class='output co'>#&gt; Schema
@@ -240,6 +254,13 @@ with columns filtered by a character vector of column names or a
 #&gt; cut: string
 #&gt; color: string
 #&gt; clarity: string
+#&gt; depth: double
+#&gt; table: double
+#&gt; price: int64
+#&gt; x: double
+#&gt; y: double
+#&gt; z: double
+#&gt; __index_level_0__: int64
 #&gt; 
 #&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='co'># }</span>
 </div></pre>
