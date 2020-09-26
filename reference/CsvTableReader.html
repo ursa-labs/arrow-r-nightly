@@ -84,7 +84,7 @@ read_json_arrow(), respectively." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -197,7 +197,7 @@ and JSON table readers. See their usage in <code><a href='read_delim_arrow.html'
 
 <p>The <code>CsvTableReader$create()</code> and <code>JsonTableReader$create()</code> factory methods
 take the following arguments:</p><ul>
-<li><p><code>file</code> A character path to a local file, or an Arrow input stream</p></li>
+<li><p><code>file</code> An Arrow <a href='InputStream.html'>InputStream</a></p></li>
 <li><p><code>convert_options</code> (CSV only), <code>parse_options</code>, <code>read_options</code>: see
 <a href='CsvReadOptions.html'>CsvReadOptions</a></p></li>
 <li><p><code>...</code> additional parameters.</p></li>

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -147,26 +147,67 @@
 <div id="uris" class="section level2">
 <h2 class="hasAnchor">
 <a href="#uris" class="anchor"></a>URIs</h2>
-<p>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.) now accept an S3 URI as the source or destination file, as do <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>. An S3 URI looks like:</p>
-<pre><code>s3://[id:secret@]bucket/path[?region=]</code></pre>
+<p>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.) accept an S3 URI as the source or destination file, as do <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>. An S3 URI looks like:</p>
+<pre><code>s3://[access_key:secret_key@]bucket/path[?region=]</code></pre>
 <p>For example, one of the NYC taxi data files used in <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> is found at</p>
-<pre><code>s3://ursa-labs-taxi-data/2019/06/data.parquet?region=us-east-2</code></pre>
-<p><code>region</code> defaults to <code>us-east-1</code> and can be omitted if the bucket is in that region.</p>
+<pre><code>s3://ursa-labs-taxi-data/2019/06/data.parquet</code></pre>
 <p>Given this URI, we can pass it to <code><a href="../reference/read_parquet.html">read_parquet()</a></code> just as if it were a local file path:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"s3://ursa-labs-taxi-data/2019/06/data.parquet?region=us-east-2"</span>)
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"s3://ursa-labs-taxi-data/2019/06/data.parquet"</span>)
 </pre></div>
 <p>Note that this will be slower to read than if the file were local, though if you’re running on a machine in the same AWS region as the file in S3, the cost of reading the data over the network should be much lower.</p>
+</div>
+<div id="creating-a-filesystem-object" class="section level2">
+<h2 class="hasAnchor">
+<a href="#creating-a-filesystem-object" class="anchor"></a>Creating a FileSystem object</h2>
+<p>Another way to connect to S3 is to create an <code>S3FileSystem</code> object once and pass that to the read/write functions. This may be a convenience when dealing with long URIs, and it’s necessary for some options and authentication methods that aren’t supported in the URI format.</p>
+<p>In the previous example, this would look like:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">fs</span> <span class="op">&lt;-</span> <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(region = <span class="st">"us-east-2"</span>)
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"ursa-labs-taxi-data/2019/06/data.parquet"</span>, filesystem = <span class="kw">fs</span>)
+</pre></div>
+<p>See the help for <code>FileSystem</code> for a list of options that <code>S3FileSystem$create()</code> can take. <code>region</code>, <code>scheme</code>, and <code>endpoint_override</code> can be encoded as query parameters in the URI (though <code>region</code> will be auto-detected the bucket URI if omitted), and <code>access_key</code> and <code>secret_key</code> can also be included, but other options are not supported in the URI.</p>
+<p>Using the <code>SubTreeFileSystem</code> class, you can represent an S3 bucket or subdirectory inside of one.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">bucket</span> <span class="op">&lt;-</span> <span class="kw">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span>(
+  <span class="st">"ursa-labs-taxi-data"</span>,
+  <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(region = <span class="st">"us-east-2"</span>)
+)
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"2019/06/data.parquet"</span>, filesystem = <span class="kw">bucket</span>)
+</pre></div>
+<p><code>SubTreeFileSystem</code> can also be made from a URI:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">bucket</span> <span class="op">&lt;-</span> <span class="kw">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span>(<span class="st">"s3://ursa-labs-taxi-data"</span>)
+</pre></div>
 </div>
 <div id="authentication" class="section level2">
 <h2 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h2>
-<p>To access private S3 buckets, you need two secret parameters: a <code>AWS_ACCESS_KEY_ID</code>, which is like a user id, and <code>AWS_SECRET_ACCESS_KEY</code>, like a token. There are a few options for passing these credentials:</p>
+<p>To access private S3 buckets, you need typically need two secret parameters: a <code>access_key</code>, which is like a user id, and <code>secret_key</code>, like a token. There are a few options for passing these credentials:</p>
 <ol style="list-style-type: decimal">
-<li><p>Include them in the URI, like <code>s3://AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY@bucket-name/path/to/file</code>. Be sure to <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encode</a> your secrets if they contain special characters like “/”.</p></li>
-<li><p>Set them as environment variables named <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>.</p></li>
+<li><p>Include them in the URI, like <code>s3://access_key:secret_key@bucket-name/path/to/file</code>. Be sure to <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encode</a> your secrets if they contain special characters like “/”.</p></li>
+<li><p>Pass them as <code>access_key</code> and <code>secret_key</code> to <code>S3FileSystem$create()</code></p></li>
+<li><p>Set them as environment variables named <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>, respectively.</p></li>
 <li><p>Define them in a <code>~/.aws/credentials</code> file, according to the <a href="https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/credentials.html">AWS documentation</a>.</p></li>
 </ol>
+<p>You can also use an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AccessRole</a> for temporary access by passing the <code>role_arn</code> identifier to <code>S3FileSystem$create()</code>.</p>
+</div>
+<div id="file-systems-that-emulate-s3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#file-systems-that-emulate-s3" class="anchor"></a>File systems that emulate S3</h2>
+<p>The <code>S3FileSystem</code> machinery enables you to work with any file system that provides an S3-compatible interface. For example, <a href="https://min.io/">MinIO</a> is and object-storage server that emulates the S3 API. If you were to run <code>minio server</code> locally with its default settings, you could connect to it with <code>arrow</code> using <code>S3FileSystem</code> like this:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">minio</span> <span class="op">&lt;-</span> <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(
+  access_key = <span class="st">"minioadmin"</span>,
+  secret_key = <span class="st">"minioadmin"</span>,
+  scheme = <span class="st">"http"</span>,
+  endpoint_override = <span class="st">"localhost:9000"</span>
+)
+</pre></div>
+<p>or, as a URI, it would be</p>
+<pre><code>s3://minioadmin:minioadmin@?scheme=http&amp;endpoint_override=localhost%3A9000</code></pre>
+<p>(note the URL escaping of the <code><a href="https://rdrr.io/r/base/Colon.html">:</a></code> in <code>endpoint_override</code>).</p>
+<p>Among other applications, this can be useful for testing out code locally before running on a remote S3 bucket.</p>
 </div>
   </div>
 

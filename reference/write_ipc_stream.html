@@ -84,7 +84,7 @@ and write_feather() write those formats, respectively." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -190,7 +190,7 @@ and <code><a href='write_feather.html'>write_feather()</a></code> write those fo
 
     <pre class="usage"><span class='fu'>write_arrow</span>(<span class='kw'>x</span>, <span class='kw'>sink</span>, <span class='kw'>...</span>)
 
-<span class='fu'>write_ipc_stream</span>(<span class='kw'>x</span>, <span class='kw'>sink</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>write_ipc_stream</span>(<span class='kw'>x</span>, <span class='kw'>sink</span>, filesystem = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,6 +206,11 @@ and <code><a href='write_feather.html'>write_feather()</a></code> write those fo
     <tr>
       <th>...</th>
       <td><p>extra parameters passed to <code><a href='write_feather.html'>write_feather()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>sink</code> should be written if it is a
+string file path; default is the local file system</p></td>
     </tr>
     </table>
 

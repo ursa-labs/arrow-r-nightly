@@ -83,7 +83,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -189,6 +189,7 @@ This function enables you to write Parquet files from R.</p>
     <pre class="usage"><span class='fu'>write_parquet</span>(
   <span class='kw'>x</span>,
   <span class='kw'>sink</span>,
+  filesystem = <span class='kw'>NULL</span>,
   chunk_size = <span class='kw'>NULL</span>,
   version = <span class='kw'>NULL</span>,
   compression = <span class='fu'>default_parquet_compression</span>(),
@@ -206,12 +207,16 @@ This function enables you to write Parquet files from R.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <a href='Table.html'>arrow::Table</a>, or an object convertible to it.</p></td>
+      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
     </tr>
     <tr>
       <th>sink</th>
-      <td><p>an <a href='OutputStream.html'>arrow::io::OutputStream</a> or a string
-interpreted as a file path or URI</p></td>
+      <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a></p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>sink</code> should be written if it is a
+string file path; default is the local file system</p></td>
     </tr>
     <tr>
       <th>chunk_size</th>

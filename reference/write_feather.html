@@ -86,7 +86,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -195,6 +195,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format.</p>
     <pre class="usage"><span class='fu'>write_feather</span>(
   <span class='kw'>x</span>,
   <span class='kw'>sink</span>,
+  filesystem = <span class='kw'>NULL</span>,
   version = <span class='fl'>2</span>,
   chunk_size = <span class='fl'>65536L</span>,
   compression = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"lz4"</span>, <span class='st'>"uncompressed"</span>, <span class='st'>"zstd"</span>),
@@ -211,6 +212,11 @@ and the version 2 specification, which is the Apache Arrow IPC file format.</p>
     <tr>
       <th>sink</th>
       <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a></p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>sink</code> should be written if it is a
+string file path; default is the local file system</p></td>
     </tr>
     <tr>
       <th>version</th>

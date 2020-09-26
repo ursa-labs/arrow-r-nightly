@@ -84,7 +84,7 @@ readr::read_delim(), and col_select was inspired by vroom::vroom()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -203,6 +203,7 @@ Arrow C++ options have been mapped to argument names that follow those of
   parse_options = <span class='kw'>NULL</span>,
   convert_options = <span class='kw'>NULL</span>,
   read_options = <span class='kw'>NULL</span>,
+  filesystem = <span class='kw'>NULL</span>,
   as_data_frame = <span class='fl'>TRUE</span>
 )
 
@@ -320,6 +321,11 @@ parsing options provided in other arguments (e.g. <code>delim</code>, <code>quot
     <tr>
       <th>read_options</th>
       <td><p>see <a href='CsvReadOptions.html'>file reader options</a></p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>file</code> can be found if it is a
+string file path; default is the local file system</p></td>
     </tr>
     <tr>
       <th>as_data_frame</th>

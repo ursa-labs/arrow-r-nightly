@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Arrow data to a raw vector — write_to_raw • Arrow R Package</title>
+<title>Copy files, including between FileSystems — copy_files • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,8 @@
 
 
 
-<meta property="og:title" content="Write Arrow data to a raw vector — write_to_raw" />
-<meta property="og:description" content="write_ipc_stream() and write_feather() write data to a sink and return
-the data (data.frame, RecordBatch, or Table) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a raw vector in R." />
+<meta property="og:title" content="Copy files, including between FileSystems — copy_files" />
+<meta property="og:description" content="Copy files, including between FileSystems" />
 
 
 
@@ -178,36 +175,53 @@ access that buffer as a raw vector in R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Arrow data to a raw vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/ipc_stream.R'><code>R/ipc_stream.R</code></a></small>
-    <div class="hidden name"><code>write_to_raw.Rd</code></div>
+    <h1>Copy files, including between FileSystems</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/filesystem.R'><code>R/filesystem.R</code></a></small>
+    <div class="hidden name"><code>copy_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='write_arrow.html'>write_ipc_stream()</a></code> and <code><a href='write_feather.html'>write_feather()</a></code> write data to a sink and return
-the data (<code>data.frame</code>, <code>RecordBatch</code>, or <code>Table</code>) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a <code>raw</code> vector in R.</p>
+    <p>Copy files, including between FileSystems</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_to_raw</span>(<span class='kw'>x</span>, format = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stream"</span>, <span class='st'>"file"</span>))</pre>
+    <pre class="usage"><span class='fu'>copy_files</span>(
+  src_fs = <span class='kw'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span>(),
+  <span class='kw'>src_sel</span>,
+  dest_fs = <span class='kw'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span>(),
+  <span class='kw'>dest_base_dir</span>,
+  chunk_size = <span class='fl'>1024L</span> <span class='op'>*</span> <span class='fl'>1024L</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
+      <th>src_fs</th>
+      <td><p>The FileSystem from which files will be copied.</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>one of <code><a href='https://rdrr.io/r/base/c.html'>c("stream", "file")</a></code>, indicating the IPC format to use</p></td>
+      <th>src_sel</th>
+      <td><p>A FileSelector indicating which files should be copied.
+A string may also be passed, which is used as the base dir for recursive
+selection.</p></td>
+    </tr>
+    <tr>
+      <th>dest_fs</th>
+      <td><p>The FileSystem into which files will be copied.</p></td>
+    </tr>
+    <tr>
+      <th>dest_base_dir</th>
+      <td><p>Where the copied files should be placed.
+Directories will be created as necessary.</p></td>
+    </tr>
+    <tr>
+      <th>chunk_size</th>
+      <td><p>The maximum size of block to read before flushing
+to the destination file. A larger chunk_size will use more memory while
+copying but may help accommodate high latency FileSystems.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>raw</code> vector containing the bytes of the IPC serialized data.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -86,7 +86,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200924</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200925</span>
       </span>
     </div>
 
@@ -192,7 +192,13 @@ This function reads both the original, limited specification of the format
 and the version 2 specification, which is the Apache Arrow IPC file format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_feather</span>(<span class='kw'>file</span>, col_select = <span class='kw'>NULL</span>, as_data_frame = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>read_feather</span>(
+  <span class='kw'>file</span>,
+  col_select = <span class='kw'>NULL</span>,
+  as_data_frame = <span class='fl'>TRUE</span>,
+  filesystem = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,6 +221,11 @@ of columns, as used in <code><a href='https://dplyr.tidyverse.org/reference/sele
       <th>as_data_frame</th>
       <td><p>Should the function return a <code>data.frame</code> (default) or
 an Arrow <a href='Table.html'>Table</a>?</p></td>
+    </tr>
+    <tr>
+      <th>filesystem</th>
+      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>file</code> can be found if it is a
+string file path; default is the local file system</p></td>
     </tr>
     <tr>
       <th>...</th>
