@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200926</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200927</span>
       </span>
     </div>
 
@@ -153,8 +153,7 @@
 <pre><code>s3://ursa-labs-taxi-data/2019/06/data.parquet</code></pre>
 <p>Given this URI, we can pass it to <code><a href="../reference/read_parquet.html">read_parquet()</a></code> just as if it were a local file path:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"s3://ursa-labs-taxi-data/2019/06/data.parquet"</span>)
-</pre></div>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data/2019/06/data.parquet"</span><span class="op">)</span></pre></div>
 <p>Note that this will be slower to read than if the file were local, though if you’re running on a machine in the same AWS region as the file in S3, the cost of reading the data over the network should be much lower.</p>
 </div>
 <div id="creating-a-filesystem-object" class="section level2">
@@ -163,22 +162,19 @@
 <p>Another way to connect to S3 is to create an <code>S3FileSystem</code> object once and pass that to the read/write functions. This may be a convenience when dealing with long URIs, and it’s necessary for some options and authentication methods that aren’t supported in the URI format.</p>
 <p>In the previous example, this would look like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">fs</span> <span class="op">&lt;-</span> <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(region = <span class="st">"us-east-2"</span>)
-<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"ursa-labs-taxi-data/2019/06/data.parquet"</span>, filesystem = <span class="kw">fs</span>)
-</pre></div>
+<span class="va">fs</span> <span class="op">&lt;-</span> <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>region <span class="op">=</span> <span class="st">"us-east-2"</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="st">"ursa-labs-taxi-data/2019/06/data.parquet"</span>, filesystem <span class="op">=</span> <span class="va">fs</span><span class="op">)</span></pre></div>
 <p>See the help for <code>FileSystem</code> for a list of options that <code>S3FileSystem$create()</code> can take. <code>region</code>, <code>scheme</code>, and <code>endpoint_override</code> can be encoded as query parameters in the URI (though <code>region</code> will be auto-detected the bucket URI if omitted), and <code>access_key</code> and <code>secret_key</code> can also be included, but other options are not supported in the URI.</p>
 <p>Using the <code>SubTreeFileSystem</code> class, you can represent an S3 bucket or subdirectory inside of one.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">bucket</span> <span class="op">&lt;-</span> <span class="kw">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span>(
+<span class="va">bucket</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>
   <span class="st">"ursa-labs-taxi-data"</span>,
-  <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(region = <span class="st">"us-east-2"</span>)
-)
-<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span>(<span class="st">"2019/06/data.parquet"</span>, filesystem = <span class="kw">bucket</span>)
-</pre></div>
+  <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>region <span class="op">=</span> <span class="st">"us-east-2"</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="st">"2019/06/data.parquet"</span>, filesystem <span class="op">=</span> <span class="va">bucket</span><span class="op">)</span></pre></div>
 <p><code>SubTreeFileSystem</code> can also be made from a URI:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">bucket</span> <span class="op">&lt;-</span> <span class="kw">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span>(<span class="st">"s3://ursa-labs-taxi-data"</span>)
-</pre></div>
+<span class="va">bucket</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data"</span><span class="op">)</span></pre></div>
 </div>
 <div id="authentication" class="section level2">
 <h2 class="hasAnchor">
@@ -197,13 +193,12 @@
 <a href="#file-systems-that-emulate-s3" class="anchor"></a>File systems that emulate S3</h2>
 <p>The <code>S3FileSystem</code> machinery enables you to work with any file system that provides an S3-compatible interface. For example, <a href="https://min.io/">MinIO</a> is and object-storage server that emulates the S3 API. If you were to run <code>minio server</code> locally with its default settings, you could connect to it with <code>arrow</code> using <code>S3FileSystem</code> like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">minio</span> <span class="op">&lt;-</span> <span class="kw">S3FileSystem</span><span class="op">$</span><span class="fu">create</span>(
-  access_key = <span class="st">"minioadmin"</span>,
-  secret_key = <span class="st">"minioadmin"</span>,
-  scheme = <span class="st">"http"</span>,
-  endpoint_override = <span class="st">"localhost:9000"</span>
-)
-</pre></div>
+<span class="va">minio</span> <span class="op">&lt;-</span> <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>
+  access_key <span class="op">=</span> <span class="st">"minioadmin"</span>,
+  secret_key <span class="op">=</span> <span class="st">"minioadmin"</span>,
+  scheme <span class="op">=</span> <span class="st">"http"</span>,
+  endpoint_override <span class="op">=</span> <span class="st">"localhost:9000"</span>
+<span class="op">)</span></pre></div>
 <p>or, as a URI, it would be</p>
 <pre><code>s3://minioadmin:minioadmin@?scheme=http&amp;endpoint_override=localhost%3A9000</code></pre>
 <p>(note the URL escaping of the <code><a href="https://rdrr.io/r/base/Colon.html">:</a></code> in <code>endpoint_override</code>).</p>

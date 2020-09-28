@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200926</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200927</span>
       </span>
     </div>
 
@@ -184,13 +184,13 @@
     <p>Copy files, including between FileSystems</p>
     </div>
 
-    <pre class="usage"><span class='fu'>copy_files</span>(
-  src_fs = <span class='kw'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span>(),
-  <span class='kw'>src_sel</span>,
-  dest_fs = <span class='kw'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span>(),
-  <span class='kw'>dest_base_dir</span>,
-  chunk_size = <span class='fl'>1024L</span> <span class='op'>*</span> <span class='fl'>1024L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>copy_files</span><span class='op'>(</span>
+  src_fs <span class='op'>=</span> <span class='va'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='va'>src_sel</span>,
+  dest_fs <span class='op'>=</span> <span class='va'>LocalFileSystem</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='va'>dest_base_dir</span>,
+  chunk_size <span class='op'>=</span> <span class='fl'>1024L</span> <span class='op'>*</span> <span class='fl'>1024L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

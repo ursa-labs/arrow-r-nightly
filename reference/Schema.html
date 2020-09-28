@@ -89,7 +89,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200926</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20200927</span>
       </span>
     </div>
 
@@ -198,7 +198,7 @@ ensure a specific schema rather than inferring it from the various files.</p>
 (active binding) that lets you access their schema.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>schema</span>(<span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>schema</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,15 +240,15 @@ All list elements are coerced to string.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(col1 = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, col2 = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span>))
-<span class='kw'>tab1</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>)
-<span class='kw'>tab1</span><span class='op'>$</span><span class='kw'>schema</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>col1 <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, col2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.3</span>, <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>tab1</span> <span class='op'>&lt;-</span> <span class='va'>Table</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
+<span class='va'>tab1</span><span class='op'>$</span><span class='va'>schema</span>
 </div><div class='output co'>#&gt; Schema
 #&gt; col1: int32
 #&gt; col2: double
 #&gt; 
-#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='kw'>tab2</span> <span class='op'>&lt;-</span> <span class='kw'>Table</span><span class='op'>$</span><span class='fu'>create</span>(<span class='kw'>df</span>, schema = <span class='fu'>schema</span>(col1 = <span class='fu'><a href='data-type.html'>int8</a></span>(), col2 = <span class='fu'><a href='data-type.html'>float32</a></span>()))
-<span class='kw'>tab2</span><span class='op'>$</span><span class='kw'>schema</span>
+#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='va'>tab2</span> <span class='op'>&lt;-</span> <span class='va'>Table</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='va'>df</span>, schema <span class='op'>=</span> <span class='fu'>schema</span><span class='op'>(</span>col1 <span class='op'>=</span> <span class='fu'><a href='data-type.html'>int8</a></span><span class='op'>(</span><span class='op'>)</span>, col2 <span class='op'>=</span> <span class='fu'><a href='data-type.html'>float32</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>tab2</span><span class='op'>$</span><span class='va'>schema</span>
 </div><div class='output co'>#&gt; Schema
 #&gt; col1: int8
 #&gt; col2: float
