@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
       </span>
     </div>
 
@@ -160,9 +160,9 @@
 <div id="installing-a-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-a-development-version" class="anchor"></a>Installing a development version</h2>
-<p>Development versions of the package (binary and source) are built daily and hosted at <a href="https://dl.bintray.com/ursalabs/arrow-r/" class="uri">https://dl.bintray.com/ursalabs/arrow-r/</a>. To install from there:</p>
+<p>Development versions of the package (binary and source) are built daily and hosted at <a href="https://arrow-r-nightly.s3.amazonaws.com" class="uri">https://arrow-r-nightly.s3.amazonaws.com</a>. To install from there:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span>, repos <span class="op">=</span> <span class="st">"https://dl.bintray.com/ursalabs/arrow-r"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span>, repos <span class="op">=</span> <span class="st">"https://arrow-r-nightly.s3.amazonaws.com"</span><span class="op">)</span></pre></div>
 <p>Or</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="reference/install_arrow.html">install_arrow</a></span><span class="op">(</span>nightly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
@@ -176,7 +176,7 @@
 brew install apache-arrow
 # Or for a development version, you can try:
 brew install apache-arrow --HEAD</code></pre>
-<p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows/">nightly bintray repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
+<p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows/">nightly repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
 <p>If you need to alter both the Arrow C++ library and the R package code, or if you can’t get a binary version of the latest C++ library elsewhere, you’ll need to build it from source too.</p>
 <p>First, install the C++ library. See the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">developer guide</a> for details. It’s recommended to make a <code>build</code> directory inside of the <code>cpp</code> directory of the Arrow git repository (it is git-ignored). Assuming you are inside <code>cpp/build</code>, you’ll first call <code>cmake</code> to configure the build and then <code>make install</code>. For the R package, you’ll need to enable several features in the C++ library using <code>-D</code> flags:</p>
 <pre><code>cmake
