@@ -2,17 +2,17 @@ ARG base
 FROM ${base}
 
 RUN yum install -y \
-        bison \
         diffutils \
-        flex \
         gcc-c++ \
+        libcurl-devel \
         make \
+        openssl-devel \
         wget \
         which
 
 # yum install cmake version is too old
 
-ARG cmake=3.16.2
+ARG cmake=3.18.1
 RUN wget -nv -O - https://github.com/Kitware/CMake/releases/download/v${cmake}/cmake-${cmake}-Linux-x86_64.tar.gz | tar -xzf - -C /opt
 ENV PATH=/opt/cmake-${cmake}-Linux-x86_64/bin:$PATH
 ENV CC=/usr/bin/gcc
