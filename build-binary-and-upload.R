@@ -1,7 +1,7 @@
 on_windows <- tolower(Sys.info()[["sysname"]]) == "windows"
 
 # Install dependencies by installing (yesterday's) binary, then removing it
-install.packages("arrow",
+install.packages(c("arrow", "cpp11"),
   type = "binary",
   repos = c("https://arrow-r-nightly.s3.amazonaws.com", "https://cloud.r-project.org")
 )
