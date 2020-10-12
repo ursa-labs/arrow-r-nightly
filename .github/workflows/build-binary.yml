@@ -66,7 +66,7 @@ jobs:
           export PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
           # These files were created by the docker user so we have to sudo to get them
-          sudo -E zip -r $PKG_FILE lib/*.a include/
+          sudo -E zip -r $PKG_FILE lib/ include/
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           sudo -E bash ../../../../../bintray-upload.sh
           # Or, upload to S3
