@@ -56,7 +56,7 @@ jobs:
         run: |
           cd arrow/r
           export LIBARROW_DOWNLOAD=true
-          Rscript -e "pkgdown::build_site()"
+          Rscript -e "pkgdown::build_site(install = FALSE)"
           cd docs
           if [ "$(git status --porcelain)" != "" ]; then
             # There are changes to the built site
