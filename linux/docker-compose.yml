@@ -70,5 +70,5 @@ services:
       LIBARROW_MINIMAL: "false"
     command: >
       /bin/bash -c "
-        if grep -q -i -e "centos.* 7" /etc/os-release; then export ARROW_S3=OFF; fi &&
+        if grep -q -i -e 'centos.* 7' /etc/os-release; then export ARROW_S3=OFF; fi &&
         cd /arrow && r/inst/build_arrow_static.sh"
