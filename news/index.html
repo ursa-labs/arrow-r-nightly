@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201012</span>
       </span>
     </div>
 
@@ -192,15 +192,24 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html">collect()</a></code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
 </li>
+<li>
+<code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> supports specifying column types, both with a <code>Schema</code> and with the compact string representation for types used in the <code>readr</code> package. It also has gained a <code>timestamp_parsers</code> argument that lets you express a set of <code>strptime</code> parse strings that will be tried to convert columns designated as <code>Timestamp</code> type.</li>
 </ul>
 </div>
 <div id="aws-s3-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aws-s3-support" class="anchor"></a>AWS S3 support</h2>
 <ul>
-<li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages. To enable it on Linux, you need additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
-<li>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.), as well as <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>, allow you to access resources on S3 (or on file systems that emulate S3) either by providing an <code>s3://</code> URI or by passing an additional <code>filesystem</code> argument. See <code><a href="../articles/fs.html">vignette("fs", package = "arrow")</a></code> for examples.</li>
+<li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages. To enable it on Linux, you need the additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
+<li>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.), as well as <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>, allow you to access resources on S3 (or on file systems that emulate S3) either by providing an <code>s3://</code> URI or by providing a <code>FileSystem$path()</code>. See <code><a href="../articles/fs.html">vignette("fs", package = "arrow")</a></code> for examples.</li>
+<li>
+<code><a href="../reference/copy_files.html">copy_files()</a></code> allows you to recursively copy directories of files from one file system to another, such as from S3 to your local machine.</li>
 </ul>
+</div>
+<div id="flight-rpc" class="section level2">
+<h2 class="hasAnchor">
+<a href="#flight-rpc" class="anchor"></a>Flight RPC</h2>
+<p><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Flight</a> is a general-purpose client-server framework for high performance transport of large datasets over network interfaces. The <code>arrow</code> R package now provides methods for connecting to Flight RPC servers to send and receive data. See <code><a href="../articles/flight.html">vignette("flight", package = "arrow")</a></code> for an overview.</p>
 </div>
 <div id="computation" class="section level2">
 <h2 class="hasAnchor">
@@ -214,12 +223,26 @@
 <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> (<code>nrow</code>) for dplyr queries on Table/RecordBatch is now supported</li>
 </ul>
 </div>
-<div id="other-improvements" class="section level2">
+<div id="packaging-and-installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-improvements" class="anchor"></a>Other improvements</h2>
+<a href="#packaging-and-installation" class="anchor"></a>Packaging and installation</h2>
 <ul>
 <li>
 <code>arrow</code> now depends on <a href="https://cpp11.r-lib.org/"><code>cpp11</code></a>, which brings more robust UTF-8 handling and faster compilation</li>
+<li>The Linux build script now succeeds on older versions of R</li>
+<li>MacOS binary packages now ship with zstandard compression enabled</li>
+</ul>
+</div>
+<div id="bug-fixes-and-other-enhancements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-and-other-enhancements" class="anchor"></a>Bug fixes and other enhancements</h2>
+<ul>
+<li>Automatic conversion of Arrow <code>Int64</code> type when all values fit with an R 32-bit integer now correctly inspects all chunks in a ChunkedArray, and this conversion can be disabled (so that <code>Int64</code> always yields a <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html">bit64::integer64</a></code> vector) by setting <code><a href="https://rdrr.io/r/base/options.html">options(arrow.int64_downcast = FALSE)</a></code>.</li>
+<li>In addition to the data.frame column metadata preserved in round trip, added in 1.0.0, now attributes of the data.frame itself are also preserved in Arrow schema metadata.</li>
+<li>File writers now respect the system umask setting</li>
+<li>
+<code>ParquetFileReader</code> has additional methods for accessing individual columns or row groups from the file</li>
+<li>Various segfaults fixed: invalid input in <code>ParquetFileWriter</code>; invalid <code>ArrowObject</code> pointer from a saved R object; converting deeply nested structs from Arrow to R</li>
 </ul>
 </div>
 </div>

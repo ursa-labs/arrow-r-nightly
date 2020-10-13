@@ -84,7 +84,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201012</span>
       </span>
     </div>
 
@@ -191,9 +191,9 @@ make it much faster to read and query.</p>
     <pre class="usage"><span class='fu'>write_dataset</span><span class='op'>(</span>
   <span class='va'>dataset</span>,
   <span class='va'>path</span>,
-  format <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>$</span><span class='va'>format</span><span class='op'>$</span><span class='va'>type</span>,
-  schema <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>$</span><span class='va'>schema</span>,
+  format <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>$</span><span class='va'>format</span>,
   partitioning <span class='op'>=</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span><span class='op'>(</span><span class='va'>dataset</span><span class='op'>)</span>,
+  basename_template <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"part-{i}."</span>, <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>format</span><span class='op'>)</span><span class='op'>)</span>,
   hive_style <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -206,13 +206,14 @@ make it much faster to read and query.</p>
       <td><p><a href='Dataset.html'>Dataset</a>, <a href='RecordBatch.html'>RecordBatch</a>, <a href='Table.html'>Table</a>, <code>arrow_dplyr_query</code>, or
 <code>data.frame</code>. If an <code>arrow_dplyr_query</code> or <code>grouped_df</code>,
 <code>schema</code> and <code>partitioning</code> will be taken from the result of any <code>select()</code>
-and <code>group_by()</code> operations done on the dataset. Note that <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries
-are not currently supported, and <code>select</code>-ed columns may not be renamed.</p></td>
+and <code>group_by()</code> operations done on the dataset. <code><a href='https://rdrr.io/r/stats/filter.html'>filter()</a></code> queries will be
+applied to restrict written rows.
+Note that <code>select()</code>-ed columns may not be renamed.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>string path to a directory to write to (directory will be
-created if it does not exist)</p></td>
+      <td><p>string path, URI, or <code>SubTreeFileSystem</code> referencing a directory
+to write to (directory will be created if it does not exist)</p></td>
     </tr>
     <tr>
       <th>format</th>
@@ -221,15 +222,17 @@ formats are "feather" (aka "ipc") and "parquet". Default is to write to the
 same format as <code>dataset</code>.</p></td>
     </tr>
     <tr>
-      <th>schema</th>
-      <td><p><a href='Schema.html'>Schema</a> containing a subset of columns, possibly reordered,
-in <code>dataset</code>. Default is <code>dataset$schema</code>, i.e. all columns.</p></td>
-    </tr>
-    <tr>
       <th>partitioning</th>
       <td><p><code>Partitioning</code> or a character vector of columns to
 use as partition keys (to be written as path segments). Default is to
 use the current <code>group_by()</code> columns.</p></td>
+    </tr>
+    <tr>
+      <th>basename_template</th>
+      <td><p>string template for the names of files to be written.
+Must contain <code>"{i}"</code>, which will be replaced with an autoincremented
+integer to generate basenames of datafiles. For example, <code>"part-{i}.feather"</code>
+will yield <code>"part-0.feather", ...</code>.</p></td>
     </tr>
     <tr>
       <th>hive_style</th>
@@ -239,7 +242,17 @@ use the current <code>group_by()</code> columns.</p></td>
     <tr>
       <th>...</th>
       <td><p>additional format-specific arguments. For available Parquet
-options, see <code><a href='write_parquet.html'>write_parquet()</a></code>.</p></td>
+options, see <code><a href='write_parquet.html'>write_parquet()</a></code>. The available Feather options are</p><ul>
+<li><p><code>use_legacy_format</code> logical: write data formatted so that Arrow libraries
+versions 0.14 and lower can read it. Default is <code>FALSE</code>. You can also
+enable this by setting the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</p></li>
+<li><p><code>metadata_version</code>: A string like "V5" or the equivalent integer indicating
+the Arrow IPC MetadataVersion. Default (NULL) will use the latest version,
+unless the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code>, in
+which case it will be V4.</p></li>
+<li><p><code>codec</code>: A <a href='Codec.html'>Codec</a> which will be used to compress body buffers of written
+files. Default (NULL) will not compress body buffers.</p></li>
+</ul></td>
     </tr>
     </table>
 

@@ -88,7 +88,7 @@ DatasetFactory is used to provide finer control over the creation of Datasets." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201012</span>
       </span>
     </div>
 
@@ -238,9 +238,6 @@ takes the following arguments:</p><ul>
 may also replace the dataset's schema by using <code>ds$schema &lt;- new_schema</code>.
 This method currently supports only adding, removing, or reordering
 fields in the schema: you cannot alter or cast the field types.</p></li>
-<li><p><code>$write(path, filesystem, schema, format, partitioning, ...)</code>: writes the
-dataset to <code>path</code> in the <code>format</code> file format, partitioned by <code>partitioning</code>,
-and invisibly returns <code>self</code>. See <code><a href='write_dataset.html'>write_dataset()</a></code>.</p></li>
 </ul>
 
 <p><code>FileSystemDataset</code> has the following methods:</p><ul>

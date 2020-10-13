@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201012</span>
       </span>
     </div>
 
@@ -159,22 +159,20 @@
 <div id="creating-a-filesystem-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating-a-filesystem-object" class="anchor"></a>Creating a FileSystem object</h2>
-<p>Another way to connect to S3 is to create an <code>S3FileSystem</code> object once and pass that to the read/write functions. This may be a convenience when dealing with long URIs, and it’s necessary for some options and authentication methods that aren’t supported in the URI format.</p>
-<p>In the previous example, this would look like:</p>
+<p>Another way to connect to S3 is to create a <code>FileSystem</code> object once and pass that to the read/write functions. <code>S3FileSystem</code> objects can be created with the <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> function, which automatically detects the bucket’s AWS region. Additionally, the resulting <code>FileSystem</code> will consider paths relative to the bucket’s path (so for example you don’t need to prefix the bucket path when listing a directory). This may be convenient when dealing with long URIs, and it’s necessary for some options and authentication methods that aren’t supported in the URI format.</p>
+<p>With a <code>FileSystem</code> object, we can point to specific files in it with the <code>$path()</code> method. In the previous example, this would look like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">fs</span> <span class="op">&lt;-</span> <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>region <span class="op">=</span> <span class="st">"us-east-2"</span><span class="op">)</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="st">"ursa-labs-taxi-data/2019/06/data.parquet"</span>, filesystem <span class="op">=</span> <span class="va">fs</span><span class="op">)</span></pre></div>
-<p>See the help for <code>FileSystem</code> for a list of options that <code>S3FileSystem$create()</code> can take. <code>region</code>, <code>scheme</code>, and <code>endpoint_override</code> can be encoded as query parameters in the URI (though <code>region</code> will be auto-detected the bucket URI if omitted), and <code>access_key</code> and <code>secret_key</code> can also be included, but other options are not supported in the URI.</p>
-<p>Using the <code>SubTreeFileSystem</code> class, you can represent an S3 bucket or subdirectory inside of one.</p>
+<span class="va">bucket</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/s3_bucket.html">s3_bucket</a></span><span class="op">(</span><span class="st">"ursa-labs-taxi-data"</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="va">bucket</span><span class="op">$</span><span class="fu">path</span><span class="op">(</span><span class="st">"2019/06/data.parquet"</span><span class="op">)</span><span class="op">)</span></pre></div>
+<p>See the help for <code>FileSystem</code> for a list of options that <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> and <code>S3FileSystem$create()</code> can take. <code>region</code>, <code>scheme</code>, and <code>endpoint_override</code> can be encoded as query parameters in the URI (though <code>region</code> will be auto-detected in <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> or from the URI if omitted). <code>access_key</code> and <code>secret_key</code> can also be included, but other options are not supported in the URI.</p>
+<p>The object that <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> returns is technically a <code>SubTreeFileSystem</code>, which holds a path and a file system to which it corresponds. <code>SubTreeFileSystem</code>s can be useful for holding a reference to a subdirectory somewhere, on S3 or elsewhere.</p>
+<p>One way to get a subtree is to call the <code>$cd()</code> method on a <code>FileSystem</code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">bucket</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>
-  <span class="st">"ursa-labs-taxi-data"</span>,
-  <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>region <span class="op">=</span> <span class="st">"us-east-2"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="st">"2019/06/data.parquet"</span>, filesystem <span class="op">=</span> <span class="va">bucket</span><span class="op">)</span></pre></div>
+<span class="va">june2019</span> <span class="op">&lt;-</span> <span class="va">bucket</span><span class="op">$</span><span class="fu">cd</span><span class="op">(</span><span class="st">"2019/06"</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="va">june2019</span><span class="op">$</span><span class="fu">path</span><span class="op">(</span><span class="st">"data.parquet"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><code>SubTreeFileSystem</code> can also be made from a URI:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">bucket</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data"</span><span class="op">)</span></pre></div>
+<span class="va">june2019</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data/2019/06"</span><span class="op">)</span></pre></div>
 </div>
 <div id="authentication" class="section level2">
 <h2 class="hasAnchor">
@@ -182,11 +180,11 @@
 <p>To access private S3 buckets, you need typically need two secret parameters: a <code>access_key</code>, which is like a user id, and <code>secret_key</code>, like a token. There are a few options for passing these credentials:</p>
 <ol style="list-style-type: decimal">
 <li><p>Include them in the URI, like <code>s3://access_key:secret_key@bucket-name/path/to/file</code>. Be sure to <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encode</a> your secrets if they contain special characters like “/”.</p></li>
-<li><p>Pass them as <code>access_key</code> and <code>secret_key</code> to <code>S3FileSystem$create()</code></p></li>
+<li><p>Pass them as <code>access_key</code> and <code>secret_key</code> to <code>S3FileSystem$create()</code> or <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code></p></li>
 <li><p>Set them as environment variables named <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>, respectively.</p></li>
 <li><p>Define them in a <code>~/.aws/credentials</code> file, according to the <a href="https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/credentials.html">AWS documentation</a>.</p></li>
 </ol>
-<p>You can also use an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AccessRole</a> for temporary access by passing the <code>role_arn</code> identifier to <code>S3FileSystem$create()</code>.</p>
+<p>You can also use an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AccessRole</a> for temporary access by passing the <code>role_arn</code> identifier to <code>S3FileSystem$create()</code> or <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code>.</p>
 </div>
 <div id="file-systems-that-emulate-s3" class="section level2">
 <h2 class="hasAnchor">

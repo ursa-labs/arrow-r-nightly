@@ -83,7 +83,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.20201012</span>
       </span>
     </div>
 
@@ -189,7 +189,6 @@ This function enables you to write Parquet files from R.</p>
     <pre class="usage"><span class='fu'>write_parquet</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>sink</span>,
-  filesystem <span class='op'>=</span> <span class='cn'>NULL</span>,
   chunk_size <span class='op'>=</span> <span class='cn'>NULL</span>,
   version <span class='op'>=</span> <span class='cn'>NULL</span>,
   compression <span class='op'>=</span> <span class='fu'>default_parquet_compression</span><span class='op'>(</span><span class='op'>)</span>,
@@ -211,12 +210,8 @@ This function enables you to write Parquet files from R.</p>
     </tr>
     <tr>
       <th>sink</th>
-      <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a></p></td>
-    </tr>
-    <tr>
-      <th>filesystem</th>
-      <td><p>A <a href='FileSystem.html'>FileSystem</a> where <code>sink</code> should be written if it is a
-string file path; default is the local file system</p></td>
+      <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a>, or path in a file
+system (<code>SubTreeFileSystem</code>)</p></td>
     </tr>
     <tr>
       <th>chunk_size</th>
@@ -270,7 +265,12 @@ to "ms", do not raise an exception</p></td>
     <p>the input <code>x</code> invisibly.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The parameters <code>compression</code>, <code>compression_level</code>, <code>use_dictionary</code> and
+    <p>Due to features of the format, Parquet files cannot be appended to.
+If you want to use the Parquet format but also want the ability to extend
+your dataset, you can write to additional Parquet files and then treat
+the whole directory of files as a <a href='Dataset.html'>Dataset</a> you can query.
+See <code><a href='../articles/dataset.html'>vignette("dataset", package = "arrow")</a></code> for examples of this.</p>
+<p>The parameters <code>compression</code>, <code>compression_level</code>, <code>use_dictionary</code> and
 <code>write_statistics</code> support various patterns:</p><ul>
 <li><p>The default <code>NULL</code> leaves the parameter unspecified, and the C++ library
 uses an appropriate default for each column (defaults listed above)</p></li>
