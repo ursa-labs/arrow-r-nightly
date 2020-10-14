@@ -32,6 +32,8 @@ files <- all_files_url %>%
   jsonlite::fromJSON(simplifyDataFrame = TRUE) %>%
   mutate(date = as.Date(substr(created, 1, 10))) %>%
   select(path, size, date) %>%
+  # We can't delete the oldest packages because they belong to an immutable version :/
+  filter(date > as.Date("2020-08-14")) %>%
   # Only consider those older than MAX_AGE
   filter(date < (Sys.Date() - MAX_AGE)) %>%
   # Only purge dev/nightly versions (those x.y.z.p versions with p > 1000)
