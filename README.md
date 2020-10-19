@@ -36,6 +36,8 @@ We also build C++ static binaries for these Linux distributions and versions:
 
 Additional distribution-versions are supported by mapping them to binary builds that we know to work for them, such as Fedora to CentOS. See [distro-map.csv](https://github.com/ursa-labs/arrow-r-nightly/blob/master/linux/distro-map.csv) for a complete list.
 
+All Linux binaries except for `centos-7` include support for connecting to AWS S3, so they have additional system requirements--`libcurl` and `openssl`--that must be installed prior to installing `arrow`.
+
 Daily builds are kept for 30 days.
 
 The `pkgdown` documentation site is also built daily. See https://ursalabs.org/arrow-r-nightly/.
