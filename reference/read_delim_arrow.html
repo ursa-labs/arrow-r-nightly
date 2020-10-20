@@ -84,7 +84,7 @@ readr::read_delim(), and col_select was inspired by vroom::vroom()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201018</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201019</span>
       </span>
     </div>
 
@@ -420,10 +420,10 @@ to idenfity column names, you'll need to add <code>skip = 1</code> to skip that 
   <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>mtcars</span>, file <span class='op'>=</span> <span class='va'>tf</span><span class='op'>)</span>
   <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv_arrow</span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in csv___ParseOptions__initialize(list(delimiter = delimiter, quoting = quoting,     quote_char = quote_char, double_quote = double_quote, escaping = escaping,     escape_char = escape_char, newlines_in_values = newlines_in_values,     ignore_empty_lines = ignore_empty_lines)): Cannot call csv___ParseOptions__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'>  <span class='co'># Can select columns</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'>  <span class='co'># Can select columns</span>
   <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv_arrow</span><span class='op'>(</span><span class='va'>tf</span>, col_select <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"d"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in csv___ParseOptions__initialize(list(delimiter = delimiter, quoting = quoting,     quote_char = quote_char, double_quote = double_quote, escaping = escaping,     escape_char = escape_char, newlines_in_values = newlines_in_values,     ignore_empty_lines = ignore_empty_lines)): Cannot call csv___ParseOptions__initialize(). Please use arrow::install_arrow() to install required runtime libraries. </span></div><div class='input'><span class='co'># }</span>
+<span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

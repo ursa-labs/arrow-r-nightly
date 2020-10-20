@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201018</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201019</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@
 <p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details. To see if your <code>arrow</code> installation has S3 support, run</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="../reference/arrow_available.html">arrow_with_s3</a></span><span class="op">(</span><span class="op">)</span></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Even with S3 support enabled network, speed will be a bottleneck unless your machine is located in the same AWS region as the data. So, for this vignette, we assume that the NYC taxi dataset has been downloaded locally in a “nyc-taxi” directory.</p>
 <p>If your <code>arrow</code> build has S3 support, you can sync the data locally with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
