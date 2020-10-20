@@ -36,9 +36,9 @@ jobs:
         shell: bash
         run: |
           cd linux
-          git clone https://github.com/apache/arrow
+          git clone https://github.com/nealrichardson/arrow
           cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          git checkout 2.0.0-rpkg
       - name: Build
         shell: bash
         run: |
