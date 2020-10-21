@@ -1,12 +1,14 @@
 source("https://raw.githubusercontent.com/apache/arrow/master/ci/etc/rprofile")
 
 # We need dev remotes for system_requirements
-install.packages("pak")
-pak::pkg_install("r-lib/remotes")
-pak::pkg_install("nealrichardson/distro")
+install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL, type = "source")
+remotes::install_github("nealrichardson/distro")
 d <- distro::distro()
 # curl has same sysreqs so use it today (since arrow with updated sysreqs isn't yet on RSPM)
 sysreqs <- remotes::system_requirements(d$id, d$short_version, package = "curl")
+if (any(grepl("apt-get", sysreqs))) {
+  system("apt-get update -y")
+}
 for (s in sysreqs) system(s)
 
 install.packages(
