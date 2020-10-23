@@ -33,4 +33,7 @@ jobs:
       - name: Install system requirements
         run: linux/install-system-requirements.sh
       - name: Install arrow from binatray
+        env:
+          LIBARROW_BUILD: "FALSE"
+          LIBARROW_DOWNLOAD: "TRUE"
         run: PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R
