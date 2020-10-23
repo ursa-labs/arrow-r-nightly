@@ -31,6 +31,6 @@ jobs:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
       - name: Install system requirements
-        run: source linux/install-system-requirements.sh
+        run: linux/install-system-requirements.sh
       - name: Install arrow from binatray
         run: PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R
