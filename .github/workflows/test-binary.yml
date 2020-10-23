@@ -40,4 +40,4 @@ jobs:
             -e LIBARROW_DOWNLOAD=TRUE \
             -v $(pwd):/linux \
             $DOCKER_IMAGE \
-            /bin/bash -c "PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R"
+            /bin/bash -c "source linux/install-system-requirements.sh && PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R"
