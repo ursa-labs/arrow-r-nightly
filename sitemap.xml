@@ -70,13 +70,13 @@
     <loc>https://arrow.apache.org/docs/r//reference/OutputStream.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/ParquetArrowReaderProperties.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/ParquetFileReader.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/ParquetFileWriter.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r//reference/ParquetReaderProperties.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r//reference/ParquetWriterProperties.html</loc>
