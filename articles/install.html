@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201130</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201201</span>
       </span>
     </div>
 
@@ -240,7 +240,7 @@ dlopen(/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so, 6): Library not loaded: 
 <h2 class="hasAnchor">
 <a href="#known-installation-issues" class="anchor"></a>Known installation issues</h2>
 <ul>
-<li><p>On CentOS, if you are using a more modern <code>devtoolset</code>, you may need to set the environment variables <code>CC=/usr/bin/gcc CXX=/usr/bin/g++</code>. See discussion <a href="https://issues.apache.org/jira/browse/ARROW-8586">here</a>.</p></li>
+<li><p>On CentOS, if you are using a more modern <code>devtoolset</code>, you may need to set the environment variables <code>CC</code> and <code>CXX</code> either in the shell or in R’s <code>Makeconf</code>. For CentOS 7 and above, both the Arrow system packages and the C++ binaries for R are built with the default system compilers. If you want to use either of these and you have a <code>devtoolset</code> installed, set <code>CC=/usr/bin/gcc CXX=/usr/bin/g++</code> to use the system compilers instead of the <code>devtoolset</code>. Alternatively, if you want to build <code>arrow</code> with the newer <code>devtoolset</code> compilers, set both <code>ARROW_USE_PKG_CONFIG</code> and <code>LIBARROW_BINARY</code> to <code>false</code> so that you build the Arrow C++ from source using those compilers. Compiler mismatch between the arrow system libraries and the R package may cause R to segfault when <code>arrow</code> package functions are used. See discussions <a href="https://issues.apache.org/jira/browse/ARROW-8586">here</a> and <a href="https://issues.apache.org/jira/browse/ARROW-10780">here</a>.</p></li>
 <li><p>If you have multiple versions of <code>zstd</code> installed on your system, installation by building the C++ from source may fail with an undefined symbols error. Workarounds include (1) setting <code>LIBARROW_BINARY</code> to use a C++ binary; (2) setting <code>ARROW_WITH_ZSTD=OFF</code> to build without <code>zstd</code>; or (3) uninstalling the conflicting <code>zstd</code>. See discussion <a href="https://issues.apache.org/jira/browse/ARROW-8556">here</a>.</p></li>
 </ul>
 </div>
