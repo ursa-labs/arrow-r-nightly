@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write data in the Feather format — write_feather • Arrow R Package</title>
+<title>See available resources on a Flight server — list_flights • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="Write data in the Feather format — write_feather" />
-<meta property="og:description" content="Feather provides binary columnar serialization for data frames.
-It is designed to make reading and writing data frames efficient,
-and to make sharing data across data analysis languages easy.
-This function writes both the original, limited specification of the format
-and the version 2 specification, which is the Apache Arrow IPC file format." />
+<meta property="og:title" content="See available resources on a Flight server — list_flights" />
+<meta property="og:description" content="See available resources on a Flight server" />
 
 
 
@@ -179,82 +175,37 @@ and the version 2 specification, which is the Apache Arrow IPC file format." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write data in the Feather format</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/feather.R'><code>R/feather.R</code></a></small>
-    <div class="hidden name"><code>write_feather.Rd</code></div>
+    <h1>See available resources on a Flight server</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/R/flight.R'><code>R/flight.R</code></a></small>
+    <div class="hidden name"><code>list_flights.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Feather provides binary columnar serialization for data frames.
-It is designed to make reading and writing data frames efficient,
-and to make sharing data across data analysis languages easy.
-This function writes both the original, limited specification of the format
-and the version 2 specification, which is the Apache Arrow IPC file format.</p>
+    <p>See available resources on a Flight server</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_feather</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  <span class='va'>sink</span>,
-  version <span class='op'>=</span> <span class='fl'>2</span>,
-  chunk_size <span class='op'>=</span> <span class='fl'>65536L</span>,
-  compression <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"lz4"</span>, <span class='st'>"uncompressed"</span>, <span class='st'>"zstd"</span><span class='op'>)</span>,
-  compression_level <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>list_flights</span><span class='op'>(</span><span class='va'>client</span><span class='op'>)</span>
+
+<span class='fu'>flight_path_exists</span><span class='op'>(</span><span class='va'>client</span>, <span class='va'>path</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
+      <th>client</th>
+      <td><p><code>pyarrow.flight.FlightClient</code>, as returned by <code><a href='flight_connect.html'>flight_connect()</a></code></p></td>
     </tr>
     <tr>
-      <th>sink</th>
-      <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a>, or path in a file
-system (<code>SubTreeFileSystem</code>)</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>integer Feather file version. Version 2 is the current.
-Version 1 is the more limited legacy format.</p></td>
-    </tr>
-    <tr>
-      <th>chunk_size</th>
-      <td><p>For V2 files, the number of rows that each chunk of data
-should have in the file. Use a smaller <code>chunk_size</code> when you need faster
-random row access. Default is 64K. This option is not supported for V1.</p></td>
-    </tr>
-    <tr>
-      <th>compression</th>
-      <td><p>Name of compression codec to use, if any. Default is
-"lz4" if LZ4 is available in your build of the Arrow C++ library, otherwise
-"uncompressed". "zstd" is the other available codec and generally has better
-compression ratios in exchange for slower read and write performance
-See <code><a href='codec_is_available.html'>codec_is_available()</a></code>. This option is not supported for V1.</p></td>
-    </tr>
-    <tr>
-      <th>compression_level</th>
-      <td><p>If <code>compression</code> is "zstd", you may
-specify an integer compression level. If omitted, the compression codec's
-default compression level is used.</p></td>
+      <th>path</th>
+      <td><p>string identifier under which data is stored</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>x</code>, invisibly. Note that if <code>sink</code> is an <a href='OutputStream.html'>OutputStream</a>,
-the stream will be left open.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p><code>list_flights()</code> returns a character vector of paths.
+<code>flight_path_exists()</code> returns a logical value, the equivalent of <code>path %in% list_flights()</code></p>
 
-    <div class='dont-index'><p><a href='RecordBatchWriter.html'>RecordBatchWriter</a> for lower-level access to writing Arrow IPC data.</p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>write_feather</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>tf</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in util___Codec__IsAvailable(compression_from_name(type)): Cannot call util___Codec__IsAvailable(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. </span></div><div class='input'><span class='co'># }</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

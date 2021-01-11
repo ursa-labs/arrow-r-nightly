@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201221</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210110</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@
 <p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details. To see if your <code>arrow</code> installation has S3 support, run</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="../reference/arrow_available.html">arrow_with_s3</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 <p>Even with S3 support enabled network, speed will be a bottleneck unless your machine is located in the same AWS region as the data. So, for this vignette, we assume that the NYC taxi dataset has been downloaded locally in a “nyc-taxi” directory.</p>
 <p>If your <code>arrow</code> build has S3 support, you can sync the data locally with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -158,25 +158,20 @@
 <p>If your <code>arrow</code> build doesn’t have S3 support, you can download the files with some additional code:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bucket</span> <span class="op">&lt;-</span> <span class="st">"https://ursa-labs-taxi-data.s3.us-east-2.amazonaws.com"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"nyc-taxi"</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">year</span> <span class="kw">in</span> <span class="fl">2009</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"nyc-taxi"</span>, <span class="va">year</span><span class="op">)</span><span class="op">)</span>
   <span class="kw">if</span> <span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2019</span><span class="op">)</span> <span class="op">{</span>
     <span class="co"># We only have through June 2019 there</span>
     <span class="va">months</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
     <span class="va">months</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>
   <span class="op">}</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">month</span> <span class="kw">in</span> <span class="va">months</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="va">month</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">month</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"0"</span>, <span class="va">month</span><span class="op">)</span>
-    <span class="op">}</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"nyc-taxi"</span>, <span class="va">year</span>, <span class="va">month</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">month</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%02d"</span>, <span class="va">months</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"nyc-taxi"</span>, <span class="va">year</span>, <span class="va">month</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>
       <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">bucket</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="st">"data.parquet"</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span>,
       <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"nyc-taxi"</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="st">"data.parquet"</span><span class="op">)</span>,
-      mode <span class="op">=</span> <span class="st">'wb'</span>
-    <span class="op">)</span>
+      mode <span class="op">=</span> <span class="st">"wb"</span>
+    <span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 <p>Note that these download steps in the vignette are not executed: if you want to run with live data, you’ll have to do it yourself separately. Given the size, if you’re running this locally and don’t have a fast connection, feel free to grab only a year or two of data.</p>

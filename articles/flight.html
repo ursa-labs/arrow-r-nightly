@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201221</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210110</span>
       </span>
     </div>
 
@@ -166,7 +166,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/">arrow</a></span><span class="op">)</span>
 <span class="va">client</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flight_connect.html">flight_connect</a></span><span class="op">(</span>port <span class="op">=</span> <span class="fl">8089</span><span class="op">)</span>
 <span class="co"># Upload some data to our server so there's something to demo</span>
-<span class="fu"><a href="../reference/push_data.html">push_data</a></span><span class="op">(</span><span class="va">client</span>, <span class="va">iris</span>, path <span class="op">=</span> <span class="st">"test_data/iris"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/flight_put.html">flight_put</a></span><span class="op">(</span><span class="va">client</span>, <span class="va">iris</span>, path <span class="op">=</span> <span class="st">"test_data/iris"</span><span class="op">)</span></code></pre></div>
 <p>Now, in a new R process, let’s connect to the server and pull the data we put there:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/">arrow</a></span><span class="op">)</span>

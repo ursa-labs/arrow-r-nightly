@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20201221</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210110</span>
       </span>
     </div>
 
@@ -182,6 +182,60 @@
 <h1 class="page-header" data-toc-text="2.0.0.9000">
 <a href="#arrow-2009000" class="anchor"></a>arrow 2.0.0.9000<small> Unreleased </small>
 </h1>
+<div id="python-and-flight" class="section level2">
+<h2 class="hasAnchor">
+<a href="#python-and-flight" class="anchor"></a>Python and Flight</h2>
+<ul>
+<li>Flight methods <code><a href="../reference/flight_get.html">flight_get()</a></code> and <code><a href="../reference/flight_put.html">flight_put()</a></code> (renamed from <code>push_data()</code> in this release) can handle both Tables and RecordBatches</li>
+<li>
+<code><a href="../reference/flight_put.html">flight_put()</a></code> gains an <code>overwrite</code> argument to optionally check for the existence of a resource with the the same name</li>
+<li>
+<code><a href="../reference/list_flights.html">list_flights()</a></code> and <code><a href="../reference/list_flights.html">flight_path_exists()</a></code> enable you to see available resources on a Flight server</li>
+<li>
+<code>Schema</code> objects now have <code>r_to_py</code> and <code>py_to_r</code> methods</li>
+<li>Schema metadata is correctly preserved when converting Tables to/from Python</li>
+</ul>
+</div>
+<div id="enhancements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#enhancements" class="anchor"></a>Enhancements</h2>
+<ul>
+<li>Arithmetic operations (<code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>, etc.) are supported on Arrays and ChunkedArrays and can be used in filter expressions in Arrow <code>dplyr</code> pipelines</li>
+<li>Table columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code>
+</li>
+<li>Column names of Tables and RecordBatches can be renamed by assigning <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>
+</li>
+<li>Large string types can now be written to Parquet files</li>
+<li>The <a href="https://rlang.r-lib.org/reference/tidyeval-data.html">pronouns <code>.data</code> and <code>.env</code></a> are now fully supported in Arrow <code>dplyr</code> pipelines.</li>
+<li>Option <code>arrow.skip_nul</code> (default <code>FALSE</code>, as in <code><a href="https://rdrr.io/r/base/scan.html">base::scan()</a></code>) allows conversion of Arrow string (<code><a href="../reference/data-type.html">utf8()</a></code>) type data containing embedded nul <code>\0</code> characters to R. If set to <code>TRUE</code>, nuls will be stripped and a warning is emitted if any are found.</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed a performance regression in converting Arrow string types to R that was present in the 2.0.0 release</li>
+<li>C++ functions now trigger garbage collection when needed</li>
+<li>
+<code><a href="../reference/write_parquet.html">write_parquet()</a></code> can now write RecordBatches</li>
+<li>Reading a Table from a RecordBatchStreamReader containing 0 batches no longer crashes</li>
+<li>
+<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently <a href="https://issues.apache.org/jira/browse/ARROW-10624">ARROW-10624</a>
+</li>
+</ul>
+</div>
+<div id="packaging-and-installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#packaging-and-installation" class="anchor"></a>Packaging and installation</h2>
+<ul>
+<li>Nightly development versions of the conda <code>r-arrow</code> package are available with <code>conda install -c arrow-nightlies -c conda-forge --strict-channel-priority r-arrow</code>
+</li>
+<li>Linux installation now safely supports older <code>cmake</code> versions</li>
+<li>Compiler version checking for enabling S3 support correctly identifies the active compiler</li>
+<li>Updated guidance and troubleshooting in <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code>, especially for known CentOS issues</li>
+<li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/"><code>distro</code></a> package. If your OS isn’t correctly identified, please report an issue there.</li>
+</ul>
+</div>
 </div>
     <div id="arrow-200" class="section level1">
 <h1 class="page-header" data-toc-text="2.0.0">
@@ -228,9 +282,9 @@
 <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> (<code>nrow</code>) for dplyr queries on Table/RecordBatch is now supported</li>
 </ul>
 </div>
-<div id="packaging-and-installation" class="section level2">
+<div id="packaging-and-installation-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#packaging-and-installation" class="anchor"></a>Packaging and installation</h2>
+<a href="#packaging-and-installation-1" class="anchor"></a>Packaging and installation</h2>
 <ul>
 <li>
 <code>arrow</code> now depends on <a href="https://cpp11.r-lib.org/"><code>cpp11</code></a>, which brings more robust UTF-8 handling and faster compilation</li>
@@ -256,9 +310,9 @@
 <h1 class="page-header" data-toc-text="1.0.1">
 <a href="#arrow-101" class="anchor"></a>arrow 1.0.1<small> 2020-08-28 </small>
 </h1>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Filtering a Dataset that has multiple partition keys using an <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> expression now faithfully returns all relevant rows</li>
 <li>Datasets can now have path segments in the root directory that start with <code>.</code> or <code>_</code>; files and subdirectories starting with those prefixes are still ignored</li>
