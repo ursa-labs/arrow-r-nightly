@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210110</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210111</span>
       </span>
     </div>
 
@@ -221,6 +221,8 @@
 <li>Reading a Table from a RecordBatchStreamReader containing 0 batches no longer crashes</li>
 <li>
 <code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently <a href="https://issues.apache.org/jira/browse/ARROW-10624">ARROW-10624</a>
+</li>
+<li>Fixed reading of compressed Feather files written with Arrow 0.17 <a href="https://issues.apache.org/jira/browse/ARROW-10850">ARROW-10850</a>
 </li>
 </ul>
 </div>
