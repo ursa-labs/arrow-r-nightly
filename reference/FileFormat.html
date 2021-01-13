@@ -84,7 +84,7 @@ file formats (ParquetFileFormat and IpcFileFormat)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210111</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210112</span>
       </span>
     </div>
 
@@ -214,7 +214,9 @@ to reduce memory overhead. Disabled by default.</p></li>
 
 <p><code>format = "text"</code>: see <a href='CsvReadOptions.html'>CsvReadOptions</a>. Note that you can specify them either
 with the Arrow C++ library naming ("delimiter", "quoting", etc.) or the
-<code>readr</code>-style naming used in <code><a href='read_delim_arrow.html'>read_csv_arrow()</a></code> ("delim", "quote", etc.)</p></li>
+<code>readr</code>-style naming used in <code><a href='read_delim_arrow.html'>read_csv_arrow()</a></code> ("delim", "quote", etc.).
+Not all <code>readr</code> options are currently supported; please file an issue if
+you encounter one that <code>arrow</code> should support.</p></li>
 </ul>
 
 <p>It returns the appropriate subclass of <code>FileFormat</code> (e.g. <code>ParquetFileFormat</code>)</p>
