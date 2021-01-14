@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210112</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
       </span>
     </div>
 
@@ -110,14 +110,7 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/apache/arrow/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -133,7 +126,7 @@
       <h1 data-toc-skip>Working with Arrow Datasets and dplyr</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/vignettes/dataset.Rmd"><code>vignettes/dataset.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/dataset.Rmd"><code>vignettes/dataset.Rmd</code></a></small>
       <div class="hidden name"><code>dataset.Rmd</code></div>
 
     </div>
@@ -200,31 +193,31 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span></code></pre></div>
 <pre><code>## 
-## ## FileSystemDataset with 125 Parquet files
-## ## vendor_id: string
-## ## pickup_at: timestamp[us]
-## ## dropoff_at: timestamp[us]
-## ## passenger_count: int8
-## ## trip_distance: float
-## ## pickup_longitude: float
-## ## pickup_latitude: float
-## ## rate_code_id: string
-## ## store_and_fwd_flag: string
-## ## dropoff_longitude: float
-## ## dropoff_latitude: float
-## ## payment_type: string
-## ## fare_amount: float
-## ## extra: float
-## ## mta_tax: float
-## ## tip_amount: float
-## ## tolls_amount: float
-## ## total_amount: float
-## ## improvement_surcharge: float
-## ## pickup_location_id: int32
-## ## dropoff_location_id: int32
-## ## congestion_surcharge: float
-## ## year: int32
-## ## month: int32
+## FileSystemDataset with 125 Parquet files
+## vendor_id: string
+## pickup_at: timestamp[us]
+## dropoff_at: timestamp[us]
+## passenger_count: int8
+## trip_distance: float
+## pickup_longitude: float
+## pickup_latitude: float
+## rate_code_id: string
+## store_and_fwd_flag: string
+## dropoff_longitude: float
+## dropoff_latitude: float
+## payment_type: string
+## fare_amount: float
+## extra: float
+## mta_tax: float
+## tip_amount: float
+## tolls_amount: float
+## total_amount: float
+## improvement_surcharge: float
+## pickup_location_id: int32
+## dropoff_location_id: int32
+## congestion_surcharge: float
+## year: int32
+## month: int32
 ## 
 ## See $metadata for additional Schema metadata</code></pre>
 <p>The other form of partitioning currently supported is <a href="https://hive.apache.org/">Hive</a>-style, in which the partition variable names are included in the path segments. If we had saved our files in paths like</p>
@@ -251,22 +244,22 @@ year=2009/month=02/data.parquet
   <span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## ## # A tibble: 10 x 3
-## ##    passenger_count tip_pct      n
-## ##              &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;
-## ##  1               0    9.84    380
-## ##  2               1   16.7  143087
-## ##  3               2   16.6   34418
-## ##  4               3   14.4    8922
-## ##  5               4   11.4    4771
-## ##  6               5   16.7    5806
-## ##  7               6   16.7    3338
-## ##  8               7   16.7      11
-## ##  9               8   16.7      32
-## ## 10               9   16.7      42
-## ##
-## ##    user  system elapsed
-## ##   4.436   1.012   1.402</code></pre>
+## # A tibble: 10 x 3
+##    passenger_count tip_pct      n
+##              &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;
+##  1               0    9.84    380
+##  2               1   16.7  143087
+##  3               2   16.6   34418
+##  4               3   14.4    8922
+##  5               4   11.4    4771
+##  6               5   16.7    5806
+##  7               6   16.7    3338
+##  8               7   16.7      11
+##  9               8   16.7      32
+## 10               9   16.7      42
+## 
+##    user  system elapsed
+##   4.436   1.012   1.402</code></pre>
 <p>We just selected a window out of a dataset with around 2 billion rows and aggregated on it in under 2 seconds on my laptop. How does this work?</p>
 <p>First, <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>/<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> record their actions but don’t evaluate on the data until you run <code><a href="https://dplyr.tidyverse.org/reference/compute.html">collect()</a></code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -275,14 +268,14 @@ year=2009/month=02/data.parquet
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">passenger_count</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## ## FileSystemDataset (query)
-## ## tip_amount: float
-## ## total_amount: float
-## ## passenger_count: int8
-## ##
-## ## * Filter: ((total_amount &gt; 100:double) and (year == 2015:double))
-## ## * Grouped by passenger_count
-## ## See $.data for the source Arrow object</code></pre>
+## FileSystemDataset (query)
+## tip_amount: float
+## total_amount: float
+## passenger_count: int8
+## 
+## * Filter: ((total_amount &gt; 100:double) and (year == 2015:double))
+## * Grouped by passenger_count
+## See $.data for the source Arrow object</code></pre>
 <p>This returns instantly and shows the window selection you’ve made, without loading data from the files. Because the evaluation of these queries is deferred, you can build up a query that selects down to a small window without generating intermediate datasets that would potentially be large.</p>
 <p>Second, all work is pushed down to the individual data files, and depending on the file format, chunks of data within the files. As a result, we can select a window of data from a much larger dataset by collecting the smaller slices from each file–we don’t have to load the whole dataset in memory in order to slice from it.</p>
 <p>Third, because of partitioning, we can ignore some files entirely. In this example, by filtering <code>year == 2015</code>, all files corresponding to other years are immediately excluded: we don’t have to load them in order to find that no rows match the filter. Relatedly, since Parquet files contain row groups with statistics on the data within, there may be entire chunks of data we can avoid scanning because they have no rows where <code>total_amount &gt; 100</code>.</p>

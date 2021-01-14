@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210112</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
       </span>
     </div>
 
@@ -110,14 +110,7 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/apache/arrow/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -133,7 +126,7 @@
       <h1 data-toc-skip>Using the Arrow C++ Library in R</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/vignettes/arrow.Rmd"><code>vignettes/arrow.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/arrow.Rmd"><code>vignettes/arrow.Rmd</code></a></small>
       <div class="hidden name"><code>arrow.Rmd</code></div>
 
     </div>
@@ -413,7 +406,7 @@
 <a href="#r-object-attributes" class="anchor"></a>R object attributes</h3>
 <p>Arrow supports custom key-value metadata attached to Schemas. When we convert a <code>data.frame</code> to an Arrow Table or RecordBatch, the package stores any <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> attached to the columns of the <code>data.frame</code> in the Arrow object’s Schema. These attributes are stored under the “r” key; you can assign additional string metadata under any other key you wish, like <code>x$metadata$new_key &lt;- "new value"</code>.</p>
 <p>This metadata is preserved when writing the table to Feather or Parquet, and when reading those files into R, or when calling <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> on a Table/RecordBatch, the column attributes are restored to the columns of the resulting <code>data.frame</code>. This means that custom data types, including <code>haven::labelled</code>, <code>vctrs</code> annotations, and others, are preserved when doing a round-trip through Arrow.</p>
-<p>Note that the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> stored in <code>$metadata$r</code> are only understood by R. If you write a <code>data.frame</code> with <code>haven</code> columns to a Feather file and read that in Pandas, the <code>haven</code> metadata won’t be recognized there. (Similarly, Pandas writes its own custom metadata, which the R package does not consume.) You are free, however, to define custom metadata conventions for your application and assign any (string) values you want to other metadata keys.</p>
+<p>Note that the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> stored in <code>$metadata$r</code> are only understood by R. If you write a <code>data.frame</code> with <code>haven</code> columns to a Feather file and read that in Pandas, the <code>haven</code> metadata won’t be recognized there. (Similarly, Pandas writes its own custom metadata, which the R package does not consume.) You are free, however, to define custom metadata conventions for your application and assign any (string) values you want to other metadata keys. For more details, see the documentation for <code><a href="../reference/Schema.html">schema()</a></code>.</p>
 </div>
 </div>
 <div id="class-structure-and-package-conventions" class="section level2">

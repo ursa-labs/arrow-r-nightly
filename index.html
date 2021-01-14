@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210112</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
       </span>
     </div>
 
@@ -114,14 +114,7 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/apache/arrow/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -173,7 +166,7 @@ brew install apache-arrow --HEAD</code></pre>
 <p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows/">nightly repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
 <p>If you need to alter both the Arrow C++ library and the R package code, or if you can’t get a binary version of the latest C++ library elsewhere, you’ll need to build it from source too.</p>
 <p>First, install the C++ library. See the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">developer guide</a> for details. It’s recommended to make a <code>build</code> directory inside of the <code>cpp</code> directory of the Arrow git repository (it is git-ignored). Assuming you are inside <code>cpp/build</code>, you’ll first call <code>cmake</code> to configure the build and then <code>make install</code>. For the R package, you’ll need to enable several features in the C++ library using <code>-D</code> flags:</p>
-<pre><code>cmake
+<pre><code>cmake \
   -DARROW_COMPUTE=ON \
   -DARROW_CSV=ON \
   -DARROW_DATASET=ON \
@@ -182,6 +175,7 @@ brew install apache-arrow --HEAD</code></pre>
   -DARROW_JSON=ON \
   -DARROW_PARQUET=ON \
   -DCMAKE_BUILD_TYPE=release \
+  -DARROW_INSTALL_NAME_RPATH=OFF \
   ..</code></pre>
 <p>where <code>..</code> is the path to the <code>cpp/</code> directory when you’re in <code>cpp/build</code>.</p>
 <p>If you want to enable support for compression libraries, add some or all of these:</p>
@@ -195,8 +189,6 @@ brew install apache-arrow --HEAD</code></pre>
 <ul>
 <li>
 <code>-DARROW_EXTRA_ERROR_CONTEXT=ON</code> makes errors coming from the C++ library point to files and line numbers</li>
-<li>
-<code>-DARROW_INSTALL_NAME_RPATH=OFF</code> may be needed on macOS if there are problems at link time</li>
 <li>
 <code>-DBOOST_SOURCE=BUNDLED</code>, for example, or any other dependency <code>*_SOURCE</code>, if you have a system version of a C++ dependency that doesn’t work correctly with Arrow. This tells the build to compile its own version of the dependency from source.</li>
 </ul>
@@ -212,7 +204,7 @@ R CMD INSTALL .</code></pre>
 <span id="cb11-2"><a href="#cb11-2"></a>Error<span class="op">:</span><span class="st"> </span>package or namespace load failed <span class="cf">for</span> <span class="st">'arrow'</span> <span class="cf">in</span> <span class="kw">dyn.load</span>(file, <span class="dt">DLLpath =</span> DLLpath, ...)<span class="op">:</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>unable to load shared object <span class="st">'/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so'</span><span class="op">:</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="kw">dlopen</span>(<span class="op">/</span>Users<span class="op">/</span>you<span class="op">/</span>R<span class="op">/</span>00LOCK<span class="op">-</span>r<span class="op">/</span>00new<span class="op">/</span>arrow<span class="op">/</span>libs<span class="op">/</span>arrow.so, <span class="dv">6</span>)<span class="op">:</span><span class="st"> </span>Library not loaded<span class="op">:</span><span class="st"> </span><span class="er">@</span>rpath<span class="op">/</span>libarrow.<span class="fl">14.</span>dylib</span></code></pre></div>
-<p>try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g. <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
+<p>ensure that <code>-DARROW_INSTALL_NAME_RPATH=OFF</code> was passed (this is important on macOS to prevent problems at link time and is a no-op on other platforms). Alternativelly, try setting the environment variable <code>R_LD_LIBRARY_PATH</code> to wherever Arrow C++ was put in <code>make install</code>, e.g. <code>export R_LD_LIBRARY_PATH=/usr/local/lib</code>, and retry installing the R package.</p>
 <p>When installing from source, if the R and C++ library versions do not match, installation may fail. If you’ve previously installed the libraries and want to upgrade the R package, you’ll need to update the Arrow C++ library first.</p>
 <p>For any other build/configuration challenges, see the <a href="https://arrow.apache.org/docs/developers/cpp/building.html">C++ developer guide</a> and <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code>.</p>
 <div id="editing-c-code" class="section level3">
@@ -268,8 +260,6 @@ R CMD check arrow_*.tar.gz --as-cran</code></pre>
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=arrow">https://​cloud.r-project.org/​package=arrow</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/apache/arrow/">https://​github.com/​apache/​arrow/​</a>
 </li>
 <li>Report a bug at <br><a href="https://issues.apache.org/jira/projects/ARROW/issues">https://​issues.apache.org/​jira/​projects/​ARROW/​issues</a>
 </li>
