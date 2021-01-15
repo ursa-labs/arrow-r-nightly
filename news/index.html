@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210114</span>
       </span>
     </div>
 
@@ -205,7 +205,7 @@
 <li>Option <code>arrow.skip_nul</code> (default <code>FALSE</code>, as in <code><a href="https://rdrr.io/r/base/scan.html">base::scan()</a></code>) allows conversion of Arrow string (<code><a href="../reference/data-type.html">utf8()</a></code>) type data containing embedded nul <code>\0</code> characters to R. If set to <code>TRUE</code>, nuls will be stripped and a warning is emitted if any are found.</li>
 <li>
 <code><a href="../reference/arrow_info.html">arrow_info()</a></code> for an overview of various run-time and build-time Arrow configurations, useful for debugging</li>
-<li>Set environment variable <code>ARROW_DEFAULT_MEMORY_POOL</code> before loading the Arrow package to change memory allocators. Windows packages are built with <code>mimalloc</code>; most others have <code>jemalloc</code>. These are used by default if they were built, and they’re generally much faster than the system malloc, but sometimes it is useful to turn them off for debugging purposes. To disable them, set <code>ARROW_DEFAULT_MEMORY_POOL=system</code>.</li>
+<li>Set environment variable <code>ARROW_DEFAULT_MEMORY_POOL</code> before loading the Arrow package to change memory allocators. Windows packages are built with <code>mimalloc</code>; most others are built with both <code>jemalloc</code> (used by default) and <code>mimalloc</code>. These alternative memory allocators are generally much faster than the system memory allocator, so they are used by default when available, but sometimes it is useful to turn them off for debugging purposes. To disable them, set <code>ARROW_DEFAULT_MEMORY_POOL=system</code>.</li>
 <li>List columns that have attributes on each element are now also included with the metadata that is saved when creating Arrow tables. This allows <code>sf</code> tibbles to faithfully preserved and roundtripped (ARROW-10386)[<a href="https://issues.apache.org/jira/browse/ARROW-10386" class="uri">https://issues.apache.org/jira/browse/ARROW-10386</a>].</li>
 <li>R metadata that exceeds 100Kb is now compressed before being written to a table; see <code><a href="../reference/Schema.html">schema()</a></code> for more details.</li>
 </ul>

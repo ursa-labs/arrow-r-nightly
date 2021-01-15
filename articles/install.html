@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210114</span>
       </span>
     </div>
 
@@ -256,7 +256,7 @@ dlopen(/Users/you/R/00LOCK-r/00new/arrow/libs/arrow.so, 6): Library not loaded: 
 <li>
 <code>LIBARROW_BUILD</code>: If set to <code>false</code>, the build script will not attempt to build the C++ from source. This means you will only get a working <code>arrow</code> R package if a prebuilt binary is found. Use this if you want to avoid compiling the C++ library, which may be slow and resource-intensive, and ensure that you only use a prebuilt binary.</li>
 <li>
-<code>LIBARROW_MINIMAL</code>: If set to <code>false</code>, the build script will enable some optional features, including compression libraries and the <code>jemalloc</code> memory allocator. This will increase the source build time but results in a more fully functional library.</li>
+<code>LIBARROW_MINIMAL</code>: If set to <code>false</code>, the build script will enable some optional features, including compression libraries, S3 support, and additional alternative memory allocators. This will increase the source build time but results in a more fully functional library.</li>
 <li>
 <code>NOT_CRAN</code>: If this variable is set to <code>true</code>, as the <code>devtools</code> package does, the build script will set <code>LIBARROW_BINARY=true</code> and <code>LIBARROW_MINIMAL=false</code> unless those environment variables are already set. This provides for a more complete and fast installation experience for users who already have <code>NOT_CRAN=true</code> as part of their workflow, without requiring additional environment variables to be set.</li>
 <li>

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210114</span>
       </span>
     </div>
 
@@ -188,10 +188,10 @@
 <ul>
 <li><p><code>backend_name</code>: one of "jemalloc", "mimalloc", or "system". Alternative
 memory allocators are optionally enabled at build time. Windows builds
-generally have mimalloc, and most others have jemalloc. To change memory
-allocators at runtime, set the environment variable
-<code>ARROW_DEFAULT_MEMORY_POOL</code> to one of those strings prior to loading
-the <code>arrow</code> library.</p></li>
+generally have <code>mimalloc</code>, and most others have both <code>jemalloc</code> (used by
+default) and <code>mimalloc</code>. To change memory allocators at runtime, set the
+environment variable <code>ARROW_DEFAULT_MEMORY_POOL</code> to one of those strings
+prior to loading the <code>arrow</code> library.</p></li>
 <li><p><code>bytes_allocated</code></p></li>
 <li><p><code>max_memory</code></p></li>
 </ul>

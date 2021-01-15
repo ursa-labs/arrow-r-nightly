@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210113</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210114</span>
       </span>
     </div>
 
@@ -178,8 +178,10 @@ brew install apache-arrow --HEAD</code></pre>
   -DARROW_INSTALL_NAME_RPATH=OFF \
   ..</code></pre>
 <p>where <code>..</code> is the path to the <code>cpp/</code> directory when you’re in <code>cpp/build</code>.</p>
-<p>If you want to enable support for compression libraries, add some or all of these:</p>
-<pre><code>  -DARROW_WITH_BROTLI=ON \
+<p>To enable optional features including S3 support, an alternative memory allocator, and additional compression libraries, add some or all of these flags:</p>
+<pre><code>  -DARROW_S3=ON \
+  -DARROW_MIMALLOC=ON \
+  -DARROW_WITH_BROTLI=ON \
   -DARROW_WITH_BZ2=ON \
   -DARROW_WITH_LZ4=ON \
   -DARROW_WITH_SNAPPY=ON \
