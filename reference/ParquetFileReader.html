@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.20210123</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210124</span>
       </span>
     </div>
 
@@ -225,39 +225,13 @@ The optional <code>column_indices=</code> argument is a 0-based integer vector i
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"v0.7.1.parquet"</span>, package<span class='op'>=</span><span class='st'>"arrow"</span><span class='op'>)</span>
 <span class='va'>pq</span> <span class='op'>&lt;-</span> <span class='va'>ParquetFileReader</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-<span class='va'>pq</span><span class='op'>$</span><span class='fu'>GetSchema</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Schema
-#&gt; carat: double
-#&gt; cut: string
-#&gt; color: string
-#&gt; clarity: string
-#&gt; depth: double
-#&gt; table: double
-#&gt; price: int64
-#&gt; x: double
-#&gt; y: double
-#&gt; z: double
-#&gt; __index_level_0__: int64
-#&gt; 
-#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='codec_is_available.html'>codec_is_available</a></span><span class='op'>(</span><span class='st'>"snappy"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in io___MemoryMappedFile__Open(path, mode): Cannot call io___MemoryMappedFile__Open(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. </span></div><div class='input'><span class='va'>pq</span><span class='op'>$</span><span class='fu'>GetSchema</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'pq' not found</span></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='codec_is_available.html'>codec_is_available</a></span><span class='op'>(</span><span class='st'>"snappy"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># This file has compressed data columns</span>
   <span class='va'>tab</span> <span class='op'>&lt;-</span> <span class='va'>pq</span><span class='op'>$</span><span class='fu'>ReadTable</span><span class='op'>(</span><span class='op'>)</span>
   <span class='va'>tab</span><span class='op'>$</span><span class='va'>schema</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; Schema
-#&gt; carat: double
-#&gt; cut: string
-#&gt; color: string
-#&gt; clarity: string
-#&gt; depth: double
-#&gt; table: double
-#&gt; price: int64
-#&gt; x: double
-#&gt; y: double
-#&gt; z: double
-#&gt; __index_level_0__: int64
-#&gt; 
-#&gt; See $metadata for additional Schema metadata</div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in util___Codec__IsAvailable(compression_from_name(type)): Cannot call util___Codec__IsAvailable(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. </span></div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
