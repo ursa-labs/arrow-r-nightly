@@ -226,6 +226,9 @@
     <loc>https://arrow.apache.org/docs/r//reference/unify_schemas.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r//reference/value_counts.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r//reference/write_dataset.html</loc>
   </url>
   <url>

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210128</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210129</span>
       </span>
     </div>
 
@@ -177,6 +177,12 @@
 <h1 class="page-header" data-toc-text="3.0.0.9000">
 <a href="#arrow-3009000" class="anchor"></a>arrow 3.0.0.9000<small> Unreleased </small>
 </h1>
+<ul>
+<li>
+<code><a href="../reference/value_counts.html">value_counts()</a></code> to tabulate values in an <code>Array</code> or <code>ChunkedArray</code>, similar to <code><a href="https://rdrr.io/r/base/table.html">base::table()</a></code>.</li>
+<li>
+<code>StructArray</code> objects gain data.frame-like methods, including <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code>.</li>
+</ul>
 </div>
     <div id="arrow-300" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.0">
@@ -211,7 +217,7 @@
 <li>
 <code><a href="../reference/arrow_info.html">arrow_info()</a></code> for an overview of various run-time and build-time Arrow configurations, useful for debugging</li>
 <li>Set environment variable <code>ARROW_DEFAULT_MEMORY_POOL</code> before loading the Arrow package to change memory allocators. Windows packages are built with <code>mimalloc</code>; most others are built with both <code>jemalloc</code> (used by default) and <code>mimalloc</code>. These alternative memory allocators are generally much faster than the system memory allocator, so they are used by default when available, but sometimes it is useful to turn them off for debugging purposes. To disable them, set <code>ARROW_DEFAULT_MEMORY_POOL=system</code>.</li>
-<li>List columns that have attributes on each element are now also included with the metadata that is saved when creating Arrow tables. This allows <code>sf</code> tibbles to faithfully preserved and roundtripped (ARROW-10386)[<a href="https://issues.apache.org/jira/browse/ARROW-10386" class="uri">https://issues.apache.org/jira/browse/ARROW-10386</a>].</li>
+<li>List columns that have attributes on each element are now also included with the metadata that is saved when creating Arrow tables. This allows <code>sf</code> tibbles to faithfully preserved and roundtripped (<a href="https://issues.apache.org/jira/browse/ARROW-10386">ARROW-10386</a>).</li>
 <li>R metadata that exceeds 100Kb is now compressed before being written to a table; see <code><a href="../reference/Schema.html">schema()</a></code> for more details.</li>
 </ul>
 </div>
@@ -225,10 +231,8 @@
 <code><a href="../reference/write_parquet.html">write_parquet()</a></code> can now write RecordBatches</li>
 <li>Reading a Table from a RecordBatchStreamReader containing 0 batches no longer crashes</li>
 <li>
-<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently <a href="https://issues.apache.org/jira/browse/ARROW-10624">ARROW-10624</a>
-</li>
-<li>Fixed reading of compressed Feather files written with Arrow 0.17 <a href="https://issues.apache.org/jira/browse/ARROW-10850">ARROW-10850</a>
-</li>
+<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently (<a href="https://issues.apache.org/jira/browse/ARROW-10624">ARROW-10624</a>)</li>
+<li>Fixed reading of compressed Feather files written with Arrow 0.17 (<a href="https://issues.apache.org/jira/browse/ARROW-10850">ARROW-10850</a>)</li>
 <li>
 <code>SubTreeFileSystem</code> gains a useful print method and no longer errors when printing</li>
 </ul>

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210128</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210129</span>
       </span>
     </div>
 
@@ -179,34 +179,26 @@
     <p>Cast options</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cast_options</span><span class='op'>(</span>
-  safe <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  allow_int_overflow <span class='op'>=</span> <span class='op'>!</span><span class='va'>safe</span>,
-  allow_time_truncate <span class='op'>=</span> <span class='op'>!</span><span class='va'>safe</span>,
-  allow_float_truncate <span class='op'>=</span> <span class='op'>!</span><span class='va'>safe</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cast_options</span><span class='op'>(</span>safe <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>safe</th>
-      <td><p>enforce safe conversion</p></td>
+      <td><p>logical: enforce safe conversion? Default <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>allow_int_overflow</th>
-      <td><p>allow int conversion, <code>!safe</code> by default</p></td>
-    </tr>
-    <tr>
-      <th>allow_time_truncate</th>
-      <td><p>allow time truncate, <code>!safe</code> by default</p></td>
-    </tr>
-    <tr>
-      <th>allow_float_truncate</th>
-      <td><p>allow float truncate, <code>!safe</code> by default</p></td>
+      <th>...</th>
+      <td><p>additional cast options, such as <code>allow_int_overflow</code>,
+<code>allow_time_truncate</code>, and <code>allow_float_truncate</code>, which are set to <code>!safe</code>
+by default</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
