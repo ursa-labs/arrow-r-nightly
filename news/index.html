@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -65,9 +67,15 @@
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +89,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210221</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210222</span>
       </span>
     </div>
 
@@ -179,10 +187,10 @@
 </h1>
 <ul>
 <li>
-<code><a href="../reference/value_counts.html">value_counts()</a></code> to tabulate values in an <code>Array</code> or <code>ChunkedArray</code>, similar to <code><a href="https://rdrr.io/r/base/table.html">base::table()</a></code>.</li>
+<code><a href="../reference/value_counts.html">value_counts()</a></code> to tabulate values in an <code>Array</code> or <code>ChunkedArray</code>, similar to <code><a href="https://rdrr.io/r/base/table.html" class="external-link">base::table()</a></code>.</li>
 <li>
-<code>StructArray</code> objects gain data.frame-like methods, including <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code>.</li>
-<li>RecordBatch columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code>
+<code>StructArray</code> objects gain data.frame-like methods, including <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code>.</li>
+<li>RecordBatch columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html" class="external-link">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>
 </li>
 </ul>
 </div>
@@ -208,18 +216,18 @@
 <h2 class="hasAnchor">
 <a href="#enhancements" class="anchor"></a>Enhancements</h2>
 <ul>
-<li>Arithmetic operations (<code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>, etc.) are supported on Arrays and ChunkedArrays and can be used in filter expressions in Arrow <code>dplyr</code> pipelines</li>
-<li>Table columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code>
+<li>Arithmetic operations (<code><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">+</a></code>, <code><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">*</a></code>, etc.) are supported on Arrays and ChunkedArrays and can be used in filter expressions in Arrow <code>dplyr</code> pipelines</li>
+<li>Table columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html" class="external-link">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>
 </li>
-<li>Column names of Tables and RecordBatches can be renamed by assigning <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>
+<li>Column names of Tables and RecordBatches can be renamed by assigning <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>
 </li>
 <li>Large string types can now be written to Parquet files</li>
-<li>The <a href="https://rlang.r-lib.org/reference/tidyeval-data.html">pronouns <code>.data</code> and <code>.env</code></a> are now fully supported in Arrow <code>dplyr</code> pipelines.</li>
-<li>Option <code>arrow.skip_nul</code> (default <code>FALSE</code>, as in <code><a href="https://rdrr.io/r/base/scan.html">base::scan()</a></code>) allows conversion of Arrow string (<code><a href="../reference/data-type.html">utf8()</a></code>) type data containing embedded nul <code>\0</code> characters to R. If set to <code>TRUE</code>, nuls will be stripped and a warning is emitted if any are found.</li>
+<li>The <a href="https://rlang.r-lib.org/reference/tidyeval-data.html" class="external-link">pronouns <code>.data</code> and <code>.env</code></a> are now fully supported in Arrow <code>dplyr</code> pipelines.</li>
+<li>Option <code>arrow.skip_nul</code> (default <code>FALSE</code>, as in <code><a href="https://rdrr.io/r/base/scan.html" class="external-link">base::scan()</a></code>) allows conversion of Arrow string (<code><a href="../reference/data-type.html">utf8()</a></code>) type data containing embedded nul <code>\0</code> characters to R. If set to <code>TRUE</code>, nuls will be stripped and a warning is emitted if any are found.</li>
 <li>
 <code><a href="../reference/arrow_info.html">arrow_info()</a></code> for an overview of various run-time and build-time Arrow configurations, useful for debugging</li>
 <li>Set environment variable <code>ARROW_DEFAULT_MEMORY_POOL</code> before loading the Arrow package to change memory allocators. Windows packages are built with <code>mimalloc</code>; most others are built with both <code>jemalloc</code> (used by default) and <code>mimalloc</code>. These alternative memory allocators are generally much faster than the system memory allocator, so they are used by default when available, but sometimes it is useful to turn them off for debugging purposes. To disable them, set <code>ARROW_DEFAULT_MEMORY_POOL=system</code>.</li>
-<li>List columns that have attributes on each element are now also included with the metadata that is saved when creating Arrow tables. This allows <code>sf</code> tibbles to faithfully preserved and roundtripped (<a href="https://issues.apache.org/jira/browse/ARROW-10386">ARROW-10386</a>).</li>
+<li>List columns that have attributes on each element are now also included with the metadata that is saved when creating Arrow tables. This allows <code>sf</code> tibbles to faithfully preserved and roundtripped (<a href="https://issues.apache.org/jira/browse/ARROW-10386" class="external-link">ARROW-10386</a>).</li>
 <li>R metadata that exceeds 100Kb is now compressed before being written to a table; see <code><a href="../reference/Schema.html">schema()</a></code> for more details.</li>
 </ul>
 </div>
@@ -233,8 +241,8 @@
 <code><a href="../reference/write_parquet.html">write_parquet()</a></code> can now write RecordBatches</li>
 <li>Reading a Table from a RecordBatchStreamReader containing 0 batches no longer crashes</li>
 <li>
-<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently (<a href="https://issues.apache.org/jira/browse/ARROW-10624">ARROW-10624</a>)</li>
-<li>Fixed reading of compressed Feather files written with Arrow 0.17 (<a href="https://issues.apache.org/jira/browse/ARROW-10850">ARROW-10850</a>)</li>
+<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently (<a href="https://issues.apache.org/jira/browse/ARROW-10624" class="external-link">ARROW-10624</a>)</li>
+<li>Fixed reading of compressed Feather files written with Arrow 0.17 (<a href="https://issues.apache.org/jira/browse/ARROW-10850" class="external-link">ARROW-10850</a>)</li>
 <li>
 <code>SubTreeFileSystem</code> gains a useful print method and no longer errors when printing</li>
 </ul>
@@ -248,7 +256,7 @@
 <li>Linux installation now safely supports older <code>cmake</code> versions</li>
 <li>Compiler version checking for enabling S3 support correctly identifies the active compiler</li>
 <li>Updated guidance and troubleshooting in <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code>, especially for known CentOS issues</li>
-<li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/"><code>distro</code></a> package. If your OS isn’t correctly identified, please report an issue there.</li>
+<li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/" class="external-link"><code>distro</code></a> package. If your OS isn’t correctly identified, please report an issue there.</li>
 </ul>
 </div>
 </div>
@@ -262,9 +270,9 @@
 <ul>
 <li>
 <code><a href="../reference/write_dataset.html">write_dataset()</a></code> to Feather or Parquet files with partitioning. See the end of <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for discussion and examples.</li>
-<li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code>, and take (<code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>) methods. <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> is optimized but the others may not be performant.</li>
+<li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code>, and take (<code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code>) methods. <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> is optimized but the others may not be performant.</li>
 <li>
-<code><a href="https://dplyr.tidyverse.org/reference/compute.html">collect()</a></code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
+<code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
 </li>
 <li>
 <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> supports specifying column types, both with a <code>Schema</code> and with the compact string representation for types used in the <code>readr</code> package. It also has gained a <code>timestamp_parsers</code> argument that lets you express a set of <code>strptime</code> parse strings that will be tried to convert columns designated as <code>Timestamp</code> type.</li>
@@ -283,18 +291,18 @@
 <div id="flight-rpc" class="section level2">
 <h2 class="hasAnchor">
 <a href="#flight-rpc" class="anchor"></a>Flight RPC</h2>
-<p><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Flight</a> is a general-purpose client-server framework for high performance transport of large datasets over network interfaces. The <code>arrow</code> R package now provides methods for connecting to Flight RPC servers to send and receive data. See <code><a href="../articles/flight.html">vignette("flight", package = "arrow")</a></code> for an overview.</p>
+<p><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/" class="external-link">Flight</a> is a general-purpose client-server framework for high performance transport of large datasets over network interfaces. The <code>arrow</code> R package now provides methods for connecting to Flight RPC servers to send and receive data. See <code><a href="../articles/flight.html">vignette("flight", package = "arrow")</a></code> for an overview.</p>
 </div>
 <div id="computation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#computation" class="anchor"></a>Computation</h2>
 <ul>
-<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>) operations, along with <code>is.na</code>, <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> and <code>match</code> (called <code><a href="../reference/match_arrow.html">match_arrow()</a></code>), on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
-<li>Aggregation methods <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>, and <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> are implemented for Arrays and ChunkedArrays.</li>
+<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">|</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">!</a></code>) operations, along with <code>is.na</code>, <code><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></code> and <code>match</code> (called <code><a href="../reference/match_arrow.html">match_arrow()</a></code>), on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
+<li>Aggregation methods <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, and <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique()</a></code> are implemented for Arrays and ChunkedArrays.</li>
 <li>
 <code>dplyr</code> filter expressions on Arrow Tables and RecordBatches are now evaluated in the C++ library, rather than by pulling data into R and evaluating. This yields significant performance improvements.</li>
 <li>
-<code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> (<code>nrow</code>) for dplyr queries on Table/RecordBatch is now supported</li>
+<code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> (<code>nrow</code>) for dplyr queries on Table/RecordBatch is now supported</li>
 </ul>
 </div>
 <div id="packaging-and-installation-1" class="section level2">
@@ -302,7 +310,7 @@
 <a href="#packaging-and-installation-1" class="anchor"></a>Packaging and installation</h2>
 <ul>
 <li>
-<code>arrow</code> now depends on <a href="https://cpp11.r-lib.org/"><code>cpp11</code></a>, which brings more robust UTF-8 handling and faster compilation</li>
+<code>arrow</code> now depends on <a href="https://cpp11.r-lib.org/" class="external-link"><code>cpp11</code></a>, which brings more robust UTF-8 handling and faster compilation</li>
 <li>The Linux build script now succeeds on older versions of R</li>
 <li>MacOS binary packages now ship with zstandard compression enabled</li>
 </ul>
@@ -311,7 +319,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-other-enhancements" class="anchor"></a>Bug fixes and other enhancements</h2>
 <ul>
-<li>Automatic conversion of Arrow <code>Int64</code> type when all values fit with an R 32-bit integer now correctly inspects all chunks in a ChunkedArray, and this conversion can be disabled (so that <code>Int64</code> always yields a <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html">bit64::integer64</a></code> vector) by setting <code><a href="https://rdrr.io/r/base/options.html">options(arrow.int64_downcast = FALSE)</a></code>.</li>
+<li>Automatic conversion of Arrow <code>Int64</code> type when all values fit with an R 32-bit integer now correctly inspects all chunks in a ChunkedArray, and this conversion can be disabled (so that <code>Int64</code> always yields a <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code> vector) by setting <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(arrow.int64_downcast = FALSE)</a></code>.</li>
 <li>In addition to the data.frame column metadata preserved in round trip, added in 1.0.0, now attributes of the data.frame itself are also preserved in Arrow schema metadata.</li>
 <li>File writers now respect the system umask setting</li>
 <li>
@@ -329,7 +337,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Filtering a Dataset that has multiple partition keys using an <code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> expression now faithfully returns all relevant rows</li>
+<li>Filtering a Dataset that has multiple partition keys using an <code><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></code> expression now faithfully returns all relevant rows</li>
 <li>Datasets can now have path segments in the root directory that start with <code>.</code> or <code>_</code>; files and subdirectories starting with those prefixes are still ignored</li>
 <li>
 <code><a href="../reference/open_dataset.html">open_dataset("~/path")</a></code> now correctly expands the path</li>
@@ -354,7 +362,7 @@
 <code>character</code> vectors that exceed 2GB are converted to Arrow <code>large_utf8</code> type</li>
 <li>
 <code>POSIXlt</code> objects can now be converted to Arrow (<code>struct</code>)</li>
-<li>R <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> are preserved in Arrow metadata when converting to Arrow RecordBatch and table and are restored when converting from Arrow. This means that custom subclasses, such as <code>haven::labelled</code>, are preserved in round trip through Arrow.</li>
+<li>R <code><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes()</a></code> are preserved in Arrow metadata when converting to Arrow RecordBatch and table and are restored when converting from Arrow. This means that custom subclasses, such as <code>haven::labelled</code>, are preserved in round trip through Arrow.</li>
 <li>Schema metadata is now exposed as a named list, and it can be modified by assignment like <code>batch$metadata$new_key &lt;- "new value"</code>
 </li>
 <li>Arrow types <code>int64</code>, <code>uint32</code>, and <code>uint64</code> now are converted to R <code>integer</code> if all values fit in bounds</li>
@@ -376,9 +384,9 @@
 <h2 class="hasAnchor">
 <a href="#other-enhancements" class="anchor"></a>Other enhancements</h2>
 <ul>
-<li>Initial support for C++ aggregation methods: <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> and <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> are implemented for <code>Array</code> and <code>ChunkedArray</code>
+<li>Initial support for C++ aggregation methods: <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code> and <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code> are implemented for <code>Array</code> and <code>ChunkedArray</code>
 </li>
-<li>Tables and RecordBatches have additional data.frame-like methods, including <code><a href="https://rdrr.io/r/base/dimnames.html">dimnames()</a></code> and <code><a href="https://rdrr.io/r/base/list.html">as.list()</a></code>
+<li>Tables and RecordBatches have additional data.frame-like methods, including <code><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames()</a></code> and <code><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list()</a></code>
 </li>
 <li>Tables and ChunkedArrays can now be moved to/from Python via <code>reticulate</code>
 </li>
@@ -416,7 +424,7 @@
 <ul>
 <li>Updates for compatibility with <code>dplyr</code> 1.0</li>
 <li>
-<code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html">reticulate::r_to_py()</a></code> conversion now correctly works automatically, without having to call the method yourself</li>
+<code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">reticulate::r_to_py()</a></code> conversion now correctly works automatically, without having to call the method yourself</li>
 <li>Assorted bug fixes in the C++ library around Parquet reading</li>
 </ul>
 </div>
@@ -427,7 +435,7 @@
 <div id="feather-v2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#feather-v2" class="anchor"></a>Feather v2</h2>
-<p>This release includes support for version 2 of the Feather file format. Feather v2 features full support for all Arrow data types, fixes the 2GB per-column limitation for large amounts of string data, and it allows files to be compressed using either <code>lz4</code> or <code>zstd</code>. <code><a href="../reference/write_feather.html">write_feather()</a></code> can write either version 2 or <a href="https://github.com/wesm/feather">version 1</a> Feather files, and <code><a href="../reference/read_feather.html">read_feather()</a></code> automatically detects which file version it is reading.</p>
+<p>This release includes support for version 2 of the Feather file format. Feather v2 features full support for all Arrow data types, fixes the 2GB per-column limitation for large amounts of string data, and it allows files to be compressed using either <code>lz4</code> or <code>zstd</code>. <code><a href="../reference/write_feather.html">write_feather()</a></code> can write either version 2 or <a href="https://github.com/wesm/feather" class="external-link">version 1</a> Feather files, and <code><a href="../reference/read_feather.html">read_feather()</a></code> automatically detects which file version it is reading.</p>
 <p>Related to this change, several functions around reading and writing data have been reworked. <code><a href="../reference/read_arrow.html">read_ipc_stream()</a></code> and <code><a href="../reference/write_arrow.html">write_ipc_stream()</a></code> have been added to facilitate writing data to the Arrow IPC stream format, which is slightly different from the IPC file format (Feather v2 <em>is</em> the IPC file format).</p>
 <p>Behavior has been standardized: all <code>read_&lt;format&gt;()</code> return an R <code>data.frame</code> (default) or a <code>Table</code> if the argument <code>as_data_frame = FALSE</code>; all <code>write_&lt;format&gt;()</code> functions return the data object, invisibly. To facilitate some workflows, a special <code><a href="../reference/write_to_raw.html">write_to_raw()</a></code> function is added to wrap <code><a href="../reference/write_arrow.html">write_ipc_stream()</a></code> and return the <code>raw</code> vector containing the buffer that was written.</p>
 <p>To achieve this standardization, <code>read_table()</code>, <code>read_record_batch()</code>, <code><a href="../reference/read_arrow.html">read_arrow()</a></code>, and <code><a href="../reference/write_arrow.html">write_arrow()</a></code> have been deprecated.</p>
@@ -443,9 +451,9 @@
 <a href="#datasets-2" class="anchor"></a>Datasets</h2>
 <ul>
 <li>Dataset reading benefits from many speedups and fixes in the C++ library</li>
-<li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> method, which sums rows across all files (#6635, @boshek)</li>
-<li>Combine multiple datasets into a single queryable <code>UnionDataset</code> with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> method</li>
-<li>Dataset filtering now treats <code>NA</code> as <code>FALSE</code>, consistent with <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>
+<li>Datasets have a <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> method, which sums rows across all files (#6635, @boshek)</li>
+<li>Combine multiple datasets into a single queryable <code>UnionDataset</code> with the <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> method</li>
+<li>Dataset filtering now treats <code>NA</code> as <code>FALSE</code>, consistent with <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code>
 </li>
 <li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types</li>
 <li>
@@ -495,7 +503,7 @@
 <div id="multi-file-datasets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multi-file-datasets" class="anchor"></a>Multi-file datasets</h2>
-<p>This release includes a <code>dplyr</code> interface to Arrow Datasets, which let you work efficiently with large, multi-file datasets as a single entity. Explore a directory of data files with <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and then use <code>dplyr</code> methods to <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, etc. Work will be done where possible in Arrow memory. When necessary, data is pulled into R for further computation. <code>dplyr</code> methods are conditionally loaded if you have <code>dplyr</code> available; it is not a hard dependency.</p>
+<p>This release includes a <code>dplyr</code> interface to Arrow Datasets, which let you work efficiently with large, multi-file datasets as a single entity. Explore a directory of data files with <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and then use <code>dplyr</code> methods to <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, etc. Work will be done where possible in Arrow memory. When necessary, data is pulled into R for further computation. <code>dplyr</code> methods are conditionally loaded if you have <code>dplyr</code> available; it is not a hard dependency.</p>
 <p>See <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="linux-installation" class="section level2">
@@ -510,7 +518,7 @@
 <ul>
 <li>
 <code>Table</code>s and <code>RecordBatch</code>es also have <code>dplyr</code> methods.</li>
-<li>For exploration without <code>dplyr</code>, <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> methods for Tables, RecordBatches, Arrays, and ChunkedArrays now support natural row extraction operations. These use the C++ <code>Filter</code>, <code>Slice</code>, and <code>Take</code> methods for efficient access, depending on the type of selection vector.</li>
+<li>For exploration without <code>dplyr</code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> methods for Tables, RecordBatches, Arrays, and ChunkedArrays now support natural row extraction operations. These use the C++ <code>Filter</code>, <code>Slice</code>, and <code>Take</code> methods for efficient access, depending on the type of selection vector.</li>
 <li>An experimental, lazily evaluated <code>array_expression</code> class has also been added, enabling among other things the ability to filter a Table with some function of Arrays, such as <code>arrow_table[arrow_table$var1 &gt; 5, ]</code> without having to pull everything into R first.</li>
 </ul>
 </div>
@@ -552,9 +560,9 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/arrow.html">vignette("arrow")</a></code>.</li>
+<li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html" class="external-link">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/arrow.html">vignette("arrow")</a></code>.</li>
 <li>Due to a subtle change in the Arrow message format, data written by the 0.15 version libraries may not be readable by older versions. If you need to send data to a process that uses an older version of Arrow (for example, an Apache Spark server that hasn’t yet updated to Arrow 0.15), you can set the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</li>
-<li>The <code>as_tibble</code> argument in the <code>read_*()</code> functions has been renamed to <code>as_data_frame</code> (<a href="https://issues.apache.org/jira/browse/ARROW-6337">ARROW-6337</a>, @jameslamb)</li>
+<li>The <code>as_tibble</code> argument in the <code>read_*()</code> functions has been renamed to <code>as_data_frame</code> (<a href="https://issues.apache.org/jira/browse/ARROW-6337" class="external-link">ARROW-6337</a>, @jameslamb)</li>
 <li>The <code>arrow::Column</code> class has been removed, as it was removed from the C++ library</li>
 </ul>
 </div>
@@ -564,8 +572,8 @@
 <ul>
 <li>
 <code>Table</code> and <code>RecordBatch</code> objects have S3 methods that enable you to work with them more like <code>data.frame</code>s. Extract columns, subset, and so on. See <code><a href="../reference/Table.html">?Table</a></code> and <code><a href="../reference/RecordBatch.html">?RecordBatch</a></code> for examples.</li>
-<li>Initial implementation of bindings for the C++ File System API. (<a href="https://issues.apache.org/jira/browse/ARROW-6348">ARROW-6348</a>)</li>
-<li>Compressed streams are now supported on Windows (<a href="https://issues.apache.org/jira/browse/ARROW-6360">ARROW-6360</a>), and you can also specify a compression level (<a href="https://issues.apache.org/jira/browse/ARROW-6533">ARROW-6533</a>)</li>
+<li>Initial implementation of bindings for the C++ File System API. (<a href="https://issues.apache.org/jira/browse/ARROW-6348" class="external-link">ARROW-6348</a>)</li>
+<li>Compressed streams are now supported on Windows (<a href="https://issues.apache.org/jira/browse/ARROW-6360" class="external-link">ARROW-6360</a>), and you can also specify a compression level (<a href="https://issues.apache.org/jira/browse/ARROW-6533" class="external-link">ARROW-6533</a>)</li>
 </ul>
 </div>
 <div id="other-upgrades" class="section level2">
@@ -577,9 +585,9 @@
 <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> supports more parsing options, including <code>col_names</code>, <code>na</code>, <code>quoted_na</code>, and <code>skip</code>
 </li>
 <li>
-<code><a href="../reference/read_parquet.html">read_parquet()</a></code> and <code><a href="../reference/read_feather.html">read_feather()</a></code> can ingest data from a <code>raw</code> vector (<a href="https://issues.apache.org/jira/browse/ARROW-6278">ARROW-6278</a>)</li>
-<li>File readers now properly handle paths that need expanding, such as <code>~/file.parquet</code> (<a href="https://issues.apache.org/jira/browse/ARROW-6323">ARROW-6323</a>)</li>
-<li>Improved support for creating types in a schema: the types’ printed names (e.g. “double”) are guaranteed to be valid to use in instantiating a schema (e.g. <code><a href="https://rdrr.io/r/base/double.html">double()</a></code>), and time types can be created with human-friendly resolution strings (“ms”, “s”, etc.). (<a href="https://issues.apache.org/jira/browse/ARROW-6338">ARROW-6338</a>, <a href="https://issues.apache.org/jira/browse/ARROW-6364">ARROW-6364</a>)</li>
+<code><a href="../reference/read_parquet.html">read_parquet()</a></code> and <code><a href="../reference/read_feather.html">read_feather()</a></code> can ingest data from a <code>raw</code> vector (<a href="https://issues.apache.org/jira/browse/ARROW-6278" class="external-link">ARROW-6278</a>)</li>
+<li>File readers now properly handle paths that need expanding, such as <code>~/file.parquet</code> (<a href="https://issues.apache.org/jira/browse/ARROW-6323" class="external-link">ARROW-6323</a>)</li>
+<li>Improved support for creating types in a schema: the types’ printed names (e.g. “double”) are guaranteed to be valid to use in instantiating a schema (e.g. <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code>), and time types can be created with human-friendly resolution strings (“ms”, “s”, etc.). (<a href="https://issues.apache.org/jira/browse/ARROW-6338" class="external-link">ARROW-6338</a>, <a href="https://issues.apache.org/jira/browse/ARROW-6364" class="external-link">ARROW-6364</a>)</li>
 </ul>
 </div>
 </div>
@@ -607,11 +615,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Romain François, Jeroen Ooms, Neal Richardson, Apache Arrow.</p>
+  <p><p>Developed by Romain François, Jeroen Ooms, Neal Richardson, Apache Arrow.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
       </footer>
@@ -619,6 +627,8 @@
 
   
 
+
+  
 
   </body>
 </html>
