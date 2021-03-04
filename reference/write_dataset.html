@@ -92,7 +92,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210302</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210303</span>
       </span>
     </div>
 
@@ -194,7 +194,7 @@ make it much faster to read and query.</p>
     <pre class="usage"><span class='fu'>write_dataset</span><span class='op'>(</span>
   <span class='va'>dataset</span>,
   <span class='va'>path</span>,
-  format <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>$</span><span class='va'>format</span>,
+  format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"parquet"</span>, <span class='st'>"feather"</span>, <span class='st'>"arrow"</span>, <span class='st'>"ipc"</span><span class='op'>)</span>,
   partitioning <span class='op'>=</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_data.html'>group_vars</a></span><span class='op'>(</span><span class='va'>dataset</span><span class='op'>)</span>,
   basename_template <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"part-{i}."</span>, <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>format</span><span class='op'>)</span><span class='op'>)</span>,
   hive_style <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -220,9 +220,8 @@ to write to (directory will be created if it does not exist)</p></td>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>file format to write the dataset to. Currently supported
-formats are "feather" (aka "ipc") and "parquet". Default is to write to the
-same format as <code>dataset</code>.</p></td>
+      <td><p>a string identifier of the file format. Default is to use
+"parquet" (see <a href='FileFormat.html'>FileFormat</a>)</p></td>
     </tr>
     <tr>
       <th>partitioning</th>
