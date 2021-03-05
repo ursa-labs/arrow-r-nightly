@@ -92,7 +92,7 @@ make it much faster to read and query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210303</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210304</span>
       </span>
     </div>
 
@@ -254,6 +254,8 @@ unless the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code>, i
 which case it will be V4.</p></li>
 <li><p><code>codec</code>: A <a href='Codec.html'>Codec</a> which will be used to compress body buffers of written
 files. Default (NULL) will not compress body buffers.</p></li>
+<li><p><code>null_fallback</code>: character to be used in place of missing values (<code>NA</code> or
+<code>NULL</code>) when using Hive-style partitioning. See <code><a href='hive_partition.html'>hive_partition()</a></code>.</p></li>
 </ul></td>
     </tr>
     </table>
