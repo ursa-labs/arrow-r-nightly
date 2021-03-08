@@ -1,6 +1,6 @@
 pandoc: 2.7.3
 pkgdown: 1.6.1.9000
-pkgdown_sha: 9c95f00d2505ddd83c4722e019202370715d3a3d
+pkgdown_sha: dd94073575aaee2fd480892d24dfe0be85f81a03
 articles:
   arrow: arrow.html
   dataset: dataset.html
@@ -8,7 +8,7 @@ articles:
   fs: fs.html
   install: install.html
   python: python.html
-last_built: 2021-03-07T22:32Z
+last_built: 2021-03-08T22:32Z
 urls:
   reference: https://arrow.apache.org/docs/r/reference
   article: https://arrow.apache.org/docs/r/articles
