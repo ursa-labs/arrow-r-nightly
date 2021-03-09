@@ -92,7 +92,7 @@ of these functions don't take arguments, but a few do." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210307</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210308</span>
       </span>
     </div>
 
@@ -310,6 +310,13 @@ way of creating a <code>float64()</code></p></li>
 
 <p><code>date32()</code> creates a datetime type with a "day" unit, like the R <code>Date</code>
 class. <code>date64()</code> has a "ms" unit.</p>
+<p><code>uint32</code> (32 bit unsigned integer), <code>uint64</code> (64 bit unsigned integer), and
+<code>int64</code> (64-bit signed integer) types may contain values that exceed the
+range of R's <code>integer</code> type (32-bit signed integer). When these arrow objects
+are translated to R objects, <code>uint32</code> and <code>uint64</code> are converted to <code>double</code>
+("numeric") and <code>int64</code> is converted to <code><a href='https://rdrr.io/pkg/bit64/man/bit64-package.html'>bit64::integer64</a></code>. For <code>int64</code>
+types, this conversion can be disabled (so that <code>int64</code> always yields a
+<code><a href='https://rdrr.io/pkg/bit64/man/bit64-package.html'>bit64::integer64</a></code> object) by setting <code><a href='https://rdrr.io/r/base/options.html'>options(arrow.int64_downcast = FALSE)</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='dictionary.html'>dictionary()</a></code> for creating a dictionary (factor-like) type.</p></div>
