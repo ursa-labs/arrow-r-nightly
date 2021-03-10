@@ -1,0 +1,338 @@
+name: Build and test
+
+on:
+  schedule:
+    - cron: |
+        0 1 * * *
+  push:
+    paths:
+      - ".github/workflows/build-and-test-all.yml"
+      - "linux/*"
+      - s3-upload.py
+      - bintray-upload.sh
+      - up-date-description.sh
+      - build-binary-and-upload.R
+
+jobs:
+  source:
+    name: Source packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Clone apache/arrow
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+      - name: Checkout arrow at date and update R package version
+        shell: bash
+        run: |
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
+      - name: Build and upload cpp bundle
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          cd arrow
+          VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
+          zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt cpp/README.md LICENSE.txt NOTICE.txt .env
+          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
+          # Or to upload to S3:
+          python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
+      - name: Install R
+        uses: r-lib/actions/setup-r@master
+      - name: Build and upload R source package
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          cd arrow/r
+          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
+          # Pin the git commit in the formula to match
+          cd tools
+          sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
+          rm -f apache-arrow.rb.bak
+          # NOTE: if you want to change the source of the libarrow files away
+          # from bintray, sed linuxlibs.R and winlibs.R
+          cd ..
+          R CMD build --no-build-vignettes .
+          Rscript -e 'tools::write_PACKAGES(".", type = "source")'
+          python ../../s3-upload.py arrow_*.tar.gz src/contrib
+          python ../../s3-upload.py PACKAGES src/contrib
+          python ../../s3-upload.py PACKAGES.gz src/contrib
+          python ../../s3-upload.py PACKAGES.rds src/contrib
+  linux-cpp:
+    name: C++ Binary ${{ matrix.config.os }}-${{ matrix.config.version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu, version: "16.04" }
+          - { os: ubuntu, version: "18.04" }
+          - { os: debian, version: "9" }
+          - { os: debian, version: "10" }
+          - { os: centos, version: "7" }
+          - { os: centos, version: "8" }
+    env:
+      VERSION: ${{ matrix.config.version }}
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          cd linux
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+      - name: Build
+        shell: bash
+        run: |
+          cd linux
+          docker-compose build ${{ matrix.config.os }}
+          docker-compose run ${{ matrix.config.os }}
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
+      - name: Bundle and upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          cd linux/arrow/r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../../up-date-description.sh
+          VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
+          export PKG_FILE="arrow-${VERSION}.zip"
+          cd libarrow/dist
+          # These files were created by the docker user so we have to sudo to get them
+          sudo -E zip -r $PKG_FILE lib/ include/
+          export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
+          sudo -E bash ../../../../../bintray-upload.sh
+          # Or, upload to S3
+          python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
+  windows-cpp:
+    name: C++ Binary Windows RTools (35 and 40)
+    runs-on: windows-latest
+    steps:
+      - run: git config --global core.autocrlf false
+      - name: Checkout Arrow
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Clone apache/arrow and checkout at date
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      # First build with the new toolchain
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: 40
+          r-version: "4.0"
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools40
+        shell: bash
+        env:
+          ARROW_HOME: "arrow"
+        run: arrow/ci/scripts/r_windows_build.sh
+      - name: Clean up so we can build again
+        shell: bash
+        run: |
+          rm -rf pkg
+          rm -rf src
+          pacman --noconfirm -R mingw-w64-{i686,x86_64}-{cmake,boost,openssl,thrift,snappy,lz4,zstd}
+      # Now build with the old toolchain
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: 35
+          r-version: "3.6"
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools35
+        shell: bash
+        env:
+          ARROW_HOME: "arrow"
+          RTOOLS_VERSION: 35
+        run: arrow/ci/scripts/r_windows_build.sh
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
+      - name: Upload
+        env:
+          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          cd build
+          export PKG_FILE=$(ls arrow-*.zip)
+          export REPO_PATH=/libarrow/bin/windows
+          source ../bintray-upload.sh
+          # Or, upload to S3
+          python ../s3-upload.py $PKG_FILE $REPO_PATH
+  r-packages:
+    needs: [source, windows-cpp]
+    name: ${{ matrix.platform }} ${{ matrix.r_version }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - windows-latest
+          # This is newer than what CRAN builds on, but Travis is no longer an option for us, so...
+          - macos-latest
+        r_version:
+          # - "3.5"
+          - "3.6"
+          - "4.0"
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.r_version }}
+          Ncpus: 2
+      - name: Build and upload
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: Rscript {0}
+        run: source("build-binary-and-upload.R")
+  test-linux-binary:
+    needs: [source, linux-cpp]
+    name: Test linux binaries
+    runs-on: ubuntu-latest
+    container: ${{ matrix.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - "rhub/ubuntu-gcc-release" # ubuntu-16.04
+          - "rstudio/r-base:3.6-bionic"
+          - "rstudio/r-base:3.6-centos7"
+          - "rstudio/r-base:3.6-centos8"
+          - "rocker/r-ver:3.6.3" # for debian:buster (10)
+          - "rocker/r-ver" # ubuntu-20.04
+          - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to centos-8
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Install system requirements
+        run: linux/install-system-requirements.sh
+      - name: Install arrow from binatray
+        env:
+          LIBARROW_BUILD: "FALSE"
+          LIBARROW_DOWNLOAD: "TRUE"
+        run: PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R
+  test-source:
+    needs: source
+    name: Test linux source build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v1
+      - name: Install R
+        uses: r-lib/actions/setup-r@master
+      - name: Install arrow from bintray
+        env:
+          # Test source build so be sure not to download a binary
+          LIBARROW_BINARY: "FALSE"
+        run: Rscript linux/install-arrow.R
+      - name: Retry with verbosity if that failed
+        env:
+          LIBARROW_BINARY: "FALSE"
+          ARROW_R_DEV: "TRUE"
+        run: Rscript linux/install-arrow.R
+        if: failure()
+  pkgdown:
+    needs: [test-linux-binary, test-source, r-packages]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Clone apache/arrow
+        shell: bash
+        run: |
+          git clone https://github.com/apache/arrow
+      - name: Checkout arrow at date and update R package version
+        shell: bash
+        run: |
+          cd arrow
+          git checkout `git rev-list -n 1 --before="00:00" master`
+          cd r
+          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
+          export DATE=$(date -d yesterday +%Y%m%d)
+          source ../../up-date-description.sh
+      - name: Set up gh-pages branch to push to
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "$(git log -1 --pretty=format:%an)"
+          git config --global user.email "$(git log -1 --pretty=format:%ae)"
+          cd arrow/r
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/ursa-labs/arrow-r-nightly.git docs
+          cd docs
+          TARGET_BRANCH=gh-pages
+          if ! git checkout gh-pages; then
+            git checkout --orphan gh-pages
+            rm -rf *
+            # So that pkgdown recognizes that it can write here
+            touch pkgdown.yml
+          fi
+      - uses: r-lib/actions/setup-r@master
+      - name: Install system dependencies
+        run: sudo apt-get install libharfbuzz-dev libfribidi-dev libcurl4-openssl-dev libssl-dev
+      - uses: r-lib/actions/setup-pandoc@master
+      - name: Install dependencies and package
+        run: Rscript linux/install-with-pkgdown.R
+      - name: Build and deploy site
+        run: |
+          cd arrow/r
+          export LIBARROW_DOWNLOAD=true
+          Rscript -e "pkgdown::build_site(install = FALSE)"
+          cd docs
+          if [ "$(git status --porcelain)" != "" ]; then
+            # There are changes to the built site
+            export DATE=$(date -d yesterday +%Y%m%d)
+            git add --all
+            git commit -m "Updating pkgdown site (${DATE})"
+            git push origin gh-pages
+          else
+            echo "No changes to the built site"
+          fi
