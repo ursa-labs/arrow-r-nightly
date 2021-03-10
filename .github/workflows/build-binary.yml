@@ -6,8 +6,8 @@ on:
         0 1 * * *
   push:
     paths:
-      - '.github/workflows/build-binary.yml'
-      - 'linux/*'
+      - ".github/workflows/build-binary.yml"
+      - "linux/*"
       - s3-upload.py
       - bintray-upload.sh
       - up-date-description.sh
@@ -21,12 +21,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: ubuntu, version: '16.04'}
-        - { os: ubuntu, version: '18.04'}
-        - { os: debian, version: '9'}
-        - { os: debian, version: '10'}
-        - { os: centos, version: '7'}
-        - { os: centos, version: '8'}
+          - { os: ubuntu, version: "16.04" }
+          - { os: ubuntu, version: "18.04" }
+          - { os: debian, version: "9" }
+          - { os: debian, version: "10" }
+          - { os: centos, version: "7" }
+          - { os: centos, version: "8" }
     env:
       VERSION: ${{ matrix.config.version }}
     steps:
@@ -48,7 +48,7 @@ jobs:
       - name: Set up Python (for S3 upload)
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install Boto
         run: |
           python -m pip install boto3
@@ -70,7 +70,7 @@ jobs:
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           sudo -E bash ../../../../../bintray-upload.sh
           # Or, upload to S3
-          # python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
+          python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows:
     name: C++ Binary Windows RTools (35 and 40)
     runs-on: windows-latest
@@ -93,7 +93,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: 40
-          r-version: '4.0'
+          r-version: "4.0"
           Ncpus: 2
       - name: Build Arrow C++ with rtools40
         shell: bash
@@ -110,7 +110,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: 35
-          r-version: '3.6'
+          r-version: "3.6"
           Ncpus: 2
       - name: Build Arrow C++ with rtools35
         shell: bash
@@ -121,7 +121,7 @@ jobs:
       - name: Set up Python (for S3 upload)
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install Boto
         run: |
           python -m pip install boto3
@@ -137,4 +137,4 @@ jobs:
           export REPO_PATH=/libarrow/bin/windows
           source ../bintray-upload.sh
           # Or, upload to S3
-          # python ../s3-upload.py $PKG_FILE $REPO_PATH
+          python ../s3-upload.py $PKG_FILE $REPO_PATH
