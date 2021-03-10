@@ -1,4 +1,4 @@
-name: Binary Windows R packages
+name: Binary R packages
 
 on:
   schedule:
