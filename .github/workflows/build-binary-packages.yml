@@ -6,7 +6,7 @@ on:
         0 5 * * *
   push:
     paths:
-      - '.github/workflows/build-binary-packages.yml'
+      - ".github/workflows/build-binary-packages.yml"
       - s3-upload.py
       - build-binary-and-upload.R
 
@@ -19,8 +19,8 @@ jobs:
       matrix:
         platform:
           - windows-latest
-          # We need to build on an older version of macOS than GHA provides
-          # - macOS-latest
+          # This is newer than what CRAN builds on, but Travis is no longer an option for us, so...
+          - macos-latest
         r_version:
           # - "3.5"
           - "3.6"
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python (for S3 upload)
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install Boto
         run: |
           python -m pip install boto3
