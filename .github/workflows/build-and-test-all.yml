@@ -156,11 +156,6 @@ jobs:
           DATE: ${{needs.setup.outputs.date}}
         shell: bash
         run: source checkout-arrow.sh
-      - name: test finding version
-        shell: bash
-        run: |
-          VERSION=$(grep ^Version arrow/r/DESCRIPTION | sed s/Version:\ //)
-          echo $VERSION
       # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
@@ -204,6 +199,7 @@ jobs:
         shell: bash
         run: |
           VERSION=$(grep ^Version arrow/r/DESCRIPTION | sed s/Version:\ //)
+          cd build
           python ../s3-upload.py arrow-$VERSION.zip libarrow/bin/windows
   r-packages:
     if: true
