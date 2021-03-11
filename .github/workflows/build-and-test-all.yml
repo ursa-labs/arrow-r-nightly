@@ -9,7 +9,6 @@ on:
       - ".github/workflows/build-and-test-all.yml"
       - "linux/*"
       - s3-upload.py
-      - bintray-upload.sh
       - build-binary-and-upload.R
 
 jobs:
@@ -58,7 +57,6 @@ jobs:
         run: python -m pip install boto3
       - name: Build and upload cpp bundle
         env:
-          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
@@ -66,7 +64,6 @@ jobs:
           cd arrow
           VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
           zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt cpp/README.md LICENSE.txt NOTICE.txt .env
-          PKG_FILE=arrow-${VERSION}.zip REPO_PATH=/libarrow/src source ../bintray-upload.sh
           # Or to upload to S3:
           python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
       - name: Install R
@@ -128,7 +125,6 @@ jobs:
           python -m pip install boto3
       - name: Bundle and upload
         env:
-          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
@@ -140,7 +136,6 @@ jobs:
           # These files were created by the docker user so we have to sudo to get them
           sudo -E zip -r $PKG_FILE lib/ include/
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
-          sudo -E bash ../../../../../bintray-upload.sh
           # Or, upload to S3
           python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows-cpp:
@@ -199,7 +194,6 @@ jobs:
           python -m pip install boto3
       - name: Upload
         env:
-          BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
@@ -207,7 +201,6 @@ jobs:
           cd build
           export PKG_FILE=$(ls arrow-*.zip)
           export REPO_PATH=/libarrow/bin/windows
-          source ../bintray-upload.sh
           # Or, upload to S3
           python ../s3-upload.py $PKG_FILE $REPO_PATH
   r-packages:
@@ -283,7 +276,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Install R
         uses: r-lib/actions/setup-r@master
-      - name: Install arrow from bintray
+      - name: Install arrow from nightly repo
         env:
           # Test source build so be sure not to download a binary
           LIBARROW_BINARY: "FALSE"
