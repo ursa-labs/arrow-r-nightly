@@ -112,7 +112,7 @@ jobs:
           DATE: ${{needs.setup.outputs.date}}
         run: |
           cd linux
-          source checkout-arrow.sh
+          source ../checkout-arrow.sh
       - name: Build
         shell: bash
         run: |
