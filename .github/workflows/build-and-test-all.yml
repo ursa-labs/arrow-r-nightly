@@ -156,6 +156,11 @@ jobs:
           DATE: ${{needs.setup.outputs.date}}
         shell: bash
         run: source checkout-arrow.sh
+      - name: test finding version
+        shell: bash
+        run: |
+          VERSION=$(grep ^Version arrow/r/DESCRIPTION | sed s/Version:\ //)
+          echo $VERSION
       # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
@@ -198,11 +203,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         shell: bash
         run: |
-          cd build
-          export PKG_FILE=$(ls arrow-*.zip)
-          export REPO_PATH=/libarrow/bin/windows
-          # Or, upload to S3
-          python ../s3-upload.py $PKG_FILE $REPO_PATH
+          VERSION=$(grep ^Version arrow/r/DESCRIPTION | sed s/Version:\ //)
+          python ../s3-upload.py arrow-$VERSION.zip libarrow/bin/windows
   r-packages:
     if: true
     needs: [source, windows-cpp]
@@ -242,7 +244,7 @@ jobs:
   test-linux-binary:
     if: true
     needs: [source, linux-cpp]
-    name: Test linux binaries
+    name: Test binary ${{ matrix.image }}
     runs-on: ubuntu-latest
     container: ${{ matrix.image }}
     strategy:
