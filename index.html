@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210309</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210310</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@
 brew install apache-arrow
 # Or for a development version, you can try:
 brew install apache-arrow --HEAD</code></pre>
-<p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://dl.bintray.com/ursalabs/arrow-r/libarrow/bin/windows/" class="external-link">nightly repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
+<p>On Windows, you can download a .zip file with the arrow dependencies from the <a href="https://arrow-r-nightly.s3.amazonaws.com/libarrow/bin/windows/" class="external-link">nightly repository</a>, and then set the <code>RWINLIB_LOCAL</code> environment variable to point to that zip file before installing the <code>arrow</code> R package. Version numbers in that repository correspond to dates, and you will likely want the most recent.</p>
 <p>If you need to alter both the Arrow C++ library and the R package code, or if you can’t get a binary version of the latest C++ library elsewhere, you’ll need to build it from source too.</p>
 <p>First, install the C++ library. See the <a href="https://arrow.apache.org/docs/developers/cpp/building.html" class="external-link">developer guide</a> for details. It’s recommended to make a <code>build</code> directory inside of the <code>cpp</code> directory of the Arrow git repository (it is git-ignored). Assuming you are inside <code>cpp/build</code>, you’ll first call <code>cmake</code> to configure the build and then <code>make install</code>. For the R package, you’ll need to enable several features in the C++ library using <code>-D</code> flags:</p>
 <pre><code>cmake \
