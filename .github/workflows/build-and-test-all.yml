@@ -3,42 +3,58 @@ name: Build and test
 on:
   schedule:
     - cron: |
-        0 1 * * *
+        0 0 * * *
   push:
     paths:
       - ".github/workflows/build-and-test-all.yml"
       - "linux/*"
       - s3-upload.py
       - bintray-upload.sh
-      - up-date-description.sh
       - build-binary-and-upload.R
 
 jobs:
+  setup:
+    name: Identify commit and other parameters
+    outputs:
+      # To build from a different repo or branch, set these manually
+      fork: ${{ steps.step0.outputs.fork }}
+      # ref can be a branch name (but if not a fixed commit,
+      # it could change while the workflow is running)
+      ref: ${{ steps.step0.outputs.ref }}
+      # Set date to "" to skip updating the version string,
+      # or set to an alternative value (e.g. 99999 to build a 3.0.0.99999)
+      date: ${{ steps.step0.outputs.date }}
+      # To exclude certain steps, toggle the `if: true` in each job
+    steps:
+      - id: step0
+        run: |
+          FORK=apache
+          git clone https://github.com/${FORK}/arrow
+          echo "::set-output name=fork::${FORK}"
+          cd arrow
+          echo "::set-output name=ref::$(git rev-parse HEAD)"
+          echo "::set-output name=date::$(date -d yesterday +%Y%m%d)"
   source:
+    if: true
+    needs: setup
     name: Source packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
-      - name: Clone apache/arrow
+      - name: Clone and configure arrow
+        env:
+          FORK: ${{needs.setup.outputs.fork}}
+          REF: ${{needs.setup.outputs.ref}}
+          DATE: ${{needs.setup.outputs.date}}
         shell: bash
-        run: |
-          git clone https://github.com/apache/arrow
-      - name: Checkout arrow at date and update R package version
-        shell: bash
-        run: |
-          cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
-          cd r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
+        run: source checkout-arrow.sh
       - name: Set up Python (for S3 upload)
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
       - name: Install Boto
-        run: |
-          python -m pip install boto3
+        run: python -m pip install boto3
       - name: Build and upload cpp bundle
         env:
           BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
@@ -61,14 +77,6 @@ jobs:
         shell: bash
         run: |
           cd arrow/r
-          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
-          # Pin the git commit in the formula to match
-          cd tools
-          sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
-          rm -f apache-arrow.rb.bak
-          # NOTE: if you want to change the source of the libarrow files away
-          # from bintray, sed linuxlibs.R and winlibs.R
-          cd ..
           R CMD build --no-build-vignettes .
           Rscript -e 'tools::write_PACKAGES(".", type = "source")'
           python ../../s3-upload.py arrow_*.tar.gz src/contrib
@@ -76,6 +84,8 @@ jobs:
           python ../../s3-upload.py PACKAGES.gz src/contrib
           python ../../s3-upload.py PACKAGES.rds src/contrib
   linux-cpp:
+    if: true
+    needs: setup
     name: C++ Binary ${{ matrix.config.os }}-${{ matrix.config.version }}
     runs-on: ubuntu-latest
     strategy:
@@ -93,13 +103,15 @@ jobs:
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v2
-      - name: Clone apache/arrow and checkout at date
+      - name: Clone and configure arrow
         shell: bash
+        env:
+          FORK: ${{needs.setup.outputs.fork}}
+          REF: ${{needs.setup.outputs.ref}}
+          DATE: ${{needs.setup.outputs.date}}
         run: |
           cd linux
-          git clone https://github.com/apache/arrow
-          cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
+          source checkout-arrow.sh
       - name: Build
         shell: bash
         run: |
@@ -121,8 +133,6 @@ jobs:
         shell: bash
         run: |
           cd linux/arrow/r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../../up-date-description.sh
           VERSION=$(grep ^Version DESCRIPTION | sed s/Version:\ //)
           export PKG_FILE="arrow-${VERSION}.zip"
           cd libarrow/dist
@@ -133,23 +143,23 @@ jobs:
           # Or, upload to S3
           python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows-cpp:
+    if: true
     name: C++ Binary Windows RTools (35 and 40)
+    needs: setup
     runs-on: windows-latest
     steps:
       - run: git config --global core.autocrlf false
-      - name: Checkout Arrow
+      - name: Checkout arrow-r-nightly
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Clone apache/arrow and checkout at date
+      - name: Clone and configure arrow
+        env:
+          FORK: ${{needs.setup.outputs.fork}}
+          REF: ${{needs.setup.outputs.ref}}
+          DATE: ${{needs.setup.outputs.date}}
         shell: bash
-        run: |
-          git clone https://github.com/apache/arrow
-          cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
-          cd r
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
+        run: source checkout-arrow.sh
       # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
@@ -200,6 +210,7 @@ jobs:
           # Or, upload to S3
           python ../s3-upload.py $PKG_FILE $REPO_PATH
   r-packages:
+    if: true
     needs: [source, windows-cpp]
     name: ${{ matrix.platform }} ${{ matrix.r_version }}
     runs-on: ${{ matrix.platform }}
@@ -235,6 +246,7 @@ jobs:
         shell: Rscript {0}
         run: source("build-binary-and-upload.R")
   test-linux-binary:
+    if: true
     needs: [source, linux-cpp]
     name: Test linux binaries
     runs-on: ubuntu-latest
@@ -261,6 +273,7 @@ jobs:
           LIBARROW_DOWNLOAD: "TRUE"
         run: PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R
   test-source:
+    if: true
     needs: source
     name: Test linux source build
     runs-on: ubuntu-latest
@@ -281,23 +294,18 @@ jobs:
         run: Rscript linux/install-arrow.R
         if: failure()
   pkgdown:
-    needs: [test-linux-binary, test-source, r-packages]
-    runs-on: ubuntu-latest
+    if: true
+    needs: [setup, test-linux-binary]
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
-      - name: Clone apache/arrow
+      - name: Clone and configure arrow
+        env:
+          FORK: ${{needs.setup.outputs.fork}}
+          REF: ${{needs.setup.outputs.ref}}
+          DATE: ${{needs.setup.outputs.date}}
         shell: bash
-        run: |
-          git clone https://github.com/apache/arrow
-      - name: Checkout arrow at date and update R package version
-        shell: bash
-        run: |
-          cd arrow
-          git checkout `git rev-list -n 1 --before="00:00" master`
-          cd r
-          cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
-          export DATE=$(date -d yesterday +%Y%m%d)
-          source ../../up-date-description.sh
+        run: source checkout-arrow.sh
       - name: Set up gh-pages branch to push to
         shell: bash
         env:
@@ -324,7 +332,6 @@ jobs:
       - name: Build and deploy site
         run: |
           cd arrow/r
-          export LIBARROW_DOWNLOAD=true
           Rscript -e "pkgdown::build_site(install = FALSE)"
           cd docs
           if [ "$(git status --porcelain)" != "" ]; then
