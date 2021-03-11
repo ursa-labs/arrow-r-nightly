@@ -15,10 +15,11 @@ on:
 jobs:
   setup:
     name: Identify commit and other parameters
+    runs-on: ubuntu-latest
     outputs:
       # To build from a different repo or branch, set these manually
       fork: ${{ steps.step0.outputs.fork }}
-      # ref can be a branch name (but if not a fixed commit,
+      # ref can be a branch name (but if not a fixed commit, beware:
       # it could change while the workflow is running)
       ref: ${{ steps.step0.outputs.ref }}
       # Set date to "" to skip updating the version string,
