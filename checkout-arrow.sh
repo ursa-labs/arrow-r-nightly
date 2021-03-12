@@ -1,5 +1,14 @@
 #! /bin/bash
 
+# This script relies on three environment variables, which in the
+# GitHub Actions workflow are set by the `setup` job:
+#
+# * FORK: which fork of apache/arrow to clone
+# * REF: which commit or ref on that repository to check out
+# * DATE: a version suffix to use. Dev versions of the R package
+#     have a version number like x.y.z.9000; if $DATE is set,
+#     this script will set the version to x.y.z.$DATE
+
 : ${FORK:="apache"}
 
 git clone https://github.com/${FORK}/arrow

@@ -8,12 +8,38 @@ on:
     paths:
       - ".github/workflows/build-and-test-all.yml"
       - "linux/*"
+      - checkout-arrow.sh
       - s3-upload.py
       - build-binary-and-upload.R
 
 jobs:
   setup:
     name: Identify commit and other parameters
+    # The purpose of this step is to set the GitHub repository,
+    # commit/ref to build, and the nightly version number to use.
+    # This is done once up front so that later build stages can
+    # all refer to the same parameters. See checkout-arrow.sh
+    # for how these parameters are used.
+    #
+    # By default, this runs at 00:00 UTC, takes the latest commit
+    # from apache/arrow, and calls it version x.y.z.YYYYMMDD,
+    # where YYYYMMDD is yesterday's date (i.e. the date that should
+    # correspond to the commit, assuming there are commits every day).
+    #
+    # At CRAN release time, you may want to run a version of this
+    # to build just the Linux C++ binaries corresponding to the
+    # CRAN release. To do this, make a branch in this repository
+    # and edit the "outputs" in this step: set `ref` to the
+    # official release branch (or, if patches are required
+    # after release, you may also need to specify a personal `fork`
+    # and branch to build from), set `date` to "" to skip updating
+    # the R version number, and set some of the downstream tasks
+    # to `if: false` to skip building them.
+    #
+    # Similarly, if you want to test building artifacts from a branch,
+    # specify the fork and ref, and you can set `date` to any number
+    # you want. (I've used this to test building on r-hub Solaris VMs
+    # with a custom C++ source package, for example.)
     runs-on: ubuntu-latest
     outputs:
       # To build from a different repo or branch, set these manually
@@ -24,7 +50,6 @@ jobs:
       # Set date to "" to skip updating the version string,
       # or set to an alternative value (e.g. 99999 to build a 3.0.0.99999)
       date: ${{ steps.step0.outputs.date }}
-      # To exclude certain steps, toggle the `if: true` in each job
     steps:
       - id: step0
         run: |
