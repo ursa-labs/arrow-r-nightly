@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210325</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
       </span>
     </div>
 
@@ -450,9 +450,9 @@
 <h2 class="hasAnchor">
 <a href="#feather-v2" class="anchor"></a>Feather v2</h2>
 <p>This release includes support for version 2 of the Feather file format. Feather v2 features full support for all Arrow data types, fixes the 2GB per-column limitation for large amounts of string data, and it allows files to be compressed using either <code>lz4</code> or <code>zstd</code>. <code><a href="../reference/write_feather.html">write_feather()</a></code> can write either version 2 or <a href="https://github.com/wesm/feather" class="external-link">version 1</a> Feather files, and <code><a href="../reference/read_feather.html">read_feather()</a></code> automatically detects which file version it is reading.</p>
-<p>Related to this change, several functions around reading and writing data have been reworked. <code><a href="../reference/read_arrow.html">read_ipc_stream()</a></code> and <code><a href="../reference/write_arrow.html">write_ipc_stream()</a></code> have been added to facilitate writing data to the Arrow IPC stream format, which is slightly different from the IPC file format (Feather v2 <em>is</em> the IPC file format).</p>
-<p>Behavior has been standardized: all <code>read_&lt;format&gt;()</code> return an R <code>data.frame</code> (default) or a <code>Table</code> if the argument <code>as_data_frame = FALSE</code>; all <code>write_&lt;format&gt;()</code> functions return the data object, invisibly. To facilitate some workflows, a special <code><a href="../reference/write_to_raw.html">write_to_raw()</a></code> function is added to wrap <code><a href="../reference/write_arrow.html">write_ipc_stream()</a></code> and return the <code>raw</code> vector containing the buffer that was written.</p>
-<p>To achieve this standardization, <code>read_table()</code>, <code>read_record_batch()</code>, <code><a href="../reference/read_arrow.html">read_arrow()</a></code>, and <code><a href="../reference/write_arrow.html">write_arrow()</a></code> have been deprecated.</p>
+<p>Related to this change, several functions around reading and writing data have been reworked. <code><a href="../reference/read_ipc_stream.html">read_ipc_stream()</a></code> and <code><a href="../reference/write_ipc_stream.html">write_ipc_stream()</a></code> have been added to facilitate writing data to the Arrow IPC stream format, which is slightly different from the IPC file format (Feather v2 <em>is</em> the IPC file format).</p>
+<p>Behavior has been standardized: all <code>read_&lt;format&gt;()</code> return an R <code>data.frame</code> (default) or a <code>Table</code> if the argument <code>as_data_frame = FALSE</code>; all <code>write_&lt;format&gt;()</code> functions return the data object, invisibly. To facilitate some workflows, a special <code><a href="../reference/write_to_raw.html">write_to_raw()</a></code> function is added to wrap <code><a href="../reference/write_ipc_stream.html">write_ipc_stream()</a></code> and return the <code>raw</code> vector containing the buffer that was written.</p>
+<p>To achieve this standardization, <code>read_table()</code>, <code>read_record_batch()</code>, <code><a href="../reference/read_ipc_stream.html">read_arrow()</a></code>, and <code><a href="../reference/write_ipc_stream.html">write_arrow()</a></code> have been deprecated.</p>
 </div>
 <div id="python-interoperability" class="section level2">
 <h2 class="hasAnchor">
@@ -506,7 +506,7 @@
 <code><a href="../reference/install_arrow.html">install_arrow()</a></code> now installs the latest release of <code>arrow</code>, including Linux dependencies, either for CRAN releases or for development builds (if <code>nightly = TRUE</code>)</li>
 <li>Package installation on Linux no longer downloads C++ dependencies unless the <code>LIBARROW_DOWNLOAD</code> or <code>NOT_CRAN</code> environment variable is set</li>
 <li>
-<code><a href="../reference/write_feather.html">write_feather()</a></code>, <code><a href="../reference/write_arrow.html">write_arrow()</a></code> and <code><a href="../reference/write_parquet.html">write_parquet()</a></code> now return their input, similar to the <code>write_*</code> functions in the <code>readr</code> package (<a href='https://issues.apache.org/jira/browse/6387'>#6387</a>, @boshek)</li>
+<code><a href="../reference/write_feather.html">write_feather()</a></code>, <code><a href="../reference/write_ipc_stream.html">write_arrow()</a></code> and <code><a href="../reference/write_parquet.html">write_parquet()</a></code> now return their input, similar to the <code>write_*</code> functions in the <code>readr</code> package (<a href='https://issues.apache.org/jira/browse/6387'>#6387</a>, @boshek)</li>
 <li>Can now infer the type of an R <code>list</code> and create a ListArray when all list elements are the same type (<a href='https://issues.apache.org/jira/browse/6275'>#6275</a>, @michaelchirico)</li>
 </ul>
 </div>

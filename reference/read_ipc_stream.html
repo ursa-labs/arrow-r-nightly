@@ -93,7 +93,7 @@ and read_feather() read those formats, respectively." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210325</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
       </span>
     </div>
 
@@ -188,13 +188,13 @@ and read_feather() read those formats, respectively." />
 
     <div class="ref-description">
     <p>Apache Arrow defines two formats for <a href='https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc'>serializing data for interprocess communication (IPC)</a>:
-a "stream" format and a "file" format, known as Feather. <code>read_ipc_stream()</code>
+a "stream" format and a "file" format, known as Feather. <code><a href='read_ipc_stream.html'>read_ipc_stream()</a></code>
 and <code><a href='read_feather.html'>read_feather()</a></code> read those formats, respectively.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_arrow</span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'><a href='read_ipc_stream.html'>read_arrow</a></span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>read_ipc_stream</span><span class='op'>(</span><span class='va'>file</span>, as_data_frame <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='read_ipc_stream.html'>read_ipc_stream</a></span><span class='op'>(</span><span class='va'>file</span>, as_data_frame <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -224,7 +224,7 @@ an Arrow <a href='Table.html'>Table</a>?</p></td>
 Arrow <a href='Table.html'>Table</a> otherwise</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>read_arrow()</code>, a wrapper around <code>read_ipc_stream()</code> and <code><a href='read_feather.html'>read_feather()</a></code>,
+    <p><code><a href='read_ipc_stream.html'>read_arrow()</a></code>, a wrapper around <code><a href='read_ipc_stream.html'>read_ipc_stream()</a></code> and <code><a href='read_feather.html'>read_feather()</a></code>,
 is deprecated. You should explicitly choose
 the function that will read the desired IPC format (stream or file) since
 a file or <code>InputStream</code> may contain either.</p>

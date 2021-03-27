@@ -93,7 +93,7 @@ may be grouped together in a Table." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210325</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
       </span>
     </div>
 
@@ -229,6 +229,8 @@ integers <code>i</code>. If <code>i</code> is an Arrow <code>Array</code> or <co
 coerced to an R vector before taking.</p></li>
 <li><p><code>$Filter(i, keep_na = TRUE)</code>: return a <code>ChunkedArray</code> with values at positions where
 logical vector or Arrow boolean-type <code>(Chunked)Array</code> <code>i</code> is <code>TRUE</code>.</p></li>
+<li><p><code>$SortIndices(descending = FALSE)</code>: return an <code>Array</code> of integer positions that can be
+used to rearrange the <code>ChunkedArray</code> in ascending or descending order</p></li>
 <li><p><code>$cast(target_type, safe = TRUE, options = cast_options(safe))</code>: Alter the
 data in the array to change its type.</p></li>
 <li><p><code>$null_count()</code>: The number of null entries in the array</p></li>
