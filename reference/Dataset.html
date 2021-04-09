@@ -97,7 +97,7 @@ DatasetFactory is used to provide finer control over the creation of Datasets." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210408</span>
       </span>
     </div>
 
@@ -226,7 +226,8 @@ as described above.</p></li>
 <p><code>FileSystemDatasetFactory$create()</code> is a lower-level factory method and
 takes the following arguments:</p><ul>
 <li><p><code>filesystem</code>: A <a href='FileSystem.html'>FileSystem</a></p></li>
-<li><p><code>selector</code>: A <a href='FileSelector.html'>FileSelector</a></p></li>
+<li><p><code>selector</code>: Either a <a href='FileSelector.html'>FileSelector</a> or <code>NULL</code></p></li>
+<li><p><code>paths</code>: Either a character vector of file paths or <code>NULL</code></p></li>
 <li><p><code>format</code>: A <a href='FileFormat.html'>FileFormat</a></p></li>
 <li><p><code>partitioning</code>: Either <code>Partitioning</code>, <code>PartitioningFactory</code>, or <code>NULL</code></p></li>
 </ul>

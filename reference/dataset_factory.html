@@ -93,7 +93,7 @@ open_dataset()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210408</span>
       </span>
     </div>
 
@@ -205,10 +205,11 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A string file x containing data files, or
-a list of <code>DatasetFactory</code> objects whose datasets should be
-grouped. If this argument is specified it will be used to construct a
-<code>UnionDatasetFactory</code> and other arguments will be ignored.</p></td>
+      <td><p>A string path to a directory containing data files, a vector of one
+one or more string paths to data files, or a list of <code>DatasetFactory</code> objects
+whose datasets should be combined. If this argument is specified it will be
+used to construct a <code>UnionDatasetFactory</code> and other arguments will be
+ignored.</p></td>
     </tr>
     <tr>
       <th>filesystem</th>

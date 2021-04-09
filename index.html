@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210408</span>
       </span>
     </div>
 
@@ -199,7 +199,13 @@ brew install apache-arrow --HEAD</code></pre>
 <p>Note that after any change to the C++ library, you must reinstall it and run <code>make clean</code> or <code>git clean -fdx .</code> to remove any cached object code in the <code>r/src/</code> directory before reinstalling the R package. This is only necessary if you make changes to the C++ library source; you do not need to manually purge object files if you are only editing R or C++ code inside <code>r/</code>.</p>
 <p>Once you’ve built the C++ library, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
 <pre class="shell"><code>cd ../../r
-R -e 'install.packages(c("devtools", "roxygen2", "pkgdown", "covr")); devtools::install_dev_deps()'
+
+Rscript -e '
+options(repos = "https://cloud.r-project.org/")
+if (!require("remotes")) install.packages("remotes")
+remotes::install_deps(dependencies = TRUE)
+'
+
 R CMD INSTALL .</code></pre>
 <p>If you need to set any compilation flags while building the C++ extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
 <pre class="shell"><code>export ARROW_R_CXXFLAGS=-fno-omit-frame-pointer</code></pre>

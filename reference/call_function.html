@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Arrow data to a raw vector — write_to_raw • Arrow R Package</title>
+<title>Call an Arrow compute function — call_function • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,12 @@
 
 
 
-<meta property="og:title" content="Write Arrow data to a raw vector — write_to_raw" />
-<meta property="og:description" content="write_ipc_stream() and write_feather() write data to a sink and return
-the data (data.frame, RecordBatch, or Table) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a raw vector in R." />
+<meta property="og:title" content="Call an Arrow compute function — call_function" />
+<meta property="og:description" content="This function provides a lower-level API for calling Arrow functions by their
+string function name. You won't use it directly for most applications.
+Many Arrow compute functions are mapped to R methods,
+and in a dplyr evaluation context, all Arrow functions
+are callable with an arrow_ prefix." />
 
 
 
@@ -70,6 +71,8 @@ access that buffer as a raw vector in R." />
   gtag('config', 'UA-107500873-1');
 </script>
 
+
+<!-- dependencies from examples -->
 
 
   
@@ -182,37 +185,81 @@ access that buffer as a raw vector in R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Arrow data to a raw vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/ipc_stream.R'><code>R/ipc_stream.R</code></a></small>
-    <div class="hidden name"><code>write_to_raw.Rd</code></div>
+    <h1>Call an Arrow compute function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/compute.R'><code>R/compute.R</code></a></small>
+    <div class="hidden name"><code>call_function.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='write_ipc_stream.html'>write_ipc_stream()</a></code> and <code><a href='write_feather.html'>write_feather()</a></code> write data to a sink and return
-the data (<code>data.frame</code>, <code>RecordBatch</code>, or <code>Table</code>) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a <code>raw</code> vector in R.</p>
+    <p>This function provides a lower-level API for calling Arrow functions by their
+string function name. You won't use it directly for most applications.
+Many Arrow compute functions are mapped to R methods,
+and in a <code>dplyr</code> evaluation context, <a href='list_compute_functions.html'>all Arrow functions</a>
+are callable with an <code>arrow_</code> prefix.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_to_raw</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stream"</span>, <span class='st'>"file"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>call_function</span><span class='op'>(</span>
+  <span class='va'>function_name</span>,
+  <span class='va'>...</span>,
+  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>,
+  options <span class='op'>=</span> <span class='fu'>empty_named_list</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
+      <th>function_name</th>
+      <td><p>string Arrow compute function name</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>one of <code><a href='https://rdrr.io/r/base/c.html'>c("stream", "file")</a></code>, indicating the IPC format to use</p></td>
+      <th>...</th>
+      <td><p>Function arguments, which may include <code>Array</code>, <code>ChunkedArray</code>, <code>Scalar</code>,
+<code>RecordBatch</code>, or <code>Table</code>.</p></td>
+    </tr>
+    <tr>
+      <th>args</th>
+      <td><p>list arguments as an alternative to specifying in <code>...</code></p></td>
+    </tr>
+    <tr>
+      <th>options</th>
+      <td><p>named list of C++ function options.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>raw</code> vector containing the bytes of the IPC serialized data.</p>
+    <p>An <code>Array</code>, <code>ChunkedArray</code>, <code>Scalar</code>, <code>RecordBatch</code>, or <code>Table</code>, whatever the compute function results in.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='https://arrow.apache.org/docs/cpp/compute.html'>Arrow C++ documentation</a> for the functions and their respective options.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='va'>Array</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>3L</span>, <span class='cn'>NA</span>, <span class='fl'>5L</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='va'>Scalar</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='fl'>4L</span><span class='op'>)</span>
+<span class='fu'>call_function</span><span class='op'>(</span><span class='st'>"fill_null"</span>, <span class='va'>a</span>, <span class='va'>s</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Array
+#&gt; &lt;int32&gt;
+#&gt; [
+#&gt;   1,
+#&gt;   2,
+#&gt;   3,
+#&gt;   4,
+#&gt;   5
+#&gt; ]</div><div class='input'>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='va'>Array</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10000</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>call_function</span><span class='op'>(</span><span class='st'>"quantile"</span>, <span class='va'>a</span>, options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>q <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Array
+#&gt; &lt;double&gt;
+#&gt; [
+#&gt;   -3.30418,
+#&gt;   -0.675502,
+#&gt;   0.0011219,
+#&gt;   0.674598,
+#&gt;   3.58895
+#&gt; ]</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

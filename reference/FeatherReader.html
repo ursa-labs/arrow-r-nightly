@@ -93,7 +93,7 @@ make an arrow::Table. See its usage in read_feather()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210326</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210408</span>
       </span>
     </div>
 
@@ -211,6 +211,8 @@ takes the following argument:</p><ul>
 <ul>
 <li><p><code>$Read(columns)</code>: Returns a <code>Table</code> of the selected columns, a vector of
 integer indices</p></li>
+<li><p><code>$column_names</code>: Active binding, returns the column names in the Feather file</p></li>
+<li><p><code>$schema</code>: Active binding, returns the schema of the Feather file</p></li>
 <li><p><code>$version</code>: Active binding, returns <code>1</code> or <code>2</code>, according to the Feather
 file version</p></li>
 </ul>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Arrow data to a raw vector — write_to_raw • Arrow R Package</title>
+<title>List available Arrow C++ compute functions — list_compute_functions • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,10 @@
 
 
 
-<meta property="og:title" content="Write Arrow data to a raw vector — write_to_raw" />
-<meta property="og:description" content="write_ipc_stream() and write_feather() write data to a sink and return
-the data (data.frame, RecordBatch, or Table) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a raw vector in R." />
+<meta property="og:title" content="List available Arrow C++ compute functions — list_compute_functions" />
+<meta property="og:description" content="This function lists the names of all available Arrow C++ library compute functions.
+These can be called by passing to call_function(), or they can be
+called by name with an arrow_ prefix inside a dplyr verb." />
 
 
 
@@ -182,36 +181,51 @@ access that buffer as a raw vector in R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Arrow data to a raw vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/ipc_stream.R'><code>R/ipc_stream.R</code></a></small>
-    <div class="hidden name"><code>write_to_raw.Rd</code></div>
+    <h1>List available Arrow C++ compute functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/compute.R'><code>R/compute.R</code></a></small>
+    <div class="hidden name"><code>list_compute_functions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='write_ipc_stream.html'>write_ipc_stream()</a></code> and <code><a href='write_feather.html'>write_feather()</a></code> write data to a sink and return
-the data (<code>data.frame</code>, <code>RecordBatch</code>, or <code>Table</code>) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a <code>raw</code> vector in R.</p>
+    <p>This function lists the names of all available Arrow C++ library compute functions.
+These can be called by passing to <code><a href='call_function.html'>call_function()</a></code>, or they can be
+called by name with an <code>arrow_</code> prefix inside a <code>dplyr</code> verb.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_to_raw</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stream"</span>, <span class='st'>"file"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>list_compute_functions</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
+      <th>pattern</th>
+      <td><p>Optional regular expression to filter the function list</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>one of <code><a href='https://rdrr.io/r/base/c.html'>c("stream", "file")</a></code>, indicating the IPC format to use</p></td>
+      <th>...</th>
+      <td><p>Additional parameters passed to <code><a href='https://rdrr.io/r/base/grep.html'>grep()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>raw</code> vector containing the bytes of the IPC serialized data.</p>
+    <p>A character vector of available Arrow C++ function names</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The resulting list describes the capabilities of your <code>arrow</code> build.
+Some functions, such as string and regular expression functions,
+require optional build-time C++ dependencies. If your <code>arrow</code> package
+was not compiled with those features enabled, those functions will
+not appear in this list.</p>
+<p>Some functions take options that need to be passed when calling them
+(in a list called <code>options</code>). These options require custom handling
+in C++; many functions already have that handling set up but not all do.
+If you encounter one that needs special handling for options, please
+report an issue.</p>
+<p>Note that this list does <em>not</em> enumerate all of the R bindings for these functions.
+The package includes Arrow methods for many base R functions that can
+be called directly on Arrow objects, as well as some tidyverse-flavored versions
+available inside <code>dplyr</code> verbs.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

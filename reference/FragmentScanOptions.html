@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Arrow data to a raw vector — write_to_raw • Arrow R Package</title>
+<title>Format-specific scan options — FragmentScanOptions • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,9 @@
 
 
 
-<meta property="og:title" content="Write Arrow data to a raw vector — write_to_raw" />
-<meta property="og:description" content="write_ipc_stream() and write_feather() write data to a sink and return
-the data (data.frame, RecordBatch, or Table) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a raw vector in R." />
+<meta property="og:title" content="Format-specific scan options — FragmentScanOptions" />
+<meta property="og:description" content="A FragmentScanOptions holds options specific to a FileFormat and a scan
+operation." />
 
 
 
@@ -182,36 +180,34 @@ access that buffer as a raw vector in R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Arrow data to a raw vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/ipc_stream.R'><code>R/ipc_stream.R</code></a></small>
-    <div class="hidden name"><code>write_to_raw.Rd</code></div>
+    <h1>Format-specific scan options</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/dataset-format.R'><code>R/dataset-format.R</code></a></small>
+    <div class="hidden name"><code>FragmentScanOptions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='write_ipc_stream.html'>write_ipc_stream()</a></code> and <code><a href='write_feather.html'>write_feather()</a></code> write data to a sink and return
-the data (<code>data.frame</code>, <code>RecordBatch</code>, or <code>Table</code>) they were given.
-This function wraps those so that you can serialize data to a buffer and
-access that buffer as a <code>raw</code> vector in R.</p>
+    <p>A <code>FragmentScanOptions</code> holds options specific to a <code>FileFormat</code> and a scan
+operation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_to_raw</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stream"</span>, <span class='st'>"file"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
-    </tr>
-    <tr>
-      <th>format</th>
-      <td><p>one of <code><a href='https://rdrr.io/r/base/c.html'>c("stream", "file")</a></code>, indicating the IPC format to use</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
 
-    <p>A <code>raw</code> vector containing the bytes of the IPC serialized data.</p>
+    
+
+<p><code>FragmentScanOptions$create()</code> takes the following arguments:</p><ul>
+<li><p><code>format</code>: A string identifier of the file format. Currently supported values:</p><ul>
+<li><p>"csv"/"text", aliases for the same format.</p></li>
+</ul></li>
+<li><p><code>...</code>: Additional format-specific options</p>
+<p><code>format = "text"</code>: see <a href='CsvReadOptions.html'>CsvConvertOptions</a>. Note that options can only be
+specified with the Arrow C++ library naming. Also, "block_size" from
+<a href='CsvReadOptions.html'>CsvReadOptions</a> may be given.</p></li>
+</ul>
+
+<p>It returns the appropriate subclass of <code>FragmentScanOptions</code>
+(e.g. <code>CsvFragmentScanOptions</code>).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
