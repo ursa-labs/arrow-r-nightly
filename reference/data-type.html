@@ -95,7 +95,7 @@ of these functions don't take arguments, but a few do." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210409</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210410</span>
       </span>
     </div>
 
@@ -307,8 +307,8 @@ take any of those four values.</p></td>
 <li><p><code>float16()</code> and <code>halffloat()</code></p></li>
 <li><p><code>float32()</code> and <code>float()</code></p></li>
 <li><p><code>bool()</code> and <code>boolean()</code></p></li>
-<li><p>Called from <code><a href='Schema.html'>schema()</a></code> or <code>struct()</code>, <code><a href='https://rdrr.io/r/base/double.html'>double()</a></code> also is supported as a
-way of creating a <code>float64()</code></p></li>
+<li><p>When called inside an <code>arrow</code> function, such as <code><a href='Schema.html'>schema()</a></code> or <code>cast()</code>,
+<code><a href='https://rdrr.io/r/base/double.html'>double()</a></code> also is supported as a way of creating a <code>float64()</code></p></li>
 </ul>
 
 <p><code>date32()</code> creates a datetime type with a "day" unit, like the R <code>Date</code>
