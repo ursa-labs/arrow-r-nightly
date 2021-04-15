@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210413</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210414</span>
       </span>
     </div>
 
@@ -167,6 +167,129 @@
 <h2 class="hasAnchor">
 <a href="#access-to-arrow-messages-buffers-and-streams" class="anchor"></a>Access to Arrow messages, buffers, and streams</h2>
 <p>The <code>arrow</code> package also provides many lower-level bindings to the C++ library, which enable you to access and manipulate Arrow objects. You can use these to build connectors to other applications and services that use Arrow. One example is Spark: the <a href="https://spark.rstudio.com/" class="external-link"><code>sparklyr</code></a> package has support for using Arrow to move data to and from Spark, yielding <a href="http://arrow.apache.org/blog/2019/01/25/r-spark-improvements/" class="external-link">significant performance gains</a>.</p>
+</div>
+</div>
+<div id="object-hierarchy" class="section level1">
+<h1 class="hasAnchor">
+<a href="#object-hierarchy" class="anchor"></a>Object hierarchy</h1>
+<div id="metadata-objects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#metadata-objects" class="anchor"></a>Metadata objects</h2>
+<p>Arrow defines the following classes for representing metadata:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="54%">
+<col width="34%">
+</colgroup>
+<thead><tr class="header">
+<th>Class</th>
+<th>Description</th>
+<th>How to create an instance</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>DataType</code></td>
+<td>attribute controlling how values are represented</td>
+<td>functions in <code><a href="../reference/data-type.html">help("data-type")</a></code>
+</td>
+</tr>
+<tr class="even">
+<td><code>Field</code></td>
+<td>a character string name and a <code>DataType</code>
+</td>
+<td><code><a href="../reference/Field.html">field(name, type)</a></code></td>
+</tr>
+<tr class="odd">
+<td><code>Schema</code></td>
+<td>list of <code>Field</code>s</td>
+<td><code><a href="../reference/Schema.html">schema(...)</a></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-objects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-objects" class="anchor"></a>Data objects</h2>
+<p>Arrow defines the following classes for representing zero-dimensional (scalar), one-dimensional (array/vector-like), and two-dimensional (tabular/data frame-like) data:</p>
+<table class="table">
+<colgroup>
+<col width="2%">
+<col width="10%">
+<col width="31%">
+<col width="56%">
+</colgroup>
+<thead><tr class="header">
+<th>Dim</th>
+<th>Class</th>
+<th>Description</th>
+<th>How to create an instance</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><code>Scalar</code></td>
+<td>single value and its <code>DataType</code>
+</td>
+<td><code>Scalar$create(value, type)</code></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><code>Array</code></td>
+<td>vector of values and its <code>DataType</code>
+</td>
+<td><code>Array$create(vector, type)</code></td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td><code>ChunkedArray</code></td>
+<td>vectors of values and their <code>DataType</code>
+</td>
+<td>
+<code>ChunkedArray$create(..., type)</code> or alias <code><a href="../reference/ChunkedArray.html">chunked_array(..., type)</a></code>
+</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>RecordBatch</code></td>
+<td>list of <code>Array</code>s with a <code>Schema</code>
+</td>
+<td>
+<code>RecordBatch$create(...)</code> or alias <code><a href="../reference/RecordBatch.html">record_batch(...)</a></code>
+</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><code>Table</code></td>
+<td>list of <code>ChunkedArray</code> with a <code>Schema</code>
+</td>
+<td>
+<code>Table$create(...)</code> or <code>arrow::read_*(file, as_data_frame = FALSE)</code>
+</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>Dataset</code></td>
+<td>list of <code>Table</code>s with the same <code>Schema</code>
+</td>
+<td>
+<code>Dataset$create(sources, schema)</code> or alias <code><a href="../reference/open_dataset.html">open_dataset(sources, schema)</a></code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each of these is defined as an <code>R6</code> class in the <code>arrow</code> R package and corresponds to a class of the same name in the Arrow C++ library. The <code>arrow</code> package provides a variety of <code>R6</code> and S3 methods for interacting with instances of these classes.</p>
+<p>For convenience, the `arrow package also defines several synthetic classes that do not exist in the C++ library, including:</p>
+<ul>
+<li>
+<code>ArrowDatum</code>: inherited by <code>Scalar</code>, <code>Array</code>, and <code>ChunkedArray</code>
+</li>
+<li>
+<code>ArrowTabular</code>: inherited by <code>RecordBatch</code> and <code>Table</code>
+</li>
+<li>
+<code>ArrowObject</code>: inherited by all Arrow objects</li>
+</ul>
 </div>
 </div>
 <div id="internals" class="section level1">
