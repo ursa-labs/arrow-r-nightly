@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210421</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210422</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
 <p>This vignette introduces Datasets and shows how to use <code>dplyr</code> to analyze them. It describes both what is possible to do with Arrow now and what is on the immediate development roadmap.</p>
 <div id="example-nyc-taxi-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-nyc-taxi-data" class="anchor"></a>Example: NYC taxi data</h2>
+<a href="#example-nyc-taxi-data" class="anchor" aria-hidden="true"></a>Example: NYC taxi data</h2>
 <p>The <a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page" class="external-link">New York City taxi trip record data</a> is widely used in big data exercises and competitions. For demonstration purposes, we have hosted a Parquet-formatted version of about 10 years of the trip data in a public Amazon S3 bucket.</p>
 <p>The total file size is around 37 gigabytes, even in the efficient Parquet file format. That’s bigger than memory on most people’s computers, so we can’t just read it all in and stack it into a single data frame.</p>
 <p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details. To see if your <code>arrow</code> installation has S3 support, run</p>
@@ -180,7 +180,7 @@
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<a href="#getting-started" class="anchor" aria-hidden="true"></a>Getting started</h2>
 <p>Because <code>dplyr</code> is not necessary for many Arrow workflows, it is an optional (<code>Suggests</code>) dependency. So, to work with Datasets, we need to load both <code>arrow</code> and <code>dplyr</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/" class="external-link">arrow</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
@@ -229,7 +229,7 @@ year=2009/month=02/data.parquet
 </div>
 <div id="querying-the-dataset" class="section level2">
 <h2 class="hasAnchor">
-<a href="#querying-the-dataset" class="anchor"></a>Querying the dataset</h2>
+<a href="#querying-the-dataset" class="anchor" aria-hidden="true"></a>Querying the dataset</h2>
 <p>Up to this point, we haven’t loaded any data: we have walked directories to find files, we’ve parsed file paths to identify partitions, and we’ve read the headers of the Parquet files to inspect their schemas so that we can make sure they all line up.</p>
 <p>In the current release, <code>arrow</code> supports the dplyr verbs <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code>. Aggregation is not yet supported, so before you call <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> or other verbs with aggregate functions, use <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to pull the selected subset of the data into an in-memory R data frame.</p>
 <p>If you attempt to call unsupported <code>dplyr</code> verbs or unimplemented functions in your query on an Arrow Dataset, the <code>arrow</code> package raises an error. However, for <code>dplyr</code> queries on <code>Table</code> objects (which are typically smaller in size) the package automatically calls <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> before processing that <code>dplyr</code> verb.</p>
@@ -287,7 +287,7 @@ year=2009/month=02/data.parquet
 </div>
 <div id="more-dataset-options" class="section level2">
 <h2 class="hasAnchor">
-<a href="#more-dataset-options" class="anchor"></a>More dataset options</h2>
+<a href="#more-dataset-options" class="anchor" aria-hidden="true"></a>More dataset options</h2>
 <p>There are a few ways you can control the Dataset creation to adapt to special use cases. For one, if you are working with a single file or a set of files that are not all in the same directory, you can provide a file path or a vector of multiple file paths to <code><a href="../reference/open_dataset.html">open_dataset()</a></code>. This is useful if, for example, you have a single CSV file that is too big to read into memory. You could pass the file path to <code><a href="../reference/open_dataset.html">open_dataset()</a></code>, use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> to partition the Dataset into manageable chunks, then use <code><a href="../reference/write_dataset.html">write_dataset()</a></code> to write each chunk to a separate Parquet file—all without needing to read the full CSV file into R.</p>
 <p>You can specify a <code>schema</code> argument to <code><a href="../reference/open_dataset.html">open_dataset()</a></code> to declare the columns and their data types. This is useful if you have data files that have different storage schema (for example, a column could be <code>int32</code> in one and <code>int8</code> in another) and you want to ensure that the resulting Dataset has a specific type. To be clear, it’s not necessary to specify a schema, even in this example of mixed integer types, because the Dataset constructor will reconcile differences like these. The schema specification just lets you declare what you want the result to be.</p>
 <p>Similarly, you can provide a Schema in the <code>partitioning</code> argument of <code><a href="../reference/open_dataset.html">open_dataset()</a></code> in order to declare the types of the virtual columns that define the partitions. This would be useful, in our taxi dataset example, if you wanted to keep <code>month</code> as a string instead of an integer for some reason.</p>
@@ -295,7 +295,7 @@ year=2009/month=02/data.parquet
 </div>
 <div id="writing-datasets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#writing-datasets" class="anchor"></a>Writing datasets</h2>
+<a href="#writing-datasets" class="anchor" aria-hidden="true"></a>Writing datasets</h2>
 <p>As you can see, querying a large dataset can be made quite fast by storage in an efficient binary columnar format like Parquet or Feather and partitioning based on columns commonly used for filtering. However, we don’t always get our data delivered to us that way. Sometimes we start with one giant CSV. Our first step in analyzing data is cleaning is up and reshaping it into a more usable form.</p>
 <p>The <code><a href="../reference/write_dataset.html">write_dataset()</a></code> function allows you to take a Dataset or other tabular data object—an Arrow <code>Table</code> or <code>RecordBatch</code>, or an R <code>data.frame</code>—and write it to a different file format, partitioned into multiple files.</p>
 <p>Assume we have a version of the NYC Taxi data as CSV:</p>

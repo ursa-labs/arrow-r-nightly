@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210421</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210422</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@
 </blockquote>
 <div id="installation-basics" class="section level1">
 <h1 class="hasAnchor">
-<a href="#installation-basics" class="anchor"></a>Installation basics</h1>
+<a href="#installation-basics" class="anchor" aria-hidden="true"></a>Installation basics</h1>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span><span class="op">)</span></code></pre></div>
@@ -173,7 +173,7 @@ R CMD INSTALL .</code></pre>
 </blockquote>
 <div id="s3-support" class="section level2">
 <h2 class="hasAnchor">
-<a href="#s3-support" class="anchor"></a>S3 support</h2>
+<a href="#s3-support" class="anchor" aria-hidden="true"></a>S3 support</h2>
 <p>The <code>arrow</code> package allows you to work with data in AWS S3 or in other cloud storage system that emulate S3. However, support for working with S3 is not enabled in the default build, and it has additional system requirements. To enable it, set the environment variable <code>LIBARROW_MINIMAL=false</code> or <code>NOT_CRAN=true</code> to choose the full-featured build, or more selectively set <code>ARROW_S3=ON</code>. You also need the following system dependencies:</p>
 <ul>
 <li>
@@ -186,7 +186,7 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="how-dependencies-are-resolved" class="section level1">
 <h1 class="hasAnchor">
-<a href="#how-dependencies-are-resolved" class="anchor"></a>How dependencies are resolved</h1>
+<a href="#how-dependencies-are-resolved" class="anchor" aria-hidden="true"></a>How dependencies are resolved</h1>
 <p>In order for the <code>arrow</code> R package to work, it needs the Arrow C++ library. There are a number of ways you can get it: a system package; a library you’ve built yourself outside of the context of installing the R package; or, if you don’t already have it, the R package will attempt to resolve it automatically when it installs.</p>
 <p>If you are authorized to install system packages and you’re installing a CRAN release, you may want to use the official Apache Arrow release packages corresponding to the R package version. See the <a href="https://arrow.apache.org/install/" class="external-link">Arrow project installation page</a> to find pre-compiled binary packages for some common Linux distributions, including Debian, Ubuntu, and CentOS. You’ll need to install <code>libparquet-dev</code> on Debian and Ubuntu, or <code>parquet-devel</code> on CentOS. This will also automatically install the Arrow C++ library as a dependency.</p>
 <p>When you install the <code>arrow</code> R package on Linux, it will first attempt to find the Arrow C++ libraries on your system using the <code>pkg-config</code> command. This will find either installed system packages or libraries you’ve built yourself. In order for <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages("arrow")</a></code> to work with these system packages, you’ll need to install them before installing the R package.</p>
@@ -196,11 +196,11 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="troubleshooting" class="section level1">
 <h1 class="hasAnchor">
-<a href="#troubleshooting" class="anchor"></a>Troubleshooting</h1>
+<a href="#troubleshooting" class="anchor" aria-hidden="true"></a>Troubleshooting</h1>
 <p>The intent is that <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages("arrow")</a></code> will just work and handle all C++ dependencies, but depending on your system, you may have better results if you tune one of several parameters. Here are some known complications and ways to address them.</p>
 <div id="package-installed-without-c-dependencies" class="section level2">
 <h2 class="hasAnchor">
-<a href="#package-installed-without-c-dependencies" class="anchor"></a>Package installed without C++ dependencies</h2>
+<a href="#package-installed-without-c-dependencies" class="anchor" aria-hidden="true"></a>Package installed without C++ dependencies</h2>
 <p>If you get an error like</p>
 <pre><code>Cannot call io___MemoryMappedFile__Open(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries.</code></pre>
 <p>for every <code>arrow</code> function you call, that means that installing the package failed to retrieve or build C++ libraries compatible with the current version of the R package.</p>
@@ -208,14 +208,14 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="using-system-libraries" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-system-libraries" class="anchor"></a>Using system libraries</h2>
+<a href="#using-system-libraries" class="anchor" aria-hidden="true"></a>Using system libraries</h2>
 <p>If a system library or other installed Arrow is found but it doesn’t match the R package version (for example, you have libarrow 1.0.0 on your system and are installing R package 2.0.0), it is likely that the R bindings will fail to compile. Because the Apache Arrow project is under active development, is it essential that versions of the C++ and R libraries match. When <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages("arrow")</a></code> has to download the C++ libraries, the install script ensures that you fetch the C++ libraries that correspond to your R package version. However, if you are using Arrow libraries already on your system, version match isn’t guaranteed.</p>
 <p>To fix version mismatch, you can either update your system packages to match the R package version, or set the environment variable <code>ARROW_USE_PKG_CONFIG=FALSE</code> to tell the configure script not to look for system Arrow packages. (The latter is the default of <code><a href="../reference/install_arrow.html">install_arrow()</a></code>.) System packages are available corresponding to all CRAN releases but not for nightly or dev versions, so depending on the R package version you’re installing, system packages may not be an option.</p>
 <p>Note also that once you have a working R package installation based on system (shared) libraries, if you update your system Arrow, you’ll need to reinstall the R package to match its version. Similarly, if you’re using Arrow system libraries, running <code><a href="https://rdrr.io/r/utils/update.packages.html" class="external-link">update.packages()</a></code> after a new release of the <code>arrow</code> package will likely fail unless you first update the system packages.</p>
 </div>
 <div id="using-prebuilt-binaries" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-prebuilt-binaries" class="anchor"></a>Using prebuilt binaries</h2>
+<a href="#using-prebuilt-binaries" class="anchor" aria-hidden="true"></a>Using prebuilt binaries</h2>
 <p>If the R package finds and downloads a prebuilt binary of the C++ library, but then the <code>arrow</code> package can’t be loaded, perhaps with “undefined symbols” errors, please <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">report an issue</a>. This is likely a compiler mismatch and may be resolvable by setting some environment variables to instruct R to compile the packages to match the C++ library.</p>
 <p>A workaround would be to set the environment variable <code>LIBARROW_BINARY=FALSE</code> and retry installation: this value instructs the package to build the C++ library from source instead of downloading the prebuilt binary. That should guarantee that the compiler settings match.</p>
 <p>If a prebuilt binary wasn’t found for your operating system but you think it should have been, check the logs for a message that says <code>*** Unable to identify current OS/version</code>, or a message that says <code>*** No C++ binaries found for</code> an invalid OS. If you see either, please <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">report an issue</a>. You may also set the environment variable <code>ARROW_R_DEV=TRUE</code> for additional debug messages.</p>
@@ -224,12 +224,12 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="building-c-from-source" class="section level2">
 <h2 class="hasAnchor">
-<a href="#building-c-from-source" class="anchor"></a>Building C++ from source</h2>
+<a href="#building-c-from-source" class="anchor" aria-hidden="true"></a>Building C++ from source</h2>
 <p>If building the C++ library from source fails, check the error message. The install script attempts to install any necessary build dependencies, but it’s possible that some operating systems may require additional ones. You may be able to install them and retry. Regardless, if the C++ library fails to compile, please <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">report an issue</a> so that we can attempt to improve the script.</p>
 </div>
 <div id="known-installation-issues" class="section level2">
 <h2 class="hasAnchor">
-<a href="#known-installation-issues" class="anchor"></a>Known installation issues</h2>
+<a href="#known-installation-issues" class="anchor" aria-hidden="true"></a>Known installation issues</h2>
 <ul>
 <li><p>On CentOS, if you are using a more modern <code>devtoolset</code>, you may need to set the environment variables <code>CC</code> and <code>CXX</code> either in the shell or in R’s <code>Makeconf</code>. For CentOS 7 and above, both the Arrow system packages and the C++ binaries for R are built with the default system compilers. If you want to use either of these and you have a <code>devtoolset</code> installed, set <code>CC=/usr/bin/gcc CXX=/usr/bin/g++</code> to use the system compilers instead of the <code>devtoolset</code>. Alternatively, if you want to build <code>arrow</code> with the newer <code>devtoolset</code> compilers, set both <code>ARROW_USE_PKG_CONFIG</code> and <code>LIBARROW_BINARY</code> to <code>false</code> so that you build the Arrow C++ from source using those compilers. Compiler mismatch between the arrow system libraries and the R package may cause R to segfault when <code>arrow</code> package functions are used. See discussions <a href="https://issues.apache.org/jira/browse/ARROW-8586" class="external-link">here</a> and <a href="https://issues.apache.org/jira/browse/ARROW-10780" class="external-link">here</a>.</p></li>
 <li><p>If you have multiple versions of <code>zstd</code> installed on your system, installation by building the C++ from source may fail with an undefined symbols error. Workarounds include (1) setting <code>LIBARROW_BINARY</code> to use a C++ binary; (2) setting <code>ARROW_WITH_ZSTD=OFF</code> to build without <code>zstd</code>; or (3) uninstalling the conflicting <code>zstd</code>. See discussion <a href="https://issues.apache.org/jira/browse/ARROW-8556" class="external-link">here</a>.</p></li>
@@ -237,7 +237,7 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="summary-of-build-environment-variables" class="section level2">
 <h2 class="hasAnchor">
-<a href="#summary-of-build-environment-variables" class="anchor"></a>Summary of build environment variables</h2>
+<a href="#summary-of-build-environment-variables" class="anchor" aria-hidden="true"></a>Summary of build environment variables</h2>
 <p>Some features are optional when you build Arrow from source. With the exception of <code>ARROW_S3</code>, these are all <code>ON</code> by default in the bundled C++ build, but you can set them to <code>OFF</code> to disable them.</p>
 <ul>
 <li>
@@ -278,7 +278,7 @@ R CMD INSTALL .</code></pre>
 </div>
 <div id="contributing" class="section level1">
 <h1 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h1>
+<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h1>
 <p>As mentioned above, please <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">report an issue</a> if you encounter ways to improve this. If you find that your Linux distribution or version is not supported, we welcome the contribution of Docker images (hosted on Docker Hub) that we can use in our continuous integration. These Docker images should be minimal, containing only R and the dependencies it requires. (For reference, see the images that <a href="https://github.com/r-hub/rhub-linux-builders" class="external-link">R-hub</a> uses.)</p>
 <p>You can test the <code>arrow</code> R package installation using the <code>docker-compose</code> setup included in the <code>apache/arrow</code> git repository. For example,</p>
 <pre><code>R_ORG=rhub R_IMAGE=ubuntu-gcc-release R_TAG=latest docker-compose build r
