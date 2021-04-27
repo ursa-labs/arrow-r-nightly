@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210425</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210426</span>
       </span>
     </div>
 
@@ -192,7 +192,7 @@ nightly$ls("libarrow/bin")</code></pre>
 <p>In this example we will install it to a directory called <code>dist</code> that has the same parent as our <code>arrow</code> checkout, but it could be named or located anywhere you would like. However, note that your installation of the Arrow R package will point to this directory and need it to remain intact for the package to continue to work. This is one reason we recommend <em>not</em> placing it inside of the arrow git checkout.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">export</span> <span class="va">ARROW_HOME=$(</span><span class="bu">pwd</span><span class="va">)</span>/dist</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">mkdir</span> <span class="va">$ARROW_HOME</span></span></code></pre></div>
-<p><em>Special instructions on Linux:</em> You will need to set <code>LD_LIBRARY_PATH</code> to the <code>lib</code> directory that will is under where we set <code>$ARROW_HOME</code>, before launching R and using Arrow. One way to do this is to add it to your profile (we use <code>~/.bash_profile</code> here, but you might need to put this in a different file depending on your setup, e.g. if you use a shell other than <code>bash</code>). On macOS we do not need to do this because the macOS shared library paths are hardcoded to their locations during build time.</p>
+<p><em>Special instructions on Linux:</em> You will need to set <code>LD_LIBRARY_PATH</code> to the <code>lib</code> directory that is under where we set <code>$ARROW_HOME</code>, before launching R and using Arrow. One way to do this is to add it to your profile (we use <code>~/.bash_profile</code> here, but you might need to put this in a different file depending on your setup, e.g. if you use a shell other than <code>bash</code>). On macOS we do not need to do this because the macOS shared library paths are hardcoded to their locations during build time.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">export</span> <span class="va">LD_LIBRARY_PATH=$ARROW_HOME</span>/lib:<span class="va">$LD_LIBRARY_PATH</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="bu">echo</span> <span class="st">"export LD_LIBRARY_PATH=</span><span class="va">$ARROW_HOME</span><span class="st">/lib:</span><span class="va">$LD_LIBRARY_PATH</span><span class="st">"</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span></code></pre></div>
 <p>Now we can move into the arrow repository to start the build process. You will need to create a directory into which the C++ build will put its contents. It is recommended to make a <code>build</code> directory inside of the <code>cpp</code> directory of the Arrow git repository (it is git-ignored, so you won’t accidentally check it in). And then, change directories to be inside <code>cpp/build</code>:</p>
@@ -206,14 +206,14 @@ nightly$ls("libarrow/bin")</code></pre>
 <span id="cb8-4"><a href="#cb8-4"></a>  -DARROW_COMPUTE=ON \</span>
 <span id="cb8-5"><a href="#cb8-5"></a>  -DARROW_CSV=ON \</span>
 <span id="cb8-6"><a href="#cb8-6"></a>  -DARROW_DATASET=ON \</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  -DARROW_FILESYSTEM=ON \</span>
-<span id="cb8-8"><a href="#cb8-8"></a>  -DARROW_JEMALLOC=ON \</span>
-<span id="cb8-9"><a href="#cb8-9"></a>  -DARROW_JSON=ON \</span>
-<span id="cb8-10"><a href="#cb8-10"></a>  -DARROW_PARQUET=ON \</span>
-<span id="cb8-11"><a href="#cb8-11"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb8-12"><a href="#cb8-12"></a>  -DARROW_WITH_ZLIB=ON \</span>
-<span id="cb8-13"><a href="#cb8-13"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
-<span id="cb8-14"><a href="#cb8-14"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  -DARROW_FILESYSTEM=ON \</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  -DARROW_JEMALLOC=ON \</span>
+<span id="cb8-11"><a href="#cb8-11"></a>  -DARROW_JSON=ON \</span>
+<span id="cb8-12"><a href="#cb8-12"></a>  -DARROW_PARQUET=ON \</span>
+<span id="cb8-13"><a href="#cb8-13"></a>  -DARROW_WITH_SNAPPY=ON \</span>
+<span id="cb8-14"><a href="#cb8-14"></a>  -DARROW_WITH_ZLIB=ON \</span>
 <span id="cb8-15"><a href="#cb8-15"></a>  ..</span></code></pre></div>
 <p><code>..</code> refers to the C++ source directory: we’re in <code>cpp/build</code>, and the source is in <code>cpp</code>.</p>
 </div>
@@ -230,14 +230,14 @@ nightly$ls("libarrow/bin")</code></pre>
 <span id="cb10-2"><a href="#cb10-2"></a>  -DARROW_COMPUTE=ON \</span>
 <span id="cb10-3"><a href="#cb10-3"></a>  -DARROW_CSV=ON \</span>
 <span id="cb10-4"><a href="#cb10-4"></a>  -DARROW_DATASET=ON \</span>
-<span id="cb10-5"><a href="#cb10-5"></a>  -DARROW_FILESYSTEM=ON \</span>
-<span id="cb10-6"><a href="#cb10-6"></a>  -DARROW_JEMALLOC=ON \</span>
-<span id="cb10-7"><a href="#cb10-7"></a>  -DARROW_JSON=ON \</span>
-<span id="cb10-8"><a href="#cb10-8"></a>  -DARROW_PARQUET=ON \</span>
-<span id="cb10-9"><a href="#cb10-9"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb10-10"><a href="#cb10-10"></a>  -DARROW_WITH_ZLIB=ON \</span>
-<span id="cb10-11"><a href="#cb10-11"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
-<span id="cb10-12"><a href="#cb10-12"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  -DARROW_FILESYSTEM=ON \</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  -DARROW_JEMALLOC=ON \</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  -DARROW_JSON=ON \</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  -DARROW_PARQUET=ON \</span>
+<span id="cb10-11"><a href="#cb10-11"></a>  -DARROW_WITH_SNAPPY=ON \</span>
+<span id="cb10-12"><a href="#cb10-12"></a>  -DARROW_WITH_ZLIB=ON \</span>
 <span id="cb10-13"><a href="#cb10-13"></a>  ..</span></code></pre></div>
 <p><code>..</code> refers to the C++ source directory: we’re in <code>cpp/build</code>, and the source is in <code>cpp</code>.</p>
 </div>
@@ -247,6 +247,7 @@ nightly$ls("libarrow/bin")</code></pre>
 <a href="#more-arrow-features" class="anchor" aria-hidden="true"></a>More Arrow features</h3>
 <p>To enable optional features including: S3 support, an alternative memory allocator, and additional compression libraries, add some or all of these flags (the trailing <code>\</code> makes them easier to paste into a bash shell on a new line):</p>
 <pre class="shell"><code>  -DARROW_MIMALLOC=ON \
+  -DARROW_S3=ON \
   -DARROW_WITH_BROTLI=ON \
   -DARROW_WITH_BZ2=ON \
   -DARROW_WITH_LZ4=ON \
@@ -290,7 +291,7 @@ nightly$ls("libarrow/bin")</code></pre>
 <h3 class="hasAnchor">
 <a href="#developer-experience" class="anchor" aria-hidden="true"></a>Developer Experience</h3>
 <p>With the setups described here, you should not need to rebuild the Arrow library or even the C++ source in the R package as you iterated and work on the R package. The only time those should need to be rebuilt is if you have changed the C++ in the R package (and even then, <code>R CMD INSTALL .</code> should only need to recompile the files that have changed) <em>or</em> if the Arrow library C++ has changed and there is a mismatch between the Arrow Library and the R package. If you find yourself rebuilding either or both each time you install the package or run tests, something is probably wrong with your set up.</p>
-<details><summary>For a full build: a <code>cmake</code> command with all of the R-relevant optional dependencies turned on</summary><p>
+<details><summary>For a full build: a <code>cmake</code> command with all of the R-relevant optional dependencies turned on. Development with other languages might require different flags as well. For example, to develop Python, you would need to also add <code>-DARROW_PYTHON=ON</code> (though all of the other flags used for Python are already included here).</summary><p>
 </p>
 <pre class="shell"><code>cmake \
   -DCMAKE_INSTALL_PREFIX=$ARROW_HOME \
@@ -298,28 +299,28 @@ nightly$ls("libarrow/bin")</code></pre>
   -DARROW_COMPUTE=ON \
   -DARROW_CSV=ON \
   -DARROW_DATASET=ON \
+  -DARROW_EXTRA_ERROR_CONTEXT=ON \
   -DARROW_FILESYSTEM=ON \
+  -DARROW_INSTALL_NAME_RPATH=OFF \
   -DARROW_JEMALLOC=ON \
   -DARROW_JSON=ON \
-  -DARROW_PARQUET=ON \
-  -DARROW_WITH_SNAPPY=ON \
-  -DARROW_WITH_ZLIB=ON \
-  -DARROW_INSTALL_NAME_RPATH=OFF \
-  -DARROW_EXTRA_ERROR_CONTEXT=ON \
   -DARROW_MIMALLOC=ON \
+  -DARROW_PARQUET=ON \
+  -DARROW_S3=ON \
   -DARROW_WITH_BROTLI=ON \
   -DARROW_WITH_BZ2=ON \
   -DARROW_WITH_LZ4=ON \
   -DARROW_WITH_SNAPPY=ON \
+  -DARROW_WITH_ZLIB=ON \
   -DARROW_WITH_ZSTD=ON \
   ..</code></pre>
 
 </details>
 </div>
 </div>
-<div id="troublshooting" class="section level2">
+<div id="troubleshooting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#troublshooting" class="anchor" aria-hidden="true"></a>Troublshooting</h2>
+<a href="#troubleshooting" class="anchor" aria-hidden="true"></a>Troubleshooting</h2>
 <p>Note that after any change to the C++ library, you must reinstall it and run <code>make clean</code> or <code>git clean -fdx .</code> to remove any cached object code in the <code>r/src/</code> directory before reinstalling the R package. This is only necessary if you make changes to the C++ library source; you do not need to manually purge object files if you are only editing R or C++ code inside <code>r/</code>.</p>
 <div id="arrow-library-r-package-mismatches" class="section level3">
 <h3 class="hasAnchor">
