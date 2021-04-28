@@ -97,7 +97,7 @@ composed from multiple record batches or chunked arrays." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210426</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210427</span>
       </span>
     </div>
 
@@ -219,12 +219,12 @@ the data in <code>...</code></p></li>
     
 
 <p>Tables are data-frame-like, and many methods you expect to work on
-a <code>data.frame</code> are implemented for <code>Table</code>. This includes <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>[[</a></code>,
-<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
+a <code>data.frame</code> are implemented for <code>Table</code>. This includes <code>[</code>, <code>[[</code>,
+<code>$</code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
 the data from an Arrow table into R with <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>. See the
 examples.</p>
-<p>A caveat about the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> method: because <code>Table</code> is an <code>R6</code> object,
-<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> is also used to access the object's methods (see below). Methods take
+<p>A caveat about the <code>$</code> method: because <code>Table</code> is an <code>R6</code> object,
+<code>$</code> is also used to access the object's methods (see below). Methods take
 precedence over the table's columns. So, <code>tab$Slice</code> would return the
 "Slice" method function even if there were a column in the table called
 "Slice".</p>
@@ -235,7 +235,7 @@ precedence over the table's columns. So, <code>tab$Slice</code> would return the
 <p>In addition to the more R-friendly S3 methods, a <code>Table</code> object has
 the following R6 methods that map onto the underlying C++ methods:</p><ul>
 <li><p><code>$column(i)</code>: Extract a <code>ChunkedArray</code> by integer position from the table</p></li>
-<li><p><code>$ColumnNames()</code>: Get all column names (called by <code><a href='https://rdrr.io/r/base/names.html'>names(tab)</a></code>)</p></li>
+<li><p><code>$ColumnNames()</code>: Get all column names (called by <code>names(tab)</code>)</p></li>
 <li><p><code>$RenameColumns(value)</code>: Set all column names (called by <code>names(tab) &lt;- value</code>)</p></li>
 <li><p><code>$GetColumnByName(name)</code>: Extract a <code>ChunkedArray</code> by string name</p></li>
 <li><p><code>$field(i)</code>: Extract a <code>Field</code> from the table schema by integer position</p></li>
@@ -274,11 +274,11 @@ All list elements are coerced to string. See <code><a href='Schema.html'>schema(
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='va'>tab</span> <span class='op'>&lt;-</span> <span class='va'>Table</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span>name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
+</div><div class='co'>#&gt; [1] 32 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='co'>#&gt; [1]  6 12</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span>
+</div><div class='co'>#&gt;  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  
 #&gt; [11] "gear" "carb"</div><div class='input'><span class='va'>tab</span><span class='op'>$</span><span class='va'>mpg</span>
-</div><div class='output co'>#&gt; ChunkedArray
+</div><div class='co'>#&gt; ChunkedArray
 #&gt; [
 #&gt;   [
 #&gt;     21,
@@ -304,7 +304,7 @@ All list elements are coerced to string. See <code><a href='Schema.html'>schema(
 #&gt;     21.4
 #&gt;   ]
 #&gt; ]</div><div class='input'><span class='va'>tab</span><span class='op'>[[</span><span class='st'>"cyl"</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; ChunkedArray
+</div><div class='co'>#&gt; ChunkedArray
 #&gt; [
 #&gt;   [
 #&gt;     6,
@@ -330,15 +330,15 @@ All list elements are coerced to string. See <code><a href='Schema.html'>schema(
 #&gt;     4
 #&gt;   ]
 #&gt; ]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>tab</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"wt"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 3</span><span>
+</div><div class='co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 3</span>
 #&gt;    gear    hp    wt
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3   110  3.22
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3   175  3.44
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3   105  3.46
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     3   245  3.57
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     4    62  3.19</div><div class='input'><span class='co'># }</span>
-</div></span></pre>
+#&gt;   <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span><span>     3   110  3.22</span>
+#&gt; <span style='color: #BCBCBC;'>2</span><span>     3   175  3.44</span>
+#&gt; <span style='color: #BCBCBC;'>3</span><span>     3   105  3.46</span>
+#&gt; <span style='color: #BCBCBC;'>4</span><span>     3   245  3.57</span>
+#&gt; <span style='color: #BCBCBC;'>5</span><span>     4    62  3.19</span></div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

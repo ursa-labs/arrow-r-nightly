@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210426</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210427</span>
       </span>
     </div>
 
@@ -372,7 +372,7 @@ ERROR: loading failed</code></pre>
 <h2 class="hasAnchor">
 <a href="#using-remotesinstall_github---" class="anchor" aria-hidden="true"></a>Using <code>remotes::install_github(...)</code>
 </h2>
-<p>If you need an Arrow installation from a specific repository or at a specific ref, <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github("apache/arrow/r", build = FALSE)</a></code> should work on most platforms (with the notable exception of Windows). The <code>build = FALSE</code> argument is important so that the installation can access the C++ source in the <code>cpp/</code> directory in <code>apache/arrow</code>.</p>
+<p>If you need an Arrow installation from a specific repository or at a specific ref, <code>remotes::install_github("apache/arrow/r", build = FALSE)</code> should work on most platforms (with the notable exception of Windows). The <code>build = FALSE</code> argument is important so that the installation can access the C++ source in the <code>cpp/</code> directory in <code>apache/arrow</code>.</p>
 <p>As with other installation methods, setting the environment variables <code>LIBARROW_MINIMAL=false</code> and <code>ARROW_R_DEV=true</code> will provide a more full-featured version of Arrow and provide more verbose output, respectively.</p>
 <p>For example, to install from the (fictional) branch <code>bugfix</code> from <code>apache/arrow</code> one could:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -381,7 +381,7 @@ ERROR: loading failed</code></pre>
 <p>Developers may wish to use this method of installing a specific commit separate from another Arrow development environment or system installation (e.g. we use this in <a href="https://github.com/ursacomputing/arrowbench" class="external-link">arrowbench</a> to install development versions of arrow isolated from the system install). If you already have Arrow C++ libraries installed system-wide, you may need to set some additional variables in order to isolate this build from your system libraries:</p>
 <ul>
 <li>Setting the environment variable <code>FORCE_BUNDLED_BUILD</code> to <code>true</code> will skip the <code>pkg-config</code> search for Arrow libraries and attempt to build from the same source at the repository+ref given.</li>
-<li>You may also need to set the Makevars <code>CPPFLAGS</code> and <code>LDFLAGS</code> to <code>""</code> in order to prevent the installation process from attempting to link to already installed system versions of Arrow. One way to do this temporarily is wrapping your <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> call like so: <code><a href="https://withr.r-lib.org/reference/with_makevars.html" class="external-link">withr::with_makevars(list(CPPFLAGS = "", LDFLAGS = ""), remotes::install_github(...))</a></code>.</li>
+<li>You may also need to set the Makevars <code>CPPFLAGS</code> and <code>LDFLAGS</code> to <code>""</code> in order to prevent the installation process from attempting to link to already installed system versions of Arrow. One way to do this temporarily is wrapping your <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> call like so: <code>withr::with_makevars(list(CPPFLAGS = "", LDFLAGS = ""), remotes::install_github(...))</code>.</li>
 </ul>
 </div>
 <div id="what-happens-when-you-r-cmd-install" class="section level2">

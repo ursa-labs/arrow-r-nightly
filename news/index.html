@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0.20210426</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210427</span>
       </span>
     </div>
 
@@ -187,6 +187,11 @@
       <small>Source: <a href='https://github.com/apache/arrow/blob/master/r/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="arrow-4009000" class="section level1">
+<h1 class="page-header" data-toc-text="4.0.0.9000">
+<a href="#arrow-4009000" class="anchor" aria-hidden="true"></a>arrow 4.0.0.9000<small> Unreleased </small>
+</h1>
+</div>
     <div id="arrow-3009000" class="section level1">
 <h1 class="page-header" data-toc-text="3.0.0.9000">
 <a href="#arrow-3009000" class="anchor" aria-hidden="true"></a>arrow 3.0.0.9000<small> Unreleased </small>
@@ -207,7 +212,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">dplyr::arrange()</a></code> to sort rows</li>
 <li>
-<code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">dplyr::compute()</a></code> to evaluate the lazy expressions and return an Arrow Table. This is equivalent to <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">dplyr::collect(as_data_frame = FALSE)</a></code>, which was added in 2.0.0.</li>
+<code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">dplyr::compute()</a></code> to evaluate the lazy expressions and return an Arrow Table. This is equivalent to <code>dplyr::collect(as_data_frame = FALSE)</code>, which was added in 2.0.0.</li>
 </ul>
 <p>Over 100 functions can now be called on Arrow objects inside a <code>dplyr</code> verb:</p>
 <ul>
@@ -218,7 +223,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/between.html" class="external-link">dplyr::between()</a></code>; the Arrow version also allows the <code>left</code> and <code>right</code> arguments to be columns in the data and not just scalars</li>
 <li>Additionally, any Arrow C++ compute function can be called inside a <code>dplyr</code> verb. This enables you to access Arrow functions that don’t have a direct R mapping. See <code><a href="../reference/list_compute_functions.html">list_compute_functions()</a></code> for all available functions, which are available in <code>dplyr</code> prefixed by <code>arrow_</code>.</li>
-<li>Arrow C++ compute functions now do more systematic type promotion when called on data with different types (e.g. int32 and float64). Previously, Scalars in an expressions were always cast to match the type of the corresponding Array, so this new type promotion enables, among other things, operations on two columns (Arrays) in a dataset. As a side effect, some comparisons that worked in prior versions are no longer supported: for example, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter(arrow_dataset, string_column == 3)</a></code> will error with a message about the type mismatch between the numeric <code>3</code> and the string type of <code>string_column</code>.</li>
+<li>Arrow C++ compute functions now do more systematic type promotion when called on data with different types (e.g. int32 and float64). Previously, Scalars in an expressions were always cast to match the type of the corresponding Array, so this new type promotion enables, among other things, operations on two columns (Arrays) in a dataset. As a side effect, some comparisons that worked in prior versions are no longer supported: for example, <code>dplyr::filter(arrow_dataset, string_column == 3)</code> will error with a message about the type mismatch between the numeric <code>3</code> and the string type of <code>string_column</code>.</li>
 </ul>
 </div>
 <div id="datasets" class="section level2">
@@ -243,15 +248,15 @@
 <li>
 <code><a href="../reference/value_counts.html">value_counts()</a></code> to tabulate values in an <code>Array</code> or <code>ChunkedArray</code>, similar to <code><a href="https://rdrr.io/r/base/table.html" class="external-link">base::table()</a></code>.</li>
 <li>
-<code>StructArray</code> objects gain data.frame-like methods, including <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code>.</li>
-<li>RecordBatch columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html" class="external-link">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>
+<code>StructArray</code> objects gain data.frame-like methods, including <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>, <code>$</code>, <code>[[</code>, and <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code>.</li>
+<li>RecordBatch columns can now be added, replaced, or removed by assigning (<code>&lt;-</code>) with either <code>$</code> or <code>[[</code>
 </li>
 <li>Similarly, <code>Schema</code> can now be edited by assigning in new types. This enables using the CSV reader to detect the schema of a file, modify the <code>Schema</code> object for any columns that you want to read in as a different type, and then use that <code>Schema</code> to read the data.</li>
 <li>Better validation when creating a <code>Table</code> with a schema, with columns of different lengths, and with scalar value recycling</li>
 <li>Reading Parquet files in Japanese or other multi-byte locales on Windows no longer hangs (workaround for a <a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=98723" class="external-link">bug in libstdc++</a>; thanks @yutannihilation for the persistence in discovering this!)</li>
-<li>If you attempt to read string data that has embedded nul (<code>\0</code>) characters, the error message now informs you that you can set <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(arrow.skip_nul = TRUE)</a></code> to strip them out. It is not recommended to set this option by default since this code path is significantly slower, and most string data does not contain nuls.</li>
+<li>If you attempt to read string data that has embedded nul (<code>\0</code>) characters, the error message now informs you that you can set <code>options(arrow.skip_nul = TRUE)</code> to strip them out. It is not recommended to set this option by default since this code path is significantly slower, and most string data does not contain nuls.</li>
 <li>
-<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code> now accepts a schema: <code><a href="../reference/read_json_arrow.html">read_json_arrow("file.json", schema = schema(col_a = float64(), col_b = string()))</a></code>
+<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code> now accepts a schema: <code>read_json_arrow("file.json", schema = schema(col_a = float64(), col_b = string()))</code>
 </li>
 </ul>
 </div>
@@ -293,8 +298,8 @@
 <h2 class="hasAnchor">
 <a href="#enhancements" class="anchor" aria-hidden="true"></a>Enhancements</h2>
 <ul>
-<li>Arithmetic operations (<code><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">+</a></code>, <code><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">*</a></code>, etc.) are supported on Arrays and ChunkedArrays and can be used in filter expressions in Arrow <code>dplyr</code> pipelines</li>
-<li>Table columns can now be added, replaced, or removed by assigning (<code><a href="https://rdrr.io/r/base/assignOps.html" class="external-link">&lt;-</a></code>) with either <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">$</a></code> or <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[[</a></code>
+<li>Arithmetic operations (<code>+</code>, <code>*</code>, etc.) are supported on Arrays and ChunkedArrays and can be used in filter expressions in Arrow <code>dplyr</code> pipelines</li>
+<li>Table columns can now be added, replaced, or removed by assigning (<code>&lt;-</code>) with either <code>$</code> or <code>[[</code>
 </li>
 <li>Column names of Tables and RecordBatches can be renamed by assigning <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>
 </li>
@@ -347,7 +352,7 @@
 <ul>
 <li>
 <code><a href="../reference/write_dataset.html">write_dataset()</a></code> to Feather or Parquet files with partitioning. See the end of <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for discussion and examples.</li>
-<li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code>, and take (<code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code>) methods. <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> is optimized but the others may not be performant.</li>
+<li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code>, and take (<code>[</code>) methods. <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> is optimized but the others may not be performant.</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
 </li>
@@ -374,7 +379,7 @@
 <h2 class="hasAnchor">
 <a href="#computation" class="anchor" aria-hidden="true"></a>Computation</h2>
 <ul>
-<li>Comparison (<code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code>, <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">&gt;</a></code>, etc.) and boolean (<code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">|</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html" class="external-link">!</a></code>) operations, along with <code>is.na</code>, <code><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></code> and <code>match</code> (called <code><a href="../reference/match_arrow.html">match_arrow()</a></code>), on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
+<li>Comparison (<code>==</code>, <code>&gt;</code>, etc.) and boolean (<code>&amp;</code>, <code>|</code>, <code>!</code>) operations, along with <code>is.na</code>, <code>%in%</code> and <code>match</code> (called <code><a href="../reference/match_arrow.html">match_arrow()</a></code>), on Arrow Arrays and ChunkedArrays are now implemented in the C++ library.</li>
 <li>Aggregation methods <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, and <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique()</a></code> are implemented for Arrays and ChunkedArrays.</li>
 <li>
 <code>dplyr</code> filter expressions on Arrow Tables and RecordBatches are now evaluated in the C++ library, rather than by pulling data into R and evaluating. This yields significant performance improvements.</li>
@@ -396,7 +401,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-other-enhancements" class="anchor" aria-hidden="true"></a>Bug fixes and other enhancements</h2>
 <ul>
-<li>Automatic conversion of Arrow <code>Int64</code> type when all values fit with an R 32-bit integer now correctly inspects all chunks in a ChunkedArray, and this conversion can be disabled (so that <code>Int64</code> always yields a <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code> vector) by setting <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options(arrow.int64_downcast = FALSE)</a></code>.</li>
+<li>Automatic conversion of Arrow <code>Int64</code> type when all values fit with an R 32-bit integer now correctly inspects all chunks in a ChunkedArray, and this conversion can be disabled (so that <code>Int64</code> always yields a <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code> vector) by setting <code>options(arrow.int64_downcast = FALSE)</code>.</li>
 <li>In addition to the data.frame column metadata preserved in round trip, added in 1.0.0, now attributes of the data.frame itself are also preserved in Arrow schema metadata.</li>
 <li>File writers now respect the system umask setting</li>
 <li>
@@ -414,10 +419,10 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-1" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
 <ul>
-<li>Filtering a Dataset that has multiple partition keys using an <code><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></code> expression now faithfully returns all relevant rows</li>
+<li>Filtering a Dataset that has multiple partition keys using an <code>%in%</code> expression now faithfully returns all relevant rows</li>
 <li>Datasets can now have path segments in the root directory that start with <code>.</code> or <code>_</code>; files and subdirectories starting with those prefixes are still ignored</li>
 <li>
-<code><a href="../reference/open_dataset.html">open_dataset("~/path")</a></code> now correctly expands the path</li>
+<code>open_dataset("~/path")</code> now correctly expands the path</li>
 <li>The <code>version</code> option to <code><a href="../reference/write_parquet.html">write_parquet()</a></code> is now correctly implemented</li>
 <li>An UBSAN failure in the <code>parquet-cpp</code> library has been fixed</li>
 <li>For bundled Linux builds, the logic for finding <code>cmake</code> is more robust, and you can now specify a <code>/path/to/cmake</code> by setting the <code>CMAKE</code> environment variable</li>
@@ -595,7 +600,7 @@
 <ul>
 <li>
 <code>Table</code>s and <code>RecordBatch</code>es also have <code>dplyr</code> methods.</li>
-<li>For exploration without <code>dplyr</code>, <code><a href="https://rdrr.io/r/base/Extract.html" class="external-link">[</a></code> methods for Tables, RecordBatches, Arrays, and ChunkedArrays now support natural row extraction operations. These use the C++ <code>Filter</code>, <code>Slice</code>, and <code>Take</code> methods for efficient access, depending on the type of selection vector.</li>
+<li>For exploration without <code>dplyr</code>, <code>[</code> methods for Tables, RecordBatches, Arrays, and ChunkedArrays now support natural row extraction operations. These use the C++ <code>Filter</code>, <code>Slice</code>, and <code>Take</code> methods for efficient access, depending on the type of selection vector.</li>
 <li>An experimental, lazily evaluated <code>array_expression</code> class has also been added, enabling among other things the ability to filter a Table with some function of Arrays, such as <code>arrow_table[arrow_table$var1 &gt; 5, ]</code> without having to pull everything into R first.</li>
 </ul>
 </div>
