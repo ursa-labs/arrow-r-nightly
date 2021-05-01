@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://arrow.apache.org/docs/r/404.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/arrow.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/dataset.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/developing.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/flight.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/fs.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/install.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/articles/python.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/authors.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/index.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/news/index.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/ArrayData.html</loc>
@@ -34,6 +67,12 @@
     <loc>https://arrow.apache.org/docs/r/reference/FeatherReader.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/FeatherTableReader.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/FeatherTableWriter.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/Field.html</loc>
   </url>
   <url>
@@ -44,6 +83,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/FileSelector.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/FileStats.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/FileSystem.html</loc>
@@ -82,6 +124,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/ParquetFileWriter.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/ParquetReaderProperties.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/ParquetWriterProperties.html</loc>
   </url>
   <url>
@@ -104,6 +149,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/Schema.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/Source.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/Table.html</loc>
@@ -169,6 +217,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/hive_partition.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/install_arrow.html</loc>
   </url>
   <url>
@@ -202,6 +253,15 @@
     <loc>https://arrow.apache.org/docs/r/reference/open_dataset.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/open_dataset_factory.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/open_source.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/push_data.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/read_delim_arrow.html</loc>
   </url>
   <url>
@@ -220,13 +280,22 @@
     <loc>https://arrow.apache.org/docs/r/reference/read_parquet.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/read_record_batch.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/read_schema.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/read_table.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/s3_bucket.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/set_cpu_count.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/type.html</loc>
@@ -236,6 +305,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/value_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/write_arrow.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/write_dataset.html</loc>
@@ -251,26 +323,5 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/write_to_raw.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/arrow.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/developing.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/flight.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/fs.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/install.html</loc>
-  </url>
-  <url>
-    <loc>https://arrow.apache.org/docs/r/articles/python.html</loc>
   </url>
 </urlset>

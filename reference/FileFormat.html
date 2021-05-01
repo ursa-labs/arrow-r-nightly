@@ -95,7 +95,7 @@ file formats (ParquetFileFormat and IpcFileFormat)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210429</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210430</span>
       </span>
     </div>
 
@@ -214,11 +214,8 @@ delimiter for text files</p></li>
 </ul></li>
 <li><p><code>...</code>: Additional format-specific options</p>
 <p>`format = "parquet"``:</p><ul>
-<li><p><code>use_buffered_stream</code>: Read files through buffered input streams rather than
-loading entire row groups at once. This may be enabled
-to reduce memory overhead. Disabled by default.</p></li>
-<li><p><code>buffer_size</code>: Size of buffered stream, if enabled. Default is 8KB.</p></li>
 <li><p><code>dict_columns</code>: Names of columns which should be read as dictionaries.</p></li>
+<li><p>Any Parquet options from <a href='FragmentScanOptions.html'>FragmentScanOptions</a>.</p></li>
 </ul>
 
 <p><code>format = "text"</code>: see <a href='CsvReadOptions.html'>CsvParseOptions</a>. Note that you can specify them either
