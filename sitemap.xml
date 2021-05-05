@@ -52,6 +52,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/CsvTableReader.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/CsvWriteOptions.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/DataType.html</loc>
   </url>
   <url>
@@ -308,6 +311,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/write_arrow.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/write_csv_arrow.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/write_dataset.html</loc>
