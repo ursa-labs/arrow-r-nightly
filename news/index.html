@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210505</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210506</span>
       </span>
     </div>
 
@@ -191,9 +191,16 @@
 <h1 class="page-header" data-toc-text="4.0.0.9000">
 <a href="#arrow-4009000" class="anchor" aria-hidden="true"></a>arrow 4.0.0.9000<small> Unreleased </small></h1>
 </div>
-    <div id="arrow-3009000" class="section level1">
-<h1 class="page-header" data-toc-text="3.0.0.9000">
-<a href="#arrow-3009000" class="anchor" aria-hidden="true"></a>arrow 3.0.0.9000<small> Unreleased </small></h1>
+    <div id="arrow-4001" class="section level1">
+<h1 class="page-header" data-toc-text="4.0.0.1">
+<a href="#arrow-4001" class="anchor" aria-hidden="true"></a>arrow 4.0.0.1<small> Unreleased </small></h1>
+<ul><li>The mimalloc memory allocator is the default memory allocator when using a static source build of the package on Linux. This is because it has better behavior under valgrind than jemalloc does. A full-featured build (installed with <code>LIBARROW_MINIMAL=false</code>) includes both jemalloc and mimalloc, and it has still has jemalloc as default, though this is configurable at runtime with the <code>ARROW_DEFAULT_MEMORY_POOL</code> environment variable.</li>
+<li>Environment variables <code>LIBARROW_MINIMAL</code>, <code>LIBARROW_DOWNLOAD</code>, and <code>NOT_CRAN</code> are now case-insensitive in the Linux build script.</li>
+<li>A build configuration issue in the macOS binary package has been resolved.</li>
+</ul></div>
+    <div id="arrow-400" class="section level1">
+<h1 class="page-header" data-toc-text="4.0.0">
+<a href="#arrow-400" class="anchor" aria-hidden="true"></a>arrow 4.0.0<small> 2021-04-27 </small></h1>
 <div id="dplyr-methods" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dplyr-methods" class="anchor" aria-hidden="true"></a>dplyr methods</h2>
