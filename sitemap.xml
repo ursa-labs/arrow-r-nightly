@@ -187,6 +187,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/compression.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/contains_regex.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/copy_files.html</loc>
   </url>
   <url>
@@ -215,6 +218,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/flight_put.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/get_stringr_pattern_options.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/hive_partition.html</loc>
