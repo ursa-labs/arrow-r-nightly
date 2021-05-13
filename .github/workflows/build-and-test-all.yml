@@ -111,3 +111,66 @@ jobs:
           export REPO_PATH=/libarrow/bin/${{ matrix.config.os }}-${{ matrix.config.version }}
           # Or, upload to S3
           python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
+  windows-cpp:
+    if: true
+    name: C++ Binary Windows RTools (35 and 40)
+    needs: setup
+    runs-on: windows-latest
+    steps:
+      - run: git config --global core.autocrlf false
+      - name: Checkout arrow-r-nightly
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Clone and configure arrow
+        env:
+          FORK: ${{needs.setup.outputs.fork}}
+          REF: ${{needs.setup.outputs.ref}}
+          DATE: ${{needs.setup.outputs.date}}
+        shell: bash
+        run: source checkout-arrow.sh
+      # First build with the new toolchain
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: 40
+          r-version: "4.0"
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools40
+        shell: bash
+        env:
+          ARROW_HOME: "arrow"
+        run: arrow/ci/scripts/r_windows_build.sh
+      - name: Clean up so we can build again
+        shell: bash
+        run: |
+          rm -rf pkg
+          rm -rf src
+          pacman --noconfirm -R mingw-w64-{i686,x86_64}-{cmake,boost,openssl,thrift,snappy,lz4,zstd}
+      # Now build with the old toolchain
+      - uses: r-lib/actions/setup-r@master
+        with:
+          rtools-version: 35
+          r-version: "3.6"
+          Ncpus: 2
+      - name: Build Arrow C++ with rtools35
+        shell: bash
+        env:
+          ARROW_HOME: "arrow"
+          RTOOLS_VERSION: 35
+        run: arrow/ci/scripts/r_windows_build.sh
+      - name: Set up Python (for S3 upload)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Boto
+        run: |
+          python -m pip install boto3
+      - name: Upload
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          VERSION=$(grep ^Version arrow/r/DESCRIPTION | sed s/Version:\ //)
+          cd build
+          python ../s3-upload.py arrow-$VERSION.zip libarrow/bin/windows
