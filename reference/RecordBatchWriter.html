@@ -74,8 +74,6 @@ For guidance on how to use these classes, see the examples section." />
 </script>
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -99,7 +97,7 @@ For guidance on how to use these classes, see the examples section." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210513</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210514</span>
       </span>
     </div>
 
@@ -244,7 +242,7 @@ interface for writing data to these formats and are sufficient for many use
 cases. <code><a href='write_to_raw.html'>write_to_raw()</a></code> is a version that serializes data to a buffer.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
 <span class='r-in'><span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'></span>
@@ -281,7 +279,7 @@ cases. <code><a href='write_to_raw.html'>write_to_raw()</a></code> is a version 
 <span class='r-in'><span class='co'># but we do still need to close the file connection</span></span>
 <span class='r-in'><span class='va'>read_file_obj</span><span class='op'>$</span><span class='fu'>close</span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># }</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

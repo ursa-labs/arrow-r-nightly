@@ -71,8 +71,6 @@ This function enables you to write Parquet files from R." />
 </script>
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -96,7 +94,7 @@ This function enables you to write Parquet files from R." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210513</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210514</span>
       </span>
     </div>
 
@@ -197,7 +195,7 @@ This function enables you to write Parquet files from R." />
 This function enables you to write Parquet files from R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_parquet</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>write_parquet</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>sink</span>,
   chunk_size <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -212,7 +210,7 @@ This function enables you to write Parquet files from R.</p>
   allow_truncated_timestamps <span class='op'>=</span> <span class='cn'>FALSE</span>,
   properties <span class='op'>=</span> <span class='cn'>NULL</span>,
   arrow_properties <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -315,7 +313,7 @@ disable compression, set <code>compression = "uncompressed"</code>.
 Note that "uncompressed" columns may still have dictionary encoding.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>tf1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".parquet"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>write_parquet</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>, <span class='va'>tf1</span><span class='op'>)</span></span>
 <span class='r-in'></span>
@@ -325,7 +323,7 @@ Note that "uncompressed" columns may still have dictionary encoding.</p>
 <span class='r-in'>  <span class='fu'>write_parquet</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>, <span class='va'>tf2</span>, compression <span class='op'>=</span> <span class='st'>"gzip"</span>, compression_level <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
