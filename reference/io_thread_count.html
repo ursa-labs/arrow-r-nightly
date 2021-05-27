@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Combine and harmonize schemas — unify_schemas • Arrow R Package</title>
+<title>Manage the global I/O thread pool in libarrow — io_thread_count • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Combine and harmonize schemas — unify_schemas" />
-<meta property="og:description" content="Combine and harmonize schemas" />
+<meta property="og:title" content="Manage the global I/O thread pool in libarrow — io_thread_count" />
+<meta property="og:description" content="Manage the global I/O thread pool in libarrow" />
 
 
 
@@ -184,41 +184,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Combine and harmonize schemas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/schema.R'><code>R/schema.R</code></a></small>
-    <div class="hidden name"><code>unify_schemas.Rd</code></div>
+    <h1>Manage the global I/O thread pool in libarrow</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/config.R'><code>R/config.R</code></a></small>
+    <div class="hidden name"><code>io_thread_count.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Combine and harmonize schemas</p>
+    <p>Manage the global I/O thread pool in libarrow</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>unify_schemas</span><span class='op'>(</span><span class='va'>...</span>, schemas <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>io_thread_count</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>set_io_thread_count</span><span class='op'>(</span><span class='va'>num_threads</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p><a href='Schema.html'>Schema</a>s to unify</p></td>
-    </tr>
-    <tr>
-      <th>schemas</th>
-      <td><p>Alternatively, a list of schemas</p></td>
+      <th>num_threads</th>
+      <td><p>integer: New number of threads for thread pool</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>Schema</code> with the union of fields contained in the inputs</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Schema.html'>schema</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span><span class='op'>(</span><span class='op'>)</span>, c <span class='op'>=</span> <span class='fu'><a href='data-type.html'>bool</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Schema.html'>schema</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span><span class='op'>(</span><span class='op'>)</span>, k <span class='op'>=</span> <span class='fu'><a href='data-type.html'>utf8</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>unify_schemas</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>z</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

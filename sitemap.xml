@@ -235,6 +235,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/install_pyarrow.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/io_thread_count.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/list_compute_functions.html</loc>
   </url>
   <url>
