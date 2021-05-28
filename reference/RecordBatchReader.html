@@ -98,7 +98,7 @@ For guidance on how to use these classes, see the examples section." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210526</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210527</span>
       </span>
     </div>
 
@@ -240,8 +240,7 @@ are in the file.</p></li>
 for reading data from these formats and are sufficient for many use cases.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
-<span class='r-in'><span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>batch</span> <span class='op'>&lt;-</span> <span class='fu'><a href='RecordBatch.html'>record_batch</a></span><span class='op'>(</span><span class='va'>chickwts</span><span class='op'>)</span></span>
@@ -276,7 +275,6 @@ for reading data from these formats and are sufficient for many use cases.</p></
 <span class='r-in'><span class='co'># Unlike the Writers, we don't have to close RecordBatchReaders,</span></span>
 <span class='r-in'><span class='co'># but we do still need to close the file connection</span></span>
 <span class='r-in'><span class='va'>read_file_obj</span><span class='op'>$</span><span class='fu'>close</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='co'># }</span></span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -94,7 +94,7 @@ contiguous memory with a particular size." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210526</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210527</span>
       </span>
     </div>
 
@@ -219,13 +219,23 @@ contiguous memory with a particular size.</p>
     
 
 <ul>
-<li><p><code>$is_mutable()</code> :</p></li>
-<li><p><code>$ZeroPadding()</code> :</p></li>
-<li><p><code>$size()</code> :</p></li>
-<li><p><code>$capacity()</code>:</p></li>
+<li><p><code>$is_mutable</code> : is this buffer mutable?</p></li>
+<li><p><code>$ZeroPadding()</code> : zero bytes in padding, i.e. bytes between size and capacity</p></li>
+<li><p><code>$size</code> : size in memory, in bytes</p></li>
+<li><p><code>$capacity</code>: possible capacity, in bytes</p></li>
 </ul>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>my_buffer</span> <span class='op'>&lt;-</span> <span class='fu'>buffer</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>my_buffer</span><span class='op'>$</span><span class='va'>is_mutable</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'><span class='va'>my_buffer</span><span class='op'>$</span><span class='fu'>ZeroPadding</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>my_buffer</span><span class='op'>$</span><span class='va'>size</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 32</span>
+<span class='r-in'><span class='va'>my_buffer</span><span class='op'>$</span><span class='va'>capacity</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 32</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

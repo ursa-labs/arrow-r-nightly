@@ -96,7 +96,7 @@ and StructArray." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210526</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210527</span>
       </span>
     </div>
 
@@ -239,9 +239,9 @@ but not limited to strings only)</p></li>
 <li><p><code>$IsNull(i)</code>: Return true if value at index is null. Does not boundscheck</p></li>
 <li><p><code>$IsValid(i)</code>: Return true if value at index is valid. Does not boundscheck</p></li>
 <li><p><code>$length()</code>: Size in the number of elements this array contains</p></li>
-<li><p><code>$offset()</code>: A relative position into another array's data, to enable zero-copy slicing</p></li>
-<li><p><code>$null_count()</code>: The number of null entries in the array</p></li>
-<li><p><code>$type()</code>: logical type of data</p></li>
+<li><p><code>$offset</code>: A relative position into another array's data, to enable zero-copy slicing</p></li>
+<li><p><code>$null_count</code>: The number of null entries in the array</p></li>
+<li><p><code>$type</code>: logical type of data</p></li>
 <li><p><code>$type_id()</code>: type id</p></li>
 <li><p><code>$Equals(other)</code> : is this array equal to <code>other</code></p></li>
 <li><p><code>$ApproxEquals(other)</code> :</p></li>
@@ -267,6 +267,60 @@ within the array's internal data. This can be an expensive check, potentially <c
 </ul>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>my_array</span> <span class='op'>&lt;-</span> <span class='va'>Array</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>my_array</span><span class='op'>$</span><span class='va'>type</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Int32</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> int32</span>
+<span class='r-in'><span class='va'>my_array</span><span class='op'>$</span><span class='fu'>cast</span><span class='op'>(</span><span class='fu'><a href='data-type.html'>int8</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Array</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;int8&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   4,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   5,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   6,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   7,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   8,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   9,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ]</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Check if value is null; zero-indexed</span></span>
+<span class='r-in'><span class='va'>na_array</span> <span class='op'>&lt;-</span> <span class='va'>Array</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>na_array</span><span class='op'>$</span><span class='fu'>IsNull</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-in'><span class='va'>na_array</span><span class='op'>$</span><span class='fu'>IsNull</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'><span class='va'>na_array</span><span class='op'>$</span><span class='fu'>IsValid</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-in'><span class='va'>na_array</span><span class='op'>$</span><span class='va'>null_count</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># zero-copy slicing; the offset of the new Array will be the same as the index passed to $Slice</span></span>
+<span class='r-in'><span class='va'>new_array</span> <span class='op'>&lt;-</span> <span class='va'>na_array</span><span class='op'>$</span><span class='fu'>Slice</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>new_array</span><span class='op'>$</span><span class='va'>offset</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 5</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Compare 2 arrays</span></span>
+<span class='r-in'><span class='va'>na_array2</span> <span class='op'>=</span> <span class='va'>na_array</span></span>
+<span class='r-in'><span class='va'>na_array2</span> <span class='op'>==</span> <span class='va'>na_array</span> <span class='co'># element-wise comparison</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Array</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;bool&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   true,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   true,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   true,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   true,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   true,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   null</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ]</span>
+<span class='r-in'><span class='va'>na_array2</span><span class='op'>$</span><span class='fu'>Equals</span><span class='op'>(</span><span class='va'>na_array</span><span class='op'>)</span> <span class='co'># overall comparison </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
