@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0.20210527</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.1.20210528</span>
       </span>
     </div>
 
@@ -187,9 +187,9 @@
       <small>Source: <a href='https://github.com/apache/arrow/blob/master/r/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="arrow-4009000" class="section level1">
-<h1 class="page-header" data-toc-text="4.0.0.9000">
-<a href="#arrow-4009000" class="anchor" aria-hidden="true"></a>arrow 4.0.0.9000<small> Unreleased </small></h1>
+    <div id="arrow-4019000" class="section level1">
+<h1 class="page-header" data-toc-text="4.0.1.9000">
+<a href="#arrow-4019000" class="anchor" aria-hidden="true"></a>arrow 4.0.1.9000<small> Unreleased </small></h1>
 <ul><li>
 <code><a href="../reference/write_csv_arrow.html">write_csv_arrow()</a></code> to write Arrow data to CSV</li>
 <li>Bindings and support for more Arrow C++ Compute functions: <code><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit()</a></code> and <code>str_split()</code>, <code><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit()</a></code> et al., <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>/<code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>,</li>
@@ -200,6 +200,11 @@
 <li>Added bindings for the remainder of C data interface: Type, Field, and RecordBatchReader (from the experimental C stream interface). These also have <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">reticulate::py_to_r()</a></code> and <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">r_to_py()</a></code> methods. Along with the addition of the <code>Scanner$ToRecordBatchReader()</code> method, you can now build up a Dataset query in R and pass the resulting stream of batches to another tool in process.</li>
 <li>
 <code>match_arrow</code> now converts <code>x</code> into an <code>Array</code> if it is not a <code>Scalar</code>, <code>Array</code> or <code>ChunkedArray</code> and no longer dispatches <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code>.</li>
+</ul></div>
+    <div id="arrow-401" class="section level1">
+<h1 class="page-header" data-toc-text="4.0.1">
+<a href="#arrow-401" class="anchor" aria-hidden="true"></a>arrow 4.0.1<small> 2021-05-28 </small></h1>
+<ul><li>Resolved a few bugs in new string compute kernels (<a href='https://issues.apache.org/jira/browse/ARROW-12774'>ARROW-12774</a>, <a href='https://issues.apache.org/jira/browse/ARROW-12670'>ARROW-12670</a>)</li>
 </ul></div>
     <div id="arrow-4001" class="section level1">
 <h1 class="page-header" data-toc-text="4.0.0.1">
