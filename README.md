@@ -2,7 +2,7 @@
 
 [![Build and test](https://github.com/ursa-labs/arrow-r-nightly/actions/workflows/build-and-test-all.yml/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions/workflows/build-and-test-all.yml)
 
-This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions.
+This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions and for Windows.
 These builds are triggered daily and are pushed to a package repository at https://arrow-r-nightly.s3.amazonaws.com.
 
 To install the latest version, use this repository as the first entry in your `"repos"` argument, ahead of your CRAN mirror, like
@@ -15,8 +15,8 @@ These daily package builds are not official Apache releases and are not recommen
 
 We currently build binary R packages for the following OS and versions:
 
-* macOS: R 3.6, 4.0
-* Windows: R 3.6, 4.0
+* macOS: R 4.0, 4.1
+* Windows: R 4.0, 4.1
 
 We also build C++ static binaries for these Linux distributions and versions, which work with any R version:
 

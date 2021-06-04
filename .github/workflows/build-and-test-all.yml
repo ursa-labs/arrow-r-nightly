@@ -165,7 +165,7 @@ jobs:
           python ../../../../../s3-upload.py $PKG_FILE $REPO_PATH
   windows-cpp:
     if: true
-    name: C++ Binary Windows RTools (35 and 40)
+    name: C++ Binary Windows RTools (40 only)
     needs: setup
     runs-on: windows-latest
     steps:
@@ -181,7 +181,6 @@ jobs:
           DATE: ${{needs.setup.outputs.date}}
         shell: bash
         run: source checkout-arrow.sh
-      # First build with the new toolchain
       - uses: r-lib/actions/setup-r@master
         with:
           rtools-version: 40
@@ -191,24 +190,6 @@ jobs:
         shell: bash
         env:
           ARROW_HOME: "arrow"
-        run: arrow/ci/scripts/r_windows_build.sh
-      - name: Clean up so we can build again
-        shell: bash
-        run: |
-          rm -rf pkg
-          rm -rf src
-          pacman --noconfirm -R mingw-w64-{i686,x86_64}-{cmake,boost,openssl,thrift,snappy,lz4,zstd}
-      # Now build with the old toolchain
-      - uses: r-lib/actions/setup-r@master
-        with:
-          rtools-version: 35
-          r-version: "3.6"
-          Ncpus: 2
-      - name: Build Arrow C++ with rtools35
-        shell: bash
-        env:
-          ARROW_HOME: "arrow"
-          RTOOLS_VERSION: 35
         run: arrow/ci/scripts/r_windows_build.sh
       - name: Set up Python (for S3 upload)
         uses: actions/setup-python@v2
@@ -240,8 +221,9 @@ jobs:
           - macos-latest
         r_version:
           # - "3.5"
-          - "3.6"
+          # - "3.6"
           - "4.0"
+          - "4.1"
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v2
