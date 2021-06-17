@@ -301,7 +301,13 @@
     <loc>https://arrow.apache.org/docs/r/reference/read_table.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/recycle_scalars.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/repeat_value_as_array.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/s3_bucket.html</loc>

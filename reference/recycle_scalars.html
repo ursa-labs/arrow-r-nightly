@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arrow enums — enums • Arrow R Package</title>
+<title>Recycle scalar values in a list of arrays — recycle_scalars • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Arrow enums — enums" />
-<meta property="og:description" content="Arrow enums" />
+<meta property="og:title" content="Recycle scalar values in a list of arrays — recycle_scalars" />
+<meta property="og:description" content="Recycle scalar values in a list of arrays" />
 
 
 
@@ -183,54 +183,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Arrow enums</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/enums.R'><code>R/enums.R</code></a></small>
-    <div class="hidden name"><code>enums.Rd</code></div>
+    <h1>Recycle scalar values in a list of arrays</h1>
+    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/util.R'><code>R/util.R</code></a></small>
+    <div class="hidden name"><code>recycle_scalars.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Arrow enums</p>
+    <p>Recycle scalar values in a list of arrays</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='va'>TimeUnit</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>recycle_scalars</span><span class='op'>(</span><span class='va'>arrays</span><span class='op'>)</span></code></pre></div>
 
-<span class='va'>DateUnit</span>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>arrays</th>
+      <td><p>List of arrays</p></td>
+    </tr>
+    </table>
 
-<span class='va'>Type</span>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-<span class='va'>StatusCode</span>
-
-<span class='va'>FileMode</span>
-
-<span class='va'>MessageType</span>
-
-<span class='va'>CompressionType</span>
-
-<span class='va'>FileType</span>
-
-<span class='va'>ParquetVersionType</span>
-
-<span class='va'>MetadataVersion</span>
-
-<span class='va'>QuantileInterpolation</span>
-
-<span class='va'>NullEncodingBehavior</span></code></pre></div>
-
-
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>TimeUnit::type</code> (inherits from <code>arrow-enum</code>) of length 4.</p>
-<p>An object of class <code>DateUnit</code> (inherits from <code>arrow-enum</code>) of length 2.</p>
-<p>An object of class <code>Type::type</code> (inherits from <code>arrow-enum</code>) of length 37.</p>
-<p>An object of class <code>StatusCode</code> (inherits from <code>arrow-enum</code>) of length 17.</p>
-<p>An object of class <code>FileMode</code> (inherits from <code>arrow-enum</code>) of length 3.</p>
-<p>An object of class <code>MessageType</code> (inherits from <code>arrow-enum</code>) of length 5.</p>
-<p>An object of class <code>Compression::type</code> (inherits from <code>arrow-enum</code>) of length 9.</p>
-<p>An object of class <code>FileType</code> (inherits from <code>arrow-enum</code>) of length 4.</p>
-<p>An object of class <code>ParquetVersionType</code> (inherits from <code>arrow-enum</code>) of length 2.</p>
-<p>An object of class <code>MetadataVersion</code> (inherits from <code>arrow-enum</code>) of length 5.</p>
-<p>An object of class <code>QuantileInterpolation</code> (inherits from <code>arrow-enum</code>) of length 5.</p>
-<p>An object of class <code>NullEncodingBehavior</code> (inherits from <code>arrow-enum</code>) of length 2.</p>
+    <p>List of arrays with any vector/Scalar/Array/ChunkedArray values of length 1 recycled</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
