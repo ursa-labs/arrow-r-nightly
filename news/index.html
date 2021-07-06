@@ -91,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.1.20210704</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.1.20210705</span>
       </span>
     </div>
 
@@ -274,14 +274,14 @@
 <div id="installation-and-configuration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-and-configuration" class="anchor" aria-hidden="true"></a>Installation and configuration</h2>
-<ul><li>The R package can now support working with an Arrow C++ library that has additional features (such as dataset, parquet, string libraries) disabled, and the bundled build script enables setting environment variables to disable them. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details. This allows a faster, smaller package build in cases where that is useful, and it enables a minimal, functioning R package build on Solaris.</li>
+<ul><li>The R package can now support working with an Arrow C++ library that has additional features (such as dataset, parquet, string libraries) disabled, and the bundled build script enables setting environment variables to disable them. See <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details. This allows a faster, smaller package build in cases where that is useful, and it enables a minimal, functioning R package build on Solaris.</li>
 <li>On macOS, it is now possible to use the same bundled C++ build that is used by default on Linux, along with all of its customization parameters, by setting the environment variable <code>FORCE_BUNDLED_BUILD=true</code>.</li>
 <li>
 <code>arrow</code> now uses the <code>mimalloc</code> memory allocator by default on macOS, if available (as it is in CRAN binaries), instead of <code>jemalloc</code>. There are <a href="https://issues.apache.org/jira/browse/<a href='https://issues.apache.org/jira/browse/ARROW-6994'>ARROW-6994</a>" class="external-link">configuration issues</a> with <code>jemalloc</code> on macOS, and <a href="https://ursalabs.org/blog/2021-r-benchmarks-part-1/" class="external-link">benchmark analysis</a> shows that this has negative effects on performance, especially on memory-intensive workflows. <code>jemalloc</code> remains the default on Linux; <code>mimalloc</code> is default on Windows.</li>
 <li>Setting the <code>ARROW_DEFAULT_MEMORY_POOL</code> environment variable to switch memory allocators now works correctly when the Arrow C++ library has been statically linked (as is usually the case when installing from CRAN).</li>
 <li>The <code><a href="../reference/arrow_info.html">arrow_info()</a></code> function now reports on the additional optional features, as well as the detected SIMD level. If key features or compression libraries are not enabled in the build, <code><a href="../reference/arrow_info.html">arrow_info()</a></code> will refer to the installation vignette for guidance on how to install a more complete build, if desired.</li>
 <li>If you attempt to read a file that was compressed with a codec that your Arrow build does not contain support for, the error message now will tell you how to reinstall Arrow with that feature enabled.</li>
-<li>A new vignette about developer environment setup <code><a href="../articles/developing.html">vignette("developing", package = "arrow")</a></code>.</li>
+<li>A new vignette about developer environment setup <code><a href="../articles/articles/developing.html">vignette("developing", package = "arrow")</a></code>.</li>
 <li>When building from source, you can use the environment variable <code>ARROW_HOME</code> to point to a specific directory where the Arrow libraries are. This is similar to passing <code>INCLUDE_DIR</code> and <code>LIB_DIR</code>.</li>
 </ul></div>
 </div>
@@ -338,7 +338,7 @@
 </li>
 <li>Linux installation now safely supports older <code>cmake</code> versions</li>
 <li>Compiler version checking for enabling S3 support correctly identifies the active compiler</li>
-<li>Updated guidance and troubleshooting in <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code>, especially for known CentOS issues</li>
+<li>Updated guidance and troubleshooting in <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code>, especially for known CentOS issues</li>
 <li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/" class="external-link"><code>distro</code></a> package. If your OS isn’t correctly identified, please report an issue there.</li>
 </ul></div>
 </div>
@@ -349,7 +349,7 @@
 <h2 class="hasAnchor">
 <a href="#datasets-1" class="anchor" aria-hidden="true"></a>Datasets</h2>
 <ul><li>
-<code><a href="../reference/write_dataset.html">write_dataset()</a></code> to Feather or Parquet files with partitioning. See the end of <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for discussion and examples.</li>
+<code><a href="../reference/write_dataset.html">write_dataset()</a></code> to Feather or Parquet files with partitioning. See the end of <code><a href="../articles/articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for discussion and examples.</li>
 <li>Datasets now have <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code>, and take (<code>[</code>) methods. <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> is optimized but the others may not be performant.</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> gains an <code>as_data_frame</code> argument, default <code>TRUE</code> but when <code>FALSE</code> allows you to evaluate the accumulated <code>select</code> and <code>filter</code> query but keep the result in Arrow, not an R <code>data.frame</code>
@@ -360,15 +360,15 @@
 <div id="aws-s3-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aws-s3-support" class="anchor" aria-hidden="true"></a>AWS S3 support</h2>
-<ul><li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages. To enable it on Linux, you need the additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
-<li>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.), as well as <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>, allow you to access resources on S3 (or on file systems that emulate S3) either by providing an <code>s3://</code> URI or by providing a <code>FileSystem$path()</code>. See <code><a href="../articles/fs.html">vignette("fs", package = "arrow")</a></code> for examples.</li>
+<ul><li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages. To enable it on Linux, you need the additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
+<li>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.), as well as <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>, allow you to access resources on S3 (or on file systems that emulate S3) either by providing an <code>s3://</code> URI or by providing a <code>FileSystem$path()</code>. See <code><a href="../articles/articles/fs.html">vignette("fs", package = "arrow")</a></code> for examples.</li>
 <li>
 <code><a href="../reference/copy_files.html">copy_files()</a></code> allows you to recursively copy directories of files from one file system to another, such as from S3 to your local machine.</li>
 </ul></div>
 <div id="flight-rpc" class="section level2">
 <h2 class="hasAnchor">
 <a href="#flight-rpc" class="anchor" aria-hidden="true"></a>Flight RPC</h2>
-<p><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/" class="external-link">Flight</a> is a general-purpose client-server framework for high performance transport of large datasets over network interfaces. The <code>arrow</code> R package now provides methods for connecting to Flight RPC servers to send and receive data. See <code><a href="../articles/flight.html">vignette("flight", package = "arrow")</a></code> for an overview.</p>
+<p><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/" class="external-link">Flight</a> is a general-purpose client-server framework for high performance transport of large datasets over network interfaces. The <code>arrow</code> R package now provides methods for connecting to Flight RPC servers to send and receive data. See <code><a href="../articles/articles/flight.html">vignette("flight", package = "arrow")</a></code> for an overview.</p>
 </div>
 <div id="computation" class="section level2">
 <h2 class="hasAnchor">
@@ -422,7 +422,7 @@
 <h2 class="hasAnchor">
 <a href="#arrow-format-conversion" class="anchor" aria-hidden="true"></a>Arrow format conversion</h2>
 <ul><li>
-<code><a href="../articles/arrow.html">vignette("arrow", package = "arrow")</a></code> includes tables that explain how R types are converted to Arrow types and vice versa.</li>
+<code><a href="../articles/articles/arrow.html">vignette("arrow", package = "arrow")</a></code> includes tables that explain how R types are converted to Arrow types and vice versa.</li>
 <li>Support added for converting to/from more Arrow types: <code>uint64</code>, <code>binary</code>, <code>fixed_size_binary</code>, <code>large_binary</code>, <code>large_utf8</code>, <code>large_list</code>, <code>list</code> of <code>structs</code>.</li>
 <li>
 <code>character</code> vectors that exceed 2GB are converted to Arrow <code>large_utf8</code> type</li>
@@ -497,7 +497,7 @@
 <h2 class="hasAnchor">
 <a href="#python-interoperability" class="anchor" aria-hidden="true"></a>Python interoperability</h2>
 <p>The 0.17 Apache Arrow release includes a C data interface that allows exchanging Arrow data in-process at the C level without copying and without libraries having a build or runtime dependency on each other. This enables us to use <code>reticulate</code> to share data between R and Python (<code>pyarrow</code>) efficiently.</p>
-<p>See <code><a href="../articles/python.html">vignette("python", package = "arrow")</a></code> for details.</p>
+<p>See <code><a href="../articles/articles/python.html">vignette("python", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="datasets-3" class="section level2">
 <h2 class="hasAnchor">
@@ -509,12 +509,12 @@
 </li>
 <li>Dataset filtering is now correctly supported for all Arrow date/time/timestamp column types</li>
 <li>
-<code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> now has correct, executable code</li>
+<code><a href="../articles/articles/dataset.html">vignette("dataset", package = "arrow")</a></code> now has correct, executable code</li>
 </ul></div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
-<ul><li>Installation on Linux now builds C++ the library from source by default, with some compression libraries disabled. For a faster, richer build, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details and more options.</li>
+<ul><li>Installation on Linux now builds C++ the library from source by default, with some compression libraries disabled. For a faster, richer build, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details and more options.</li>
 <li>Source installation is faster and more reliable on more Linux distributions.</li>
 </ul></div>
 <div id="other-bug-fixes-and-enhancements" class="section level2">
@@ -547,13 +547,13 @@
 <h2 class="hasAnchor">
 <a href="#multi-file-datasets" class="anchor" aria-hidden="true"></a>Multi-file datasets</h2>
 <p>This release includes a <code>dplyr</code> interface to Arrow Datasets, which let you work efficiently with large, multi-file datasets as a single entity. Explore a directory of data files with <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and then use <code>dplyr</code> methods to <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, etc. Work will be done where possible in Arrow memory. When necessary, data is pulled into R for further computation. <code>dplyr</code> methods are conditionally loaded if you have <code>dplyr</code> available; it is not a hard dependency.</p>
-<p>See <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for details.</p>
+<p>See <code><a href="../articles/articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="linux-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#linux-installation" class="anchor" aria-hidden="true"></a>Linux installation</h2>
 <p>A source package installation (as from CRAN) will now handle its C++ dependencies automatically. For common Linux distributions and versions, installation will retrieve a prebuilt static C++ library for inclusion in the package; where this binary is not available, the package executes a bundled script that should build the Arrow C++ library with no system dependencies beyond what R requires.</p>
-<p>See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
+<p>See <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="data-exploration" class="section level2">
 <h2 class="hasAnchor">
@@ -592,7 +592,7 @@
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
-<ul><li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html" class="external-link">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/arrow.html">vignette("arrow")</a></code>.</li>
+<ul><li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html" class="external-link">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/articles/arrow.html">vignette("arrow")</a></code>.</li>
 <li>Due to a subtle change in the Arrow message format, data written by the 0.15 version libraries may not be readable by older versions. If you need to send data to a process that uses an older version of Arrow (for example, an Apache Spark server that hasn’t yet updated to Arrow 0.15), you can set the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</li>
 <li>The <code>as_tibble</code> argument in the <code>read_*()</code> functions has been renamed to <code>as_data_frame</code> (<a href='https://issues.apache.org/jira/browse/ARROW-6337'>ARROW-6337</a>, @jameslamb)</li>
 <li>The <code>arrow::Column</code> class has been removed, as it was removed from the C++ library</li>
