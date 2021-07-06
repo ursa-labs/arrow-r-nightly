@@ -140,14 +140,14 @@
     
 <p>The Arrow C++ library includes a generic filesystem interface and specific implementations for some cloud storage systems. This setup allows various parts of the project to be able to read and write data with different storage backends. In the <code>arrow</code> R package, support has been enabled for AWS S3. This vignette provides an overview of working with S3 data using Arrow.</p>
 <blockquote>
-<p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
+<p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 </blockquote>
 <div id="uris" class="section level2">
 <h2 class="hasAnchor">
 <a href="#uris" class="anchor" aria-hidden="true"></a>URIs</h2>
 <p>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.) accept an S3 URI as the source or destination file, as do <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>. An S3 URI looks like:</p>
 <pre><code>s3://[access_key:secret_key@]bucket/path[?region=]</code></pre>
-<p>For example, one of the NYC taxi data files used in <code><a href="../articles/articles/dataset.html">vignette("dataset", package = "arrow")</a></code> is found at</p>
+<p>For example, one of the NYC taxi data files used in <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> is found at</p>
 <pre><code>s3://ursa-labs-taxi-data/2019/06/data.parquet</code></pre>
 <p>Given this URI, we can pass it to <code><a href="../reference/read_parquet.html">read_parquet()</a></code> just as if it were a local file path:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">

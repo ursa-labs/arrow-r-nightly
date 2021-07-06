@@ -168,7 +168,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span><span class="op">)</span></code></pre></div>
 <p>Conda users can install <code>arrow</code> from conda-forge with</p>
 <pre class="shell"><code>conda install -c conda-forge --strict-channel-priority r-arrow</code></pre>
-<p>Installing a released version of the <code>arrow</code> package requires no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will also build necessary C++ dependencies. For a faster, more complete installation, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="articles/articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
+<p>Installing a released version of the <code>arrow</code> package requires no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will also build necessary C++ dependencies. For a faster, more complete installation, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="installing-a-development-version" class="section level3">
 <h3 class="hasAnchor">
@@ -232,8 +232,8 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sw</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="va">file_path</span><span class="op">)</span></code></pre></div>
 <p>R object attributes are preserved when writing data to Parquet or Feather files and when reading those files back into R. This enables round-trip writing and reading of <code>sf::sf</code> objects, R <code>data.frame</code>s with with <code>haven::labelled</code> columns, and <code>data.frame</code>s with other custom attributes.</p>
-<p>For reading and writing larger files or sets of multiple files, <code>arrow</code> defines <code>Dataset</code> objects and provides the functions <code><a href="reference/open_dataset.html">open_dataset()</a></code> and <code><a href="reference/write_dataset.html">write_dataset()</a></code>, which enable analysis and processing of bigger-than-memory data, including the ability to partition data into smaller chunks without loading the full data into memory. For examples of these functions, see <code><a href="articles/articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</p>
-<p>All these functions can read and write files in the local filesystem or in Amazon S3 (by passing S3 URIs beginning with <code>s3://</code>). For more details, see <code><a href="articles/articles/fs.html">vignette("fs", package = "arrow")</a></code></p>
+<p>For reading and writing larger files or sets of multiple files, <code>arrow</code> defines <code>Dataset</code> objects and provides the functions <code><a href="reference/open_dataset.html">open_dataset()</a></code> and <code><a href="reference/write_dataset.html">write_dataset()</a></code>, which enable analysis and processing of bigger-than-memory data, including the ability to partition data into smaller chunks without loading the full data into memory. For examples of these functions, see <code><a href="articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</p>
+<p>All these functions can read and write files in the local filesystem or in Amazon S3 (by passing S3 URIs beginning with <code>s3://</code>). For more details, see <code><a href="articles/fs.html">vignette("fs", package = "arrow")</a></code></p>
 </div>
 <div id="using-dplyr-with-arrow" class="section level3">
 <h3 class="hasAnchor">
@@ -294,11 +294,11 @@
 <p>Other applications of <code>arrow</code> are described in the following vignettes:</p>
 <ul>
 <li>
-<code><a href="articles/articles/python.html">vignette("python", package = "arrow")</a></code>: use <code>arrow</code> and <code>reticulate</code> to pass data between R and Python</li>
+<code><a href="articles/python.html">vignette("python", package = "arrow")</a></code>: use <code>arrow</code> and <code>reticulate</code> to pass data between R and Python</li>
 <li>
-<code><a href="articles/articles/flight.html">vignette("flight", package = "arrow")</a></code>: connect to Arrow Flight RPC servers to send and receive data</li>
+<code><a href="articles/flight.html">vignette("flight", package = "arrow")</a></code>: connect to Arrow Flight RPC servers to send and receive data</li>
 <li>
-<code><a href="articles/articles/arrow.html">vignette("arrow", package = "arrow")</a></code>: access and manipulate Arrow objects through low-level bindings to the C++ library</li>
+<code><a href="articles/arrow.html">vignette("arrow", package = "arrow")</a></code>: access and manipulate Arrow objects through low-level bindings to the C++ library</li>
 </ul>
 </div>
 </div>
