@@ -91,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.1.20210706</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.1.20210707</span>
       </span>
     </div>
 
@@ -198,7 +198,9 @@
 <code>dplyr</code> queries on <code>Table</code> and <code>RecordBatch</code> now use the same expression internals as <code>Dataset</code> (via <code>InMemoryDataset</code>). Among other (mostly internal) benefits that come with this, the print method for <code>arrow_dplyr_query</code> now includes the expression and the resulting type of columns derived by <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>.</li>
 <li>Added bindings for the remainder of C data interface: Type, Field, and RecordBatchReader (from the experimental C stream interface). These also have <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">reticulate::py_to_r()</a></code> and <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">r_to_py()</a></code> methods. Along with the addition of the <code>Scanner$ToRecordBatchReader()</code> method, you can now build up a Dataset query in R and pass the resulting stream of batches to another tool in process.</li>
 <li>
-<code>match_arrow</code> now converts <code>x</code> into an <code>Array</code> if it is not a <code>Scalar</code>, <code>Array</code> or <code>ChunkedArray</code> and no longer dispatches <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code>.</li>
+<code><a href="../reference/match_arrow.html">match_arrow()</a></code> now converts <code>x</code> into an <code>Array</code> if it is not a <code>Scalar</code>, <code>Array</code> or <code>ChunkedArray</code> and no longer dispatches <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code>.</li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute()</a></code> now errors if passed arguments <code>.keep</code>, <code>.before</code>, or <code>.after</code>, for consistency with the behavior of <code>dplyr</code> on <code>data.frame</code>s.</li>
 </ul></div>
     <div id="arrow-401" class="section level1">
 <h1 class="page-header" data-toc-text="4.0.1">
