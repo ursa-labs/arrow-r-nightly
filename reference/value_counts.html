@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210802</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210803</span>
       </span>
     </div>
 
@@ -208,25 +208,6 @@
     <p>A <code>StructArray</code> containing "values" (same type as <code>x</code>) and "counts"
 <code>Int64</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>cyl_vals</span> <span class='op'>&lt;-</span> <span class='va'>Array</span><span class='op'>$</span><span class='fu'>create</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>cyl</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>value_counts</span><span class='op'>(</span><span class='va'>cyl_vals</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> StructArray</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;struct&lt;values: double, counts: int64&gt;&gt;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> -- is_valid: all not null</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> -- child 0 type: double</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   [</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     6,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     4,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     8</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   ]</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> -- child 1 type: int64</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   [</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     7,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     11,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     14</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   ]</span>
-</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

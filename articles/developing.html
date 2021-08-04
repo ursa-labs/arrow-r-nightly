@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210802</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210803</span>
       </span>
     </div>
 
@@ -411,6 +411,18 @@ ERROR: loading failed</code></pre>
 <li>
 <code>inst/build_arrow_static.sh</code> this script builds Arrow for a bundled, static build. It is called by <code>tools/nixlibs.R</code> when the Arrow library is being built. (If you’re looking at this script, and you’ve gotten this far, it should look <em>incredibly</em> familiar: it’s basically the contents of this guide in script form — with a few important changes)</li>
 </ul>
+</div>
+<div id="styling-and-linting-of-the-r-code-in-the-r-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#styling-and-linting-of-the-r-code-in-the-r-package" class="anchor" aria-hidden="true"></a>Styling and linting of the R code in the R package</h2>
+<p>The R code in the package follows <a href="https://style.tidyverse.org/" class="external-link">the tidyverse style</a>. On PR submission (and on pushes) our CI will run linting and will flag possible errors on the pull request with annotations.</p>
+<p>To run the <a href="https://github.com/jimhester/lintr" class="external-link">lintr</a> locally, install the lintr package (note, we currently use a fork that includes fixes not yet accepted upstream, see how lintr is being installed in the file <code>ci/docker/linux-apt-lint.dockerfile</code> for the current status) and then run <code>lintr::lint_package("arrow/r")</code>.</p>
+<p>One can automatically change the formatting of the code in the package using the <a href="https://styler.r-lib.org/" class="external-link">styler</a> package. There are two ways to do this:</p>
+<ol style="list-style-type: decimal">
+<li>Use the comment bot to do this automatically with the command <code>@github-actions autotune</code> on a PR and commit it back to the branch.</li>
+<li>Locally, with the command <code>styler::style_pkg(exclude_files = c("tests/testthat/latin1.R", "data-raw/codegen.R"))</code> note the two excluded files which should not be styled.</li>
+</ol>
+<p>The styler package will fix many styling errors, thought not all lintr errors are automatically fixable with styler.</p>
 </div>
 <div id="editing-c-code-in-the-r-package" class="section level2">
 <h2 class="hasAnchor">
