@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210803</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210804</span>
       </span>
     </div>
 
@@ -420,9 +420,9 @@ ERROR: loading failed</code></pre>
 <p>One can automatically change the formatting of the code in the package using the <a href="https://styler.r-lib.org/" class="external-link">styler</a> package. There are two ways to do this:</p>
 <ol style="list-style-type: decimal">
 <li>Use the comment bot to do this automatically with the command <code>@github-actions autotune</code> on a PR and commit it back to the branch.</li>
-<li>Locally, with the command <code>styler::style_pkg(exclude_files = c("tests/testthat/latin1.R", "data-raw/codegen.R"))</code> note the two excluded files which should not be styled.</li>
+<li>Locally, with the command <code>make style</code> (for only the files changed), <code>make style-all</code> (for all files), or use <code>styler::style_pkg(exclude_files = c("tests/testthat/latin1.R", "data-raw/codegen.R"))</code> note the two excluded files which should not be styled.</li>
 </ol>
-<p>The styler package will fix many styling errors, thought not all lintr errors are automatically fixable with styler.</p>
+<p>The styler package will fix many styling errors, thought not all lintr errors are automatically fixable with styler. The list of files we habitually do not style is in <code>r/.styler_excludes.R</code>.</p>
 </div>
 <div id="editing-c-code-in-the-r-package" class="section level2">
 <h2 class="hasAnchor">

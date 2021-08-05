@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210803</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210804</span>
       </span>
     </div>
 
@@ -212,6 +212,15 @@
     <p>A <code>Schema</code> with the union of fields contained in the inputs, or
 <code>NULL</code> if any of <code>schemas</code> is <code>NULL</code></p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Schema.html'>schema</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span><span class='op'>(</span><span class='op'>)</span>, c <span class='op'>=</span> <span class='fu'><a href='data-type.html'>bool</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Schema.html'>schema</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/double.html'>double</a></span><span class='op'>(</span><span class='op'>)</span>, k <span class='op'>=</span> <span class='fu'><a href='data-type.html'>utf8</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>unify_schemas</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>z</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Schema</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b: double</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c: bool</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> k: string</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

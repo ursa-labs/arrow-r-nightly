@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write CSV file to disk — write_csv_arrow • Arrow R Package</title>
+<title>Style • Arrow R Package</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,16 +33,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
   
-  <script src="../extra.js"></script>
+  <script src="extra.js"></script>
 
-<meta property="og:title" content="Write CSV file to disk — write_csv_arrow" />
-<meta property="og:description" content="Write CSV file to disk" />
+<meta property="og:title" content="Style" />
 
 
 
@@ -79,7 +78,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -91,7 +90,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">Arrow R Package</a>
+        <a class="navbar-link" href="index.html">Arrow R Package</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210804</span>
       </span>
     </div>
@@ -102,10 +101,10 @@
   <a href="https://arrow.apache.org/">❯❯❯</a>
 </li>
 <li>
-  <a href="../articles/arrow.html">Get started</a>
+  <a href="articles/arrow.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -115,27 +114,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/install.html">Installing the Arrow Package on Linux</a>
+      <a href="articles/install.html">Installing the Arrow Package on Linux</a>
     </li>
     <li>
-      <a href="../articles/dataset.html">Working with Arrow Datasets and dplyr</a>
+      <a href="articles/dataset.html">Working with Arrow Datasets and dplyr</a>
     </li>
     <li>
-      <a href="../articles/fs.html">Working with Cloud Storage (S3)</a>
+      <a href="articles/fs.html">Working with Cloud Storage (S3)</a>
     </li>
     <li>
-      <a href="../articles/python.html">Apache Arrow in Python and R with reticulate</a>
+      <a href="articles/python.html">Apache Arrow in Python and R with reticulate</a>
     </li>
     <li>
-      <a href="../articles/flight.html">Connecting to Flight RPC Servers</a>
+      <a href="articles/flight.html">Connecting to Flight RPC Servers</a>
     </li>
     <li>
-      <a href="../articles/developing.html">Arrow R Developer Guide</a>
+      <a href="articles/developing.html">Arrow R Developer Guide</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -163,7 +162,7 @@
       <a href="https://arrow.apache.org/docs/python">Python</a>
     </li>
     <li>
-      <a href="../index.html">R</a>
+      <a href="index.html">R</a>
     </li>
   </ul>
 </li>
@@ -181,58 +180,47 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Write CSV file to disk</h1>
-    <small class="dont-index">Source: <a href='https://github.com/apache/arrow/blob/master/r/R/csv.R'><code>R/csv.R</code></a></small>
-    <div class="hidden name"><code>write_csv_arrow.Rd</code></div>
+      <h1>Style</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Write CSV file to disk</p>
-    </div>
+<div id="style" class="section level1">
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>write_csv_arrow</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>sink</span>, include_header <span class='op'>=</span> <span class='cn'>TRUE</span>, batch_size <span class='op'>=</span> <span class='fl'>1024L</span><span class='op'>)</span></code></pre></div>
+<p>This is a style guide to writing documentation for arrow.</p>
+<div id="coding-style" class="section level2">
+<h2 class="hasAnchor">
+<a href="#coding-style" class="anchor" aria-hidden="true"></a>Coding style</h2>
+<p>Please use the <a href="https://style.tidyverse.org/" class="external-link">tidyverse coding style</a>.</p>
+</div>
+<div id="referring-to-external-packages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#referring-to-external-packages" class="anchor" aria-hidden="true"></a>Referring to external packages</h2>
+<p>When referring to external packages, include a link to the package at the first mention, and subsequently refer to it in plain text, e.g.</p>
+<ul>
+<li>“The arrow R package provides a <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> interface to Arrow Datasets. This vignette introduces Datasets and shows how to use dplyr to analyze them.”</li>
+</ul>
+</div>
+<div id="data-frames" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-frames" class="anchor" aria-hidden="true"></a>Data frames</h2>
+<p>When referring to the concept, use the phrase “data frame”, whereas when referring to an object of that class or when the class is important, write <code>data.frame</code>, e.g.</p>
+<ul>
+<li>“You can call <code><a href="reference/write_dataset.html">write_dataset()</a></code> on tabular data objects such as Arrow Tables or RecordBatches, or R data frames. If working with data frames you might want to use a <code>tibble</code> instead of a <code>data.frame</code> to take advantage of the default behaviour of partitioning data based on grouped variables.”</li>
+</ul>
+</div>
+</div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p><code>data.frame</code>, <a href='RecordBatch.html'>RecordBatch</a>, or <a href='Table.html'>Table</a></p></td>
-    </tr>
-    <tr>
-      <th>sink</th>
-      <td><p>A string file path, URI, or <a href='OutputStream.html'>OutputStream</a>, or path in a file
-system (<code>SubTreeFileSystem</code>)</p></td>
-    </tr>
-    <tr>
-      <th>include_header</th>
-      <td><p>Whether to write an initial header line with column names</p></td>
-    </tr>
-    <tr>
-      <th>batch_size</th>
-      <td><p>Maximum number of rows processed at a time. Default is 1024.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The input <code>x</code>, invisibly. Note that if <code>sink</code> is an <a href='OutputStream.html'>OutputStream</a>,
-the stream will be left open.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>write_csv_arrow</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>tf</span><span class='op'>)</span></span>
-</code></pre></div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
+
 
 
       <footer>
