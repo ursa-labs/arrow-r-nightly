@@ -43,22 +43,17 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       # To build from a different repo or branch, set these manually
-      fork: ${{ steps.step0.outputs.fork }}
+      fork: nealrichardson
       # ref can be a branch name (but if not a fixed commit, beware:
       # it could change while the workflow is running)
-      ref: ${{ steps.step0.outputs.ref }}
+      ref: r-5.0.0.1
       # Set date to "" to skip updating the version string,
       # or set to an alternative value (e.g. 99999 to build a 3.0.0.99999)
-      date: ${{ steps.step0.outputs.date }}
+      date: ""
     steps:
       - id: step0
         run: |
-          FORK=apache
-          git clone https://github.com/${FORK}/arrow
-          echo "::set-output name=fork::${FORK}"
-          cd arrow
-          echo "::set-output name=ref::$(git rev-parse HEAD)"
-          echo "::set-output name=date::$(date -d yesterday +%Y%m%d)"
+          echo ""
   source:
     if: true
     needs: setup
