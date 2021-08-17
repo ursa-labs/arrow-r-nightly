@@ -327,6 +327,8 @@ jobs:
         run: sudo apt-get install libharfbuzz-dev libfribidi-dev libcurl4-openssl-dev libssl-dev
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies and package
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: Rscript linux/install-with-pkgdown.R
       - name: Build and deploy site
         run: |
