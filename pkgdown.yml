@@ -9,7 +9,7 @@ articles:
   fs: fs.html
   install: install.html
   python: python.html
-last_built: 2021-08-21T00:51Z
+last_built: 2021-08-22T00:50Z
 urls:
   reference: https://arrow.apache.org/docs/r/reference
   article: https://arrow.apache.org/docs/r/articles
