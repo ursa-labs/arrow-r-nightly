@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210823</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210824</span>
       </span>
     </div>
 
@@ -446,8 +446,6 @@ ERROR: loading failed</code></pre>
 <a href="#running-tests" class="anchor" aria-hidden="true"></a>Running tests</h2>
 <p>Some tests are conditionally enabled based on the availability of certain features in the package build (S3 support, compression libraries, etc.). Others are generally skipped by default but can be enabled with environment variables or other settings:</p>
 <ul>
-<li>All tests are skipped on Linux if the package builds without the C++ libarrow. To make the build fail if libarrow is not available (as in, to test that the C++ build was successful), set <code>TEST_R_WITH_ARROW=true</code>
-</li>
 <li>Some tests are disabled unless <code>ARROW_R_DEV=true</code>
 </li>
 <li>Tests that require allocating &gt;2GB of memory to test Large types are disabled unless <code>ARROW_LARGE_MEMORY_TESTS=true</code>
