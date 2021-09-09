@@ -199,6 +199,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/cpu_count.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/create_package_with_all_dependencies.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/data-type.html</loc>
   </url>
   <url>
