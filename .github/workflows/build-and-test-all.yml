@@ -80,17 +80,6 @@ jobs:
           python-version: "3.x"
       - name: Install Boto
         run: python -m pip install boto3
-      - name: Build and upload cpp bundle
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        shell: bash
-        run: |
-          cd arrow
-          VERSION=$(grep ^Version r/DESCRIPTION | sed s/Version:\ //)
-          zip -r arrow-${VERSION}.zip cpp/build-support/ cpp/cmake_modules/ cpp/src/ cpp/thirdparty/ cpp/tools/ cpp/CMakeLists.txt cpp/README.md LICENSE.txt NOTICE.txt .env
-          # Or to upload to S3:
-          python ../s3-upload.py arrow-${VERSION}.zip libarrow/src
       - name: Install R
         uses: r-lib/actions/setup-r@master
       - name: Build and upload R source package
@@ -100,6 +89,15 @@ jobs:
         shell: bash
         run: |
           cd arrow/r
+
+          # Copy in the Arrow C++ source
+          # cf. make build
+          cp ../NOTICE.txt inst/NOTICE.txt
+          rsync --archive --delete --exclude 'build' --exclude 'build-support/boost_*' --exclude 'submodules' ../cpp tools/
+          cp -p ../.env tools/
+          cp -p ../NOTICE.txt tools/
+          cp -p ../LICENSE.txt tools/
+
           R CMD build --no-build-vignettes .
           Rscript -e 'tools::write_PACKAGES(".", type = "source")'
           python ../../s3-upload.py arrow_*.tar.gz src/contrib
@@ -266,10 +264,10 @@ jobs:
         uses: actions/checkout@v1
       - name: Install system requirements
         run: linux/install-system-requirements.sh
-      - name: Install arrow from binatray
+      - name: Install arrow from our repo
         env:
           LIBARROW_BUILD: "FALSE"
-          LIBARROW_DOWNLOAD: "TRUE"
+          LIBARROW_BINARY: "TRUE"
         run: PATH=/opt/R-devel/bin:$PATH Rscript linux/install-arrow.R
   test-source:
     if: true
