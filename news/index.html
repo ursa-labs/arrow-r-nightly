@@ -91,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210908</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0.20210909</span>
       </span>
     </div>
 
@@ -189,13 +189,36 @@
     <div id="arrow-5009000" class="section level1">
 <h1 class="page-header" data-toc-text="5.0.0.9000">
 <a href="#arrow-5009000" class="anchor" aria-hidden="true"></a>arrow 5.0.0.9000<small> Unreleased </small></h1>
-<div id="breaking-changes" class="section level2">
+<p>There are now two ways to query Arrow data:</p>
+<div id="1-grouped-aggregation-in-arrow" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
+<a href="#1-grouped-aggregation-in-arrow" class="anchor" aria-hidden="true"></a>1. Grouped aggregation in Arrow</h2>
+<p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code>, both grouped and ungrouped, is now implemented for Arrow Datasets, Tables, and RecordBatches. Because data is scanned in chunks, you can aggregate over larger-than-memory datasets backed by many files. Supported aggregation functions include <code><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>, and <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>.</p>
+<p>This enhancement does change the behavior of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> in some cases: see “Breaking changes” below for details.</p>
+<p>New compute functions include <code>str_to_title()</code> and <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code>.</p>
+</div>
+<div id="2-duckdb-integration" class="section level2">
+<h2 class="hasAnchor">
+<a href="#2-duckdb-integration" class="anchor" aria-hidden="true"></a>2. duckdb integration</h2>
+<p>If you have the <a href="https://duckdb.org/" class="external-link">duckdb</a> package installed, you can hand off an Arrow Dataset or query object to duckdb for further querying using the <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> function. This allows you to use duckdb’s <code>dbplyr</code> methods, as well as its SQL interface, to aggregate data. Filtering and column projection done before <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> is evaluated in Arrow. ## Breaking changes</p>
 <ul><li>
 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code> on an in-memory Arrow Table or RecordBatch no longer eagerly evaluates. Call <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to evaluate the query.</li>
-<li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
+<li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
 </ul></div>
+<div id="installation-on-linux" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation-on-linux" class="anchor" aria-hidden="true"></a>Installation on Linux</h2>
+<ul><li>Package installation now fails if the Arrow C++ library does not compile. In previous versions, if the C++ library failed to compile, you would get a successful R package installation that wouldn’t do much useful.</li>
+<li>You can disable all optional C++ components when building from source by setting the environment variable <code>LIBARROW_MINIMAL=true</code>. This will have the core Arrow/Feather components but excludes Parquet, Datasets, compression libraries, and other optional features.</li>
+<li>Source packages now bundle the Arrow C++ source code, so it does not have to be downloaded in order to build the package. Because the source is included, it is now possible to build the package on an offline/airgapped system. By default, the offline build will be minimal because it cannot download third-party C++ dependencies required to support all features. To allow a fully featured offline build, the included <code><a href="../reference/create_package_with_all_dependencies.html">create_package_with_all_dependencies()</a></code> function (also available on GitHub without installing the arrow package) will download all third-party C++ dependencies and bundle them inside the R source package. Run this function on a system connected to the network to produce the “fat” source package, then copy that .tar.gz package to your offline machine and install.</li>
+<li>Source builds can make use of system dependencies (such as <code>libz</code>) by setting <code>ARROW_DEPENDENCY_SOURCE=AUTO</code>. This is not the default in this release (<code>BUNDLED</code>, i.e. download and build all dependencies) but may become the default in the future.</li>
+<li>The JSON library components (<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>) are now optional and still on by default; set <code>ARROW_JSON=OFF</code> before building to disable them.</li>
+</ul></div>
+</div>
+    <div id="arrow-5002" class="section level1">
+<h1 class="page-header" data-toc-text="5.0.0.2">
+<a href="#arrow-5002" class="anchor" aria-hidden="true"></a>arrow 5.0.0.2<small> 2021-09-05 </small></h1>
+<p>This patch version contains fixes for some sanitizer and compiler warnings.</p>
 </div>
     <div id="arrow-500" class="section level1">
 <h1 class="page-header" data-toc-text="5.0.0">
@@ -641,9 +664,9 @@
     <div id="arrow-0150" class="section level1">
 <h1 class="page-header" data-toc-text="0.15.0">
 <a href="#arrow-0150" class="anchor" aria-hidden="true"></a>arrow 0.15.0<small> 2019-10-07 </small></h1>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
+<a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
 <ul><li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html" class="external-link">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/arrow.html">vignette("arrow")</a></code>.</li>
 <li>Due to a subtle change in the Arrow message format, data written by the 0.15 version libraries may not be readable by older versions. If you need to send data to a process that uses an older version of Arrow (for example, an Apache Spark server that hasn’t yet updated to Arrow 0.15), you can set the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</li>
 <li>The <code>as_tibble</code> argument in the <code>read_*()</code> functions has been renamed to <code>as_data_frame</code> (<a href='https://issues.apache.org/jira/browse/ARROW-6337'>ARROW-6337</a>, @jameslamb)</li>
