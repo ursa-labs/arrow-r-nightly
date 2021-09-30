@@ -91,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20210928</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20210929</span>
       </span>
     </div>
 
@@ -204,6 +204,7 @@
 <ul><li>
 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code> on an in-memory Arrow Table or RecordBatch no longer eagerly evaluates. Call <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to evaluate the query.</li>
 <li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
+<li>Datasets are officially no longer supported on 32-bit Windows on R &lt; 4.0 (Rtools 3.5). 32-bit Windows users should upgrade to a newer version of R in order to use datasets.</li>
 </ul></div>
 <div id="installation-on-linux" class="section level2">
 <h2 class="hasAnchor">
