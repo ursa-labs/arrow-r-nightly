@@ -91,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211002</span>
       </span>
     </div>
 
@@ -194,13 +194,13 @@
 <h2 class="hasAnchor">
 <a href="#1-grouped-aggregation-in-arrow" class="anchor" aria-hidden="true"></a>1. Grouped aggregation in Arrow</h2>
 <p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code>, both grouped and ungrouped, is now implemented for Arrow Datasets, Tables, and RecordBatches. Because data is scanned in chunks, you can aggregate over larger-than-memory datasets backed by many files. Supported aggregation functions include <code><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct()</a></code>, <code>min(),</code> <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>, and <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>. <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> with one probability are also supported and currently return approximate results using the t-digest algorithm.</p>
-<p>This enhancement does change the behavior of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> in some cases: see “Breaking changes” below for details.</p>
+<p>This enhancement does change the behavior of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> in some cases: see âBreaking changesâ below for details.</p>
 <p>New compute functions include <code>str_to_title()</code> and <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code>.</p>
 </div>
 <div id="2-duckdb-integration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#2-duckdb-integration" class="anchor" aria-hidden="true"></a>2. duckdb integration</h2>
-<p>If you have the <a href="https://duckdb.org/" class="external-link">duckdb</a> package installed, you can hand off an Arrow Dataset or query object to duckdb for further querying using the <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> function. This allows you to use duckdb’s <code>dbplyr</code> methods, as well as its SQL interface, to aggregate data. Filtering and column projection done before <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> is evaluated in Arrow. ## Breaking changes</p>
+<p>If you have the <a href="https://duckdb.org/" class="external-link">duckdb</a> package installed, you can hand off an Arrow Dataset or query object to duckdb for further querying using the <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> function. This allows you to use duckdbâs <code>dbplyr</code> methods, as well as its SQL interface, to aggregate data. Filtering and column projection done before <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> is evaluated in Arrow. ## Breaking changes</p>
 <ul><li>
 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code> on an in-memory Arrow Table or RecordBatch no longer eagerly evaluates. Call <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to evaluate the query.</li>
 <li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
@@ -209,10 +209,10 @@
 <div id="installation-on-linux" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-on-linux" class="anchor" aria-hidden="true"></a>Installation on Linux</h2>
-<ul><li>Package installation now fails if the Arrow C++ library does not compile. In previous versions, if the C++ library failed to compile, you would get a successful R package installation that wouldn’t do much useful.</li>
+<ul><li>Package installation now fails if the Arrow C++ library does not compile. In previous versions, if the C++ library failed to compile, you would get a successful R package installation that wouldnât do much useful.</li>
 <li>You can disable all optional C++ components when building from source by setting the environment variable <code>LIBARROW_MINIMAL=true</code>. This will have the core Arrow/Feather components but excludes Parquet, Datasets, compression libraries, and other optional features.</li>
-<li>Source packages now bundle the Arrow C++ source code, so it does not have to be downloaded in order to build the package. Because the source is included, it is now possible to build the package on an offline/airgapped system. By default, the offline build will be minimal because it cannot download third-party C++ dependencies required to support all features. To allow a fully featured offline build, the included <code><a href="../reference/create_package_with_all_dependencies.html">create_package_with_all_dependencies()</a></code> function (also available on GitHub without installing the arrow package) will download all third-party C++ dependencies and bundle them inside the R source package. Run this function on a system connected to the network to produce the “fat” source package, then copy that .tar.gz package to your offline machine and install.</li>
-<li>Source builds can make use of system dependencies (such as <code>libz</code>) by setting <code>ARROW_DEPENDENCY_SOURCE=AUTO</code>. This is not the default in this release (<code>BUNDLED</code>, i.e. download and build all dependencies) but may become the default in the future.</li>
+<li>Source packages now bundle the Arrow C++ source code, so it does not have to be downloaded in order to build the package. Because the source is included, it is now possible to build the package on an offline/airgapped system. By default, the offline build will be minimal because it cannot download third-party C++ dependencies required to support all features. To allow a fully featured offline build, the included <code><a href="../reference/create_package_with_all_dependencies.html">create_package_with_all_dependencies()</a></code> function (also available on GitHub without installing the arrow package) will download all third-party C++ dependencies and bundle them inside the R source package. Run this function on a system connected to the network to produce the âfatâ source package, then copy that .tar.gz package to your offline machine and install.</li>
+<li>Source builds can make use of system dependencies (such as <code>libz</code>) by setting <code>ARROW_DEPENDENCY_SOURCE=AUTO</code>. This is not the default in this release (<code>BUNDLED</code>, i.e.Â download and build all dependencies) but may become the default in the future.</li>
 <li>The JSON library components (<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>) are now optional and still on by default; set <code>ARROW_JSON=OFF</code> before building to disable them.</li>
 </ul></div>
 </div>
@@ -254,7 +254,7 @@
 <h2 class="hasAnchor">
 <a href="#c-interface" class="anchor" aria-hidden="true"></a>C interface</h2>
 <ul><li>Added bindings for the remainder of C data interface: Type, Field, and RecordBatchReader (from the experimental C stream interface). These also have <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">reticulate::py_to_r()</a></code> and <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">r_to_py()</a></code> methods. Along with the addition of the <code>Scanner$ToRecordBatchReader()</code> method, you can now build up a Dataset query in R and pass the resulting stream of batches to another tool in process.</li>
-<li>C interface methods are exposed on Arrow objects (e.g. <code>Array$export_to_c()</code>, <code>RecordBatch$import_from_c()</code>), similar to how they are in <code>pyarrow</code>. This facilitates their use in other packages. See the <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">py_to_r()</a></code> and <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">r_to_py()</a></code> methods for usage examples.</li>
+<li>C interface methods are exposed on Arrow objects (e.g.Â <code>Array$export_to_c()</code>, <code>RecordBatch$import_from_c()</code>), similar to how they are in <code>pyarrow</code>. This facilitates their use in other packages. See the <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">py_to_r()</a></code> and <code><a href="https://rdrr.io/pkg/reticulate/man/r-py-conversion.html" class="external-link">r_to_py()</a></code> methods for usage examples.</li>
 </ul></div>
 <div id="other-enhancements" class="section level2">
 <h2 class="hasAnchor">
@@ -273,7 +273,7 @@
 <code><a href="../reference/arrow_info.html">arrow_info()</a></code> includes details on the C++ build, such as compiler version</li>
 <li>
 <code><a href="../reference/match_arrow.html">match_arrow()</a></code> now converts <code>x</code> into an <code>Array</code> if it is not a <code>Scalar</code>, <code>Array</code> or <code>ChunkedArray</code> and no longer dispatches <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code>.</li>
-<li>Row-level metadata is now restricted to reading/writing single parquet or feather files. Row-level metadata with datasets is ignored (with a warning) if the dataset contains row-level metadata. Writing a dataset with row-level metadata will also be ignored (with a warning). We are working on a more robust implementation to support row-level metadata (and other complex types) — stay tuned. For working with {sf} objects, <a href="https://CRAN.R-project.org/package=sfarrow" class="external-link">{sfarrow}</a> is helpful for serializing sf columns and sharing them with geopandas.</li>
+<li>Row-level metadata is now restricted to reading/writing single parquet or feather files. Row-level metadata with datasets is ignored (with a warning) if the dataset contains row-level metadata. Writing a dataset with row-level metadata will also be ignored (with a warning). We are working on a more robust implementation to support row-level metadata (and other complex types) â stay tuned. For working with {sf} objects, <a href="https://CRAN.R-project.org/package=sfarrow" class="external-link">{sfarrow}</a> is helpful for serializing sf columns and sharing them with geopandas.</li>
 </ul></div>
 </div>
     <div id="arrow-401" class="section level1">
@@ -314,8 +314,8 @@
 <code>cast(x, type)</code> and <code>dictionary_encode()</code> allow changing the type of columns in Arrow objects; <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>, etc. are exposed as similar type-altering conveniences</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/between.html" class="external-link">dplyr::between()</a></code>; the Arrow version also allows the <code>left</code> and <code>right</code> arguments to be columns in the data and not just scalars</li>
-<li>Additionally, any Arrow C++ compute function can be called inside a <code>dplyr</code> verb. This enables you to access Arrow functions that don’t have a direct R mapping. See <code><a href="../reference/list_compute_functions.html">list_compute_functions()</a></code> for all available functions, which are available in <code>dplyr</code> prefixed by <code>arrow_</code>.</li>
-<li>Arrow C++ compute functions now do more systematic type promotion when called on data with different types (e.g. int32 and float64). Previously, Scalars in an expressions were always cast to match the type of the corresponding Array, so this new type promotion enables, among other things, operations on two columns (Arrays) in a dataset. As a side effect, some comparisons that worked in prior versions are no longer supported: for example, <code>dplyr::filter(arrow_dataset, string_column == 3)</code> will error with a message about the type mismatch between the numeric <code>3</code> and the string type of <code>string_column</code>.</li>
+<li>Additionally, any Arrow C++ compute function can be called inside a <code>dplyr</code> verb. This enables you to access Arrow functions that donât have a direct R mapping. See <code><a href="../reference/list_compute_functions.html">list_compute_functions()</a></code> for all available functions, which are available in <code>dplyr</code> prefixed by <code>arrow_</code>.</li>
+<li>Arrow C++ compute functions now do more systematic type promotion when called on data with different types (e.g.Â int32 and float64). Previously, Scalars in an expressions were always cast to match the type of the corresponding Array, so this new type promotion enables, among other things, operations on two columns (Arrays) in a dataset. As a side effect, some comparisons that worked in prior versions are no longer supported: for example, <code>dplyr::filter(arrow_dataset, string_column == 3)</code> will error with a message about the type mismatch between the numeric <code>3</code> and the string type of <code>string_column</code>.</li>
 </ul></div>
 <div id="datasets" class="section level2">
 <h2 class="hasAnchor">
@@ -402,7 +402,7 @@
 <code><a href="../reference/write_parquet.html">write_parquet()</a></code> can now write RecordBatches</li>
 <li>Reading a Table from a RecordBatchStreamReader containing 0 batches no longer crashes</li>
 <li>
-<code>readr</code>’s <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently (<a href='https://issues.apache.org/jira/browse/ARROW-10624'>ARROW-10624</a>)</li>
+<code>readr</code>âs <code>problems</code> attribute is removed when converting to Arrow RecordBatch and table to prevent large amounts of metadata from accumulating inadvertently (<a href='https://issues.apache.org/jira/browse/ARROW-10624'>ARROW-10624</a>)</li>
 <li>Fixed reading of compressed Feather files written with Arrow 0.17 (<a href='https://issues.apache.org/jira/browse/ARROW-10850'>ARROW-10850</a>)</li>
 <li>
 <code>SubTreeFileSystem</code> gains a useful print method and no longer errors when printing</li>
@@ -415,7 +415,7 @@
 <li>Linux installation now safely supports older <code>cmake</code> versions</li>
 <li>Compiler version checking for enabling S3 support correctly identifies the active compiler</li>
 <li>Updated guidance and troubleshooting in <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code>, especially for known CentOS issues</li>
-<li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/" class="external-link"><code>distro</code></a> package. If your OS isn’t correctly identified, please report an issue there.</li>
+<li>Operating system detection on Linux uses the <a href="https://enpiar.com/distro/" class="external-link"><code>distro</code></a> package. If your OS isnât correctly identified, please report an issue there.</li>
 </ul></div>
 </div>
     <div id="arrow-200" class="section level1">
@@ -436,7 +436,7 @@
 <div id="aws-s3-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aws-s3-support" class="anchor" aria-hidden="true"></a>AWS S3 support</h2>
-<ul><li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e. R &gt;= 4.0) packages. To enable it on Linux, you need the additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
+<ul><li>S3 support is now enabled in binary macOS and Windows (Rtools40 only, i.e.Â R &gt;= 4.0) packages. To enable it on Linux, you need the additional system dependencies <code>libcurl</code> and <code>openssl</code>, as well as a sufficiently modern compiler. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</li>
 <li>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.), as well as <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>, allow you to access resources on S3 (or on file systems that emulate S3) either by providing an <code>s3://</code> URI or by providing a <code>FileSystem$path()</code>. See <code><a href="../articles/fs.html">vignette("fs", package = "arrow")</a></code> for examples.</li>
 <li>
 <code><a href="../reference/copy_files.html">copy_files()</a></code> allows you to recursively copy directories of files from one file system to another, such as from S3 to your local machine.</li>
@@ -510,13 +510,13 @@
 <li>Arrow types <code>int64</code>, <code>uint32</code>, and <code>uint64</code> now are converted to R <code>integer</code> if all values fit in bounds</li>
 <li>Arrow <code>date32</code> is now converted to R <code>Date</code> with <code>double</code> underlying storage. Even though the data values themselves are integers, this provides more strict round-trip fidelity</li>
 <li>When converting to R <code>factor</code>, <code>dictionary</code> ChunkedArrays that do not have identical dictionaries are properly unified</li>
-<li>In the 1.0 release, the Arrow IPC metadata version is increased from V4 to V5. By default, <code>RecordBatch{File,Stream}Writer</code> will write V5, but you can specify an alternate <code>metadata_version</code>. For convenience, if you know the consumer you’re writing to cannot read V5, you can set the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code> to write V4 without changing any other code.</li>
+<li>In the 1.0 release, the Arrow IPC metadata version is increased from V4 to V5. By default, <code>RecordBatch{File,Stream}Writer</code> will write V5, but you can specify an alternate <code>metadata_version</code>. For convenience, if you know the consumer youâre writing to cannot read V5, you can set the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code> to write V4 without changing any other code.</li>
 </ul></div>
 <div id="datasets-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datasets-2" class="anchor" aria-hidden="true"></a>Datasets</h2>
 <ul><li>CSV and other text-delimited datasets are now supported</li>
-<li>With a custom C++ build, it is possible to read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Note that this currently requires a special C++ library build with additional dependencies–this is not yet available in CRAN releases or in nightly packages.</li>
+<li>With a custom C++ build, it is possible to read datasets directly on S3 by passing a URL like <code>ds &lt;- open_dataset("s3://...")</code>. Note that this currently requires a special C++ library build with additional dependenciesâthis is not yet available in CRAN releases or in nightly packages.</li>
 <li>When reading individual CSV and JSON files, compression is automatically detected from the file extension</li>
 </ul></div>
 <div id="other-enhancements-1" class="section level2">
@@ -536,7 +536,7 @@
 <li>The <code>coerce_timestamps</code> option to <code><a href="../reference/write_parquet.html">write_parquet()</a></code> is now correctly implemented.</li>
 <li>Creating a Dictionary array respects the <code>type</code> definition if provided by the user</li>
 <li>
-<code>read_arrow</code> and <code>write_arrow</code> are now deprecated; use the <code>read/write_feather()</code> and <code>read/write_ipc_stream()</code> functions depending on whether you’re working with the Arrow IPC file or stream format, respectively.</li>
+<code>read_arrow</code> and <code>write_arrow</code> are now deprecated; use the <code>read/write_feather()</code> and <code>read/write_ipc_stream()</code> functions depending on whether youâre working with the Arrow IPC file or stream format, respectively.</li>
 <li>Previously deprecated <code>FileStats</code>, <code>read_record_batch</code>, and <code>read_table</code> have been removed.</li>
 </ul></div>
 <div id="installation-and-packaging" class="section level2">
@@ -645,7 +645,7 @@
 <ul><li>
 <code><a href="../reference/write_parquet.html">write_parquet()</a></code> now supports compression</li>
 <li>
-<code><a href="../reference/codec_is_available.html">codec_is_available()</a></code> returns <code>TRUE</code> or <code>FALSE</code> whether the Arrow C++ library was built with support for a given compression library (e.g. gzip, lz4, snappy)</li>
+<code><a href="../reference/codec_is_available.html">codec_is_available()</a></code> returns <code>TRUE</code> or <code>FALSE</code> whether the Arrow C++ library was built with support for a given compression library (e.g.Â gzip, lz4, snappy)</li>
 <li>Windows builds now include support for zstd and lz4 compression (<a href='https://issues.apache.org/jira/browse/5814'>#5814</a>, @gnguy)</li>
 </ul></div>
 <div id="other-fixes-and-improvements" class="section level2">
@@ -669,7 +669,7 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking changes</h2>
 <ul><li>The R6 classes that wrap the C++ classes are now documented and exported and have been renamed to be more R-friendly. Users of the high-level R interface in this package are not affected. Those who want to interact with the Arrow C++ API more directly should work with these objects and methods. As part of this change, many functions that instantiated these R6 objects have been removed in favor of <code>Class$create()</code> methods. Notably, <code><a href="../reference/array.html">arrow::array()</a></code> and <code><a href="https://rdrr.io/r/base/table.html" class="external-link">arrow::table()</a></code> have been removed in favor of <code>Array$create()</code> and <code>Table$create()</code>, eliminating the package startup message about masking <code>base</code> functions. For more information, see the new <code><a href="../articles/arrow.html">vignette("arrow")</a></code>.</li>
-<li>Due to a subtle change in the Arrow message format, data written by the 0.15 version libraries may not be readable by older versions. If you need to send data to a process that uses an older version of Arrow (for example, an Apache Spark server that hasn’t yet updated to Arrow 0.15), you can set the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</li>
+<li>Due to a subtle change in the Arrow message format, data written by the 0.15 version libraries may not be readable by older versions. If you need to send data to a process that uses an older version of Arrow (for example, an Apache Spark server that hasnât yet updated to Arrow 0.15), you can set the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</li>
 <li>The <code>as_tibble</code> argument in the <code>read_*()</code> functions has been renamed to <code>as_data_frame</code> (<a href='https://issues.apache.org/jira/browse/ARROW-6337'>ARROW-6337</a>, @jameslamb)</li>
 <li>The <code>arrow::Column</code> class has been removed, as it was removed from the C++ library</li>
 </ul></div>
@@ -691,7 +691,7 @@
 <li>
 <code><a href="../reference/read_parquet.html">read_parquet()</a></code> and <code><a href="../reference/read_feather.html">read_feather()</a></code> can ingest data from a <code>raw</code> vector (<a href='https://issues.apache.org/jira/browse/ARROW-6278'>ARROW-6278</a>)</li>
 <li>File readers now properly handle paths that need expanding, such as <code>~/file.parquet</code> (<a href='https://issues.apache.org/jira/browse/ARROW-6323'>ARROW-6323</a>)</li>
-<li>Improved support for creating types in a schema: the types’ printed names (e.g. “double”) are guaranteed to be valid to use in instantiating a schema (e.g. <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code>), and time types can be created with human-friendly resolution strings (“ms”, “s”, etc.). (<a href='https://issues.apache.org/jira/browse/ARROW-6338'>ARROW-6338</a>, <a href='https://issues.apache.org/jira/browse/ARROW-6364'>ARROW-6364</a>)</li>
+<li>Improved support for creating types in a schema: the typesâ printed names (e.g.Â âdoubleâ) are guaranteed to be valid to use in instantiating a schema (e.g.Â <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code>), and time types can be created with human-friendly resolution strings (âmsâ, âsâ, etc.). (<a href='https://issues.apache.org/jira/browse/ARROW-6338'>ARROW-6338</a>, <a href='https://issues.apache.org/jira/browse/ARROW-6364'>ARROW-6364</a>)</li>
 </ul></div>
 </div>
     <div id="arrow-0141" class="section level1">
@@ -715,7 +715,7 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Neal Richardson, Ian Cook, Nic Crane, Jonathan Keane, Romain François, Jeroen Ooms, Apache Arrow.</p></p>
+  <p><p>Developed by Neal Richardson, Ian Cook, Nic Crane, Jonathan Keane, Romain FranÃ§ois, Jeroen Ooms, Apache Arrow.</p></p>
 </div>
 
 <div class="pkgdown">
