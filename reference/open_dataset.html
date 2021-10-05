@@ -96,7 +96,7 @@ Dataset, then use dplyr methods to query it." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211004</span>
       </span>
     </div>
 
@@ -322,7 +322,7 @@ or call <code><a href='Scanner.html'>$NewScan()</a></code> to construct a query 
 <span class='r-out co'><span class='r-pr'>#&gt;</span> cyl: int32</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># You can also supply a vector of paths</span></span>
-<span class='r-in'><span class='fu'>open_dataset</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tf</span>, <span class='st'>"cyl=4/part-1.parquet"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tf</span>, <span class='st'>"cyl=8/part-2.parquet"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>open_dataset</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tf</span>, <span class='st'>"cyl=4/part-0.parquet"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tf</span>, <span class='st'>"cyl=8/part-0.parquet"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> FileSystemDataset with 2 Parquet files</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> mpg: double</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> disp: double</span>
