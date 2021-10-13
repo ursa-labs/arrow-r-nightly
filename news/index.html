@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211012</span>
       </span>
     </div>
 
@@ -121,9 +121,11 @@
 <h2 class="hasAnchor">
 <a href="#2-duckdb-integration" class="anchor" aria-hidden="true"></a>2. duckdb integration</h2>
 <p>If you have the <a href="https://duckdb.org/" class="external-link">duckdb</a> package installed, you can hand off an Arrow Dataset or query object to duckdb for further querying using the <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> function. This allows you to use duckdb’s <code>dbplyr</code> methods, as well as its SQL interface, to aggregate data. Filtering and column projection done before <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> is evaluated in Arrow. ## Breaking changes</p>
-<ul><li>
+<ul><li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
+<li>
 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code> on an in-memory Arrow Table or RecordBatch no longer eagerly evaluates. Call <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to evaluate the query.</li>
-<li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
+<li>
+<code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> also no longer eagerly evaluate, both for in-memory data and for Datasets. Also, because row order is no longer deterministic, they will effectively give you a random slice of data from somewhere in the dataset unless you <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> to specify sorting.</li>
 <li>Datasets are officially no longer supported on 32-bit Windows on R &lt; 4.0 (Rtools 3.5). 32-bit Windows users should upgrade to a newer version of R in order to use datasets.</li>
 </ul></div>
 <div id="installation-on-linux" class="section level2">
