@@ -28,7 +28,7 @@ For guidance on how to use these classes, see the examples section.'><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -123,8 +123,8 @@ respectively.</p>
 
 
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 
@@ -133,8 +133,9 @@ factory methods instantiate the object and
 take a single argument, named according to the class:</p><ul><li><p><code>file</code> A character file name, raw vector, or Arrow file connection object
 (e.g. <a href="InputStream.html">RandomAccessFile</a>).</p></li>
 <li><p><code>stream</code> A raw vector, <a href="buffer.html">Buffer</a>, or <a href="InputStream.html">InputStream</a>.</p></li>
-</ul><h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
+</ul></div>
+    <div id="methods">
+    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 
 <ul><li><p><code>$read_next_batch()</code>: Returns a <code>RecordBatch</code>, iterating through the
@@ -146,12 +147,15 @@ Reader. If there are no further batches in the Reader, it returns <code>NULL</co
 by an integer index.</p></li>
 <li><p><code>$num_record_batches()</code>: For <code>RecordBatchFileReader</code>, see how many batches
 are in the file.</p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+</ul></div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="read_ipc_stream.html">read_ipc_stream()</a></code> and <code><a href="read_feather.html">read_feather()</a></code> provide a much simpler interface
 for reading data from these formats and are sufficient for many use cases.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -188,6 +192,7 @@ for reading data from these formats and are sufficient for many use cases.</p></
 <span class="r-in"><span class="co"># but we do still need to close the file connection</span></span>
 <span class="r-in"><span class="va">read_file_obj</span><span class="op">$</span><span class="fu">close</span><span class="op">(</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

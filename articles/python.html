@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -140,8 +140,8 @@
     
 <p>The <code>arrow</code> package provides <code>reticulate</code> methods for passing data between R and Python in the same process. This document provides a brief overview.</p>
 <div id="installing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installing" class="anchor" aria-hidden="true"></a>Installing</h2>
+<h2>Installing<a class="anchor" aria-label="anchor" href="#installing"></a>
+</h2>
 <p>To use <code>arrow</code> in Python, at a minimum you’ll need the <code>pyarrow</code> library. To install it in a virtualenv,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate" class="external-link">reticulate</a></span><span class="op">)</span>
@@ -154,8 +154,8 @@
 <p>For more on installing and configuring Python, see the <a href="https://rstudio.github.io/reticulate/articles/python_packages.html" class="external-link">reticulate docs</a>.</p>
 </div>
 <div id="using" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using" class="anchor" aria-hidden="true"></a>Using</h2>
+<h2>Using<a class="anchor" aria-label="anchor" href="#using"></a>
+</h2>
 <p>To start, load <code>arrow</code> and <code>reticulate</code>, and then import <code>pyarrow</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/" class="external-link">arrow</a></span><span class="op">)</span>
@@ -206,8 +206,8 @@
 <p>“Send”, however, isn’t the correct word. Internally, we’re passing pointers to the data between the R and Python interpreters running together in the same process, without copying anything. Nothing is being sent: we’re sharing and accessing the same internal Arrow memory buffers.</p>
 </div>
 <div id="troubleshooting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#troubleshooting" class="anchor" aria-hidden="true"></a>Troubleshooting</h2>
+<h2>Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
+</h2>
 <p>If you get an error like</p>
 <pre><code>Error in py_get_attr_impl(x, name, silent) :
   AttributeError: 'pyarrow.lib.DoubleArray' object has no attribute '_export_to_c'</code></pre>

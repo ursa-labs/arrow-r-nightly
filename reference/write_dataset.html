@@ -25,7 +25,7 @@ make it much faster to read and query."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -125,7 +125,8 @@ make it much faster to read and query.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>dataset</th>
       <td><p><a href="Dataset.html">Dataset</a>, <a href="RecordBatch.html">RecordBatch</a>, <a href="Table.html">Table</a>, <code>arrow_dplyr_query</code>, or
 <code>data.frame</code>. If an <code>arrow_dplyr_query</code> or <code>grouped_df</code>,
@@ -165,11 +166,15 @@ files. Default (NULL) will not compress body buffers.</p></li>
 <li><p><code>null_fallback</code>: character to be used in place of missing values (<code>NA</code> or
 <code>NULL</code>) when using Hive-style partitioning. See <code><a href="hive_partition.html">hive_partition()</a></code>.</p></li>
 </ul></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input <code>dataset</code>, invisibly</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># You can write datasets partitioned by the values in a column (here: "cyl").</span></span>
 <span class="r-in"><span class="co"># This creates a structure of the form cyl=X/part-Z.parquet.</span></span>
 <span class="r-in"><span class="va">one_level_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -220,6 +225,7 @@ files. Default (NULL) will not compress body buffers.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4] "6/3/part-0.parquet" "6/4/part-0.parquet" "6/5/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7] "8/3/part-0.parquet" "8/5/part-0.parquet"</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

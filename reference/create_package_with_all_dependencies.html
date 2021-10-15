@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -113,7 +113,8 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">create_package_with_all_dependencies</span><span class="op">(</span>dest_file <span class="op">=</span> <span class="cn">NULL</span>, source_file <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>dest_file</th>
       <td><p>File path for the new tar.gz package. Defaults to
 <code>arrow_V.V.V_with_deps.tar.gz</code> in the current directory (<code>V.V.V</code> is the version)</p></td>
@@ -121,8 +122,10 @@
       <td><p>File path for the input tar.gz package. Defaults to
 downloading the package from CRAN (or whatever you have set as the first in
 <code>getOption("repos")</code>)</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The full path to <code>dest_file</code>, invisibly</p>
 <p>This function is used for setting up an offline build. If it's possible to
 download at build time, don't use this function. Instead, let <code>cmake</code>
@@ -138,21 +141,73 @@ Windows binary package.)</p>
 <p>Note if you're using RStudio Package Manager on Linux: If you still want to
 make a source bundle with this function, make sure to set the first repo in
 <code>options("repos")</code> to be a mirror that contains source packages (that is:
-something other than the RSPM binary mirror URLs).</p><h3 class="hasAnchor" id="steps-for-an-offline-install-with-optional-dependencies-"><a class="anchor" aria-hidden="true" href="#steps-for-an-offline-install-with-optional-dependencies-"></a>Steps for an offline install with optional dependencies:</h3>
-
-<h4 class="hasAnchor" id="using-a-computer-with-internet-access-pre-download-the-dependencies-"><a class="anchor" aria-hidden="true" href="#using-a-computer-with-internet-access-pre-download-the-dependencies-"></a>Using a computer with internet access, pre-download the dependencies:</h4>
+something other than the RSPM binary mirror URLs).</p><div id="steps-for-an-offline-install-with-optional-dependencies-">
+<h3>
+<div id="using-a-computer-with-internet-access-pre-download-the-dependencies-">
+<h4>
+<ul><li><p>Install the <code>arrow</code> package <em>or</em> run
+<code>source("https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R")</code></p></li>
+<li><p>Run <code>create_package_with_all_dependencies("my_arrow_pkg.tar.gz")</code></p></li>
+<li><p>Copy the newly created <code>my_arrow_pkg.tar.gz</code> to the computer without internet access</p></li>
+</ul><a class="anchor" aria-label="anchor" href="#using-a-computer-with-internet-access-pre-download-the-dependencies-"></a></h4>
 
 <ul><li><p>Install the <code>arrow</code> package <em>or</em> run
 <code>source("https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R")</code></p></li>
 <li><p>Run <code>create_package_with_all_dependencies("my_arrow_pkg.tar.gz")</code></p></li>
 <li><p>Copy the newly created <code>my_arrow_pkg.tar.gz</code> to the computer without internet access</p></li>
-</ul><h4 class="hasAnchor" id="on-the-computer-without-internet-access-install-the-prepared-package-"><a class="anchor" aria-hidden="true" href="#on-the-computer-without-internet-access-install-the-prepared-package-"></a>On the computer without internet access, install the prepared package:</h4>
+</ul></div>
+
+<div id="on-the-computer-without-internet-access-install-the-prepared-package-">
+<h4>
+<ul><li><p>Install the <code>arrow</code> package from the copied file</p><ul><li><p><code>install.packages("my_arrow_pkg.tar.gz", dependencies = c("Depends", "Imports", "LinkingTo"))</code></p></li>
+<li><p>This installation will build from source, so <code>cmake</code> must be available</p></li>
+</ul></li>
+<li><p>Run <code><a href="arrow_info.html">arrow_info()</a></code> to check installed capabilities</p></li>
+</ul><a class="anchor" aria-label="anchor" href="#on-the-computer-without-internet-access-install-the-prepared-package-"></a></h4>
 
 <ul><li><p>Install the <code>arrow</code> package from the copied file</p><ul><li><p><code>install.packages("my_arrow_pkg.tar.gz", dependencies = c("Depends", "Imports", "LinkingTo"))</code></p></li>
 <li><p>This installation will build from source, so <code>cmake</code> must be available</p></li>
 </ul></li>
 <li><p>Run <code><a href="arrow_info.html">arrow_info()</a></code> to check installed capabilities</p></li>
-</ul><h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+</ul></div>
+
+<a class="anchor" aria-label="anchor" href="#steps-for-an-offline-install-with-optional-dependencies-"></a></h3>
+
+<div id="using-a-computer-with-internet-access-pre-download-the-dependencies--1">
+<h4>
+<ul><li><p>Install the <code>arrow</code> package <em>or</em> run
+<code>source("https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R")</code></p></li>
+<li><p>Run <code>create_package_with_all_dependencies("my_arrow_pkg.tar.gz")</code></p></li>
+<li><p>Copy the newly created <code>my_arrow_pkg.tar.gz</code> to the computer without internet access</p></li>
+</ul><a class="anchor" aria-label="anchor" href="#using-a-computer-with-internet-access-pre-download-the-dependencies--1"></a></h4>
+
+<ul><li><p>Install the <code>arrow</code> package <em>or</em> run
+<code>source("https://raw.githubusercontent.com/apache/arrow/master/r/R/install-arrow.R")</code></p></li>
+<li><p>Run <code>create_package_with_all_dependencies("my_arrow_pkg.tar.gz")</code></p></li>
+<li><p>Copy the newly created <code>my_arrow_pkg.tar.gz</code> to the computer without internet access</p></li>
+</ul></div>
+
+<div id="on-the-computer-without-internet-access-install-the-prepared-package--1">
+<h4>
+<ul><li><p>Install the <code>arrow</code> package from the copied file</p><ul><li><p><code>install.packages("my_arrow_pkg.tar.gz", dependencies = c("Depends", "Imports", "LinkingTo"))</code></p></li>
+<li><p>This installation will build from source, so <code>cmake</code> must be available</p></li>
+</ul></li>
+<li><p>Run <code><a href="arrow_info.html">arrow_info()</a></code> to check installed capabilities</p></li>
+</ul><a class="anchor" aria-label="anchor" href="#on-the-computer-without-internet-access-install-the-prepared-package--1"></a></h4>
+
+<ul><li><p>Install the <code>arrow</code> package from the copied file</p><ul><li><p><code>install.packages("my_arrow_pkg.tar.gz", dependencies = c("Depends", "Imports", "LinkingTo"))</code></p></li>
+<li><p>This installation will build from source, so <code>cmake</code> must be available</p></li>
+</ul></li>
+<li><p>Run <code><a href="arrow_info.html">arrow_info()</a></code> to check installed capabilities</p></li>
+</ul></div>
+
+
+</div>
+
+    </div>
+
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">new_pkg</span> <span class="op">&lt;-</span> <span class="fu">create_package_with_all_dependencies</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># Note: this works when run in the same R session, but it's meant to be</span></span>
@@ -160,6 +215,7 @@ something other than the RSPM binary mirror URLs).</p><h3 class="hasAnchor" id="
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">new_pkg</span>, dependencies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Depends"</span>, <span class="st">"Imports"</span>, <span class="st">"LinkingTo"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

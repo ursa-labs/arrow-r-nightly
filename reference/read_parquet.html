@@ -24,7 +24,7 @@ This function enables you to read Parquet files into R."><!-- mathjax --><script
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -121,7 +121,8 @@ This function enables you to read Parquet files into R.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file</th>
       <td><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
@@ -140,12 +141,16 @@ an Arrow <a href="Table.html">Table</a>?</p></td>
       <td><p><a href="ParquetArrowReaderProperties.html">ParquetArrowReaderProperties</a></p></td>
     </tr><tr><th>...</th>
       <td><p>Additional arguments passed to <code>ParquetFileReader$create()</code></p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="Table.html">arrow::Table</a>, or a <code>data.frame</code> if <code>as_data_frame</code> is
 <code>TRUE</code> (the default).</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="write_parquet.html">write_parquet</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tf</span><span class="op">)</span></span>
@@ -159,6 +164,7 @@ an Arrow <a href="Table.html">Table</a>?</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  360 3.15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  225 2.76</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

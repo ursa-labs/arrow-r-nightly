@@ -25,7 +25,7 @@ may be grouped together in a Table."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -117,19 +117,23 @@ may be grouped together in a <a href="Table.html">Table</a>.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">chunked_array</span><span class="op">(</span><span class="va">...</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>...</th>
       <td><p>Vectors to coerce</p></td>
     </tr><tr><th>type</th>
       <td><p>currently ignored</p></td>
-    </tr></table><h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
+    </tr></table></div>
 
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 <p>The <code>ChunkedArray$create()</code> factory method instantiates the object from
 various Arrays or R vectors. <code>chunked_array()</code> is an alias for it.</p>
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
+    </div>
+    <div id="methods">
+    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 
 <ul><li><p><code>$length()</code>: Size in the number of elements this array contains</p></li>
@@ -155,11 +159,14 @@ data in the array to change its type.</p></li>
 given type.</p></li>
 <li><p><code>$Validate()</code>: Perform any validation checks to determine obvious inconsistencies
 within the array's internal data. This can be an expensive check, potentially <code>O(length)</code></p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+</ul></div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="array.html">Array</a></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Pass items into chunked_array as separate objects to create chunks</span></span>
 <span class="r-in"><span class="va">class_scores</span> <span class="op">&lt;-</span> <span class="fu">chunked_array</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">87</span>, <span class="fl">88</span>, <span class="fl">89</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">94</span>, <span class="fl">93</span>, <span class="fl">92</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">71</span>, <span class="fl">72</span>, <span class="fl">73</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">class_scores</span><span class="op">$</span><span class="va">num_chunks</span></span>
@@ -211,6 +218,7 @@ within the array's internal data. This can be an expensive check, potentially <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> Float64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> double</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

@@ -27,7 +27,7 @@ Dataset, then use dplyr methods to query it."><!-- mathjax --><script src="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -128,7 +128,8 @@ can accelerate queries that only touch some partitions (files). Call
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>sources</th>
       <td><p>One of:</p><ul><li><p>a string path or URI to a directory containing data files</p></li>
 <li><p>a string path or URI to a single file</p></li>
@@ -182,15 +183,20 @@ it is assumed to be "text".</p></td>
 is a directory path/URI or vector of file paths/URIs, otherwise ignored.
 These may include <code>format</code> to indicate the file format, or other
 format-specific options.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="Dataset.html">Dataset</a> R6 object. Use <code>dplyr</code> methods on it to query the data,
 or call <code><a href="Scanner.html">$NewScan()</a></code> to construct a query directly.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Set up directory for examples</span></span>
 <span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span>
@@ -299,6 +305,7 @@ or call <code><a href="Scanner.html">$NewScan()</a></code> to construct a query 
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> See $metadata for additional Schema metadata</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

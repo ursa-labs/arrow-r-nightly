@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -143,8 +143,8 @@
 <p>In Windows and macOS binary packages, S3 support is included. On Linux when installing from source, S3 support is not enabled by default, and it has additional system requirements. See <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 </blockquote>
 <div id="uris" class="section level2">
-<h2 class="hasAnchor">
-<a href="#uris" class="anchor" aria-hidden="true"></a>URIs</h2>
+<h2>URIs<a class="anchor" aria-label="anchor" href="#uris"></a>
+</h2>
 <p>File readers and writers (<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.) accept an S3 URI as the source or destination file, as do <code><a href="../reference/open_dataset.html">open_dataset()</a></code> and <code><a href="../reference/write_dataset.html">write_dataset()</a></code>. An S3 URI looks like:</p>
 <pre><code>s3://[access_key:secret_key@]bucket/path[?region=]</code></pre>
 <p>For example, one of the NYC taxi data files used in <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> is found at</p>
@@ -155,8 +155,8 @@
 <p>Note that this will be slower to read than if the file were local, though if you’re running on a machine in the same AWS region as the file in S3, the cost of reading the data over the network should be much lower.</p>
 </div>
 <div id="creating-a-filesystem-object" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-a-filesystem-object" class="anchor" aria-hidden="true"></a>Creating a FileSystem object</h2>
+<h2>Creating a FileSystem object<a class="anchor" aria-label="anchor" href="#creating-a-filesystem-object"></a>
+</h2>
 <p>Another way to connect to S3 is to create a <code>FileSystem</code> object once and pass that to the read/write functions. <code>S3FileSystem</code> objects can be created with the <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> function, which automatically detects the bucket’s AWS region. Additionally, the resulting <code>FileSystem</code> will consider paths relative to the bucket’s path (so for example you don’t need to prefix the bucket path when listing a directory). This may be convenient when dealing with long URIs, and it’s necessary for some options and authentication methods that aren’t supported in the URI format.</p>
 <p>With a <code>FileSystem</code> object, we can point to specific files in it with the <code>$path()</code> method. In the previous example, this would look like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -173,8 +173,8 @@
 <code class="sourceCode R"><span class="va">june2019</span> <span class="op">&lt;-</span> <span class="va">SubTreeFileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data/2019/06"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="authentication" class="section level2">
-<h2 class="hasAnchor">
-<a href="#authentication" class="anchor" aria-hidden="true"></a>Authentication</h2>
+<h2>Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
+</h2>
 <p>To access private S3 buckets, you need typically need two secret parameters: a <code>access_key</code>, which is like a user id, and <code>secret_key</code>, like a token. There are a few options for passing these credentials:</p>
 <ol style="list-style-type: decimal">
 <li><p>Include them in the URI, like <code>s3://access_key:secret_key@bucket-name/path/to/file</code>. Be sure to <a href="https://en.wikipedia.org/wiki/Percent-encoding" class="external-link">URL-encode</a> your secrets if they contain special characters like “/”.</p></li>
@@ -185,8 +185,8 @@
 <p>You can also use an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html" class="external-link">AccessRole</a> for temporary access by passing the <code>role_arn</code> identifier to <code>S3FileSystem$create()</code> or <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code>.</p>
 </div>
 <div id="file-systems-that-emulate-s3" class="section level2">
-<h2 class="hasAnchor">
-<a href="#file-systems-that-emulate-s3" class="anchor" aria-hidden="true"></a>File systems that emulate S3</h2>
+<h2>File systems that emulate S3<a class="anchor" aria-label="anchor" href="#file-systems-that-emulate-s3"></a>
+</h2>
 <p>The <code>S3FileSystem</code> machinery enables you to work with any file system that provides an S3-compatible interface. For example, <a href="https://min.io/" class="external-link">MinIO</a> is and object-storage server that emulates the S3 API. If you were to run <code>minio server</code> locally with its default settings, you could connect to it with <code>arrow</code> using <code>S3FileSystem</code> like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">minio</span> <span class="op">&lt;-</span> <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>

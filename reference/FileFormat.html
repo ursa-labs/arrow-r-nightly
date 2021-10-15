@@ -25,7 +25,7 @@ file formats (ParquetFileFormat and IpcFileFormat)."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -117,8 +117,8 @@ file formats (<code>ParquetFileFormat</code> and <code>IpcFileFormat</code>).</p
 
 
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 <p><code>FileFormat$create()</code> takes the following arguments:</p><ul><li><p><code>format</code>: A string identifier of the file format. Currently supported values:</p><ul><li><p>"parquet"</p></li>
@@ -144,8 +144,10 @@ From <a href="FragmentScanOptions.html">CsvFragmentScanOptions</a> (these values
 <li><p><code>block_size</code></p></li>
 </ul></li>
 </ul><p>It returns the appropriate subclass of <code>FileFormat</code> (e.g. <code>ParquetFileFormat</code>)</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Semi-colon delimited files</span></span>
 <span class="r-in"><span class="co"># Set up directory for examples</span></span>
 <span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -170,6 +172,7 @@ From <a href="FragmentScanOptions.html">CsvFragmentScanOptions</a> (these values
 <span class="r-out co"><span class="r-pr">#&gt;</span> gear: int64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> carb: int64</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

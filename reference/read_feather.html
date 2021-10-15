@@ -27,7 +27,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format."><!-
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -121,7 +121,8 @@ and the version 2 specification, which is the Apache Arrow IPC file format.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">read_feather</span><span class="op">(</span><span class="va">file</span>, col_select <span class="op">=</span> <span class="cn">NULL</span>, as_data_frame <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file</th>
       <td><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
@@ -138,15 +139,20 @@ of columns, as used in <code><a href="https://dplyr.tidyverse.org/reference/sele
 an Arrow <a href="Table.html">Table</a>?</p></td>
     </tr><tr><th>...</th>
       <td><p>additional parameters, passed to <code><a href="make_readable_file.html">make_readable_file()</a></code>.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code>data.frame</code> if <code>as_data_frame</code> is <code>TRUE</code> (the default), or an
 Arrow <a href="Table.html">Table</a> otherwise</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="FeatherReader.html">FeatherReader</a> and <a href="RecordBatchReader.html">RecordBatchReader</a> for lower-level access to reading Arrow IPC data.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="write_feather.html">write_feather</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tf</span><span class="op">)</span></span>
@@ -156,6 +162,7 @@ Arrow <a href="Table.html">Table</a> otherwise</p>
 <span class="r-in"><span class="co"># Can select columns</span></span>
 <span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_feather</span><span class="op">(</span><span class="va">tf</span>, col_select <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

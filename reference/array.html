@@ -26,7 +26,7 @@ and StructArray."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -119,8 +119,8 @@ and <code>StructArray</code>.</p>
 
 
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 <p>The <code>Array$create()</code> factory method instantiates an <code>Array</code> and
@@ -133,8 +133,9 @@ will be inferred from the data.</p></li>
 which takes two arguments:</p><ul><li><p><code>x</code>: an R vector or <code>Array</code> of integers for the dictionary indices</p></li>
 <li><p><code>dict</code>: an R vector or <code>Array</code> of dictionary values (like R factor levels
 but not limited to strings only)</p></li>
-</ul><h2 class="hasAnchor" id="usage"><a class="anchor" href="#usage"></a>Usage</h2>
-
+</ul></div>
+    <div id="usage">
+    <h2>Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h2>
     
 <pre><code>a &lt;- Array$create(x)
 length(a)
@@ -143,8 +144,9 @@ print(a)
 a == a
 </code></pre>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
+    </div>
+    <div id="methods">
+    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 
 <ul><li><p><code>$IsNull(i)</code>: Return true if value at index is null. Does not boundscheck</p></li>
@@ -175,7 +177,10 @@ data in the array to change its type.</p></li>
 <li><p><code>$View(type)</code>: Construct a zero-copy view of this array with the given type.</p></li>
 <li><p><code>$Validate()</code> : Perform any validation checks to determine obvious inconsistencies
 within the array's internal data. This can be an expensive check, potentially <code>O(length)</code></p></li>
-</ul><h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+</ul></div>
+
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">my_array</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">my_array</span><span class="op">$</span><span class="va">type</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Int32</span>
@@ -228,6 +233,7 @@ within the array's internal data. This can be an expensive check, potentially <c
 <span class="r-in"><span class="va">na_array2</span><span class="op">$</span><span class="fu">Equals</span><span class="op">(</span><span class="va">na_array</span><span class="op">)</span> <span class="co"># overall comparison</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

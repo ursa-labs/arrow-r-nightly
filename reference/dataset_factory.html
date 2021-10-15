@@ -25,7 +25,7 @@ open_dataset()."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -123,7 +123,8 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
       <td><p>A string path to a directory containing data files, a vector of one
 one or more string paths to data files, or a list of <code>DatasetFactory</code> objects
@@ -163,17 +164,21 @@ with the Arrow C++ library naming ("delimiter", "quoting", etc.) or the
 <code>readr</code>-style naming used in <code><a href="read_delim_arrow.html">read_csv_arrow()</a></code> ("delim", "quote", etc.).
 Not all <code>readr</code> options are currently supported; please file an issue if you
 encounter one that <code>arrow</code> should support.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code>DatasetFactory</code> object. Pass this to <code><a href="open_dataset.html">open_dataset()</a></code>,
 in a list potentially with other <code>DatasetFactory</code> objects, to create
 a <code>Dataset</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+    </div>
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>If you would only have a single <code>DatasetFactory</code> (for example, you have a
 single directory containing Parquet files), you can call <code><a href="open_dataset.html">open_dataset()</a></code>
 directly. Use <code>dataset_factory()</code> when you
 want to combine different directories, file systems, or file formats.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

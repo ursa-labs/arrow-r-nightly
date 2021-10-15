@@ -24,7 +24,7 @@ by ParquetFileWriter."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -115,8 +115,8 @@ by <a href="ParquetFileWriter.html">ParquetFileWriter</a>.</p>
 
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The parameters <code>compression</code>, <code>compression_level</code>, <code>use_dictionary</code>
 and write_statistics` support various patterns:</p><ul><li><p>The default <code>NULL</code> leaves the parameter unspecified, and the C++ library
 uses an appropriate default for each column (defaults listed above)</p></li>
@@ -128,8 +128,9 @@ value for the setting is used when not supplied</p></li>
 </ul><p>Unlike the high-level <a href="write_parquet.html">write_parquet</a>, <code>ParquetWriterProperties</code> arguments
 use the C++ defaults. Currently this means "uncompressed" rather than
 "snappy" for the <code>compression</code> argument.</p>
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    </div>
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 
@@ -142,10 +143,12 @@ and takes the following arguments:</p><ul><li><p><code>table</code>: table to wr
 <li><p><code>write_statistics</code>: Specify if we should write statistics. Default <code>TRUE</code></p></li>
 <li><p><code>data_page_size</code>: Set a target threshold for the approximate encoded
 size of data pages within a column chunk (in bytes). Default 1 MiB.</p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+</ul></div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="write_parquet.html">write_parquet</a></p>
 <p><a href="Schema.html">Schema</a> for information about schemas and metadata handling.</p></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

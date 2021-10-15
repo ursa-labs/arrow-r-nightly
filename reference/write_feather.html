@@ -27,7 +27,7 @@ and the version 2 specification, which is the Apache Arrow IPC file format."><!-
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -128,7 +128,8 @@ and the version 2 specification, which is the Apache Arrow IPC file format.</p>
   compression_level <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
       <td><p><code>data.frame</code>, <a href="RecordBatch.html">RecordBatch</a>, or <a href="Table.html">Table</a></p></td>
     </tr><tr><th>sink</th>
@@ -151,20 +152,26 @@ See <code><a href="codec_is_available.html">codec_is_available()</a></code>. Thi
       <td><p>If <code>compression</code> is "zstd", you may
 specify an integer compression level. If omitted, the compression codec's
 default compression level is used.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The input <code>x</code>, invisibly. Note that if <code>sink</code> is an <a href="OutputStream.html">OutputStream</a>,
 the stream will be left open.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="RecordBatchWriter.html">RecordBatchWriter</a> for lower-level access to writing Arrow IPC data.</p>
 <p><a href="Schema.html">Schema</a> for information about schemas and metadata handling.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">write_feather</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tf</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

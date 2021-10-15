@@ -27,7 +27,7 @@ are callable with an arrow_ prefix."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -126,7 +126,8 @@ are callable with an <code>arrow_</code> prefix.</p>
   options <span class="op">=</span> <span class="fu">empty_named_list</span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>function_name</th>
       <td><p>string Arrow compute function name</p></td>
     </tr><tr><th>...</th>
@@ -136,19 +137,25 @@ are callable with an <code>arrow_</code> prefix.</p>
       <td><p>list arguments as an alternative to specifying in <code>...</code></p></td>
     </tr><tr><th>options</th>
       <td><p>named list of C++ function options.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <code>Array</code>, <code>ChunkedArray</code>, <code>Scalar</code>, <code>RecordBatch</code>, or <code>Table</code>, whatever the compute function results in.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+    </div>
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>When passing indices in <code>...</code>, <code>args</code>, or <code>options</code>, express them as
 0-based integers (consistent with C++).</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="https://arrow.apache.org/docs/cpp/compute.html">Arrow C++ documentation</a> for
 the functions and their respective options.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="cn">NA</span>, <span class="fl">5L</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="va">Scalar</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">call_function</span><span class="op">(</span><span class="st">"coalesce"</span>, <span class="va">a</span>, <span class="va">s</span><span class="op">)</span></span>
@@ -167,13 +174,14 @@ the functions and their respective options.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Array</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;double&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.5330136193747124,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.6820635658075904,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.009991674525148833,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6848260344298083,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.906813638039612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.9347073388325504,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.6486328851496934,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.001166200868875075,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6675498566969454,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.474362818831241</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

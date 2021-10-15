@@ -25,7 +25,7 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -117,8 +117,8 @@ composed from multiple record batches or chunked arrays.</p>
 
 
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 
@@ -127,8 +127,9 @@ an unnamed series of <a href="RecordBatch.html">record batches</a> may also be p
 which will be stacked as rows in the table.</p></li>
 <li><p><code>schema</code> a <a href="Schema.html">Schema</a>, or <code>NULL</code> (the default) to infer the schema from
 the data in <code>...</code></p></li>
-</ul><h2 class="hasAnchor" id="s-methods-and-usage"><a class="anchor" href="#s-methods-and-usage"></a>S3 Methods and Usage</h2>
-
+</ul></div>
+    <div id="s-methods-and-usage">
+    <h2>S3 Methods and Usage<a class="anchor" aria-label="anchor" href="#s-methods-and-usage"></a></h2>
     
 
 <p>Tables are data-frame-like, and many methods you expect to work on
@@ -141,8 +142,9 @@ examples.</p>
 precedence over the table's columns. So, <code>tab$Slice</code> would return the
 "Slice" method function even if there were a column in the table called
 "Slice".</p>
-    <h2 class="hasAnchor" id="r-methods"><a class="anchor" href="#r-methods"></a>R6 Methods</h2>
-
+    </div>
+    <div id="r-methods">
+    <h2>R6 Methods<a class="anchor" aria-label="anchor" href="#r-methods"></a></h2>
     
 
 <p>In addition to the more R-friendly S3 methods, a <code>Table</code> object has
@@ -176,7 +178,10 @@ the schema of the record batch.</p></li>
 Modify or replace by assigning in (<code>tab$metadata &lt;- new_metadata</code>).
 All list elements are coerced to string. See <code><a href="Schema.html">schema()</a></code> for more information.</p></li>
 <li><p><code>$columns</code>: Returns a list of <code>ChunkedArray</code>s</p></li>
-</ul><h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+</ul></div>
+
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tab</span> <span class="op">&lt;-</span> <span class="va">Table</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32 12</span>
@@ -249,6 +254,7 @@ All list elements are coerced to string. See <code><a href="Schema.html">schema(
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     3   245  3.57</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     4    62  3.19</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

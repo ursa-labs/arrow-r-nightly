@@ -25,7 +25,7 @@ readr::read_delim(), and col_select was inspired by vroom::vroom()."><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -176,7 +176,8 @@ Arrow C++ options have been mapped to argument names that follow those of
   timestamp_parsers <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file</th>
       <td><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
@@ -244,11 +245,14 @@ starting from the beginning of this vector. Possible values are:</p><ul><li><p><
 <li><p>a character vector of <a href="https://rdrr.io/r/base/strptime.html">strptime</a> parse strings</p></li>
 <li><p>a list of <a href="CsvReadOptions.html">TimestampParser</a> objects</p></li>
 </ul></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code>data.frame</code>, or a Table if <code>as_data_frame = FALSE</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+    </div>
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>read_csv_arrow()</code> and <code>read_tsv_arrow()</code> are wrappers around
 <code>read_delim_arrow()</code> that specify a delimiter.</p>
 <p>Note that not all <code>readr</code> options are currently implemented here. Please file
@@ -257,8 +261,9 @@ an issue if you encounter one that <code>arrow</code> should support.</p>
 equivalent in <code>readr::read_csv()</code>, you can either provide them in the
 <code>parse_options</code>, <code>convert_options</code>, or <code>read_options</code> arguments, or you can
 use <a href="CsvTableReader.html">CsvTableReader</a> directly for lower-level access.</p>
-    <h2 class="hasAnchor" id="specifying-column-types-and-names"><a class="anchor" href="#specifying-column-types-and-names"></a>Specifying column types and names</h2>
-
+    </div>
+    <div id="specifying-column-types-and-names">
+    <h2>Specifying column types and names<a class="anchor" aria-label="anchor" href="#specifying-column-types-and-names"></a></h2>
     
 
 
@@ -296,8 +301,10 @@ be dropped.</p>
 <p>Note that if you are specifying column names, whether by <code>schema</code> or
 <code>col_names</code>, and the CSV file has a header row that would otherwise be used
 to idenfity column names, you'll need to add <code>skip = 1</code> to skip that row.</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>, file <span class="op">=</span> <span class="va">tf</span><span class="op">)</span></span>
@@ -307,6 +314,7 @@ to idenfity column names, you'll need to add <code>skip = 1</code> to skip that 
 <span class="r-in"><span class="co"># Can select columns</span></span>
 <span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv_arrow</span><span class="op">(</span><span class="va">tf</span>, col_select <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

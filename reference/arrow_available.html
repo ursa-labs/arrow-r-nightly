@@ -24,7 +24,7 @@ for diagnostic purposes."><!-- mathjax --><script src="https://cdnjs.cloudflare.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -124,21 +124,24 @@ for diagnostic purposes.</p>
 <span class="fu">arrow_with_json</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>TRUE</code> or <code>FALSE</code> depending on whether the package was installed
 with:</p><ul><li><p>The Arrow C++ library (check with <code>arrow_available()</code>)</p></li>
 <li><p>Arrow Dataset support enabled (check with <code>arrow_with_dataset()</code>)</p></li>
 <li><p>Parquet support enabled (check with <code>arrow_with_parquet()</code>)</p></li>
 <li><p>JSON support enabled (check with <code>arrow_with_json()</code>)</p></li>
 <li><p>Amazon S3 support enabled (check with <code>arrow_with_s3()</code>)</p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+</ul></div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>If any of these are <code>FALSE</code>, see
 <code><a href="../articles/install.html">vignette("install", package = "arrow")</a></code> for guidance on reinstalling the
 package.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">arrow_available</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span class="fu">arrow_with_dataset</span><span class="op">(</span><span class="op">)</span></span>
@@ -150,6 +153,7 @@ package.</p></div>
 <span class="r-in"><span class="fu">arrow_with_s3</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

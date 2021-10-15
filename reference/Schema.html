@@ -30,7 +30,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -127,12 +127,15 @@ ensure a specific schema rather than inferring it from the various files.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">schema</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>...</th>
       <td><p>named list containing <a href="data-type.html">data types</a> or
 a list of <a href="Field.html">fields</a> containing the fields for the schema</p></td>
-    </tr></table><h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+    </tr></table></div>
 
+    <div id="methods">
+    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 
 <ul><li><p><code>$ToString()</code>: convert to a string</p></li>
@@ -141,8 +144,9 @@ a list of <a href="Field.html">fields</a> containing the fields for the schema</
 <li><p><code>$WithMetadata(metadata)</code>: returns a new <code>Schema</code> with the key-value
 <code>metadata</code> set. Note that all list elements in <code>metadata</code> will be coerced
 to <code>character</code>.</p></li>
-</ul><h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
-
+</ul></div>
+    <div id="active-bindings">
+    <h2>Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
     
 
 <ul><li><p><code>$names</code>: returns the field names (called in <code>names(Schema)</code>)</p></li>
@@ -153,8 +157,9 @@ iterating over</p></li>
 <li><p><code>$metadata</code>: returns the key-value metadata as a named list.
 Modify or replace by assigning in (<code>sch$metadata &lt;- new_metadata</code>).
 All list elements are coerced to string.</p></li>
-</ul><h2 class="hasAnchor" id="r-metadata"><a class="anchor" href="#r-metadata"></a>R Metadata</h2>
-
+</ul></div>
+    <div id="r-metadata">
+    <h2>R Metadata<a class="anchor" aria-label="anchor" href="#r-metadata"></a></h2>
     
 
 
@@ -178,8 +183,10 @@ that are compatible with Arrow versions before 3.0.0 and include large
 amounts of metadata), set the option <code>arrow.compress_metadata</code> to <code>FALSE</code>.
 Files with compressed metadata are readable by older versions of arrow, but
 the metadata is dropped.</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">tab1</span> <span class="op">&lt;-</span> <span class="va">Table</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">tab1</span><span class="op">$</span><span class="va">schema</span></span>
@@ -196,6 +203,7 @@ the metadata is dropped.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> See $metadata for additional Schema metadata</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

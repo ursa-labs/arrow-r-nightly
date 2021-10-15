@@ -25,7 +25,7 @@ and read_feather() read those formats, respectively.'><!-- mathjax --><script sr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -119,7 +119,8 @@ and <code><a href="read_feather.html">read_feather()</a></code> read those forma
 
 <span class="fu">read_ipc_stream</span><span class="op">(</span><span class="va">file</span>, as_data_frame <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file</th>
       <td><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
@@ -131,20 +132,25 @@ open.</p></td>
     </tr><tr><th>as_data_frame</th>
       <td><p>Should the function return a <code>data.frame</code> (default) or
 an Arrow <a href="Table.html">Table</a>?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code>data.frame</code> if <code>as_data_frame</code> is <code>TRUE</code> (the default), or an
 Arrow <a href="Table.html">Table</a> otherwise</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
+    </div>
+    <div id="details">
+    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>read_arrow()</code>, a wrapper around <code>read_ipc_stream()</code> and <code><a href="read_feather.html">read_feather()</a></code>,
 is deprecated. You should explicitly choose
 the function that will read the desired IPC format (stream or file) since
 a file or <code>InputStream</code> may contain either.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="read_feather.html">read_feather()</a></code> for writing IPC files. <a href="RecordBatchReader.html">RecordBatchReader</a> for a
 lower-level interface.</p></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

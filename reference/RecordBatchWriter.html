@@ -27,7 +27,7 @@ For guidance on how to use these classes, see the examples section.'><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -121,8 +121,8 @@ interfaces for writing record batches to those formats, respectively.</p>
 
 
 
-    <h2 class="hasAnchor" id="factory"><a class="anchor" href="#factory"></a>Factory</h2>
-
+    <div id="factory">
+    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
     
 
 
@@ -136,8 +136,9 @@ enable this by setting the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=
 the Arrow IPC MetadataVersion. Default (NULL) will use the latest version,
 unless the environment variable <code>ARROW_PRE_1_0_METADATA_VERSION=1</code>, in
 which case it will be V4.</p></li>
-</ul><h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
+</ul></div>
+    <div id="methods">
+    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 
 <ul><li><p><code>$write(x)</code>: Write a <a href="RecordBatch.html">RecordBatch</a>, <a href="Table.html">Table</a>, or <code>data.frame</code>, dispatching
@@ -147,13 +148,16 @@ to the methods below appropriately</p></li>
 <li><p><code>$close()</code>: close stream. Note that this indicates end-of-file or
 end-of-stream--it does not close the connection to the <code>sink</code>. That needs
 to be closed separately.</p></li>
-</ul><h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+</ul></div>
+    <div id="see-also">
+    <h2>See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="write_ipc_stream.html">write_ipc_stream()</a></code> and <code><a href="write_feather.html">write_feather()</a></code> provide a much simpler
 interface for writing data to these formats and are sufficient for many use
 cases. <code><a href="write_to_raw.html">write_to_raw()</a></code> is a version that serializes data to a buffer.</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -190,6 +194,7 @@ cases. <code><a href="write_to_raw.html">write_to_raw()</a></code> is a version 
 <span class="r-in"><span class="co"># but we do still need to close the file connection</span></span>
 <span class="r-in"><span class="va">read_file_obj</span><span class="op">$</span><span class="fu">close</span><span class="op">(</span><span class="op">)</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211014</span>
       </span>
     </div>
 
@@ -140,16 +140,16 @@
     
 <p>The Apache Arrow C++ library provides rich, powerful features for working with columnar data. The <code>arrow</code> R package provides both a low-level interface to the C++ library and some higher-level, R-flavored tools for working with it. This vignette provides an overview of how the pieces fit together, and it describes the conventions that the classes and methods follow in R.</p>
 <div id="features" class="section level1">
-<h1 class="hasAnchor">
-<a href="#features" class="anchor" aria-hidden="true"></a>Features</h1>
+<h1>Features<a class="anchor" aria-label="anchor" href="#features"></a>
+</h1>
 <div id="multi-file-datasets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multi-file-datasets" class="anchor" aria-hidden="true"></a>Multi-file datasets</h2>
+<h2>Multi-file datasets<a class="anchor" aria-label="anchor" href="#multi-file-datasets"></a>
+</h2>
 <p>The <code>arrow</code> package lets you work efficiently with large, multi-file datasets using <code>dplyr</code> methods. See <code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code> for an overview.</p>
 </div>
 <div id="reading-and-writing-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reading-and-writing-files" class="anchor" aria-hidden="true"></a>Reading and writing files</h2>
+<h2>Reading and writing files<a class="anchor" aria-label="anchor" href="#reading-and-writing-files"></a>
+</h2>
 <p><code>arrow</code> provides some simple functions for using the Arrow C++ library to read and write files. These functions are designed to drop into your normal R workflow without requiring any knowledge of the Arrow C++ library and use naming conventions and arguments that follow popular R packages, particularly <code>readr</code>. The readers return <code>data.frame</code>s (or if you use the <code>tibble</code> package, they will act like <code>tbl_df</code>s), and the writers take <code>data.frame</code>s.</p>
 <p>Importantly, <code>arrow</code> provides basic read and write support for the <a href="https://parquet.apache.org/" class="external-link">Apache Parquet</a> columnar data file format.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -162,22 +162,22 @@
 <p>For CSV and line-delimited JSON, there are <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> and <code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>, respectively. While <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> currently has fewer parsing options for dealing with every CSV format variation in the wild, for the files it can read, it is often significantly faster than other R CSV readers, such as <code>base::read.csv</code>, <code>readr::read_csv</code>, and <code>data.table::fread</code>.</p>
 </div>
 <div id="working-with-arrow-data-in-python" class="section level2">
-<h2 class="hasAnchor">
-<a href="#working-with-arrow-data-in-python" class="anchor" aria-hidden="true"></a>Working with Arrow data in Python</h2>
+<h2>Working with Arrow data in Python<a class="anchor" aria-label="anchor" href="#working-with-arrow-data-in-python"></a>
+</h2>
 <p>Using <a href="https://rstudio.github.io/reticulate/" class="external-link"><code>reticulate</code></a>, <code>arrow</code> lets you share data between R and Python (<code>pyarrow</code>) efficiently, enabling you to take advantage of the vibrant ecosystem of Python packages that build on top of Apache Arrow. See <code><a href="../articles/python.html">vignette("python", package = "arrow")</a></code> for details.</p>
 </div>
 <div id="access-to-arrow-messages-buffers-and-streams" class="section level2">
-<h2 class="hasAnchor">
-<a href="#access-to-arrow-messages-buffers-and-streams" class="anchor" aria-hidden="true"></a>Access to Arrow messages, buffers, and streams</h2>
+<h2>Access to Arrow messages, buffers, and streams<a class="anchor" aria-label="anchor" href="#access-to-arrow-messages-buffers-and-streams"></a>
+</h2>
 <p>The <code>arrow</code> package also provides many lower-level bindings to the C++ library, which enable you to access and manipulate Arrow objects. You can use these to build connectors to other applications and services that use Arrow. One example is Spark: the <a href="https://spark.rstudio.com/" class="external-link"><code>sparklyr</code></a> package has support for using Arrow to move data to and from Spark, yielding <a href="http://arrow.apache.org/blog/2019/01/25/r-spark-improvements/" class="external-link">significant performance gains</a>.</p>
 </div>
 </div>
 <div id="object-hierarchy" class="section level1">
-<h1 class="hasAnchor">
-<a href="#object-hierarchy" class="anchor" aria-hidden="true"></a>Object hierarchy</h1>
+<h1>Object hierarchy<a class="anchor" aria-label="anchor" href="#object-hierarchy"></a>
+</h1>
 <div id="metadata-objects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#metadata-objects" class="anchor" aria-hidden="true"></a>Metadata objects</h2>
+<h2>Metadata objects<a class="anchor" aria-label="anchor" href="#metadata-objects"></a>
+</h2>
 <p>Arrow defines the following classes for representing metadata:</p>
 <table class="table">
 <colgroup>
@@ -212,8 +212,8 @@
 </table>
 </div>
 <div id="data-objects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-objects" class="anchor" aria-hidden="true"></a>Data objects</h2>
+<h2>Data objects<a class="anchor" aria-label="anchor" href="#data-objects"></a>
+</h2>
 <p>Arrow defines the following classes for representing zero-dimensional (scalar), one-dimensional (array/vector-like), and two-dimensional (tabular/data frame-like) data:</p>
 <table class="table">
 <colgroup>
@@ -296,16 +296,16 @@
 </div>
 </div>
 <div id="internals" class="section level1">
-<h1 class="hasAnchor">
-<a href="#internals" class="anchor" aria-hidden="true"></a>Internals</h1>
+<h1>Internals<a class="anchor" aria-label="anchor" href="#internals"></a>
+</h1>
 <div id="mapping-of-r-arrow-types" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mapping-of-r-arrow-types" class="anchor" aria-hidden="true"></a>Mapping of R &lt;–&gt; Arrow types</h2>
+<h2>Mapping of R &lt;–&gt; Arrow types<a class="anchor" aria-label="anchor" href="#mapping-of-r-arrow-types"></a>
+</h2>
 <p>Arrow has a rich data type system that includes direct parallels with R’s data types and much more.</p>
 <p>In the tables, entries with a <code>-</code> are not currently implemented.</p>
 <div id="r-to-arrow" class="section level3">
-<h3 class="hasAnchor">
-<a href="#r-to-arrow" class="anchor" aria-hidden="true"></a>R to Arrow</h3>
+<h3>R to Arrow<a class="anchor" aria-label="anchor" href="#r-to-arrow"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th>R type</th>
@@ -378,8 +378,8 @@
 <p><sup>3</sup>: Only lists where all elements are the same type are able to be translated to Arrow list type (which is a “list of” some type).</p>
 </div>
 <div id="arrow-to-r" class="section level3">
-<h3 class="hasAnchor">
-<a href="#arrow-to-r" class="anchor" aria-hidden="true"></a>Arrow to R</h3>
+<h3>Arrow to R<a class="anchor" aria-label="anchor" href="#arrow-to-r"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th>Arrow type</th>
@@ -537,16 +537,16 @@
 <p><sup>5</sup>: <code>arrow*_list</code> classes are implemented as subclasses of <code>vctrs_list_of</code> with a <code>ptype</code> attribute set to what an empty Array of the value type converts to.</p>
 </div>
 <div id="r-object-attributes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#r-object-attributes" class="anchor" aria-hidden="true"></a>R object attributes</h3>
+<h3>R object attributes<a class="anchor" aria-label="anchor" href="#r-object-attributes"></a>
+</h3>
 <p>Arrow supports custom key-value metadata attached to Schemas. When we convert a <code>data.frame</code> to an Arrow Table or RecordBatch, the package stores any <code><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes()</a></code> attached to the columns of the <code>data.frame</code> in the Arrow object’s Schema. These attributes are stored under the “r” key; you can assign additional string metadata under any other key you wish, like <code>x$metadata$new_key &lt;- "new value"</code>.</p>
 <p>This metadata is preserved when writing the table to Feather or Parquet, and when reading those files into R, or when calling <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> on a Table/RecordBatch, the column attributes are restored to the columns of the resulting <code>data.frame</code>. This means that custom data types, including <code>haven::labelled</code>, <code>vctrs</code> annotations, and others, are preserved when doing a round-trip through Arrow.</p>
 <p>Note that the <code><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes()</a></code> stored in <code>$metadata$r</code> are only understood by R. If you write a <code>data.frame</code> with <code>haven</code> columns to a Feather file and read that in Pandas, the <code>haven</code> metadata won’t be recognized there. (Similarly, Pandas writes its own custom metadata, which the R package does not consume.) You are free, however, to define custom metadata conventions for your application and assign any (string) values you want to other metadata keys. For more details, see the documentation for <code><a href="../reference/Schema.html">schema()</a></code>.</p>
 </div>
 </div>
 <div id="class-structure-and-package-conventions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#class-structure-and-package-conventions" class="anchor" aria-hidden="true"></a>Class structure and package conventions</h2>
+<h2>Class structure and package conventions<a class="anchor" aria-label="anchor" href="#class-structure-and-package-conventions"></a>
+</h2>
 <p>C++ is an object-oriented language, so the core logic of the Arrow library is encapsulated in classes and methods. In the R package, these classes are implemented as <code>R6</code> reference classes, most of which are exported from the namespace.</p>
 <p>In order to match the C++ naming conventions, the <code>R6</code> classes are in TitleCase, e.g. <code>RecordBatch</code>. This makes it easy to look up the relevant C++ implementations in the <a href="https://github.com/apache/arrow/tree/master/cpp" class="external-link">code</a> or <a href="https://arrow.apache.org/docs/cpp/" class="external-link">documentation</a>. To simplify things in R, the C++ library namespaces are generally dropped or flattened; that is, where the C++ library has <code>arrow::io::FileOutputStream</code>, it is just <code>FileOutputStream</code> in the R package. One exception is for the file readers, where the namespace is necessary to disambiguate. So <code>arrow::csv::TableReader</code> becomes <code>CsvTableReader</code>, and <code>arrow::json::TableReader</code> becomes <code>JsonTableReader</code>.</p>
 <p>Some of these classes are not meant to be instantiated directly; they may be base classes or other kinds of helpers. For those that you should be able to create, use the <code>$create()</code> method to instantiate an object. For example, <code>rb &lt;- RecordBatch$create(int = 1:10, dbl = as.numeric(1:10))</code> will create a <code>RecordBatch</code>. Many of these factory methods that an R user might most often encounter also have a <code>snake_case</code> alias, in order to be more familiar for contemporary R users. So <code>record_batch(int = 1:10, dbl = as.numeric(1:10))</code> would do the same as <code>RecordBatch$create()</code> above.</p>
