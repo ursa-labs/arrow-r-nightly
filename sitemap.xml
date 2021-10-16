@@ -322,6 +322,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/set_cpu_count.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/to_arrow.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/to_duckdb.html</loc>
   </url>
   <url>
