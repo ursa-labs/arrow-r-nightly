@@ -24,7 +24,7 @@ contiguous memory with a particular size."><!-- mathjax --><script src="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -116,23 +116,23 @@ contiguous memory with a particular size.</p>
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">buffer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
       <td><p>R object. Only raw, numeric and integer vectors are currently supported</p></td>
     </tr></table></div>
 
     <div id="value">
-    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <h2>Value</h2>
     <p>an instance of <code>Buffer</code> that borrows memory from <code>x</code></p>
     </div>
     <div id="factory">
-    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
+    <h2>Factory</h2>
     
 
 <p><code>buffer()</code> lets you create an <code>arrow::Buffer</code> from an R object</p>
     </div>
     <div id="methods">
-    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
+    <h2>Methods</h2>
     
 
 <ul><li><p><code>$is_mutable</code> : is this buffer mutable?</p></li>
@@ -142,7 +142,7 @@ contiguous memory with a particular size.</p>
 </ul></div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">my_buffer</span> <span class="op">&lt;-</span> <span class="fu">buffer</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">my_buffer</span><span class="op">$</span><span class="va">is_mutable</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>

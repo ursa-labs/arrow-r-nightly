@@ -26,7 +26,7 @@ and StructArray."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ and <code>StructArray</code>.</p>
 
 
     <div id="factory">
-    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
+    <h2>Factory</h2>
     
 
 <p>The <code>Array$create()</code> factory method instantiates an <code>Array</code> and
@@ -135,7 +135,7 @@ which takes two arguments:</p><ul><li><p><code>x</code>: an R vector or <code>Ar
 but not limited to strings only)</p></li>
 </ul></div>
     <div id="usage">
-    <h2>Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h2>
+    <h2>Usage</h2>
     
 <pre><code>a &lt;- Array$create(x)
 length(a)
@@ -146,7 +146,7 @@ a == a
 
     </div>
     <div id="methods">
-    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
+    <h2>Methods</h2>
     
 
 <ul><li><p><code>$IsNull(i)</code>: Return true if value at index is null. Does not boundscheck</p></li>
@@ -180,7 +180,7 @@ within the array's internal data. This can be an expensive check, potentially <c
 </ul></div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">my_array</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">my_array</span><span class="op">$</span><span class="va">type</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Int32</span>

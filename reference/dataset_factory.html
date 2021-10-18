@@ -25,7 +25,7 @@ open_dataset()."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -124,7 +124,7 @@ This function helps you construct a <code>DatasetFactory</code> that you can pas
 <span class="op">)</span></code></pre></div>
 
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
       <td><p>A string path to a directory containing data files, a vector of one
 one or more string paths to data files, or a list of <code>DatasetFactory</code> objects
@@ -167,13 +167,13 @@ encounter one that <code>arrow</code> should support.</p></td>
     </tr></table></div>
 
     <div id="value">
-    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <h2>Value</h2>
     <p>A <code>DatasetFactory</code> object. Pass this to <code><a href="open_dataset.html">open_dataset()</a></code>,
 in a list potentially with other <code>DatasetFactory</code> objects, to create
 a <code>Dataset</code>.</p>
     </div>
     <div id="details">
-    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <h2>Details</h2>
     <p>If you would only have a single <code>DatasetFactory</code> (for example, you have a
 single directory containing Parquet files), you can call <code><a href="open_dataset.html">open_dataset()</a></code>
 directly. Use <code>dataset_factory()</code> when you

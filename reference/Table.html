@@ -25,7 +25,7 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ composed from multiple record batches or chunked arrays.</p>
 
 
     <div id="factory">
-    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
+    <h2>Factory</h2>
     
 
 
@@ -129,7 +129,7 @@ which will be stacked as rows in the table.</p></li>
 the data in <code>...</code></p></li>
 </ul></div>
     <div id="s-methods-and-usage">
-    <h2>S3 Methods and Usage<a class="anchor" aria-label="anchor" href="#s-methods-and-usage"></a></h2>
+    <h2>S3 Methods and Usage</h2>
     
 
 <p>Tables are data-frame-like, and many methods you expect to work on
@@ -144,7 +144,7 @@ precedence over the table's columns. So, <code>tab$Slice</code> would return the
 "Slice".</p>
     </div>
     <div id="r-methods">
-    <h2>R6 Methods<a class="anchor" aria-label="anchor" href="#r-methods"></a></h2>
+    <h2>R6 Methods</h2>
     
 
 <p>In addition to the more R-friendly S3 methods, a <code>Table</code> object has
@@ -181,7 +181,7 @@ All list elements are coerced to string. See <code><a href="Schema.html">schema(
 </ul></div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tab</span> <span class="op">&lt;-</span> <span class="va">Table</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32 12</span>

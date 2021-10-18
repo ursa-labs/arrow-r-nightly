@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
 
 
     <div id="factory">
-    <h2>Factory<a class="anchor" aria-label="anchor" href="#factory"></a></h2>
+    <h2>Factory</h2>
     
 
 
@@ -126,7 +126,7 @@ takes the following arguments:</p><ul><li><p><code>file</code> A character file 
 <li><p><code>...</code> Additional arguments, currently ignored</p></li>
 </ul></div>
     <div id="methods">
-    <h2>Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
+    <h2>Methods</h2>
     
 
 <ul><li><p><code>$ReadTable(column_indices)</code>: get an <code><a href="Table.html">arrow::Table</a></code> from the file. The optional
@@ -140,7 +140,7 @@ The optional <code>column_indices=</code> argument is a 0-based integer vector i
 <li><p><code>$ReadColumn(i)</code>: read the <code>i</code>th column (0-based) as a <a href="ChunkedArray.html">ChunkedArray</a>.</p></li>
 </ul></div>
     <div id="active-bindings">
-    <h2>Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
+    <h2>Active bindings</h2>
     
 
 <ul><li><p><code>$num_rows</code>: number of rows.</p></li>
@@ -149,7 +149,7 @@ The optional <code>column_indices=</code> argument is a 0-based integer vector i
 </ul></div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"v0.7.1.parquet"</span>, package <span class="op">=</span> <span class="st">"arrow"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">pq</span> <span class="op">&lt;-</span> <span class="va">ParquetFileReader</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">pq</span><span class="op">$</span><span class="fu">GetSchema</span><span class="op">(</span><span class="op">)</span></span>

@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -131,14 +131,14 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="arrow" class="section level1">
-<div class="page-header"><h1>arrow<a class="anchor" aria-label="anchor" href="#arrow"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="arrow">arrow<a class="anchor" aria-label="anchor" href="#arrow"></a>
 </h1></div>
 
 <p><strong><a href="https://arrow.apache.org/" class="external-link">Apache Arrow</a> is a cross-language development platform for in-memory data.</strong> It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication.</p>
 <p><strong>The <code>arrow</code> package exposes an interface to the Arrow C++ library, enabling access to many of its features in R.</strong> It provides low-level access to the Arrow C++ library API and higher-level access through a <code>dplyr</code> backend and familiar R functions.</p>
-<div id="what-can-the-arrow-package-do" class="section level2">
-<h2>What can the <code>arrow</code> package do?<a class="anchor" aria-label="anchor" href="#what-can-the-arrow-package-do"></a>
+<div class="section level2">
+<h2 id="what-can-the-arrow-package-do">What can the <code>arrow</code> package do?<a class="anchor" aria-label="anchor" href="#what-can-the-arrow-package-do"></a>
 </h2>
 <ul>
 <li>Read and write <strong>Parquet files</strong> (<code><a href="reference/read_parquet.html">read_parquet()</a></code>, <code><a href="reference/write_parquet.html">write_parquet()</a></code>), an efficient and widely used columnar format</li>
@@ -157,11 +157,11 @@
 <li>Provide a <strong>toolkit for building connectors</strong> to other applications and services that use Arrow</li>
 </ul>
 </div>
-<div id="installation" class="section level2">
-<h2>Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div id="installing-the-latest-release-version" class="section level3">
-<h3>Installing the latest release version<a class="anchor" aria-label="anchor" href="#installing-the-latest-release-version"></a>
+<div class="section level3">
+<h3 id="installing-the-latest-release-version">Installing the latest release version<a class="anchor" aria-label="anchor" href="#installing-the-latest-release-version"></a>
 </h3>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -171,8 +171,8 @@
 <p>Installing a released version of the <code>arrow</code> package requires no additional system dependencies. For macOS and Windows, CRAN hosts binary packages that contain the Arrow C++ library. On Linux, source package installation will also build necessary C++ dependencies. For a faster, more complete installation, set the environment variable <code>NOT_CRAN=true</code>. See <code><a href="articles/install.html">vignette("install", package = "arrow")</a></code> for details.</p>
 <p>For Windows users of R 3.6 and earlier, note that support for AWS S3 is not available, and the 32-bit version does not support Arrow Datasets. These features are only supported by the <code>rtools40</code> toolchain on Windows and thus are only available in R &gt;= 4.0.</p>
 </div>
-<div id="installing-a-development-version" class="section level3">
-<h3>Installing a development version<a class="anchor" aria-label="anchor" href="#installing-a-development-version"></a>
+<div class="section level3">
+<h3 id="installing-a-development-version">Installing a development version<a class="anchor" aria-label="anchor" href="#installing-a-development-version"></a>
 </h3>
 <p>Development versions of the package (binary and source) are built nightly and hosted at <a href="https://arrow-r-nightly.s3.amazonaws.com" class="external-link uri">https://arrow-r-nightly.s3.amazonaws.com</a>. To install from there:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -185,8 +185,8 @@
 <p>These nightly package builds are not official Apache releases and are not recommended for production use. They may be useful for testing bug fixes and new features under active development.</p>
 </div>
 </div>
-<div id="usage" class="section level2">
-<h2>Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Among the many applications of the <code>arrow</code> package, two of the most accessible are:</p>
 <ul>
@@ -200,8 +200,8 @@
 <li>
 <code>Dataset</code>: a data structure functionally similar to <code>Table</code> but with the capability to work on larger-than-memory data partitioned across multiple files</li>
 </ul>
-<div id="reading-and-writing-data-files-with-arrow" class="section level3">
-<h3>Reading and writing data files with <code>arrow</code><a class="anchor" aria-label="anchor" href="#reading-and-writing-data-files-with-arrow"></a>
+<div class="section level3">
+<h3 id="reading-and-writing-data-files-with-arrow">Reading and writing data files with <code>arrow</code><a class="anchor" aria-label="anchor" href="#reading-and-writing-data-files-with-arrow"></a>
 </h3>
 <p>The <code>arrow</code> package provides functions for reading single data files in several common formats. By default, calling any of these functions returns an R <code>data.frame</code>. To return an Arrow <code>Table</code>, set argument <code>as_data_frame = FALSE</code>.</p>
 <ul>
@@ -235,8 +235,8 @@
 <p>For reading and writing larger files or sets of multiple files, <code>arrow</code> defines <code>Dataset</code> objects and provides the functions <code><a href="reference/open_dataset.html">open_dataset()</a></code> and <code><a href="reference/write_dataset.html">write_dataset()</a></code>, which enable analysis and processing of bigger-than-memory data, including the ability to partition data into smaller chunks without loading the full data into memory. For examples of these functions, see <code><a href="articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</p>
 <p>All these functions can read and write files in the local filesystem or in Amazon S3 (by passing S3 URIs beginning with <code>s3://</code>). For more details, see <code><a href="articles/fs.html">vignette("fs", package = "arrow")</a></code></p>
 </div>
-<div id="using-dplyr-with-arrow" class="section level3">
-<h3>Using <code>dplyr</code> with <code>arrow</code><a class="anchor" aria-label="anchor" href="#using-dplyr-with-arrow"></a>
+<div class="section level3">
+<h3 id="using-dplyr-with-arrow">Using <code>dplyr</code> with <code>arrow</code><a class="anchor" aria-label="anchor" href="#using-dplyr-with-arrow"></a>
 </h3>
 <p>The <code>arrow</code> package provides a <code>dplyr</code> backend enabling manipulation of Arrow tabular data with <code>dplyr</code> verbs. To use it, first load both packages <code>arrow</code> and <code>dplyr</code>. Then load data into an Arrow <code>Table</code> or <code>Dataset</code> object. For example, read the Parquet file written in the previous example into an Arrow <code>Table</code> named <code>sw</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -287,8 +287,8 @@
 <p>The <code>arrow</code> package works with most single-table <code>dplyr</code> verbs except those that compute aggregates, such as <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> after <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>. Inside <code>dplyr</code> verbs, Arrow offers support for many functions and operators, with common functions mapped to their base R and tidyverse equivalents. The <a href="https://arrow.apache.org/docs/r/news/index.html">changelog</a> lists many of them. If there are additional functions you would like to see implemented, please file an issue as described in the <a href="#getting-help">Getting help</a> section below.</p>
 <p>For <code>dplyr</code> queries on <code>Table</code> objects, if the <code>arrow</code> package detects an unimplemented function within a <code>dplyr</code> verb, it automatically calls <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to return the data as an R <code>data.frame</code> before processing that <code>dplyr</code> verb. For queries on <code>Dataset</code> objects (which can be larger than memory), it raises an error if the function is unimplemented; you need to explicitly tell it to <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code>.</p>
 </div>
-<div id="additional-features" class="section level3">
-<h3>Additional features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
+<div class="section level3">
+<h3 id="additional-features">Additional features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
 </h3>
 <p>Other applications of <code>arrow</code> are described in the following vignettes:</p>
 <ul>
@@ -301,8 +301,8 @@
 </ul>
 </div>
 </div>
-<div id="getting-help" class="section level2">
-<h2>Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+<div class="section level2">
+<h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
 </h2>
 <p>If you encounter a bug, please file an issue with a minimal reproducible example on the <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">Apache Jira issue tracker</a>. Create an account or log in, then click <strong>Create</strong> to file an issue. Select the project <strong>Apache Arrow (ARROW)</strong>, select the component <strong>R</strong>, and begin the issue summary with <strong><code>[R]</code></strong> followed by a space. For more information, see the <strong>Report bugs and propose features</strong> section of the <a href="https://arrow.apache.org/docs/developers/contributing.html" class="external-link">Contributing to Apache Arrow</a> page in the Arrow developer documentation.</p>
 <p>We welcome questions, discussion, and contributions from users of the <code>arrow</code> package. For information about mailing lists and other venues for engaging with the Arrow developer and user communities, please see the <a href="https://arrow.apache.org/community/" class="external-link">Apache Arrow Community</a> page.</p>

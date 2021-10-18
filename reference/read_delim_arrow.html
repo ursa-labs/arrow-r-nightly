@@ -25,7 +25,7 @@ readr::read_delim(), and col_select was inspired by vroom::vroom()."><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
       </span>
     </div>
 
@@ -177,7 +177,7 @@ Arrow C++ options have been mapped to argument names that follow those of
 <span class="op">)</span></code></pre></div>
 
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file</th>
       <td><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
@@ -248,11 +248,11 @@ starting from the beginning of this vector. Possible values are:</p><ul><li><p><
     </tr></table></div>
 
     <div id="value">
-    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <h2>Value</h2>
     <p>A <code>data.frame</code>, or a Table if <code>as_data_frame = FALSE</code>.</p>
     </div>
     <div id="details">
-    <h2>Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <h2>Details</h2>
     <p><code>read_csv_arrow()</code> and <code>read_tsv_arrow()</code> are wrappers around
 <code>read_delim_arrow()</code> that specify a delimiter.</p>
 <p>Note that not all <code>readr</code> options are currently implemented here. Please file
@@ -263,7 +263,7 @@ equivalent in <code>readr::read_csv()</code>, you can either provide them in the
 use <a href="CsvTableReader.html">CsvTableReader</a> directly for lower-level access.</p>
     </div>
     <div id="specifying-column-types-and-names">
-    <h2>Specifying column types and names<a class="anchor" aria-label="anchor" href="#specifying-column-types-and-names"></a></h2>
+    <h2>Specifying column types and names</h2>
     
 
 
@@ -304,7 +304,7 @@ to idenfity column names, you'll need to add <code>skip = 1</code> to skip that 
     </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>, file <span class="op">=</span> <span class="va">tf</span><span class="op">)</span></span>
