@@ -26,13 +26,13 @@ and StructArray."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -75,22 +75,22 @@ and StructArray."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -106,7 +106,7 @@ and StructArray."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Arrow Arrays</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/array.R"><code>R/array.R</code></a>, <a href="https://github.com/apache/arrow/blob/master/r/R/scalar.R"><code>R/scalar.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/array.R" class="external-link"><code>R/array.R</code></a>, <a href="https://github.com/apache/arrow/blob/master/r/R/scalar.R" class="external-link"><code>R/scalar.R</code></a></small>
     <div class="hidden name"><code>array.Rd</code></div>
     </div>
 
@@ -119,6 +119,7 @@ and <code>StructArray</code>.</p>
 
 
 
+    <div id="ref-sections">
     <div id="factory">
     <h2>Factory</h2>
     
@@ -137,12 +138,11 @@ but not limited to strings only)</p></li>
     <div id="usage">
     <h2>Usage</h2>
     
-<pre><code>a &lt;- Array$create(x)
-length(a)
+<pre><code><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
 
-print(a)
-a == a
-</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
+<span class="va">a</span> <span class="op">==</span> <span class="va">a</span></code></pre>
 
     </div>
     <div id="methods">
@@ -178,6 +178,7 @@ data in the array to change its type.</p></li>
 <li><p><code>$Validate()</code> : Perform any validation checks to determine obvious inconsistencies
 within the array's internal data. This can be an expensive check, potentially <code>O(length)</code></p></li>
 </ul></div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
@@ -202,7 +203,7 @@ within the array's internal data. This can be an expensive check, potentially <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Check if value is null; zero-indexed</span></span>
-<span class="r-in"><span class="va">na_array</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">na_array</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">na_array</span><span class="op">$</span><span class="fu">IsNull</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span class="va">na_array</span><span class="op">$</span><span class="fu">IsNull</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>

@@ -24,13 +24,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -73,22 +73,22 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -104,7 +104,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Construct Hive partitioning</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/dataset-partition.R"><code>R/dataset-partition.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/dataset-partition.R" class="external-link"><code>R/dataset-partition.R</code></a></small>
     <div class="hidden name"><code>hive_partition.Rd</code></div>
     </div>
 
@@ -128,6 +128,7 @@ which is what Hive uses.</p></td>
 Default is <code>"uri"</code> (URI-decode segments). May also be <code>"none"</code> (leave as-is).</p></td>
     </tr></table></div>
 
+    <div id="ref-sections">
     <div id="value">
     <h2>Value</h2>
     <p>A <a href="Partitioning.html">HivePartitioning</a>, or a <code>HivePartitioningFactory</code> if
@@ -137,6 +138,7 @@ calling <code>hive_partition()</code> with no arguments.</p>
     <h2>Details</h2>
     <p>Because fields are named in the path segments, order of fields passed to
 <code>hive_partition()</code> does not matter.</p>
+    </div>
     </div>
 
     <div id="examples">

@@ -24,13 +24,13 @@ This function enables you to write Parquet files from R."><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -73,22 +73,22 @@ This function enables you to write Parquet files from R."><!-- mathjax --><scrip
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -104,12 +104,12 @@ This function enables you to write Parquet files from R."><!-- mathjax --><scrip
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Write Parquet file to disk</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/parquet.R"><code>R/parquet.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/parquet.R" class="external-link"><code>R/parquet.R</code></a></small>
     <div class="hidden name"><code>write_parquet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://parquet.apache.org/">Parquet</a> is a columnar storage file format.
+    <p><a href="https://parquet.apache.org/" class="external-link">Parquet</a> is a columnar storage file format.
 This function enables you to write Parquet files from R.</p>
     </div>
 
@@ -172,6 +172,7 @@ of <code>write_parquet()</code>, use <code>ParquetFileWriter</code> instead.</p>
 <code>properties</code>, this argument is deprecated.</p></td>
     </tr></table></div>
 
+    <div id="ref-sections">
     <div id="value">
     <h2>Value</h2>
     <p>the input <code>x</code> invisibly.</p>
@@ -199,16 +200,17 @@ The default "snappy" is used if available, otherwise "uncompressed". To
 disable compression, set <code>compression = "uncompressed"</code>.
 Note that "uncompressed" columns may still have dictionary encoding.</p>
     </div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".parquet"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">write_parquet</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="va">tf1</span><span class="op">)</span></span>
+    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".parquet"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">write_parquet</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="va">tf1</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># using compression</span></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="codec_is_available.html">codec_is_available</a></span><span class="op">(</span><span class="st">"gzip"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">tf2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".gz.parquet"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">write_parquet</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="va">tf2</span>, compression <span class="op">=</span> <span class="st">"gzip"</span>, compression_level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in">  <span class="va">tf2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".gz.parquet"</span><span class="op">)</span></span>
+<span class="r-in">  <span class="fu">write_parquet</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="va">tf2</span>, compression <span class="op">=</span> <span class="st">"gzip"</span>, compression_level <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

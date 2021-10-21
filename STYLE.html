@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="articles/arrow.html">Get started</a>
@@ -72,22 +72,22 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="index.html">R</a>
@@ -109,19 +109,16 @@
 
 <p>This is a style guide to writing documentation for arrow.</p>
 <div class="section level2">
-<h2 id="data-frames">Coding style<a class="anchor" aria-label="anchor" href="#style"></a>
-</h2>
+<h2 id="data-frames">Coding style<a class="anchor" aria-label="anchor" href="#style"></a></h2>
 <p>Please use the <a href="https://style.tidyverse.org/" class="external-link">tidyverse coding style</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="coding-style">Referring to external packages<a class="anchor" aria-label="anchor" href="#coding-style"></a>
-</h2>
+<h2 id="coding-style">Referring to external packages<a class="anchor" aria-label="anchor" href="#coding-style"></a></h2>
 <p>When referring to external packages, include a link to the package at the first mention, and subsequently refer to it in plain text, e.g.</p>
 <ul><li>“The arrow R package provides a <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> interface to Arrow Datasets. This vignette introduces Datasets and shows how to use dplyr to analyze them.”</li>
 </ul></div>
 <div class="section level2">
-<h2 id="referring-to-external-packages">Data frames<a class="anchor" aria-label="anchor" href="#referring-to-external-packages"></a>
-</h2>
+<h2 id="referring-to-external-packages">Data frames<a class="anchor" aria-label="anchor" href="#referring-to-external-packages"></a></h2>
 <p>When referring to the concept, use the phrase “data frame”, whereas when referring to an object of that class or when the class is important, write <code>data.frame</code>, e.g.</p>
 <ul><li>“You can call <code><a href="reference/write_dataset.html">write_dataset()</a></code> on tabular data objects such as Arrow Tables or RecordBatches, or R data frames. If working with data frames you might want to use a <code>tibble</code> instead of a <code>data.frame</code> to take advantage of the default behaviour of partitioning data based on grouped variables.”</li>
 </ul></div>

@@ -25,13 +25,13 @@ make it much faster to read and query."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -74,22 +74,22 @@ make it much faster to read and query."><!-- mathjax --><script src="https://cdn
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -105,7 +105,7 @@ make it much faster to read and query."><!-- mathjax --><script src="https://cdn
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Write a dataset</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/dataset-write.R"><code>R/dataset-write.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/dataset-write.R" class="external-link"><code>R/dataset-write.R</code></a></small>
     <div class="hidden name"><code>write_dataset.Rd</code></div>
     </div>
 
@@ -118,9 +118,9 @@ make it much faster to read and query.</p>
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">write_dataset</span><span class="op">(</span>
   <span class="va">dataset</span>,
   <span class="va">path</span>,
-  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"parquet"</span>, <span class="st">"feather"</span>, <span class="st">"arrow"</span>, <span class="st">"ipc"</span>, <span class="st">"csv"</span><span class="op">)</span>,
-  partitioning <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_data.html">group_vars</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span>,
-  basename_template <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"part-{i}."</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">format</span><span class="op">)</span><span class="op">)</span>,
+  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"parquet"</span>, <span class="st">"feather"</span>, <span class="st">"arrow"</span>, <span class="st">"ipc"</span>, <span class="st">"csv"</span><span class="op">)</span>,
+  partitioning <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_data.html" class="external-link">group_vars</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span>,
+  basename_template <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"part-{i}."</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">format</span><span class="op">)</span><span class="op">)</span>,
   hive_style <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
@@ -129,11 +129,9 @@ make it much faster to read and query.</p>
     <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>dataset</th>
       <td><p><a href="Dataset.html">Dataset</a>, <a href="RecordBatch.html">RecordBatch</a>, <a href="Table.html">Table</a>, <code>arrow_dplyr_query</code>, or
-<code>data.frame</code>. If an <code>arrow_dplyr_query</code> or <code>grouped_df</code>,
-<code>schema</code> and <code>partitioning</code> will be taken from the result of any <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>
-and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> operations done on the dataset. <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> queries will be
-applied to restrict written rows.
-Note that <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>-ed columns may not be renamed.</p></td>
+<code>data.frame</code>. If an <code>arrow_dplyr_query</code>, the query will be evaluated and
+the result will be written. This means that you can <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>,
+etc. to transform the data before it is written if you need to.</p></td>
     </tr><tr><th>path</th>
       <td><p>string path, URI, or <code>SubTreeFileSystem</code> referencing a directory
 to write to (directory will be created if it does not exist)</p></td>
@@ -143,7 +141,7 @@ to write to (directory will be created if it does not exist)</p></td>
     </tr><tr><th>partitioning</th>
       <td><p><code>Partitioning</code> or a character vector of columns to
 use as partition keys (to be written as path segments). Default is to
-use the current <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> columns.</p></td>
+use the current <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> columns.</p></td>
     </tr><tr><th>basename_template</th>
       <td><p>string template for the names of files to be written.
 Must contain <code>"{i}"</code>, which will be replaced with an autoincremented
@@ -168,26 +166,28 @@ files. Default (NULL) will not compress body buffers.</p></li>
 </ul></td>
     </tr></table></div>
 
+    <div id="ref-sections">
     <div id="value">
     <h2>Value</h2>
     <p>The input <code>dataset</code>, invisibly</p>
+    </div>
     </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># You can write datasets partitioned by the values in a column (here: "cyl").</span></span>
 <span class="r-in"><span class="co"># This creates a structure of the form cyl=X/part-Z.parquet.</span></span>
-<span class="r-in"><span class="va">one_level_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">one_level_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">write_dataset</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">one_level_tree</span>, partitioning <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">one_level_tree</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">one_level_tree</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cyl=4/part-0.parquet" "cyl=6/part-0.parquet" "cyl=8/part-0.parquet"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># You can also partition by the values in multiple columns</span></span>
 <span class="r-in"><span class="co"># (here: "cyl" and "gear").</span></span>
 <span class="r-in"><span class="co"># This creates a structure of the form cyl=X/gear=Y/part-Z.parquet.</span></span>
-<span class="r-in"><span class="va">two_levels_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">write_dataset</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">two_levels_tree</span>, partitioning <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"gear"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">two_levels_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">write_dataset</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">two_levels_tree</span>, partitioning <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"gear"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cyl=4/gear=3/part-0.parquet" "cyl=4/gear=4/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "cyl=4/gear=5/part-0.parquet" "cyl=6/gear=3/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] "cyl=6/gear=4/part-0.parquet" "cyl=6/gear=5/part-0.parquet"</span>
@@ -201,12 +201,12 @@ files. Default (NULL) will not compress body buffers.</p></li>
 <span class="r-in"><span class="co"># You can obtain the same result as as the previous examples using arrow with</span></span>
 <span class="r-in"><span class="co"># a dplyr pipeline. This will be the same as two_levels_tree above, but the</span></span>
 <span class="r-in"><span class="co"># output directory will be different.</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">two_levels_tree_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="va">two_levels_tree_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">write_dataset</span><span class="op">(</span><span class="va">two_levels_tree_2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree_2</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree_2</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cyl=4/gear=3/part-0.parquet" "cyl=4/gear=4/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "cyl=4/gear=5/part-0.parquet" "cyl=6/gear=3/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] "cyl=6/gear=4/part-0.parquet" "cyl=6/gear=5/part-0.parquet"</span>
@@ -216,11 +216,11 @@ files. Default (NULL) will not compress body buffers.</p></li>
 <span class="r-in"><span class="co"># name is included with the values by using `hive_style = FALSE`.</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Write a structure X/Y/part-Z.parquet.</span></span>
-<span class="r-in"><span class="va">two_levels_tree_no_hive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span class="r-in"><span class="va">two_levels_tree_no_hive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">write_dataset</span><span class="op">(</span><span class="va">two_levels_tree_no_hive</span>, hive_style <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree_no_hive</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">two_levels_tree_no_hive</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "4/3/part-0.parquet" "4/4/part-0.parquet" "4/5/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4] "6/3/part-0.parquet" "6/4/part-0.parquet" "6/5/part-0.parquet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7] "8/3/part-0.parquet" "8/5/part-0.parquet"</span>

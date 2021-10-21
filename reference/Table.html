@@ -25,13 +25,13 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -74,22 +74,22 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -105,7 +105,7 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Table class</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/table.R"><code>R/table.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/table.R" class="external-link"><code>R/table.R</code></a></small>
     <div class="hidden name"><code>Table.Rd</code></div>
     </div>
 
@@ -115,19 +115,21 @@ have a similar interface to <a href="RecordBatch.html">record batches</a>, but t
 composed from multiple record batches or chunked arrays.</p>
     </div>
 
+    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">arrow_table</span><span class="op">(</span><span class="va">...</span>, schema <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>...</th>
+      <td><p>A <code>data.frame</code> or a named set of Arrays or vectors. If given a
+mixture of data.frames and named vectors, the inputs will be autospliced together
+(see examples). Alternatively, you can provide a single Arrow IPC
+<code>InputStream</code>, <code>Message</code>, <code>Buffer</code>, or R <code>raw</code> object containing a <code>Buffer</code>.</p></td>
+    </tr><tr><th>schema</th>
+      <td><p>a <a href="Schema.html">Schema</a>, or <code>NULL</code> (the default) to infer the schema from
+the data in <code>...</code>. When providing an Arrow IPC buffer, <code>schema</code> is required.</p></td>
+    </tr></table></div>
 
-    <div id="factory">
-    <h2>Factory</h2>
-    
-
-
-<p>The <code>Table$create()</code> function takes the following arguments:</p><ul><li><p><code>...</code> arrays, chunked arrays, or R vectors, with names; alternatively,
-an unnamed series of <a href="RecordBatch.html">record batches</a> may also be provided,
-which will be stacked as rows in the table.</p></li>
-<li><p><code>schema</code> a <a href="Schema.html">Schema</a>, or <code>NULL</code> (the default) to infer the schema from
-the data in <code>...</code></p></li>
-</ul></div>
+    <div id="ref-sections">
     <div id="s-methods-and-usage">
     <h2>S3 Methods and Usage</h2>
     
@@ -135,7 +137,7 @@ the data in <code>...</code></p></li>
 <p>Tables are data-frame-like, and many methods you expect to work on
 a <code>data.frame</code> are implemented for <code>Table</code>. This includes <code>[</code>, <code>[[</code>,
 <code>$</code>, <code>names</code>, <code>dim</code>, <code>nrow</code>, <code>ncol</code>, <code>head</code>, and <code>tail</code>. You can also pull
-the data from an Arrow table into R with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>. See the
+the data from an Arrow table into R with <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. See the
 examples.</p>
 <p>A caveat about the <code>$</code> method: because <code>Table</code> is an <code>R6</code> object,
 <code>$</code> is also used to access the object's methods (see below). Methods take
@@ -179,18 +181,19 @@ Modify or replace by assigning in (<code>tab$metadata &lt;- new_metadata</code>)
 All list elements are coerced to string. See <code><a href="Schema.html">schema()</a></code> for more information.</p></li>
 <li><p><code>$columns</code>: Returns a list of <code>ChunkedArray</code>s</p></li>
 </ul></div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tab</span> <span class="op">&lt;-</span> <span class="va">Table</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
+    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">arrow_table</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32 12</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  6 12</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "name" "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "gear" "carb"</span>
-<span class="r-in"><span class="va">tab</span><span class="op">$</span><span class="va">mpg</span></span>
+<span class="r-in"><span class="va">tbl</span><span class="op">$</span><span class="va">mpg</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ChunkedArray</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [</span>
@@ -217,7 +220,7 @@ All list elements are coerced to string. See <code><a href="Schema.html">schema(
 <span class="r-out co"><span class="r-pr">#&gt;</span>     21.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
-<span class="r-in"><span class="va">tab</span><span class="op">[[</span><span class="st">"cyl"</span><span class="op">]</span><span class="op">]</span></span>
+<span class="r-in"><span class="va">tbl</span><span class="op">[[</span><span class="st">"cyl"</span><span class="op">]</span><span class="op">]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ChunkedArray</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [</span>
@@ -244,7 +247,7 @@ All list elements are coerced to string. See <code><a href="Schema.html">schema(
 <span class="r-out co"><span class="r-pr">#&gt;</span>     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">tab</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gear"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gear"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    gear    hp    wt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>

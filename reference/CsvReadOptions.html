@@ -26,13 +26,13 @@ read_json_arrow(), respectively."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211020</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="https://arrow.apache.org/">❯❯❯</a>
+  <a href="https://arrow.apache.org/" class="external-link">❯❯❯</a>
 </li>
 <li>
   <a href="../articles/arrow.html">Get started</a>
@@ -75,22 +75,22 @@ read_json_arrow(), respectively."><!-- mathjax --><script src="https://cdnjs.clo
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://arrow.apache.org/docs/format/README.html">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/c_glib">C GLib</a>
+      <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/cpp">C++</a>
+      <a href="https://arrow.apache.org/docs/cpp" class="external-link">C++</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/java">Java</a>
+      <a href="https://arrow.apache.org/docs/java" class="external-link">Java</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/js">JavaScript</a>
+      <a href="https://arrow.apache.org/docs/js" class="external-link">JavaScript</a>
     </li>
     <li>
-      <a href="https://arrow.apache.org/docs/python">Python</a>
+      <a href="https://arrow.apache.org/docs/python" class="external-link">Python</a>
     </li>
     <li>
       <a href="../index.html">R</a>
@@ -106,7 +106,7 @@ read_json_arrow(), respectively."><!-- mathjax --><script src="https://cdnjs.clo
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>File reader options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/csv.R"><code>R/csv.R</code></a>, <a href="https://github.com/apache/arrow/blob/master/r/R/json.R"><code>R/json.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/csv.R" class="external-link"><code>R/csv.R</code></a>, <a href="https://github.com/apache/arrow/blob/master/r/R/json.R" class="external-link"><code>R/json.R</code></a></small>
     <div class="hidden name"><code>CsvReadOptions.Rd</code></div>
     </div>
 
@@ -119,6 +119,7 @@ file reading options. See their usage in <code><a href="read_delim_arrow.html">r
 
 
 
+    <div id="ref-sections">
     <div id="factory">
     <h2>Factory</h2>
     
@@ -150,7 +151,7 @@ generate a row of missing values (if <code>FALSE</code>)?</p></li>
 <p><code>CsvConvertOptions$create()</code> takes the following arguments:</p><ul><li><p><code>check_utf8</code> Logical: check UTF8 validity of string columns? (default <code>TRUE</code>)</p></li>
 <li><p><code>null_values</code> character vector of recognized spellings for null values.
 Analogous to the <code>na.strings</code> argument to
-<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> or <code>na</code> in <code>readr::read_csv()</code>.</p></li>
+<code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code> or <code>na</code> in <code>readr::read_csv()</code>.</p></li>
 <li><p><code>strings_can_be_null</code> Logical: can string / binary columns have
 null values? Similar to the <code>quoted_na</code> argument to <code>readr::read_csv()</code>.
 (default <code>FALSE</code>)</p></li>
@@ -173,10 +174,10 @@ raise an error.</p></li>
 parser is specified, the CSV conversion logic will try parsing values
 starting from the beginning of this vector. Possible values are
 (a) <code>NULL</code>, the default, which uses the ISO-8601 parser;
-(b) a character vector of <a href="https://rdrr.io/r/base/strptime.html">strptime</a> parse strings; or
+(b) a character vector of <a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a> parse strings; or
 (c) a list of TimestampParser objects.</p></li>
 </ul><p><code>TimestampParser$create()</code> takes an optional <code>format</code> string argument.
-See <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code> for example syntax.
+See <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code> for example syntax.
 The default is to use an ISO-8601 format parser.</p>
 <p>The <code>CsvWriteOptions$create()</code> factory method takes the following arguments:</p><ul><li><p><code>include_header</code> Whether to write an initial header line with column names</p></li>
 <li><p><code>batch_size</code> Maximum number of rows processed at a time. Default is 1024.</p></li>
@@ -187,6 +188,7 @@ The default is to use an ISO-8601 format parser.</p>
 
 <ul><li><p><code>column_names</code>: from <code>CsvReadOptions</code></p></li>
 </ul></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
