@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -113,20 +113,17 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">write_csv_arrow</span><span class="op">(</span><span class="va">x</span>, <span class="va">sink</span>, include_header <span class="op">=</span> <span class="cn">TRUE</span>, batch_size <span class="op">=</span> <span class="fl">1024L</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>x</th>
-      <td><p><code>data.frame</code>, <a href="RecordBatch.html">RecordBatch</a>, or <a href="Table.html">Table</a></p></td>
-    </tr><tr><th>sink</th>
-      <td><p>A string file path, URI, or <a href="OutputStream.html">OutputStream</a>, or path in a file
-system (<code>SubTreeFileSystem</code>)</p></td>
-    </tr><tr><th>include_header</th>
-      <td><p>Whether to write an initial header line with column names</p></td>
-    </tr><tr><th>batch_size</th>
-      <td><p>Maximum number of rows processed at a time. Default is 1024.</p></td>
-    </tr></table></div>
+    
 
-    <div id="ref-sections">
+<dl><dt>x</dt><dd><p><code>data.frame</code>, <a href="RecordBatch.html">RecordBatch</a>, or <a href="Table.html">Table</a></p></dd>
+</dl><dl><dt>sink</dt><dd><p>A string file path, URI, or <a href="OutputStream.html">OutputStream</a>, or path in a file
+system (<code>SubTreeFileSystem</code>)</p></dd>
+</dl><dl><dt>include_header</dt><dd><p>Whether to write an initial header line with column names</p></dd>
+</dl><dl><dt>batch_size</dt><dd><p>Maximum number of rows processed at a time. Default is 1024.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>The input <code>x</code>, invisibly. Note that if <code>sink</code> is an <a href="OutputStream.html">OutputStream</a>,

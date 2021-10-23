@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -113,18 +113,17 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">create_package_with_all_dependencies</span><span class="op">(</span>dest_file <span class="op">=</span> <span class="cn">NULL</span>, source_file <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>dest_file</th>
-      <td><p>File path for the new tar.gz package. Defaults to
-<code>arrow_V.V.V_with_deps.tar.gz</code> in the current directory (<code>V.V.V</code> is the version)</p></td>
-    </tr><tr><th>source_file</th>
-      <td><p>File path for the input tar.gz package. Defaults to
-downloading the package from CRAN (or whatever you have set as the first in
-<code>getOption("repos")</code>)</p></td>
-    </tr></table></div>
+    
 
-    <div id="ref-sections">
+<dl><dt>dest_file</dt><dd><p>File path for the new tar.gz package. Defaults to
+<code>arrow_V.V.V_with_deps.tar.gz</code> in the current directory (<code>V.V.V</code> is the version)</p></dd>
+</dl><dl><dt>source_file</dt><dd><p>File path for the input tar.gz package. Defaults to
+downloading the package from CRAN (or whatever you have set as the first in
+<code>getOption("repos")</code>)</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>The full path to <code>dest_file</code>, invisibly</p>

@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -113,21 +113,19 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">copy_files</span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span>, chunk_size <span class="op">=</span> <span class="fl">1024L</span> <span class="op">*</span> <span class="fl">1024L</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>from</th>
-      <td><p>A string path to a local directory or file, a URI, or a
-<code>SubTreeFileSystem</code>. Files will be copied recursively from this path.</p></td>
-    </tr><tr><th>to</th>
-      <td><p>A string path to a local directory or file, a URI, or a
-<code>SubTreeFileSystem</code>. Directories will be created as necessary</p></td>
-    </tr><tr><th>chunk_size</th>
-      <td><p>The maximum size of block to read before flushing
-to the destination file. A larger chunk_size will use more memory while
-copying but may help accommodate high latency FileSystems.</p></td>
-    </tr></table></div>
+    
 
-    <div id="ref-sections">
+<dl><dt>from</dt><dd><p>A string path to a local directory or file, a URI, or a
+<code>SubTreeFileSystem</code>. Files will be copied recursively from this path.</p></dd>
+</dl><dl><dt>to</dt><dd><p>A string path to a local directory or file, a URI, or a
+<code>SubTreeFileSystem</code>. Directories will be created as necessary</p></dd>
+</dl><dl><dt>chunk_size</dt><dd><p>The maximum size of block to read before flushing
+to the destination file. A larger chunk_size will use more memory while
+copying but may help accommodate high latency FileSystems.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>Nothing: called for side effects in the file system</p>

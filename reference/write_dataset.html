@@ -25,7 +25,7 @@ make it much faster to read and query."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -125,34 +125,31 @@ make it much faster to read and query.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>dataset</th>
-      <td><p><a href="Dataset.html">Dataset</a>, <a href="RecordBatch.html">RecordBatch</a>, <a href="Table.html">Table</a>, <code>arrow_dplyr_query</code>, or
+    
+
+<dl><dt>dataset</dt><dd><p><a href="Dataset.html">Dataset</a>, <a href="RecordBatch.html">RecordBatch</a>, <a href="Table.html">Table</a>, <code>arrow_dplyr_query</code>, or
 <code>data.frame</code>. If an <code>arrow_dplyr_query</code>, the query will be evaluated and
 the result will be written. This means that you can <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>,
-etc. to transform the data before it is written if you need to.</p></td>
-    </tr><tr><th>path</th>
-      <td><p>string path, URI, or <code>SubTreeFileSystem</code> referencing a directory
-to write to (directory will be created if it does not exist)</p></td>
-    </tr><tr><th>format</th>
-      <td><p>a string identifier of the file format. Default is to use
-"parquet" (see <a href="FileFormat.html">FileFormat</a>)</p></td>
-    </tr><tr><th>partitioning</th>
-      <td><p><code>Partitioning</code> or a character vector of columns to
+etc. to transform the data before it is written if you need to.</p></dd>
+</dl><dl><dt>path</dt><dd><p>string path, URI, or <code>SubTreeFileSystem</code> referencing a directory
+to write to (directory will be created if it does not exist)</p></dd>
+</dl><dl><dt>format</dt><dd><p>a string identifier of the file format. Default is to use
+"parquet" (see <a href="FileFormat.html">FileFormat</a>)</p></dd>
+</dl><dl><dt>partitioning</dt><dd><p><code>Partitioning</code> or a character vector of columns to
 use as partition keys (to be written as path segments). Default is to
-use the current <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> columns.</p></td>
-    </tr><tr><th>basename_template</th>
-      <td><p>string template for the names of files to be written.
+use the current <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> columns.</p></dd>
+</dl><dl><dt>basename_template</dt><dd><p>string template for the names of files to be written.
 Must contain <code>"{i}"</code>, which will be replaced with an autoincremented
 integer to generate basenames of datafiles. For example, <code>"part-{i}.feather"</code>
-will yield <code>"part-0.feather", ...</code>.</p></td>
-    </tr><tr><th>hive_style</th>
-      <td><p>logical: write partition segments as Hive-style
-(<code>key1=value1/key2=value2/file.ext</code>) or as just bare values. Default is <code>TRUE</code>.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>additional format-specific arguments. For available Parquet
-options, see <code><a href="write_parquet.html">write_parquet()</a></code>. The available Feather options are</p><ul><li><p><code>use_legacy_format</code> logical: write data formatted so that Arrow libraries
+will yield <code>"part-0.feather", ...</code>.</p></dd>
+</dl><dl><dt>hive_style</dt><dd><p>logical: write partition segments as Hive-style
+(<code>key1=value1/key2=value2/file.ext</code>) or as just bare values. Default is <code>TRUE</code>.</p></dd>
+</dl><dl><dt>...</dt><dd><p>additional format-specific arguments. For available Parquet
+options, see <code><a href="write_parquet.html">write_parquet()</a></code>. The available Feather options are
+</p><ul><li><p><code>use_legacy_format</code> logical: write data formatted so that Arrow libraries
 versions 0.14 and lower can read it. Default is <code>FALSE</code>. You can also
 enable this by setting the environment variable <code>ARROW_PRE_0_15_IPC_FORMAT=1</code>.</p></li>
 <li><p><code>metadata_version</code>: A string like "V5" or the equivalent integer indicating
@@ -163,10 +160,8 @@ which case it will be V4.</p></li>
 files. Default (NULL) will not compress body buffers.</p></li>
 <li><p><code>null_fallback</code>: character to be used in place of missing values (<code>NA</code> or
 <code>NULL</code>) when using Hive-style partitioning. See <code><a href="hive_partition.html">hive_partition()</a></code>.</p></li>
-</ul></td>
-    </tr></table></div>
-
-    <div id="ref-sections">
+</ul></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>The input <code>dataset</code>, invisibly</p>

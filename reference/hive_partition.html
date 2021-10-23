@@ -24,7 +24,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -115,20 +115,18 @@
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">hive_partition</span><span class="op">(</span><span class="va">...</span>, null_fallback <span class="op">=</span> <span class="cn">NULL</span>, segment_encoding <span class="op">=</span> <span class="st">"uri"</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>...</th>
-      <td><p>named list of <a href="data-type.html">data types</a>, passed to <code><a href="Schema.html">schema()</a></code></p></td>
-    </tr><tr><th>null_fallback</th>
-      <td><p>character to be used in place of missing values (<code>NA</code> or <code>NULL</code>)
-in partition columns. Default is <code>"__HIVE_DEFAULT_PARTITION__"</code>,
-which is what Hive uses.</p></td>
-    </tr><tr><th>segment_encoding</th>
-      <td><p>Decode partition segments after splitting paths.
-Default is <code>"uri"</code> (URI-decode segments). May also be <code>"none"</code> (leave as-is).</p></td>
-    </tr></table></div>
+    
 
-    <div id="ref-sections">
+<dl><dt>...</dt><dd><p>named list of <a href="data-type.html">data types</a>, passed to <code><a href="Schema.html">schema()</a></code></p></dd>
+</dl><dl><dt>null_fallback</dt><dd><p>character to be used in place of missing values (<code>NA</code> or <code>NULL</code>)
+in partition columns. Default is <code>"__HIVE_DEFAULT_PARTITION__"</code>,
+which is what Hive uses.</p></dd>
+</dl><dl><dt>segment_encoding</dt><dd><p>Decode partition segments after splitting paths.
+Default is <code>"uri"</code> (URI-decode segments). May also be <code>"none"</code> (leave as-is).</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A <a href="Partitioning.html">HivePartitioning</a>, or a <code>HivePartitioningFactory</code> if

@@ -25,7 +25,7 @@ of these functions don't take arguments, but a few do."><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -179,29 +179,22 @@ of these functions don't take arguments, but a few do.</p>
 
 <span class="fu">fixed_size_list_of</span><span class="op">(</span><span class="va">type</span>, <span class="va">list_size</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>byte_width</th>
-      <td><p>byte width for <code>FixedSizeBinary</code> type.</p></td>
-    </tr><tr><th>unit</th>
-      <td><p>For time/timestamp types, the time unit. <code>time32()</code> can take
-either "s" or "ms", while <code>time64()</code> can be "us" or "ns". <code>timestamp()</code> can
-take any of those four values.</p></td>
-    </tr><tr><th>timezone</th>
-      <td><p>For <code>timestamp()</code>, an optional time zone string.</p></td>
-    </tr><tr><th>precision</th>
-      <td><p>For <code>decimal()</code>, precision</p></td>
-    </tr><tr><th>scale</th>
-      <td><p>For <code>decimal()</code>, scale</p></td>
-    </tr><tr><th>...</th>
-      <td><p>For <code>struct()</code>, a named list of types to define the struct columns</p></td>
-    </tr><tr><th>type</th>
-      <td><p>For <code>list_of()</code>, a data type to make a list-of-type</p></td>
-    </tr><tr><th>list_size</th>
-      <td><p>list size for <code>FixedSizeList</code> type.</p></td>
-    </tr></table></div>
+    
 
-    <div id="ref-sections">
+<dl><dt>byte_width</dt><dd><p>byte width for <code>FixedSizeBinary</code> type.</p></dd>
+</dl><dl><dt>unit</dt><dd><p>For time/timestamp types, the time unit. <code>time32()</code> can take
+either "s" or "ms", while <code>time64()</code> can be "us" or "ns". <code>timestamp()</code> can
+take any of those four values.</p></dd>
+</dl><dl><dt>timezone</dt><dd><p>For <code>timestamp()</code>, an optional time zone string.</p></dd>
+</dl><dl><dt>precision</dt><dd><p>For <code>decimal()</code>, precision</p></dd>
+</dl><dl><dt>scale</dt><dd><p>For <code>decimal()</code>, scale</p></dd>
+</dl><dl><dt>...</dt><dd><p>For <code>struct()</code>, a named list of types to define the struct columns</p></dd>
+</dl><dl><dt>type</dt><dd><p>For <code>list_of()</code>, a data type to make a list-of-type</p></dd>
+</dl><dl><dt>list_size</dt><dd><p>list size for <code>FixedSizeList</code> type.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>An Arrow type object inheriting from DataType.</p>

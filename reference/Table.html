@@ -25,7 +25,7 @@ composed from multiple record batches or chunked arrays."><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211022</span>
       </span>
     </div>
 
@@ -117,19 +117,18 @@ composed from multiple record batches or chunked arrays.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">arrow_table</span><span class="op">(</span><span class="va">...</span>, schema <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>...</th>
-      <td><p>A <code>data.frame</code> or a named set of Arrays or vectors. If given a
+    
+
+<dl><dt>...</dt><dd><p>A <code>data.frame</code> or a named set of Arrays or vectors. If given a
 mixture of data.frames and named vectors, the inputs will be autospliced together
 (see examples). Alternatively, you can provide a single Arrow IPC
-<code>InputStream</code>, <code>Message</code>, <code>Buffer</code>, or R <code>raw</code> object containing a <code>Buffer</code>.</p></td>
-    </tr><tr><th>schema</th>
-      <td><p>a <a href="Schema.html">Schema</a>, or <code>NULL</code> (the default) to infer the schema from
-the data in <code>...</code>. When providing an Arrow IPC buffer, <code>schema</code> is required.</p></td>
-    </tr></table></div>
-
-    <div id="ref-sections">
+<code>InputStream</code>, <code>Message</code>, <code>Buffer</code>, or R <code>raw</code> object containing a <code>Buffer</code>.</p></dd>
+</dl><dl><dt>schema</dt><dd><p>a <a href="Schema.html">Schema</a>, or <code>NULL</code> (the default) to infer the schema from
+the data in <code>...</code>. When providing an Arrow IPC buffer, <code>schema</code> is required.</p></dd>
+</dl></div>
     <div id="s-methods-and-usage">
     <h2>S3 Methods and Usage</h2>
     
