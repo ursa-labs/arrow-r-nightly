@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -122,22 +122,25 @@
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>file</dt><dd><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
+    <dl><dt>file</dt>
+<dd><p>A character file name or URI, <code>raw</code> vector, an Arrow input stream,
 or a <code>FileSystem</code> with path (<code>SubTreeFileSystem</code>).
 If a file name, a memory-mapped Arrow <a href="InputStream.html">InputStream</a> will be opened and
 closed when finished; compression will be detected from the file extension
 and handled automatically. If an input stream is provided, it will be left
 open.</p></dd>
-</dl><dl><dt>col_select</dt><dd><p>A character vector of column names to keep, as in the
+<dt>col_select</dt>
+<dd><p>A character vector of column names to keep, as in the
 "select" argument to <code>data.table::fread()</code>, or a
 <a href="https://tidyselect.r-lib.org/reference/vars_select.html" class="external-link">tidy selection specification</a>
 of columns, as used in <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">dplyr::select()</a></code>.</p></dd>
-</dl><dl><dt>as_data_frame</dt><dd><p>Should the function return a <code>data.frame</code> (default) or
+<dt>as_data_frame</dt>
+<dd><p>Should the function return a <code>data.frame</code> (default) or
 an Arrow <a href="Table.html">Table</a>?</p></dd>
-</dl><dl><dt>schema</dt><dd><p><a href="Schema.html">Schema</a> that describes the table.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional options passed to <code>JsonTableReader$create()</code></p></dd>
+<dt>schema</dt>
+<dd><p><a href="Schema.html">Schema</a> that describes the table.</p></dd>
+<dt>...</dt>
+<dd><p>Additional options passed to <code>JsonTableReader$create()</code></p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

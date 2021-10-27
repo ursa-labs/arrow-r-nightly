@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -116,12 +116,14 @@
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>client</dt><dd><p><code>pyarrow.flight.FlightClient</code>, as returned by <code><a href="flight_connect.html">flight_connect()</a></code></p></dd>
-</dl><dl><dt>data</dt><dd><p><code>data.frame</code>, <a href="RecordBatch.html">RecordBatch</a>, or <a href="Table.html">Table</a> to upload</p></dd>
-</dl><dl><dt>path</dt><dd><p>string identifier to store the data under</p></dd>
-</dl><dl><dt>overwrite</dt><dd><p>logical: if <code>path</code> exists on <code>client</code> already, should we
+    <dl><dt>client</dt>
+<dd><p><code>pyarrow.flight.FlightClient</code>, as returned by <code><a href="flight_connect.html">flight_connect()</a></code></p></dd>
+<dt>data</dt>
+<dd><p><code>data.frame</code>, <a href="RecordBatch.html">RecordBatch</a>, or <a href="Table.html">Table</a> to upload</p></dd>
+<dt>path</dt>
+<dd><p>string identifier to store the data under</p></dd>
+<dt>overwrite</dt>
+<dd><p>logical: if <code>path</code> exists on <code>client</code> already, should we
 replace it with the contents of <code>data</code>? Default is <code>TRUE</code>; if <code>FALSE</code> and
 <code>path</code> exists, the function will error.</p></dd>
 </dl></div>

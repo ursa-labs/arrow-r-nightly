@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -116,15 +116,17 @@
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>file</dt><dd><p>A character file name, <code>raw</code> vector, or an Arrow input stream</p></dd>
-</dl><dl><dt>mmap</dt><dd><p>Logical: whether to memory-map the file (default <code>TRUE</code>)</p></dd>
-</dl><dl><dt>compression</dt><dd><p>If the file is compressed, created a <a href="compression.html">CompressedInputStream</a>
+    <dl><dt>file</dt>
+<dd><p>A character file name, <code>raw</code> vector, or an Arrow input stream</p></dd>
+<dt>mmap</dt>
+<dd><p>Logical: whether to memory-map the file (default <code>TRUE</code>)</p></dd>
+<dt>compression</dt>
+<dd><p>If the file is compressed, created a <a href="compression.html">CompressedInputStream</a>
 with this compression codec, either a <a href="Codec.html">Codec</a> or the string name of one.
 If <code>NULL</code> (default) and <code>file</code> is a string file name, the function will try
 to infer compression from the file extension.</p></dd>
-</dl><dl><dt>filesystem</dt><dd><p>If not <code>NULL</code>, <code>file</code> will be opened via the
+<dt>filesystem</dt>
+<dd><p>If not <code>NULL</code>, <code>file</code> will be opened via the
 <code>filesystem$OpenInputFile()</code> filesystem method, rather than the <code>io</code> module's
 <code>MemoryMappedFile</code> or <code>ReadableFile</code> constructors.</p></dd>
 </dl></div>

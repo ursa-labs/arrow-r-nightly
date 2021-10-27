@@ -24,7 +24,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -118,13 +118,14 @@
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>...</dt><dd><p>named list of <a href="data-type.html">data types</a>, passed to <code><a href="Schema.html">schema()</a></code></p></dd>
-</dl><dl><dt>null_fallback</dt><dd><p>character to be used in place of missing values (<code>NA</code> or <code>NULL</code>)
+    <dl><dt>...</dt>
+<dd><p>named list of <a href="data-type.html">data types</a>, passed to <code><a href="Schema.html">schema()</a></code></p></dd>
+<dt>null_fallback</dt>
+<dd><p>character to be used in place of missing values (<code>NA</code> or <code>NULL</code>)
 in partition columns. Default is <code>"__HIVE_DEFAULT_PARTITION__"</code>,
 which is what Hive uses.</p></dd>
-</dl><dl><dt>segment_encoding</dt><dd><p>Decode partition segments after splitting paths.
+<dt>segment_encoding</dt>
+<dd><p>Decode partition segments after splitting paths.
 Default is <code>"uri"</code> (URI-decode segments). May also be <code>"none"</code> (leave as-is).</p></dd>
 </dl></div>
     <div id="value">

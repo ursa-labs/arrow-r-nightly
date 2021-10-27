@@ -25,7 +25,7 @@ collect() or compute() are called or a query is run against the table."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -125,14 +125,16 @@ that is backed by the Arrow object given. No data is copied or modified until
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>.data</dt><dd><p>the Arrow object (e.g. Dataset, Table) to use for the DuckDB table</p></dd>
-</dl><dl><dt>con</dt><dd><p>a DuckDB connection to use (default will create one and store it
+    <dl><dt>.data</dt>
+<dd><p>the Arrow object (e.g. Dataset, Table) to use for the DuckDB table</p></dd>
+<dt>con</dt>
+<dd><p>a DuckDB connection to use (default will create one and store it
 in <code>options("arrow_duck_con")</code>)</p></dd>
-</dl><dl><dt>table_name</dt><dd><p>a name to use in DuckDB for this object. The default is a
+<dt>table_name</dt>
+<dd><p>a name to use in DuckDB for this object. The default is a
 unique string <code>"arrow_"</code> followed by numbers.</p></dd>
-</dl><dl><dt>auto_disconnect</dt><dd><p>should the table be automatically cleaned up when the
+<dt>auto_disconnect</dt>
+<dd><p>should the table be automatically cleaned up when the
 resulting object is removed (and garbage collected)? Default: <code>FALSE</code></p></dd>
 </dl></div>
     <div id="value">

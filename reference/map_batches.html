@@ -27,7 +27,7 @@ Dataset result in memory."><!-- mathjax --><script src="https://cdnjs.cloudflare
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
       </span>
     </div>
 
@@ -124,14 +124,16 @@ a <code>data.frame</code> for further aggregation, even if you couldn't fit the 
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>X</dt><dd><p>A <code>Dataset</code> or <code>arrow_dplyr_query</code> object, as returned by the
+    <dl><dt>X</dt>
+<dd><p>A <code>Dataset</code> or <code>arrow_dplyr_query</code> object, as returned by the
 <code>dplyr</code> methods on <code>Dataset</code>.</p></dd>
-</dl><dl><dt>FUN</dt><dd><p>A function or <code>purrr</code>-style lambda expression to apply to each
+<dt>FUN</dt>
+<dd><p>A function or <code>purrr</code>-style lambda expression to apply to each
 batch</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional arguments passed to <code>FUN</code></p></dd>
-</dl><dl><dt>.data.frame</dt><dd><p>logical: collect the resulting chunks into a single
+<dt>...</dt>
+<dd><p>Additional arguments passed to <code>FUN</code></p></dd>
+<dt>.data.frame</dt>
+<dd><p>logical: collect the resulting chunks into a single
 <code>data.frame</code>? Default <code>TRUE</code></p></dd>
 </dl></div>
     <div id="details">
