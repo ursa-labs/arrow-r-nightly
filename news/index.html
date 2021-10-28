@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">5.0.0.20211026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211027</span>
       </span>
     </div>
 
@@ -107,10 +107,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="5.0.0.9000" id="arrow-5009000">arrow 5.0.0.9000<a class="anchor" aria-label="anchor" href="#arrow-5009000"></a></h2>
+<h2 class="page-header" data-toc-text="6.0.0.9000" id="arrow-6009000">arrow 6.0.0.9000<a class="anchor" aria-label="anchor" href="#arrow-6009000"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="6.0.0" id="arrow-600">arrow 6.0.0<a class="anchor" aria-label="anchor" href="#arrow-600"></a></h2>
 <p>There are now two ways to query Arrow data:</p>
 <div class="section level3">
-<h3 id="1-expanded-arrow-native-queries-aggregation-and-joins-5-0-0-9000">1. Expanded Arrow-native queries: aggregation and joins<a class="anchor" aria-label="anchor" href="#1-expanded-arrow-native-queries-aggregation-and-joins-5-0-0-9000"></a></h3>
+<h3 id="1-expanded-arrow-native-queries-aggregation-and-joins-6-0-0">1. Expanded Arrow-native queries: aggregation and joins<a class="anchor" aria-label="anchor" href="#1-expanded-arrow-native-queries-aggregation-and-joins-6-0-0"></a></h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code>, both grouped and ungrouped, is now implemented for Arrow Datasets, Tables, and RecordBatches. Because data is scanned in chunks, you can aggregate over larger-than-memory datasets backed by many files. Supported aggregation functions include <code><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct()</a></code>, <code>min(),</code> <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>, and <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>. <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> with one probability are also supported and currently return approximate results using the t-digest algorithm.</p>
 <p>Along with <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can also call <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">tally()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct()</a></code>, which effectively wrap <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>.</p>
 <p>This enhancement does change the behavior of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> in some cases: see “Breaking changes” below for details.</p>
@@ -120,12 +123,12 @@
 <p>We’ve also worked to fill in support for all data types, such as <code>Decimal</code>, for functions added in previous releases. All type limitations mentioned in previous release notes should be no longer valid, and if you find a function that is not implemented for a certain data type, please <a href="https://issues.apache.org/jira/projects/ARROW/issues" class="external-link">report an issue</a>.</p>
 </div>
 <div class="section level3">
-<h3 id="2-duckdb-integration-5-0-0-9000">2. DuckDB integration<a class="anchor" aria-label="anchor" href="#2-duckdb-integration-5-0-0-9000"></a></h3>
+<h3 id="2-duckdb-integration-6-0-0">2. DuckDB integration<a class="anchor" aria-label="anchor" href="#2-duckdb-integration-6-0-0"></a></h3>
 <p>If you have the <a href="https://CRAN.R-project.org/package=duckdb" class="external-link">duckdb package</a> installed, you can hand off an Arrow Dataset or query object to <a href="https://duckdb.org/" class="external-link">DuckDB</a> for further querying using the <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> function. This allows you to use duckdb’s <code>dbplyr</code> methods, as well as its SQL interface, to aggregate data. Filtering and column projection done before <code><a href="../reference/to_duckdb.html">to_duckdb()</a></code> is evaluated in Arrow, and duckdb can push down some predicates to Arrow as well. This handoff <em>does not</em> copy the data, instead it uses Arrow’s C-interface (just like passing arrow data between R and Python). This means there is no serialization or data copying costs are incurred.</p>
 <p>You can also take a duckdb <code>tbl</code> and call <code><a href="../reference/to_arrow.html">to_arrow()</a></code> to stream data to Arrow’s query engine. This means that in a single dplyr pipeline, you could start with an Arrow Dataset, evaluate some steps in DuckDB, then evaluate the rest in Arrow.</p>
 </div>
 <div class="section level3">
-<h3 id="breaking-changes-5-0-0-9000">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-5-0-0-9000"></a></h3>
+<h3 id="breaking-changes-6-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-6-0-0"></a></h3>
 <ul><li>Row order of data from a Dataset query is no longer deterministic. If you need a stable sort order, you should explicitly <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> the query result. For calls to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, you can set <code>options(arrow.summarise.sort = TRUE)</code> to match the current <code>dplyr</code> behavior of sorting on the grouping columns.</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarize()</a></code> on an in-memory Arrow Table or RecordBatch no longer eagerly evaluates. Call <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to evaluate the query.</li>
@@ -135,7 +138,7 @@
 <li>Datasets are officially no longer supported on 32-bit Windows on R &lt; 4.0 (Rtools 3.5). 32-bit Windows users should upgrade to a newer version of R in order to use datasets.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="installation-on-linux-5-0-0-9000">Installation on Linux<a class="anchor" aria-label="anchor" href="#installation-on-linux-5-0-0-9000"></a></h3>
+<h3 id="installation-on-linux-6-0-0">Installation on Linux<a class="anchor" aria-label="anchor" href="#installation-on-linux-6-0-0"></a></h3>
 <ul><li>Package installation now fails if the Arrow C++ library does not compile. In previous versions, if the C++ library failed to compile, you would get a successful R package installation that wouldn’t do much useful.</li>
 <li>You can disable all optional C++ components when building from source by setting the environment variable <code>LIBARROW_MINIMAL=true</code>. This will have the core Arrow/Feather components but excludes Parquet, Datasets, compression libraries, and other optional features.</li>
 <li>Source packages now bundle the Arrow C++ source code, so it does not have to be downloaded in order to build the package. Because the source is included, it is now possible to build the package on an offline/airgapped system. By default, the offline build will be minimal because it cannot download third-party C++ dependencies required to support all features. To allow a fully featured offline build, the included <code><a href="../reference/create_package_with_all_dependencies.html">create_package_with_all_dependencies()</a></code> function (also available on GitHub without installing the arrow package) will download all third-party C++ dependencies and bundle them inside the R source package. Run this function on a system connected to the network to produce the “fat” source package, then copy that .tar.gz package to your offline machine and install. Special thanks to @karldw for the huge amount of work on this.</li>
@@ -143,7 +146,7 @@
 <li>The JSON library components (<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>) are now optional and still on by default; set <code>ARROW_JSON=OFF</code> before building to disable them.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-enhancements-and-fixes-5-0-0-9000">Other enhancements and fixes<a class="anchor" aria-label="anchor" href="#other-enhancements-and-fixes-5-0-0-9000"></a></h3>
+<h3 id="other-enhancements-and-fixes-6-0-0">Other enhancements and fixes<a class="anchor" aria-label="anchor" href="#other-enhancements-and-fixes-6-0-0"></a></h3>
 <ul><li>More Arrow data types use ALTREP when converting to and from R. This speeds up some workflows significantly, while for others it merely delays conversion from Arrow to R. ALTREP is used by default, but to disable it, set <code>options(arrow.use_altrep = FALSE)</code>
 </li>
 <li>
@@ -165,7 +168,7 @@
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="internals-5-0-0-9000">Internals<a class="anchor" aria-label="anchor" href="#internals-5-0-0-9000"></a></h3>
+<h3 id="internals-6-0-0">Internals<a class="anchor" aria-label="anchor" href="#internals-6-0-0"></a></h3>
 <ul><li>We now use testthat 3rd edition as our default</li>
 <li>A number of large test reorganizations</li>
 <li>Style changes to conform with the tidyverse style guide + using lintr</li>
