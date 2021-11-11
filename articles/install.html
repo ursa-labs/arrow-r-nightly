@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211109</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211110</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://arrow.apache.org/docs/format/README.html" class="external-link">Specification</a>
+      <a href="https://arrow.apache.org/docs/format/Columnar.html" class="external-link">Specification</a>
     </li>
     <li>
       <a href="https://arrow.apache.org/docs/c_glib" class="external-link">C GLib</a>
@@ -138,8 +138,15 @@
 
     
     
-<p>On macOS and Windows, when you <code>install.packages("arrow")</code>, you get a binary package that contains Arrow’s C++ dependencies along with it. On Linux, <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> retrieves a source package that has to be compiled locally, and C++ dependencies need to be resolved as well. Generally for R packages with C++ dependencies, this requires either installing system packages, which you may not have privileges to do, or building the C++ dependencies separately, which introduces all sorts of additional ways for things to go wrong.</p>
-<p>Our goal is to make <code>install.packages("arrow")</code> “just work” for as many Linux distributions, versions, and configurations as possible. This document describes how it works and the options for fine-tuning Linux installation. The intended audience for this document is <code>arrow</code> R package users on Linux, not developers. If you’re contributing to the Arrow project, see `vignette(“developing”, package = “arrow”) for guidance on setting up your development environment.</p>
+<p>On macOS and Windows, when you <code>install.packages("arrow")</code>, you get a binary package that contains Arrow’s C++ dependencies along with it. On Linux, <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> retrieves a source package that has to be compiled locally, and C++ dependencies need to be resolved as well.</p>
+<p>On linux we recommend one of the following for the quickest and easiest installation:</p>
+<ul>
+<li>Set the environment variable <code>NOT_CRAN=true</code> before installing, which will both check for compatible Apache binaries and use those and if those aren’t available set a more fully-featured build than default.</li>
+<li>Using <a href="https://packagemanager.rstudio.com/client/#/" class="external-link">RStudio’s public package manager</a> which includes pre-built binaries</li>
+</ul>
+<p>Our goal is to make <code>install.packages("arrow")</code> “just work” for as many Linux distributions, versions, and configurations as possible with the above options.</p>
+<p>This rest of this document describes how it works and the options for fine-tuning Linux installation. The intended audience for this document is <code>arrow</code> R package users on Linux, not Arrow developers. If you’re contributing to the Arrow project, see `vignette(“developing”, package = “arrow”) for guidance on setting up your development environment.</p>
+<p>Generally compiling and installing R packages with C++ dependencies, requires either installing system packages, which you may not have privileges to do, or building the C++ dependencies separately, which introduces all sorts of additional ways for things to go wrong.</p>
 <p>Note also that if you use <code>conda</code> to manage your R environment, this document does not apply. You can <code>conda install -c conda-forge --strict-channel-priority r-arrow</code> and you’ll get the latest official release of the R package along with any C++ dependencies.</p>
 <blockquote>
 <p>Having trouble installing <code>arrow</code>? See the “Troubleshooting” section below.</p>
@@ -149,10 +156,12 @@
 </h1>
 <p>Install the latest release of <code>arrow</code> from CRAN with</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NOT_CRAN <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span><span class="op">)</span></code></pre></div>
 <p>Daily development builds, which are not official releases, can be installed from the Ursa Labs repository:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span>, repos <span class="op">=</span> <span class="st">"https://arrow-r-nightly.s3.amazonaws.com"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NOT_CRAN <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"arrow"</span>, repos <span class="op">=</span> <span class="st">"https://arrow-r-nightly.s3.amazonaws.com"</span><span class="op">)</span></code></pre></div>
 <p>or for conda users via:</p>
 <pre><code>conda install -c arrow-nightlies -c conda-forge --strict-channel-priority r-arrow</code></pre>
 <p>You can also install the R package from a git checkout:</p>
