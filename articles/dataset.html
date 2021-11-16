@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211114</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211115</span>
       </span>
     </div>
 
@@ -79,6 +79,14 @@
     <li>
       <a href="../articles/developing.html">Arrow R Developer Guide</a>
     </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developers</a>
+      <ul class="dropdown-menu" role="menu">
+<li>
+          <a href="../articles/developers/debugging.html">Debugging</a>
+        </li>
+      </ul>
+</li>
   </ul>
 </li>
 <li>
@@ -156,7 +164,7 @@
 <p>If your arrow build has S3 support, you can sync the data locally with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="../reference/copy_files.html">copy_files</a></span><span class="op">(</span><span class="st">"s3://ursa-labs-taxi-data"</span>, <span class="st">"nyc-taxi"</span><span class="op">)</span></code></pre></div>
-<p>If your arrow build doesn’t have S3 support, you can download the files with some additional code:</p>
+<p>If your arrow build doesn’t have S3 support, you can download the files with the additional code shown below. Since these are large files, you may need to increase R’s download timeout from the default of 60 seconds, e.g. <code>options(timeout = 300)</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bucket</span> <span class="op">&lt;-</span> <span class="st">"https://ursa-labs-taxi-data.s3.us-east-2.amazonaws.com"</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">year</span> <span class="kw">in</span> <span class="fl">2009</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span> <span class="op">{</span>
