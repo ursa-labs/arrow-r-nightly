@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211116</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211117</span>
       </span>
     </div>
 
@@ -215,7 +215,28 @@
 <div class="section level4">
 <h4 id="windows-1">Windows<a class="anchor" aria-label="anchor" href="#windows-1"></a>
 </h4>
-<p>Currently, the R package cannot be made to work with a local libarrow build. This will be resolved in a future release.</p>
+<p>The package can be built on Windows using <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools 4</a>. It can be built for mingw32 (i386), mingw64 (x64), or ucrt64 (UCRT x64). mingw64 is the recommended 64-bit installation.</p>
+<p>Open the corresponding RTools Bash, for example “Rtools MinGW 64-bit” for mingw64.</p>
+<p>Install CMake and Ninja with:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">pacman</span> --sync --refresh --noconfirm \</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-cmake \</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-ninja \</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-openssl</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="bu">export</span> <span class="va">CMAKE_GENERATOR=</span>Ninja</span></code></pre></div>
+<p>You will need to add R to your path. For a user-level installation, R will be at something like <code>~/Documents/R/R-4.1.2/bin</code>. For a global installation, R will be at something like <code>/c/Program\ Files/R/R-4.1.2/bin</code>. The R on your path needs to match the architecture you are compiling for, so if you are compiling on 32-bit specify <code>.../bin/i386</code> instead of <code>.../bin/x64</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents/R/R-4.1.2/bin/x64:<span class="va">$PATH</span></span></code></pre></div>
+<p>You can install additional dependencies like so. Note that you are limited to the packages in <a href="https://github.com/r-windows/rtools-packages" class="external-link">the RTools repo</a>, which does not contain every dependency used by Arrow.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pacman</span> --sync --refresh --noconfirm \</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-boost \</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-lz4 \</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-protobuf \</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-snappy \</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-thrift \</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zlib \</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zstd \</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-aws-sdk-cpp \</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-re2 \</span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-libutf8proc</span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -223,77 +244,43 @@
 </h3>
 <p>We recommend that you configure libarrow to be built to a user-level directory rather than a system directory for your development work. This is so that the development version you are using doesn’t overwrite a released version of libarrow you may already have installed, and so that you are also able work with more than one version of libarrow (by using different <code>ARROW_HOME</code> directories for the different versions).</p>
 <p>In the example below, libarrow is installed to a directory called <code>dist</code> that has the same parent directory as the <code>arrow</code> checkout. Your installation of the Arrow R package can point to any directory with any name, though we recommend <em>not</em> placing it inside of the <code>arrow</code> git checkout directory as unwanted changes could stop it working properly.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">export</span> <span class="va">ARROW_HOME=$(</span><span class="bu">pwd</span><span class="va">)</span>/dist</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mkdir</span> <span class="va">$ARROW_HOME</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">export</span> <span class="va">ARROW_HOME=$(</span><span class="bu">pwd</span><span class="va">)</span>/dist</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">mkdir</span> <span class="va">$ARROW_HOME</span></span></code></pre></div>
 <p><em>Special instructions on Linux:</em> You will need to set <code>LD_LIBRARY_PATH</code> to the <code>lib</code> directory that is under where you set <code>$ARROW_HOME</code>, before launching R and using arrow. One way to do this is to add it to your profile (we use <code>~/.bash_profile</code> here, but you might need to put this in a different file depending on your setup, e.g. if you use a shell other than <code>bash</code>). On macOS you do not need to do this because the macOS shared library paths are hardcoded to their locations during build time.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">export</span> <span class="va">LD_LIBRARY_PATH=$ARROW_HOME</span>/lib:<span class="va">$LD_LIBRARY_PATH</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">echo</span> <span class="st">"export LD_LIBRARY_PATH=</span><span class="va">$ARROW_HOME</span><span class="st">/lib:</span><span class="va">$LD_LIBRARY_PATH</span><span class="st">"</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">export</span> <span class="va">LD_LIBRARY_PATH=$ARROW_HOME</span>/lib:<span class="va">$LD_LIBRARY_PATH</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">echo</span> <span class="st">"export LD_LIBRARY_PATH=</span><span class="va">$ARROW_HOME</span><span class="st">/lib:</span><span class="va">$LD_LIBRARY_PATH</span><span class="st">"</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span></code></pre></div>
+<p><em>Special instructions on Windows:</em> You will need to add <code>$ARROW_HOME/bin</code> to your <code>PATH</code> if you are using dynamic libraries (which is recommended).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">export</span> <span class="va">PATH=$ARROW_HOME</span>/bin:<span class="va">$PATH</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="bu">echo</span> <span class="st">"export PATH=</span><span class="dt">\"</span><span class="va">$ARROW_HOME</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="dt">\"</span><span class="st">"</span> <span class="op">&gt;&gt;</span> ~/.bash_profile</span></code></pre></div>
 <p>Start by navigating in a terminal to the <code>arrow</code> repository. You will need to create a directory into which the C++ build will put its contents. We recommend that you make a <code>build</code> directory inside of the <code>cpp</code> directory of the Arrow git repository (it is git-ignored, so you won’t accidentally check it in). Next, change directories to be inside <code>cpp/build</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">pushd</span> arrow</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">mkdir</span> -p cpp/build</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="bu">pushd</span> cpp/build</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">pushd</span> arrow</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">mkdir</span> -p cpp/build</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="bu">pushd</span> cpp/build</span></code></pre></div>
 <p>You’ll first call <code>cmake</code> to configure the build and then <code>make install</code>. For the R package, you’ll need to enable several features in libarrow using <code>-D</code> flags:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">cmake</span> \</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  -DCMAKE_INSTALL_PREFIX=<span class="va">$ARROW_HOME</span> \</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  -DCMAKE_INSTALL_LIBDIR=lib \</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  -DARROW_COMPUTE=ON \</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  -DARROW_CSV=ON \</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  -DARROW_DATASET=ON \</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
-<span id="cb9-8"><a href="#cb9-8"></a>  -DARROW_FILESYSTEM=ON \</span>
-<span id="cb9-9"><a href="#cb9-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
-<span id="cb9-10"><a href="#cb9-10"></a>  -DARROW_JEMALLOC=ON \</span>
-<span id="cb9-11"><a href="#cb9-11"></a>  -DARROW_JSON=ON \</span>
-<span id="cb9-12"><a href="#cb9-12"></a>  -DARROW_PARQUET=ON \</span>
-<span id="cb9-13"><a href="#cb9-13"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb9-14"><a href="#cb9-14"></a>  -DARROW_WITH_ZLIB=ON \</span>
-<span id="cb9-15"><a href="#cb9-15"></a>  ..</span></code></pre></div>
-<p><code>..</code> refers to the C++ source directory: you’re in <code>cpp/build</code> and the source is in <code>cpp</code>.</p>
-<div class="section level4">
-<h4 id="enabling-more-arrow-features">Enabling more Arrow features<a class="anchor" aria-label="anchor" href="#enabling-more-arrow-features"></a>
-</h4>
-<p>To enable optional features including: S3 support, an alternative memory allocator, and additional compression libraries, add some or all of these flags to your call to <code>cmake</code> (the trailing <code>\</code> makes them easier to paste into a bash shell on a new line):</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="ex">-DARROW_MIMALLOC</span>=ON \</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  -DARROW_S3=ON \</span>
-<span id="cb10-3"><a href="#cb10-3"></a>  -DARROW_WITH_BROTLI=ON \</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  -DARROW_WITH_BZ2=ON \</span>
-<span id="cb10-5"><a href="#cb10-5"></a>  -DARROW_WITH_LZ4=ON \</span>
-<span id="cb10-6"><a href="#cb10-6"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb10-7"><a href="#cb10-7"></a>  -DARROW_WITH_ZSTD=ON \</span></code></pre></div>
-<p>Other flags that may be useful:</p>
-<ul>
-<li><p><code>-DBoost_SOURCE=BUNDLED</code> and <code>-DThrift_SOURCE=BUNDLED</code>, for example, or any other dependency <code>*_SOURCE</code>, if you have a system version of a C++ dependency that doesn’t work correctly with Arrow. This tells the build to compile its own version of the dependency from source.</p></li>
-<li><p><code>-DCMAKE_BUILD_TYPE=debug</code> or <code>-DCMAKE_BUILD_TYPE=relwithdebinfo</code> can be useful for debugging. You probably don’t want to do this generally because a debug build is much slower at runtime than the default <code>release</code> build.</p></li>
-</ul>
-<p><em>Note</em> <code>cmake</code> is particularly sensitive to whitespacing, if you see errors, check that you don’t have any errant whitespace.</p>
+<div class="section level4 tabset">
+<h4 id="section"></h4>
+<div class="section level5">
+<h5 id="linux-mac-os">Linux / Mac OS<a class="anchor" aria-label="anchor" href="#linux-mac-os"></a>
+</h5>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">cmake</span> \</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  -DCMAKE_INSTALL_PREFIX=<span class="va">$ARROW_HOME</span> \</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  -DCMAKE_INSTALL_LIBDIR=lib \</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  -DARROW_COMPUTE=ON \</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  -DARROW_CSV=ON \</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  -DARROW_DATASET=ON \</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  -DARROW_FILESYSTEM=ON \</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
+<span id="cb13-10"><a href="#cb13-10"></a>  -DARROW_JEMALLOC=ON \</span>
+<span id="cb13-11"><a href="#cb13-11"></a>  -DARROW_JSON=ON \</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  -DARROW_PARQUET=ON \</span>
+<span id="cb13-13"><a href="#cb13-13"></a>  -DARROW_WITH_SNAPPY=ON \</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  -DARROW_WITH_ZLIB=ON \</span>
+<span id="cb13-15"><a href="#cb13-15"></a>  ..</span></code></pre></div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="step-3---building-libarrow">Step 3 - Building libarrow<a class="anchor" aria-label="anchor" href="#step-3---building-libarrow"></a>
-</h3>
-<p>You can add <code>-j#</code> between <code>make</code> and <code>install</code> here too to speed up compilation by running in parallel (where <code>#</code> is the number of cores you have available).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">make</span> -j8 install</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="step-4---build-the-arrow-r-package">Step 4 - Build the Arrow R package<a class="anchor" aria-label="anchor" href="#step-4---build-the-arrow-r-package"></a>
-</h3>
-<p>Once you’ve built libarrow, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">popd</span> <span class="co"># To go back to the root directory of the project, from cpp/build</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="bu">pushd</span> r</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">R</span> -e <span class="st">'install.packages("remotes"); remotes::install_deps(dependencies = TRUE)'</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="ex">R</span> CMD INSTALL .</span></code></pre></div>
-<div class="section level4">
-<h4 id="compilation-flags">Compilation flags<a class="anchor" aria-label="anchor" href="#compilation-flags"></a>
-</h4>
-<p>If you need to set any compilation flags while building the C++ extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="bu">export</span> <span class="va">ARROW_R_CXXFLAGS=</span>-fno-omit-frame-pointer</span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="recompiling-the-c-code">Recompiling the C++ code<a class="anchor" aria-label="anchor" href="#recompiling-the-c-code"></a>
-</h4>
-<p>With the setup described here, you should not need to rebuild the Arrow library or even the C++ source in the R package as you iterate and work on the R package. The only time those should need to be rebuilt is if you have changed the C++ in the R package (and even then, <code>R CMD INSTALL .</code> should only need to recompile the files that have changed) <em>or</em> if the libarrow C++ has changed and there is a mismatch between libarrow and the R package. If you find yourself rebuilding either or both each time you install the package or run tests, something is probably wrong with your set up.</p>
-<details><summary>For a full build: a <code>cmake</code> command with all of the R-relevant optional dependencies turned on. Development with other languages might require different flags as well. For example, to develop Python, you would need to also add <code>-DARROW_PYTHON=ON</code> (though all of the other flags used for Python are already included here).</summary><p>
-</p>
+<div class="section level5">
+<h5 id="windows-2">Windows<a class="anchor" aria-label="anchor" href="#windows-2"></a>
+</h5>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">cmake</span> \</span>
 <span id="cb14-2"><a href="#cb14-2"></a>  -DCMAKE_INSTALL_PREFIX=<span class="va">$ARROW_HOME</span> \</span>
 <span id="cb14-3"><a href="#cb14-3"></a>  -DCMAKE_INSTALL_LIBDIR=lib \</span>
@@ -303,18 +290,93 @@
 <span id="cb14-7"><a href="#cb14-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
 <span id="cb14-8"><a href="#cb14-8"></a>  -DARROW_FILESYSTEM=ON \</span>
 <span id="cb14-9"><a href="#cb14-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
-<span id="cb14-10"><a href="#cb14-10"></a>  -DARROW_JEMALLOC=ON \</span>
-<span id="cb14-11"><a href="#cb14-11"></a>  -DARROW_JSON=ON \</span>
-<span id="cb14-12"><a href="#cb14-12"></a>  -DARROW_MIMALLOC=ON \</span>
-<span id="cb14-13"><a href="#cb14-13"></a>  -DARROW_PARQUET=ON \</span>
-<span id="cb14-14"><a href="#cb14-14"></a>  -DARROW_S3=ON \</span>
-<span id="cb14-15"><a href="#cb14-15"></a>  -DARROW_WITH_BROTLI=ON \</span>
-<span id="cb14-16"><a href="#cb14-16"></a>  -DARROW_WITH_BZ2=ON \</span>
-<span id="cb14-17"><a href="#cb14-17"></a>  -DARROW_WITH_LZ4=ON \</span>
-<span id="cb14-18"><a href="#cb14-18"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb14-19"><a href="#cb14-19"></a>  -DARROW_WITH_ZLIB=ON \</span>
+<span id="cb14-10"><a href="#cb14-10"></a>  -DARROW_JSON=OFF \</span>
+<span id="cb14-11"><a href="#cb14-11"></a>  -DARROW_PARQUET=ON \</span>
+<span id="cb14-12"><a href="#cb14-12"></a>  -DARROW_WITH_LZ4=OFF \</span>
+<span id="cb14-13"><a href="#cb14-13"></a>  -DARROW_WITH_SNAPPY=OFF \</span>
+<span id="cb14-14"><a href="#cb14-14"></a>  -DARROW_WITH_ZLIB=ON \</span>
+<span id="cb14-15"><a href="#cb14-15"></a>  -DARROW_MIMALLOC=OFF \</span>
+<span id="cb14-16"><a href="#cb14-16"></a>  -DARROW_S3=OFF \</span>
+<span id="cb14-17"><a href="#cb14-17"></a>  -DARROW_WITH_BROTLI=ON \</span>
+<span id="cb14-18"><a href="#cb14-18"></a>  -DARROW_WITH_BZ2=ON \</span>
+<span id="cb14-19"><a href="#cb14-19"></a>  -DARROW_WITH_SNAPPY=ON \</span>
 <span id="cb14-20"><a href="#cb14-20"></a>  -DARROW_WITH_ZSTD=ON \</span>
 <span id="cb14-21"><a href="#cb14-21"></a>  ..</span></code></pre></div>
+</div>
+</div>
+<div class="section level4 unnumbered">
+<h4 id="section-1"></h4>
+<p><code>..</code> refers to the C++ source directory: you’re in <code>cpp/build</code> and the source is in <code>cpp</code>.</p>
+<p><strong>For Windows</strong>: some options, including <code>-DARROW_JEMALLOC</code>, are not supported on Windows.</p>
+</div>
+<div class="section level4">
+<h4 id="enabling-more-arrow-features">Enabling more Arrow features<a class="anchor" aria-label="anchor" href="#enabling-more-arrow-features"></a>
+</h4>
+<p>To enable optional features including: S3 support, an alternative memory allocator, and additional compression libraries, add some or all of these flags to your call to <code>cmake</code> (the trailing <code>\</code> makes them easier to paste into a bash shell on a new line):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a>  <span class="ex">-DARROW_MIMALLOC</span>=ON \</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  -DARROW_S3=ON \</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  -DARROW_WITH_BROTLI=ON \</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  -DARROW_WITH_BZ2=ON \</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  -DARROW_WITH_LZ4=ON \</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  -DARROW_WITH_SNAPPY=ON \</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  -DARROW_WITH_ZSTD=ON \</span></code></pre></div>
+<p>Other flags that may be useful:</p>
+<ul>
+<li><p><code>-DBoost_SOURCE=BUNDLED</code> and <code>-DThrift_SOURCE=BUNDLED</code>, for example, or any other dependency <code>*_SOURCE</code>, if you have a system version of a C++ dependency that doesn’t work correctly with Arrow. This tells the build to compile its own version of the dependency from source.</p></li>
+<li><p><code>-DCMAKE_BUILD_TYPE=debug</code> or <code>-DCMAKE_BUILD_TYPE=relwithdebinfo</code> can be useful for debugging. You probably don’t want to do this generally because a debug build is much slower at runtime than the default <code>release</code> build.</p></li>
+<li><p><code>-DARROW_BUILD_STATIC=ON</code> and <code>-DARROW_BUILD_SHARED=OFF</code> if you want to use static libraries instead of dynamic libraries. With static libraries there isn’t a risk of the R package linking to the wrong library, but it does mean if you change the C++ code you have to recompile both the C++ libraries and the R package. Compilers typically will link to static libraries only if the dynamic ones are not present, which is why we need to set <code>-DARROW_BUILD_SHARED=OFF</code>. If you are switching after compiling and installing previously, you may need to remove the <code>.dll</code> or <code>.so</code> files from <code>$ARROW_HOME/dist/bin</code>.</p></li>
+</ul>
+<p><em>Note</em> <code>cmake</code> is particularly sensitive to whitespacing, if you see errors, check that you don’t have any errant whitespace.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="step-3---building-libarrow">Step 3 - Building libarrow<a class="anchor" aria-label="anchor" href="#step-3---building-libarrow"></a>
+</h3>
+<p>You can add <code>-j#</code> at the end of the command here too to speed up compilation by running in parallel (where <code>#</code> is the number of cores you have available).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cmake</span> --build . --target install -j8</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="step-4---build-the-arrow-r-package">Step 4 - Build the Arrow R package<a class="anchor" aria-label="anchor" href="#step-4---build-the-arrow-r-package"></a>
+</h3>
+<p>Once you’ve built libarrow, you can install the R package and its dependencies, along with additional dev dependencies, from the git checkout:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="bu">popd</span> <span class="co"># To go back to the root directory of the project, from cpp/build</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="bu">pushd</span> r</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="ex">R</span> -e <span class="st">"install.packages('remotes'); remotes::install_deps(dependencies = TRUE)"</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="ex">R</span> CMD INSTALL --no-multiarch .</span></code></pre></div>
+<p>The <code>--no-multiarch</code> flag makes it only compile on the “main” architecture. This will compile for the architecture that the R in your path corresponds to. If you compile on one architecture and then switch to another, make sure to pass the <code>--preclean</code> flag so that the R package code is recompiled for the new architecture. Otherwise, you may see errors like <code>LoadLibrary failure: %1 is not a valid Win32 application</code>.</p>
+<div class="section level4">
+<h4 id="compilation-flags">Compilation flags<a class="anchor" aria-label="anchor" href="#compilation-flags"></a>
+</h4>
+<p>If you need to set any compilation flags while building the C++ extensions, you can use the <code>ARROW_R_CXXFLAGS</code> environment variable. For example, if you are using <code>perf</code> to profile the R extensions, you may need to set</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="bu">export</span> <span class="va">ARROW_R_CXXFLAGS=</span>-fno-omit-frame-pointer</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="recompiling-the-c-code">Recompiling the C++ code<a class="anchor" aria-label="anchor" href="#recompiling-the-c-code"></a>
+</h4>
+<p>With the setup described here, you should not need to rebuild the Arrow library or even the C++ source in the R package as you iterate and work on the R package. The only time those should need to be rebuilt is if you have changed the C++ in the R package (and even then, <code>R CMD INSTALL .</code> should only need to recompile the files that have changed) <em>or</em> if the libarrow C++ has changed and there is a mismatch between libarrow and the R package. If you find yourself rebuilding either or both each time you install the package or run tests, something is probably wrong with your set up.</p>
+<details><summary>For a full build: a <code>cmake</code> command with all of the R-relevant optional dependencies turned on. Development with other languages might require different flags as well. For example, to develop Python, you would need to also add <code>-DARROW_PYTHON=ON</code> (though all of the other flags used for Python are already included here).</summary><p>
+</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">cmake</span> \</span>
+<span id="cb19-2"><a href="#cb19-2"></a>  -DCMAKE_INSTALL_PREFIX=<span class="va">$ARROW_HOME</span> \</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  -DCMAKE_INSTALL_LIBDIR=lib \</span>
+<span id="cb19-4"><a href="#cb19-4"></a>  -DARROW_COMPUTE=ON \</span>
+<span id="cb19-5"><a href="#cb19-5"></a>  -DARROW_CSV=ON \</span>
+<span id="cb19-6"><a href="#cb19-6"></a>  -DARROW_DATASET=ON \</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
+<span id="cb19-8"><a href="#cb19-8"></a>  -DARROW_FILESYSTEM=ON \</span>
+<span id="cb19-9"><a href="#cb19-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
+<span id="cb19-10"><a href="#cb19-10"></a>  -DARROW_JEMALLOC=ON \</span>
+<span id="cb19-11"><a href="#cb19-11"></a>  -DARROW_JSON=ON \</span>
+<span id="cb19-12"><a href="#cb19-12"></a>  -DARROW_MIMALLOC=ON \</span>
+<span id="cb19-13"><a href="#cb19-13"></a>  -DARROW_PARQUET=ON \</span>
+<span id="cb19-14"><a href="#cb19-14"></a>  -DARROW_S3=ON \</span>
+<span id="cb19-15"><a href="#cb19-15"></a>  -DARROW_WITH_BROTLI=ON \</span>
+<span id="cb19-16"><a href="#cb19-16"></a>  -DARROW_WITH_BZ2=ON \</span>
+<span id="cb19-17"><a href="#cb19-17"></a>  -DARROW_WITH_LZ4=ON \</span>
+<span id="cb19-18"><a href="#cb19-18"></a>  -DARROW_WITH_SNAPPY=ON \</span>
+<span id="cb19-19"><a href="#cb19-19"></a>  -DARROW_WITH_ZLIB=ON \</span>
+<span id="cb19-20"><a href="#cb19-20"></a>  -DARROW_WITH_ZSTD=ON \</span>
+<span id="cb19-21"><a href="#cb19-21"></a>  ..</span></code></pre></div>
 
 </details>
 </div>
@@ -324,12 +386,12 @@
 <h2 id="installing-a-version-of-the-r-package-with-a-specific-git-reference">Installing a version of the R package with a specific git reference<a class="anchor" aria-label="anchor" href="#installing-a-version-of-the-r-package-with-a-specific-git-reference"></a>
 </h2>
 <p>If you need an arrow installation from a specific repository or git reference, on most platforms except Windows, you can run:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"apache/arrow/r"</span>, build <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>The <code>build = FALSE</code> argument is important so that the installation can access the C++ source in the <code>cpp/</code> directory in <code>apache/arrow</code>.</p>
 <p>As with other installation methods, setting the environment variables <code>LIBARROW_MINIMAL=false</code> and <code>ARROW_R_DEV=true</code> will provide a more full-featured version of Arrow and provide more verbose output, respectively.</p>
 <p>For example, to install from the (fictional) branch <code>bugfix</code> from <code>apache/arrow</code> you could run:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LIBARROW_MINIMAL<span class="op">=</span><span class="st">"false"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"apache/arrow/r@bugfix"</span>, build <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Developers may wish to use this method of installing a specific commit separate from another Arrow development environment or system installation (e.g. we use this in <a href="https://github.com/ursacomputing/arrowbench" class="external-link">arrowbench</a> to install development versions of libarrow isolated from the system install). If you already have libarrow installed system-wide, you may need to set some additional variables in order to isolate this build from your system libraries:</p>
@@ -337,7 +399,7 @@
 <li><p>Setting the environment variable <code>FORCE_BUNDLED_BUILD</code> to <code>true</code> will skip the <code>pkg-config</code> search for libarrow and attempt to build from the same source at the repository+ref given.</p></li>
 <li><p>You may also need to set the Makevars <code>CPPFLAGS</code> and <code>LDFLAGS</code> to <code>""</code> in order to prevent the installation process from attempting to link to already installed system versions of libarrow. One way to do this temporarily is wrapping your <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> call like so:</p></li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_makevars.html" class="external-link">with_makevars</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CPPFLAGS <span class="op">=</span> <span class="st">""</span>, LDFLAGS <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -354,10 +416,10 @@
 <h2 id="rebuilding-the-documentation">Rebuilding the documentation<a class="anchor" aria-label="anchor" href="#rebuilding-the-documentation"></a>
 </h2>
 <p>The R documentation uses the <a href="https://roxygen2.r-lib.org/articles/rd.html#functions" class="external-link"><code>@examplesIf</code></a> tag introduced in <code>roxygen2</code> version 7.1.1.9001, which hasn’t yet been released on CRAN at the time of writing. If you are making changes which require updating the documentation, please install the development version of <code>roxygen2</code> from GitHub.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"r-lib/roxygen2"</span><span class="op">)</span></code></pre></div>
 <p>You can use <code>devtools::document()</code> and <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code> to rebuild the documentation and preview the results.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Update roxygen documentation</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span>
 
@@ -372,17 +434,17 @@
 </h3>
 <p>The R code in the package follows <a href="https://style.tidyverse.org/" class="external-link">the tidyverse style</a>. On PR submission (and on pushes) our CI will run linting and will flag possible errors on the pull request with annotations.</p>
 <p>To run the <a href="https://github.com/jimhester/lintr" class="external-link">lintr</a> locally, install the lintr package (note, we currently use a fork that includes fixes not yet accepted upstream, see how lintr is being installed in the file <code>ci/docker/linux-apt-lint.dockerfile</code> for the current status) and then run</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">lintr</span><span class="fu">::</span><span class="fu">lint_package</span><span class="op">(</span><span class="st">"arrow/r"</span><span class="op">)</span></code></pre></div>
 <p>You can automatically change the formatting of the code in the package using the <a href="https://styler.r-lib.org/" class="external-link">styler</a> package. There are two ways to do this:</p>
 <ol style="list-style-type: decimal">
 <li><p>Use the comment bot to do this automatically with the command <code>@github-actions autotune</code> on a PR, and commit it back to the branch.</p></li>
 <li><p>Run the styler locally either via Makefile commands:</p></li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">make</span> style <span class="co"># (for only the files changed)</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">make</span> style-all <span class="co"># (for all files)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">make</span> style <span class="co"># (for only the files changed)</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">make</span> style-all <span class="co"># (for all files)</span></span></code></pre></div>
 <p>or in R:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># note the two excluded files which should not be styled</span>
 <span class="fu">styler</span><span class="fu">::</span><span class="fu">style_pkg</span><span class="op">(</span>exclude_files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tests/testthat/latin1.R"</span>, <span class="st">"data-raw/codegen.R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The styler package will fix many styling errors, thought not all lintr errors are automatically fixable with styler. The list of files we intentionally do not style is in <code>r/.styler_excludes.R</code>.</p>
@@ -393,13 +455,13 @@
 <p>The arrow package uses some customized tools on top of <a href="https://cpp11.r-lib.org/" class="external-link">cpp11</a> to prepare its C++ code in <code>src/</code>. This is because there are some features that are only enabled and built conditionally during build time. If you change C++ code in the R package, you will need to set the <code>ARROW_R_DEV</code> environment variable to <code>true</code> (optionally, add it to your <code>~/.Renviron</code> file to persist across sessions) so that the <code>data-raw/codegen.R</code> file is used for code generation. The <code>Makefile</code> commands also handles this automatically.</p>
 <p>We use Google C++ style in our C++ code. The easiest way to accomplish this is use an editors/IDE that formats your code for you. Many popular editors/IDEs have support for running <code>clang-format</code> on C++ files when you save them. Installing/enabling the appropriate plugin may save you much frustration.</p>
 <p>Check for style errors with</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">./lint.sh</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="ex">./lint.sh</span></span></code></pre></div>
 <p>Fix any style issues before committing with</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="ex">./lint.sh</span> --fix</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="ex">./lint.sh</span> --fix</span></code></pre></div>
 <p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isn’t found, you can explicitly provide the path to it like:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="fu">which</span> clang-format-8<span class="va">)</span> <span class="ex">./lint.sh</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="fu">which</span> clang-format-8<span class="va">)</span> <span class="ex">./lint.sh</span></span></code></pre></div>
 <p>On macOS, you can get this by installing LLVM via Homebrew and running the script as:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="ex">brew</span> --prefix llvm@8<span class="va">)</span>/bin/clang-format <span class="ex">./lint.sh</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="ex">brew</span> --prefix llvm@8<span class="va">)</span>/bin/clang-format <span class="ex">./lint.sh</span></span></code></pre></div>
 <p><em>Note</em> that the lint script requires Python 3 and the Python dependencies (note that `cmake_format is pinned to a specific version):</p>
 <ul>
 <li>autopep8</li>
@@ -412,11 +474,11 @@
 <h2 id="running-tests">Running tests<a class="anchor" aria-label="anchor" href="#running-tests"></a>
 </h2>
 <p>Tests can be run either using <code>devtools::test()</code> or the Makefile alternative.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Run the test suite, optionally filtering file names</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="dt">filter=</span><span class="st">"^regexp$"</span>)</span>
-<span id="cb27-3"><a href="#cb27-3"></a></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># or the Makefile alternative from the arrow/r directory in a shell:</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a>make test file=regexp</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Run the test suite, optionally filtering file names</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="dt">filter=</span><span class="st">"^regexp$"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># or the Makefile alternative from the arrow/r directory in a shell:</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>make test file=regexp</span></code></pre></div>
 <p>Some tests are conditionally enabled based on the availability of certain features in the package build (S3 support, compression libraries, etc.). Others are generally skipped by default but can be enabled with environment variables or other settings:</p>
 <ul>
 <li><p>All tests are skipped on Linux if the package builds without the C++ libarrow. To make the build fail if libarrow is not available (as in, to test that the C++ build was successful), set <code>TEST_R_WITH_ARROW=true</code></p></li>
@@ -430,7 +492,7 @@
 <h2 id="running-checks">Running checks<a class="anchor" aria-label="anchor" href="#running-checks"></a>
 </h2>
 <p>You can run package checks by using <code>devtools::check()</code> and check test coverage with <code>covr::package_coverage()</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># All package checks</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span>
 
@@ -511,7 +573,7 @@ ERROR: loading failed</code></pre>
 </li>
 <li>adding <code>LDFLAGS=</code> to your <code>~/.R/Makevars</code> file (the least recommended way, though it is a common debugging approach suggested online)</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1"></a><span class="va">MAKEFLAGS=</span><span class="st">"LDFLAGS="</span> <span class="ex">R</span> CMD INSTALL .</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1"></a><span class="va">MAKEFLAGS=</span><span class="st">"LDFLAGS="</span> <span class="ex">R</span> CMD INSTALL .</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="rpath-issues">

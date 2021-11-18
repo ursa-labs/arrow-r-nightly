@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211116</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0.20211117</span>
       </span>
     </div>
 
@@ -182,11 +182,19 @@ Traceback:
 <p>You should now be in an R session with the C++ debugger attached. This will look similar to a normal R session, but with extra output.</p>
 <p>Now, run your code - either directly in the session or by sourcing it from a file. If the code results in a segfault, you will have extra output that you can use to diagnose the problem or attach to an issue as extra information.</p>
 <p>Here is debugger output from the segfault shown in the previous example. You can see here that the exact line which triggers the segfault is included in the output.</p>
-<pre><code>&gt; S3FileSystem$create()
+<pre class="shell"><code>&gt; S3FileSystem$create()
 
 Thread 1 "R" received signal SIGSEGV, Segmentation fault.
 0x00007ffff0128369 in std::__atomic_base&lt;long&gt;::operator++ (this=0x178) at /usr/include/c++/9/bits/atomic_base.h:318
 318       operator++() noexcept</code></pre>
+<div class="section level4">
+<h4 id="getting-debugger-output-if-your-session-hangs">Getting debugger output if your session hangs<a class="anchor" aria-label="anchor" href="#getting-debugger-output-if-your-session-hangs"></a>
+</h4>
+<p>The instructions above can provide valuable additional context when a segfault occurs. However, there are occasionally circumstances in which a bug could cause your session to hang indefinitely without segfaulting. In this case, it may be diagnostically useful to interrupt the debugger and generate backtraces from all running threads.</p>
+<p>To do this, firstly, press Ctrl/Cmd and C to interrupt the debugger, and then run:</p>
+<pre class="shell"><code>thread apply all bt</code></pre>
+<p>This will generate a large amount of output, but this information is useful when identifying the cause of the issue.</p>
+</div>
 </div>
 </div>
 <div class="section level2">
