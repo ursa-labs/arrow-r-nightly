@@ -46,7 +46,7 @@ jobs:
       fork: nealrichardson
       # ref can be a branch name (but if not a fixed commit, beware:
       # it could change while the workflow is running)
-      ref: r-6.0.0
+      ref: r-6.0.1
       # Set date to "" to skip updating the version string,
       # or set to an alternative value (e.g. 99999 to build a 3.0.0.99999)
       date: ""
