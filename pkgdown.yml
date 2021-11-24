@@ -5,12 +5,14 @@ articles:
   arrow: arrow.html
   dataset: dataset.html
   debugging: developers/debugging.html
+  setup: developers/setup.html
+  workflow: developers/workflow.html
   developing: developing.html
   flight: flight.html
   fs: fs.html
   install: install.html
   python: python.html
-last_built: 2021-11-23T00:56Z
+last_built: 2021-11-24T00:58Z
 urls:
   reference: https://arrow.apache.org/docs/r/reference
   article: https://arrow.apache.org/docs/r/articles
