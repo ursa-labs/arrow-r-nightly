@@ -25,7 +25,7 @@ file formats (ParquetFileFormat and IpcFileFormat)."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -127,9 +127,8 @@ included in a <code>Dataset</code>. There are subclasses corresponding to the su
 file formats (<code>ParquetFileFormat</code> and <code>IpcFileFormat</code>).</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,NULL</div>
+    <div id="ref-usage">Usage,NULL</div>
 
-    <div id="ref-sections">
     <div id="factory">
     <h2>Factory</h2>
     
@@ -158,11 +157,10 @@ From <a href="FragmentScanOptions.html">CsvFragmentScanOptions</a> (these values
 </ul></li>
 </ul><p>It returns the appropriate subclass of <code>FileFormat</code> (e.g. <code>ParquetFileFormat</code>)</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Semi-colon delimited files</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Semi-colon delimited files</span></span>
 <span class="r-in"><span class="co"># Set up directory for examples</span></span>
 <span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span>

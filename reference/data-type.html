@@ -25,7 +25,7 @@ of these functions don't take arguments, but a few do."><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@ when defining a <code><a href="Schema.html">schema()</a></code> or as inputs to 
 of these functions don't take arguments, but a few do.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">int8</span><span class="op">(</span><span class="op">)</span>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">int8</span><span class="op">(</span><span class="op">)</span>
 
 <span class="fu">int16</span><span class="op">(</span><span class="op">)</span>
 
@@ -189,9 +189,8 @@ of these functions don't take arguments, but a few do.</p>
 
 <span class="fu">large_list_of</span><span class="op">(</span><span class="va">type</span><span class="op">)</span>
 
-<span class="fu">fixed_size_list_of</span><span class="op">(</span><span class="va">type</span>, <span class="va">list_size</span><span class="op">)</span></code></pre></div>
+<span class="fu">fixed_size_list_of</span><span class="op">(</span><span class="va">type</span>, <span class="va">list_size</span><span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>byte_width</dt>
@@ -203,9 +202,12 @@ take any of those four values.</p></dd>
 <dt>timezone</dt>
 <dd><p>For <code>timestamp()</code>, an optional time zone string.</p></dd>
 <dt>precision</dt>
-<dd><p>For <code>decimal()</code>, precision</p></dd>
+<dd><p>For <code>decimal()</code>, the number of significant digits
+the arrow <code>decimal</code> type can represent. The maximum precision for
+<code>decimal()</code> is 38 significant digits.</p></dd>
 <dt>scale</dt>
-<dd><p>For <code>decimal()</code>, scale</p></dd>
+<dd><p>For <code>decimal()</code>, the number of digits after the decimal
+point. It can be negative.</p></dd>
 <dt>...</dt>
 <dd><p>For <code>struct()</code>, a named list of types to define the struct columns</p></dd>
 <dt>type</dt>
@@ -234,16 +236,28 @@ are translated to R objects, <code>uint32</code> and <code>uint64</code> are con
 ("numeric") and <code>int64</code> is converted to <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code>. For <code>int64</code>
 types, this conversion can be disabled (so that <code>int64</code> always yields a
 <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code> object) by setting <code>options(arrow.int64_downcast = FALSE)</code>.</p>
+<p><code>decimal()</code> creates a <code>decimal128</code> type. Arrow decimals are fixed-point
+decimal numbers encoded as a scalar integer. The <code>precision</code> is the number of
+significant digits that the decimal type can represent; the <code>scale</code> is the
+number of digits after the decimal point. For example, the number 1234.567
+has a precision of 7 and a scale of 3. Note that <code>scale</code> can be negative.</p>
+<p>As an example, <code>decimal(7, 3)</code> can exactly represent the numbers 1234.567 and
+-1234.567 (encoded internally as the 128-bit integers 1234567 and -1234567,
+respectively), but neither 12345.67 nor 123.4567.</p>
+<p><code>decimal(5, -3)</code> can exactly represent the number 12345000 (encoded
+internally as the 128-bit integer 12345), but neither 123450000 nor 1234500.
+The <code>scale</code> can be thought of as an argument that controls rounding. When
+negative, <code>scale</code> causes the number to be expressed using scientific notation
+and power of 10.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="dictionary.html">dictionary()</a></code> for creating a dictionary (factor-like) type.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bool</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bool</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Boolean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bool</span>
 <span class="r-in"><span class="fu">struct</span><span class="op">(</span>a <span class="op">=</span> <span class="fu">int32</span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">double</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>

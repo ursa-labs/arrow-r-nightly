@@ -25,7 +25,7 @@ called by name with an arrow_ prefix inside a dplyr verb."><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -127,9 +127,8 @@ These can be called by passing to <code><a href="call_function.html">call_functi
 called by name with an <code>arrow_</code> prefix inside a <code>dplyr</code> verb.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">list_compute_functions</span><span class="op">(</span>pattern <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">list_compute_functions</span><span class="op">(</span>pattern <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pattern</dt>
@@ -158,11 +157,10 @@ The package includes Arrow methods for many base R functions that can
 be called directly on Arrow objects, as well as some tidyverse-flavored versions
 available inside <code>dplyr</code> verbs.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">available_funcs</span> <span class="op">&lt;-</span> <span class="fu">list_compute_functions</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">available_funcs</span> <span class="op">&lt;-</span> <span class="fu">list_compute_functions</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">utf8_funcs</span> <span class="op">&lt;-</span> <span class="fu">list_compute_functions</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^UTF8"</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 </code></pre></div>
     </div>

@@ -30,7 +30,7 @@ Many Arrow objects, including Table and Dataset, have a $schema method
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -137,9 +137,8 @@ ensure a specific schema rather than inferring it from the various files.</p>
 (active binding) that lets you access their schema.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">schema</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">schema</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
@@ -195,11 +194,10 @@ amounts of metadata), set the option <code>arrow.compress_metadata</code> to <co
 Files with compressed metadata are readable by older versions of arrow, but
 the metadata is dropped.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">schema</span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="data-type.html">int32</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="data-type.html">float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">schema</span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="data-type.html">int32</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="data-type.html">float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Schema</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a: int32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> b: double</span>

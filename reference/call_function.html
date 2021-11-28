@@ -27,7 +27,7 @@ are callable with an arrow_ prefix."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -131,14 +131,13 @@ and in a <code>dplyr</code> evaluation context, <a href="list_compute_functions.
 are callable with an <code>arrow_</code> prefix.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">call_function</span><span class="op">(</span>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">call_function</span><span class="op">(</span>
   <span class="va">function_name</span>,
   <span class="va">...</span>,
   args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,
   options <span class="op">=</span> <span class="fu">empty_named_list</span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>function_name</dt>
@@ -165,11 +164,10 @@ are callable with an <code>arrow_</code> prefix.</p>
     <div class="dont-index"><p><a href="https://arrow.apache.org/docs/cpp/compute.html" class="external-link">Arrow C++ documentation</a> for
 the functions and their respective options.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="cn">NA</span>, <span class="fl">5L</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="cn">NA</span>, <span class="fl">5L</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="va">Scalar</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">call_function</span><span class="op">(</span><span class="st">"coalesce"</span>, <span class="va">a</span>, <span class="va">s</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Array</span>
@@ -187,11 +185,11 @@ the functions and their respective options.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Array</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;double&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.448219891150889,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.6650774909901972,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.00560936865162924,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6698834814403738,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   4.485275911831961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.255378458889247,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.6707464059417199,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.0020320146090865424,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6862008115822806,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.600978594434524</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
 </code></pre></div>
     </div>

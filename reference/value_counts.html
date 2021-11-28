@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -123,9 +123,8 @@
     <p>This function tabulates the values in the array and returns a table of counts.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">value_counts</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">value_counts</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
@@ -136,11 +135,10 @@
     <p>A <code>StructArray</code> containing "values" (same type as <code>x</code>) and "counts"
 <code>Int64</code>.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">cyl_vals</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">cyl_vals</span> <span class="op">&lt;-</span> <span class="va">Array</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">value_counts</span><span class="op">(</span><span class="va">cyl_vals</span><span class="op">)</span></span>
 </code></pre></div>
     </div>

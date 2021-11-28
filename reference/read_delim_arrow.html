@@ -25,7 +25,7 @@ readr::read_delim(), and col_select was inspired by vroom::vroom()."><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211126</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211127</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@ Arrow C++ options have been mapped to argument names that follow those of
 <code>readr::read_delim()</code>, and <code>col_select</code> was inspired by <code>vroom::vroom()</code>.</p>
     </div>
 
-    <div class="ref-usage sourceCode">Usage,<pre class="sourceCode r"><code><span class="fu">read_delim_arrow</span><span class="op">(</span>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_delim_arrow</span><span class="op">(</span>
   <span class="va">file</span>,
   delim <span class="op">=</span> <span class="st">","</span>,
   quote <span class="op">=</span> <span class="st">"\""</span>,
@@ -186,9 +186,8 @@ Arrow C++ options have been mapped to argument names that follow those of
   read_options <span class="op">=</span> <span class="cn">NULL</span>,
   as_data_frame <span class="op">=</span> <span class="cn">TRUE</span>,
   timestamp_parsers <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
@@ -314,11 +313,10 @@ be dropped.</p>
 <code>col_names</code>, and the CSV file has a header row that would otherwise be used
 to idenfity column names, you'll need to add <code>skip = 1</code> to skip that row.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tf</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>, file <span class="op">=</span> <span class="va">tf</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv_arrow</span><span class="op">(</span><span class="va">tf</span><span class="op">)</span></span>
