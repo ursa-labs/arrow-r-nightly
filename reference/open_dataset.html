@@ -27,7 +27,7 @@ Dataset, then use dplyr methods to query it."><!-- mathjax --><script src="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211130</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211201</span>
       </span>
     </div>
 
@@ -131,14 +131,16 @@ can accelerate queries that only touch some partitions (files). Call
 <code>Dataset</code>, then use <code>dplyr</code> methods to query it.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">open_dataset</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">open_dataset</span><span class="op">(</span>
   <span class="va">sources</span>,
   schema <span class="op">=</span> <span class="cn">NULL</span>,
   partitioning <span class="op">=</span> <span class="fu"><a href="hive_partition.html">hive_partition</a></span><span class="op">(</span><span class="op">)</span>,
   unify_schemas <span class="op">=</span> <span class="cn">NULL</span>,
   format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"parquet"</span>, <span class="st">"arrow"</span>, <span class="st">"ipc"</span>, <span class="st">"feather"</span>, <span class="st">"csv"</span>, <span class="st">"tsv"</span>, <span class="st">"text"</span><span class="op">)</span>,
   <span class="va">...</span>
-<span class="op">)</span></code></pre></div></div>
+<span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>

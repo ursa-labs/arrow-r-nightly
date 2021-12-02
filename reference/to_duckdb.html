@@ -25,7 +25,7 @@ collect() or compute() are called or a query is run against the table."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211130</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211201</span>
       </span>
     </div>
 
@@ -127,12 +127,14 @@ that is backed by the Arrow object given. No data is copied or modified until
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> are called or a query is run against the table.</p>
     </div>
 
-    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">to_duckdb</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">to_duckdb</span><span class="op">(</span>
   <span class="va">.data</span>,
   con <span class="op">=</span> <span class="fu">arrow_duck_connection</span><span class="op">(</span><span class="op">)</span>,
   table_name <span class="op">=</span> <span class="fu">unique_arrow_tablename</span><span class="op">(</span><span class="op">)</span>,
   auto_disconnect <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div></div>
+<span class="op">)</span></code></pre></div>
+    </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
