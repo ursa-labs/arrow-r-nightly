@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211201</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211202</span>
       </span>
     </div>
 
@@ -207,10 +207,10 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">./lint.sh</span></span></code></pre></div>
 <p>Fix any style issues before committing with</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">./lint.sh</span> --fix</span></code></pre></div>
-<p>The lint script requires Python 3 and <code>clang-format-8</code>. If the command isn’t found, you can explicitly provide the path to it like:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="fu">which</span> clang-format-8<span class="va">)</span> <span class="ex">./lint.sh</span></span></code></pre></div>
-<p>On macOS, you can get this by installing LLVM via Homebrew and running the script as:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="va">CLANG_FORMAT=$(</span><span class="ex">brew</span> --prefix llvm@8<span class="va">)</span>/bin/clang-format <span class="ex">./lint.sh</span></span></code></pre></div>
+<p>The lint script requires Python 3 and <code>clang-format</code>. If the command isn’t found, you can explicitly provide the path to it like:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="va">CLANG_FORMAT=</span>/opt/llvm/bin/clang-format <span class="ex">./lint.sh</span></span></code></pre></div>
+<p>You can see what version of <code>clang-format</code> is required by the following command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">(</span><span class="bu">.</span> <span class="ex">../.env</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="va">${CLANG_TOOLS}</span><span class="kw">)</span></span></code></pre></div>
 <p><em>Note</em> that the lint script requires Python 3 and the Python dependencies (note that `cmake_format is pinned to a specific version):</p>
 <ul>
 <li>autopep8</li>
