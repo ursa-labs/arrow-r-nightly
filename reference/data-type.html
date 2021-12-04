@@ -25,7 +25,7 @@ of these functions don't take arguments, but a few do."><!-- mathjax --><script 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211202</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211203</span>
       </span>
     </div>
 
@@ -182,6 +182,8 @@ of these functions don't take arguments, but a few do.</p>
 
 <span class="fu">timestamp</span><span class="op">(</span>unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s"</span>, <span class="st">"ms"</span>, <span class="st">"us"</span>, <span class="st">"ns"</span><span class="op">)</span>, timezone <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 
+<span class="fu">decimal128</span><span class="op">(</span><span class="va">precision</span>, <span class="va">scale</span><span class="op">)</span>
+
 <span class="fu">decimal</span><span class="op">(</span><span class="va">precision</span>, <span class="va">scale</span><span class="op">)</span>
 
 <span class="fu">struct</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
@@ -204,12 +206,12 @@ take any of those four values.</p></dd>
 <dt>timezone</dt>
 <dd><p>For <code>timestamp()</code>, an optional time zone string.</p></dd>
 <dt>precision</dt>
-<dd><p>For <code>decimal()</code>, the number of significant digits
-the arrow <code>decimal</code> type can represent. The maximum precision for
-<code>decimal()</code> is 38 significant digits.</p></dd>
+<dd><p>For <code>decimal()</code>, <code>decimal128()</code> the number of significant
+digits the arrow <code>decimal</code> type can represent. The maximum precision for
+<code>decimal()</code> and <code>decimal128()</code> is 38 significant digits.</p></dd>
 <dt>scale</dt>
-<dd><p>For <code>decimal()</code>, the number of digits after the decimal
-point. It can be negative.</p></dd>
+<dd><p>For <code>decimal()</code> and <code>decimal128()</code>, the number of digits after
+the decimal point. It can be negative.</p></dd>
 <dt>...</dt>
 <dd><p>For <code>struct()</code>, a named list of types to define the struct columns</p></dd>
 <dt>type</dt>
@@ -238,19 +240,22 @@ are translated to R objects, <code>uint32</code> and <code>uint64</code> are con
 ("numeric") and <code>int64</code> is converted to <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code>. For <code>int64</code>
 types, this conversion can be disabled (so that <code>int64</code> always yields a
 <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code> object) by setting <code>options(arrow.int64_downcast = FALSE)</code>.</p>
-<p><code>decimal()</code> creates a <code>decimal128</code> type. Arrow decimals are fixed-point
+<p><code>decimal128()</code> creates a <code>decimal128</code> type. Arrow decimals are fixed-point
 decimal numbers encoded as a scalar integer. The <code>precision</code> is the number of
 significant digits that the decimal type can represent; the <code>scale</code> is the
 number of digits after the decimal point. For example, the number 1234.567
 has a precision of 7 and a scale of 3. Note that <code>scale</code> can be negative.</p>
-<p>As an example, <code>decimal(7, 3)</code> can exactly represent the numbers 1234.567 and
+<p>As an example, <code>decimal128(7, 3)</code> can exactly represent the numbers 1234.567 and
 -1234.567 (encoded internally as the 128-bit integers 1234567 and -1234567,
 respectively), but neither 12345.67 nor 123.4567.</p>
-<p><code>decimal(5, -3)</code> can exactly represent the number 12345000 (encoded
+<p><code>decimal128(5, -3)</code> can exactly represent the number 12345000 (encoded
 internally as the 128-bit integer 12345), but neither 123450000 nor 1234500.
 The <code>scale</code> can be thought of as an argument that controls rounding. When
 negative, <code>scale</code> causes the number to be expressed using scientific notation
 and power of 10.</p>
+<p><code>decimal()</code> is identical to <code>decimal128()</code>, defined for backward compatibility.
+Use <code>decimal128()</code> as the name  is more informative and <code>decimal()</code> might be
+deprecated in the future.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -285,7 +290,7 @@ and power of 10.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>
