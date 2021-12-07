@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211205</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211206</span>
       </span>
     </div>
 
@@ -120,7 +120,16 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="6.0.1.9000" id="arrow-6019000">arrow 6.0.1.9000<a class="anchor" aria-label="anchor" href="#arrow-6019000"></a></h2>
-<ul><li>Added <code><a href="../reference/data-type.html">decimal128()</a></code> (identical to <code><a href="../reference/data-type.html">decimal()</a></code>) as the name is more explicit and updated docs to encourage its use.</li>
+<ul><li>updated <code><a href="../reference/write_csv_arrow.html">write_csv_arrow()</a></code> to follow the signature of <code>readr::write_csv()</code>. The following arguments are supported:
+<ul><li>
+<code>file</code> identical to <code>sink</code>
+</li>
+<li>
+<code>col_names</code> identical to <code>include_header</code>
+</li>
+<li>other arguments are currently unsupported, but the function errors with a meaningful message.</li>
+</ul></li>
+<li>Added <code><a href="../reference/data-type.html">decimal128()</a></code> (identical to <code><a href="../reference/data-type.html">decimal()</a></code>) as the name is more explicit and updated docs to encourage its use.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="6.0.1" id="arrow-601">arrow 6.0.1<small>2021-11-20</small><a class="anchor" aria-label="anchor" href="#arrow-601"></a></h2>
