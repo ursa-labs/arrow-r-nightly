@@ -7,6 +7,7 @@ RUN yum install -y \
         libcurl-devel \
         make \
         openssl-devel \
+        patch \
         wget \
         which
 
