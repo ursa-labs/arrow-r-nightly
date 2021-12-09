@@ -10,6 +10,7 @@ RUN apt-get update && \
         libssl-dev \
         make \
         wget \
+        patch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
