@@ -240,7 +240,7 @@ jobs:
           if [ ! -f ./Rscript ]; then
             sudo ln -s /Library/Frameworks/R.framework/Resources/bin/Rscript .
           fi
-     - name: Build and upload
+      - name: Build and upload
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
