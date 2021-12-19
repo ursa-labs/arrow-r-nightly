@@ -145,80 +145,91 @@
 
       
 
-      </header><script src="debugging_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="docker_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/developers/debugging.Rmd" class="external-link"><code>vignettes/developers/debugging.Rmd</code></a></small>
-      <div class="hidden name"><code>debugging.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/developers/docker.Rmd" class="external-link"><code>vignettes/developers/docker.Rmd</code></a></small>
+      <div class="hidden name"><code>docker.Rmd</code></div>
 
     </div>
 
     
     
 <div class="section level1">
-<h1 id="debugging-arrow">Debugging Arrow<a class="anchor" aria-label="anchor" href="#debugging-arrow"></a>
+<h1 id="using-docker-with-arrow">Using docker with Arrow<a class="anchor" aria-label="anchor" href="#using-docker-with-arrow"></a>
 </h1>
-<p>If you are a developer working with Arrow code, the package’s use of tidy eval and C++ necessitates a solid debugging strategy. In this article, we recommend a few approaches.</p>
+<p>Arrow is compatible with a huge number of combinations of OSs, OS versions, compilers, R versions, and other variables. Sometimes these combinations of variables means that behaviours are found in some environments which cannot be replicated in others. In addition, there are different ways of building Arrow, for example, using environment variables to specify the building of optional components.</p>
+<p>What all this means is that you may need to use a different setup to the one in which you are working, when diagnosing a bug or testing out a new feature which you have reason to believe may be affected by these variables. One way to do this is so spin up a Docker image containing the desired setup.</p>
+<p>This article provides a basic guide to using Docker in your R development.</p>
 <div class="section level2">
-<h2 id="debugging-r-code">Debugging R code<a class="anchor" aria-label="anchor" href="#debugging-r-code"></a>
+<h2 id="how-do-i-run-a-docker-container">How do I run a Docker container?<a class="anchor" aria-label="anchor" href="#how-do-i-run-a-docker-container"></a>
 </h2>
-<p>In general, we have found that using interactive debugging (e.g. calls to <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code>), where you can inspect objects in a particular environment, is more efficient than simpler techniques such as <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> statements.</p>
-</div>
-<div class="section level2">
-<h2 id="getting-more-descriptive-c-error-messages-after-a-segfault">Getting more descriptive C++ error messages after a segfault<a class="anchor" aria-label="anchor" href="#getting-more-descriptive-c-error-messages-after-a-segfault"></a>
-</h2>
-<p>If you are working in the RStudio IDE, your R session will be aborted if there is a segfault. If you re-run your code in a command-line R session, the session isn’t automatically aborted and so it will be possible to copy the error message accompanying the segfault. Here is an example from a bug which existed at time of writing.</p>
-<pre class="shell"><code>&gt; S3FileSystem$create()
-
- *** caught segfault ***
-address 0x1a0, cause 'memory not mapped'
-
-Traceback:
- 1: (function (anonymous, access_key, secret_key, session_token,     role_arn, session_name, external_id, load_frequency, region,     endpoint_override, scheme, background_writes) {    .Call(`_arrow_fs___S3FileSystem__create`, anonymous, access_key,         secret_key, session_token, role_arn, session_name, external_id,         load_frequency, region, endpoint_override, scheme, background_writes)})(access_key = "", secret_key = "", session_token = "", role_arn = "",     session_name = "", external_id = "", load_frequency = 900L,     region = "", endpoint_override = "", scheme = "", background_writes = TRUE,     anonymous = FALSE)
- 2: exec(fs___S3FileSystem__create, !!!args)
- 3: S3FileSystem$create()</code></pre>
-<p>This output provides the R traceback; however, it doesn’t provide any information about the exact line of C++ code from which the segfault originated. For this, you will need to run R with the C++ debugger attached.</p>
-<div class="section level3">
-<h3 id="running-r-code-with-the-c-debugger-attached">Running R code with the C++ debugger attached<a class="anchor" aria-label="anchor" href="#running-r-code-with-the-c-debugger-attached"></a>
-</h3>
-<p>As Arrow has C++ code at its core, debugging code can sometimes be tricky when errors originate in the C++ rather than the R layer. If you are adding new code which triggers a C++ bug (or find one in existing code), this can result in a segfault. If you are working in RStudio, the session is aborted, and you may not be able to retrieve the error messaging needed to diagnose and/or report the bug. One way around this is to find the code that causes the error, and run R with a C++ debugger.</p>
-<p>If you are using macOS and have installed R using the Apple installer, you will not be able to run R with a debugger attached; please see <a href="https://mac.r-project.org/bin/macosx/RMacOSX-FAQ.html#I-cannot-attach-debugger-to-R" class="external-link">the instructions here for details on causes of this and workarounds.</a></p>
-<p>Firstly, load R with your debugger. The most common debuggers are <code>gdb</code> (typically found on Linux, sometimes on macOS, or Windows via MinGW or Cygwin) and <code>lldb</code> (the default macOS debugger).</p>
-<p>In my case it’s <code>gdb</code>, but if you’re using the <code>lldb</code> debugger (for example, if you’re on a Mac), just swap in that command here.</p>
-<pre class="shell"><code>R -d gdb</code></pre>
-<p>Next, run R.</p>
-<pre class="shell"><code><span class="va">run</span></code></pre>
-<p>You should now be in an R session with the C++ debugger attached. This will look similar to a normal R session, but with extra output.</p>
-<p>Now, run your code - either directly in the session or by sourcing it from a file. If the code results in a segfault, you will have extra output that you can use to diagnose the problem or attach to an issue as extra information.</p>
-<p>Here is debugger output from the segfault shown in the previous example. You can see here that the exact line which triggers the segfault is included in the output.</p>
-<pre class="shell"><code>&gt; S3FileSystem$create()
-
-Thread 1 "R" received signal SIGSEGV, Segmentation fault.
-0x00007ffff0128369 in std::__atomic_base&lt;long&gt;::operator++ (this=0x178) at /usr/include/c++/9/bits/atomic_base.h:318
-318       operator++() noexcept</code></pre>
-<div class="section level4">
-<h4 id="getting-debugger-output-if-your-session-hangs">Getting debugger output if your session hangs<a class="anchor" aria-label="anchor" href="#getting-debugger-output-if-your-session-hangs"></a>
-</h4>
-<p>The instructions above can provide valuable additional context when a segfault occurs. However, there are occasionally circumstances in which a bug could cause your session to hang indefinitely without segfaulting. In this case, it may be diagnostically useful to interrupt the debugger and generate backtraces from all running threads.</p>
-<p>To do this, firstly, press Ctrl/Cmd and C to interrupt the debugger, and then run:</p>
-<pre class="shell"><code>thread apply all bt</code></pre>
-<p>This will generate a large amount of output, but this information is useful when identifying the cause of the issue.</p>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
-</h2>
-<p>The following resources provide detailed guides to debugging R code:</p>
+<p>There are a number of images which have been created for the convenience of Arrow devs and you can find them on <a href="https://hub.docker.com/r/apache/arrow-dev/tags" class="external-link">the DockerHub repo</a>.</p>
+<p>The code below shows an example command you could use to run a Docker container.</p>
+<p>This should be run in the root directory of a checkout of the arrow repo.</p>
+<pre class="shell"><code>docker run -it -e ARROW_DEPENDENCY_SOURCE=AUTO -v $(pwd):/arrow apache/arrow-dev:r-rhub-ubuntu-gcc-release-latest</code></pre>
+<p>Components:</p>
 <ul>
-<li><a href="https://adv-r.hadley.nz/debugging.html" class="external-link">The chapter on debugging in ‘Advanced R’ by Hadley Wickham</a></li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio" class="external-link">The RStudio debugging documentation</a></li>
+<li>
+<code>docker run</code> - command to run the container</li>
+<li>
+<code>-it</code> - run with an interactive terminal so you can run commands on the containers</li>
+<li>
+<code>-e ARROW_DEPENDENCY_SOURCE=AUTO</code> - set the environment variable <code>ARROW_DEPENDENCY_SOURCE</code> to the value <code>AUTO</code>
+</li>
+<li>
+<code>-v $(pwd):/arrow</code> - mount the current directory at <code>/arrow</code> in the container</li>
+<li>
+<code>apache/arrow-dev</code> - the DockerHub repo to get this container from</li>
+<li>
+<code>r-rhub-ubuntu-gcc-release-latest</code> - the image tag</li>
 </ul>
-<p>For an excellent in-depth guide to using the C++ debugger in R, see <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" class="external-link">this blog post by David Vaughan.</a></p>
-<p>You can find a list of equivalent <a href="https://lldb.llvm.org/use/map.html" class="external-link">gdb and lldb commands on the LLDB website.</a></p>
+<p>Once you run this command, if you don’t have a copy of that particular image saved locally, it will first be downloaded before a container is spun up.</p>
+<p>In the example above, mounting the directory in which the Arrow repo was stored on the local machine, meant that that code could be built and tested on the container.</p>
+</div>
+<div class="section level2">
+<h2 id="how-do-i-exit-this-image">How do I exit this image?<a class="anchor" aria-label="anchor" href="#how-do-i-exit-this-image"></a>
+</h2>
+<p>On Linux, press Ctrl+D.</p>
+</div>
+<div class="section level2">
+<h2 id="how-do-i-show-all-images-saved">How do I show all images saved?<a class="anchor" aria-label="anchor" href="#how-do-i-show-all-images-saved"></a>
+</h2>
+<pre class="shell"><code>docker images</code></pre>
+</div>
+<div class="section level2">
+<h2 id="how-do-i-show-all-running-containers">How do I show all running containers?<a class="anchor" aria-label="anchor" href="#how-do-i-show-all-running-containers"></a>
+</h2>
+<pre class="shell"><code>docker ps</code></pre>
+</div>
+<div class="section level2">
+<h2 id="how-do-i-show-all-containers">How do I show all containers?<a class="anchor" aria-label="anchor" href="#how-do-i-show-all-containers"></a>
+</h2>
+<pre class="shell"><code>sudo docker ps -a</code></pre>
+</div>
+<div class="section level2">
+<h2 id="running-existing-workflows-from-docker-compose-yml">Running existing workflows from docker-compose.yml<a class="anchor" aria-label="anchor" href="#running-existing-workflows-from-docker-compose-yml"></a>
+</h2>
+<p>There are a number of workflows outlined in the file <code>docker-compose.yml</code> in the arrow repo root directory. For example, you can use the workflow called <code>r</code> to test building and installing the R package. This is advantageous as you can use existing utility scripts and install it onto a container which already has R on it.</p>
+<p>These workflows are also parameterized, which means you can specify different options (or just use the defaults, which can be found in <code>.env</code>)</p>
+<div class="section level3">
+<h3 id="example---the-manual-way">Example - The manual way<a class="anchor" aria-label="anchor" href="#example---the-manual-way"></a>
+</h3>
+<p>If you wanted to run <a href="https://hub.docker.com/r/rhub/ubuntu-gcc-release" class="external-link">RHub’s latest <code>ubuntu-gcc-release</code> image</a>, you could run:</p>
+<pre class="shell"><code>R_ORG=rhub R_IMAGE=ubuntu-gcc-release R_TAG=latest docker-compose build r
+R_ORG=rhub R_IMAGE=ubuntu-gcc-release R_TAG=latest docker-compose run r</code></pre>
+</div>
+<div class="section level3">
+<h3 id="example---using-archery">Example - Using Archery<a class="anchor" aria-label="anchor" href="#example---using-archery"></a>
+</h3>
+<p>Alternatively, you may prefer to use the <a href="https://arrow.apache.org/docs/developers/docker.html" class="external-link">Archery tool to run docker images</a>. This has the advantage of making it simpler to build some of the existing Arrow CI jobs which have hierarchical dependencies, and so for example, you could build the R package on a container which already has the C++ code pre-built.</p>
+<p>This is the same tool which our CI uses - via a tool called <a href="https://arrow.apache.org/docs/developers/crossbow.html" class="external-link">Crossbow</a>.</p>
+<p>If you want to run the <code>r</code> workflow discussed above, you could run:</p>
+<pre class="shell"><code>R_ORG=rhub R_IMAGE=ubuntu-gcc-release R_TAG=latest archery docker run r</code></pre>
+</div>
 </div>
 </div>
   </div>

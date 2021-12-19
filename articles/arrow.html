@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211208</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211218</span>
       </span>
     </div>
 
@@ -93,6 +93,9 @@
         </li>
         <li>
           <a href="../articles/developers/install_details.html">Package Installation Details</a>
+        </li>
+        <li>
+          <a href="../articles/developers/docker.html">Docker</a>
         </li>
       </ul>
 </li>
@@ -381,10 +384,14 @@
 <td>int64</td>
 </tr>
 <tr class="odd">
-<td>difftime</td>
+<td>hms::hms</td>
 <td>time32</td>
 </tr>
 <tr class="even">
+<td>difftime</td>
+<td>duration</td>
+</tr>
+<tr class="odd">
 <td>vctrs::vctrs_unspecified</td>
 <td>null</td>
 </tr>
@@ -488,11 +495,11 @@
 </tr>
 <tr class="even">
 <td>time32</td>
-<td>hms::difftime</td>
+<td>hms::hms</td>
 </tr>
 <tr class="odd">
 <td>time64</td>
-<td>hms::difftime</td>
+<td>hms::hms</td>
 </tr>
 <tr class="even">
 <td>timestamp</td>
@@ -500,8 +507,7 @@
 </tr>
 <tr class="odd">
 <td>duration</td>
-<td>-<sup>2</sup>
-</td>
+<td>difftime</td>
 </tr>
 <tr class="even">
 <td>decimal</td>

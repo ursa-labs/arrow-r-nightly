@@ -1,10 +1,11 @@
 pandoc: 2.7.3
 pkgdown: 2.0.1.9000
-pkgdown_sha: 1c2bedc10283fe39c5e539083021cb87f208903a
+pkgdown_sha: 83ddb78f31dfeb6491ade584a720d5f101c54389
 articles:
   arrow: arrow.html
   dataset: dataset.html
   debugging: developers/debugging.html
+  docker: developers/docker.html
   install_details: developers/install_details.html
   setup: developers/setup.html
   workflow: developers/workflow.html
@@ -13,7 +14,7 @@ articles:
   fs: fs.html
   install: install.html
   python: python.html
-last_built: 2021-12-09T21:07Z
+last_built: 2021-12-19T01:06Z
 urls:
   reference: https://arrow.apache.org/docs/r/reference
   article: https://arrow.apache.org/docs/r/articles

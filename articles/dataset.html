@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211208</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211218</span>
       </span>
     </div>
 
@@ -93,6 +93,9 @@
         </li>
         <li>
           <a href="../articles/developers/install_details.html">Package Installation Details</a>
+        </li>
+        <li>
+          <a href="../articles/developers/docker.html">Docker</a>
         </li>
       </ul>
 </li>
@@ -393,6 +396,26 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">vendor_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>Note that while you can select a subset of columns, you cannot currently rename columns when writing a dataset.</p>
+</div>
+<div class="section level2">
+<h2 id="partitioning-performance-considerations">Partitioning performance considerations<a class="anchor" aria-label="anchor" href="#partitioning-performance-considerations"></a>
+</h2>
+<p>Partitioning datasets has two aspects that affect performance: it increases the number of files and it creates a directory structure around the files. Both of these have benefits as well as costs. Depending on the configuration and the size of your dataset, the costs can outweigh the benefits.</p>
+<p>Because partitions split up the dataset into multiple files, partitioned datasets can be read and written with parallelism. However, each additional file adds a little overhead in processing for filesystem interaction. It also increases the overall dataset size since each file has some shared metadata. For example, each parquet file contains the schema and group-level statistics. The number of partitions is a floor for the number of files. If you partition a dataset by date with a year of data, you will have at least 365 files. If you further partition by another dimension with 1,000 unique values, you will have up to 365,000 files. This fine of partitioning often leads to small files that mostly consist of metadata.</p>
+<p>Partitioned datasets create nested folder structures, and those allow us to prune which files are loaded in a scan. However, this adds overhead to discovering files in the dataset, as we’ll need to recursively “list directory” to find the data files. Too fine partitions can cause problems here: Partitioning a dataset by date for a years worth of data will require 365 list calls to find all the files; adding another column with cardinality 1,000 will make that 365,365 calls.</p>
+<p>The most optimal partitioning layout will depend on your data, access patterns, and which systems will be reading the data. Most systems, including Arrow, should work across a range of file sizes and partitioning layouts, but there are extremes you should avoid. These guidelines can help avoid some known worst cases:</p>
+<ul>
+<li>Avoid files smaller than 20MB and larger than 2GB.</li>
+<li>Avoid partitioning layouts with more than 10,000 distinct partitions.</li>
+</ul>
+<p>For file formats that have a notion of groups within a file, such as Parquet, similar guidelines apply. Row groups can provide parallelism when reading and allow data skipping based on statistics, but very small groups can cause metadata to be a significant portion of file size. Arrow’s file writer provides sensible defaults for group sizing in most cases.</p>
+</div>
+<div class="section level2">
+<h2 id="transactions-acid-guarantees">Transactions / ACID guarantees<a class="anchor" aria-label="anchor" href="#transactions-acid-guarantees"></a>
+</h2>
+<p>The dataset API offers no transaction support or any ACID guarantees. This affects both reading and writing. Concurrent reads are fine. Concurrent writes or writes concurring with reads may have unexpected behavior. Various approaches can be used to avoid operating on the same files such as using a unique basename template for each writer, a temporary directory for new files, or separate storage of the file list instead of relying on directory discovery.</p>
+<p>Unexpectedly killing the process while a write is in progress can leave the system in an inconsistent state. Write calls generally return as soon as the bytes to be written have been completely delivered to the OS page cache. Even though a write operation has been completed it is possible for part of the file to be lost if there is a sudden power loss immediately after the write call.</p>
+<p>Most file formats have magic numbers which are written at the end. This means a partial file write can safely be detected and discarded. The CSV file format does not have any such concept and a partially written CSV file may be detected as valid.</p>
 </div>
   </div>
 

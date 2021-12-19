@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211208</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211218</span>
       </span>
     </div>
 
@@ -93,6 +93,9 @@
         </li>
         <li>
           <a href="../../articles/developers/install_details.html">Package Installation Details</a>
+        </li>
+        <li>
+          <a href="../../articles/developers/docker.html">Docker</a>
         </li>
       </ul>
 </li>
@@ -183,18 +186,28 @@ needs to be built. It builds libarrow for a bundled, static build, and mirrors t
 <h3 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a>
 </h3>
 <p>The diagram below shows how the R package finds a libarrow installation on Windows.</p>
-<p><img src="install_diagram_windows.png" width="70%"></p>
+<p><img src="install_diagram_windows.png" title="Flowchart of libarrow installation on Windows systems - find full descriptions in sections 'Checking for existing libarrow installations' and 'Downloading libarrow' below" alt="Flowchart of libarrow installation on Windows systems - find full descriptions in sections 'Checking for existing libarrow installations' and 'Downloading libarrow' below" width="70%"></p>
+<div class="section level4">
+<h4 id="checking-for-existing-libarrow-installations">Checking for existing libarrow installations<a class="anchor" aria-label="anchor" href="#checking-for-existing-libarrow-installations"></a>
+</h4>
+<p>When you install the arrow R package on Windows, if the <code>ARROW_HOME</code> environment variable has not been set, the install script looks for an existing libarrow installation. If this cannot be find, it then checks whether the <code>R_WINLIB_LOCAL</code> environment variable has been set to point to a local installation.</p>
+</div>
+<div class="section level4">
+<h4 id="downloading-libarrow">Downloading libarrow<a class="anchor" aria-label="anchor" href="#downloading-libarrow"></a>
+</h4>
+<p>If no existing libarrow installations can be found, the script proceeds to try to download the required version of libarrow, first from the nightly builds repository and then from Rwinlib. The script first tries to find a version of libarrow which is matches the most components according to semantic versioning, and in the case of a failure becomes less specific (i.e. if there are no binaries found for version 0.14.1.1, then try to find one for 0.14.1).</p>
+</div>
 </div>
 <div class="section level3">
-<h3 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a>
+<h3 id="non-windows">Non-Windows<a class="anchor" aria-label="anchor" href="#non-windows"></a>
 </h3>
 <p>The diagram below shows how the R package finds a libarrow installation on non-Windows systems.</p>
-<p><img src="install_nix.png" width="70%"></p>
+<p><img src="install_nix.png" title="Flowchart of libarrow installation on non-Windows systems - find full description in sections 'Using pkg-config', 'Prebuilt binaries' and 'Building from source' below" alt="Flowchart of libarrow installation on non-Windows systems - find full description in sections 'Using pkg-config', 'Prebuilt binaries' and 'Building from source' below" width="70%"></p>
 <p>More information about these steps can be found below.</p>
 <div class="section level4">
 <h4 id="using-pkg-config">Using pkg-config<a class="anchor" aria-label="anchor" href="#using-pkg-config"></a>
 </h4>
-<p>When you install the arrow R package on Linux, if no environment variables relating to the location of an existing libarrow installation have already by set, the installation code will attempt to find libarrow on your system using the <code>pkg-config</code> command.</p>
+<p>When you install the arrow R package on non-Windows systems, if no environment variables relating to the location of an existing libarrow installation have already by set, the installation code will attempt to find libarrow on your system using the <code>pkg-config</code> command.</p>
 <p>This will find either installed system packages or libraries you’ve built yourself. In order for <code>install.packages("arrow")</code> to work with these system packages, you’ll need to install them before installing the R package.</p>
 </div>
 <div class="section level4">
