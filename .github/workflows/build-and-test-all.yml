@@ -211,7 +211,7 @@ jobs:
         platform:
           - windows-latest
           # This is newer than what CRAN builds on, but Travis is no longer an option for us, so...
-          - macos-latest
+          - macos-10.15
         r_version:
           # - "3.5"
           # - "3.6"
@@ -231,6 +231,15 @@ jobs:
         with:
           r-version: ${{ matrix.r_version }}
           Ncpus: 2
+      - name: Create symlink to Rscript
+        # A bug in CRAN installers < 4.1
+        # https://github.com/r-lib/actions/issues/412
+        if: contains(matrix.r_version, '4.0') & contains(matrix.platform, 'macos')
+        run: |
+          cd /usr/local/bin
+          if [ ! -f ./Rscript ]; then
+            sudo ln -s /Library/Frameworks/R.framework/Resources/bin/Rscript .
+          fi
       - name: Build and upload
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
