@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211228</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20220106</span>
       </span>
     </div>
 
@@ -299,13 +299,14 @@ We recommend looking at the documentation next to the source code for these func
 </h3>
 <p>If the function cannot be mapped directly, some extra work may be needed to ensure that calling the arrow version of the function results in the same result as calling the R version of the function. In this case, the function will need adding to the <code>nse_funcs</code> list in <code>arrow/r/R/dplyr-functions.R</code>. Here is how this might look for <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nse_funcs</span><span class="op">$</span><span class="va">startsWith</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">prefix</span><span class="op">)</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="fu"><a href="../../reference/register_binding.html">register_binding</a></span><span class="op">(</span><span class="st">"startsWith"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">prefix</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">Expression</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>
     <span class="st">"starts_with"</span>,
     <span class="va">x</span>,
     options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="va">prefix</span><span class="op">)</span>
   <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>In the source files, all the <code><a href="../../reference/register_binding.html">register_binding()</a></code> calls are wrapped in functions that are called on package load. These are separated into files based on subject matter (e.g., <code>R/dplyr-funcs-math.R</code>, <code>R/dplyr-funcs-string.R</code>): find the closest analog to the function whose binding is being defined and define the new binding in a similar location. For example, the binding for <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith()</a></code> is registered in <code>dplyr-funcs-string.R</code> next to the binding for <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">endsWith()</a></code>.</p>
 <p>Hint: you can use <code><a href="../../reference/call_function.html">call_function()</a></code> to call a compute function directly from R. This might be useful if you want to experiment with a compute function while you’re writing bindings for it, e.g.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/call_function.html">call_function</a></span><span class="op">(</span>
@@ -326,7 +327,8 @@ We recommend looking at the documentation next to the source code for these func
 <div class="section level2">
 <h2 id="step-4---run-and-potentially-add-to-your-tests-">Step 4 - Run (and potentially add to) your tests.<a class="anchor" aria-label="anchor" href="#step-4---run-and-potentially-add-to-your-tests-"></a>
 </h2>
-<p>In the process of implementing the function, you may end up implementing more tests, for example if you discover unusual edge cases. This is fine - add them to the ones you wrote originally, and run them all. If they pass, you’re done! Submit a PR. If you’ve modified the C++ code in the R package (for example, when hooking up a binding to its options class), you should make sure to run <code>arrow/r/lint.sh</code> to lint the code.</p>
+<p>In the process of implementing the function, you will need at least one test to make sure that your binding works and that future changes to the Arrow R package don’t break it! Bindings are tested in files that correspond to the file in which they were defined (e.g., <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith()</a></code> is tested in <code>tests/testthat/test-dplyr-funcs-string.R</code>) next to the tests for <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">endsWith()</a></code>.</p>
+<p>You may end up implementing more tests, for example if you discover unusual edge cases. This is fine - add them to the ones you wrote originally, and run them all. If they pass, you’re done and you can submit a PR. If you’ve modified the C++ code in the R package (for example, when hooking up a binding to its options class), you should make sure to run <code>arrow/r/lint.sh</code> to lint the code.</p>
 </div>
 </div>
   </div>

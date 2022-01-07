@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211228</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20220106</span>
       </span>
     </div>
 
@@ -329,6 +329,46 @@
 <p>This code returns an output instantly and shows the manipulations you’ve made, without loading data from the files. Because the evaluation of these queries is deferred, you can build up a query that selects down to a small subset without generating intermediate datasets that would potentially be large.</p>
 <p>Second, all work is pushed down to the individual data files, and depending on the file format, chunks of data within the files. As a result, you can select a subset of data from a much larger dataset by collecting the smaller slices from each file—you don’t have to load the whole dataset in memory to slice from it.</p>
 <p>Third, because of partitioning, you can ignore some files entirely. In this example, by filtering <code>year == 2015</code>, all files corresponding to other years are immediately excluded: you don’t have to load them in order to find that no rows match the filter. Relatedly, since Parquet files contain row groups with statistics on the data within, there may be entire chunks of data you can avoid scanning because they have no rows where <code>total_amount &gt; 100</code>.</p>
+<div class="section level3">
+<h3 id="processing-data-in-batches">Processing data in batches<a class="anchor" aria-label="anchor" href="#processing-data-in-batches"></a>
+</h3>
+<p>Sometimes you want to run R code on the entire dataset, but that dataset is much larger than memory. You can use <code>map_batches</code> on a dataset query to process it batch-by-batch.</p>
+<p><strong>Note</strong>: <code>map_batches</code> is experimental and not recommended for production use.</p>
+<p>As an example, to randomly sample a dataset, use <code>map_batches</code> to sample a percentage of rows from each batch:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sampled_data</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/map_batches.html">map_batches</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_frac</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fl">1e-4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">sampled_data</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## 'data.frame':    15603 obs. of  4 variables:</span>
+<span class="co">##  $ tip_amount     : num  0 0 1.55 1.45 5.2 ...</span>
+<span class="co">##  $ total_amount   : num  5.8 16.3 7.85 8.75 26 ...</span>
+<span class="co">##  $ passenger_count: int  1 1 1 1 1 6 5 1 2 1 ...</span>
+<span class="co">##  $ tip_pct        : num  0 0 0.197 0.166 0.2 ...</span></code></pre>
+<p>This function can also be used to aggregate summary statistics over a dataset by computing partial results for each batch and then aggregating those partial results. Extending the example above, you could fit a model to the sample data and then use <code>map_batches</code> to compute the MSE on the full dataset.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tip_pct</span> <span class="op">~</span> <span class="va">total_amount</span> <span class="op">+</span> <span class="va">passenger_count</span>, data <span class="op">=</span> <span class="va">sampled_data</span><span class="op">)</span>
+
+<span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/map_batches.html">map_batches</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">batch</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">batch</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pred_tip_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.nan</a></span><span class="op">(</span><span class="va">tip_pct</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>sse_partial <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">pred_tip_pct</span> <span class="op">-</span> <span class="va">tip_pct</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, n_partial <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>mse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sse_partial</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n_partial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">mse</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## [1] 0.1304284</span></code></pre>
+</div>
 </div>
 <div class="section level2">
 <h2 id="more-dataset-options">More dataset options<a class="anchor" aria-label="anchor" href="#more-dataset-options"></a>
@@ -362,19 +402,19 @@
 <p>As you can see, querying a large dataset can be made quite fast by storage in an efficient binary columnar format like Parquet or Feather and partitioning based on columns commonly used for filtering. However, data isn’t always stored that way. Sometimes you might start with one giant CSV. The first step in analyzing data is cleaning is up and reshaping it into a more usable form.</p>
 <p>The <code><a href="../reference/write_dataset.html">write_dataset()</a></code> function allows you to take a Dataset or another tabular data object—an Arrow Table or RecordBatch, or an R data frame—and write it to a different file format, partitioned into multiple files.</p>
 <p>Assume that you have a version of the NYC Taxi data as CSV:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_dataset.html">open_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/csv/"</span>, format <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></code></pre></div>
 <p>You can write it to a new location and translate the files to the Feather format by calling <code><a href="../reference/write_dataset.html">write_dataset()</a></code> on it:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="va">ds</span>, <span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>Next, let’s imagine that the <code>payment_type</code> column is something you often filter on, so you want to partition the data by that variable. By doing so you ensure that a filter like <code>payment_type == "Cash"</code> will touch only a subset of files where <code>payment_type</code> is always <code>"Cash"</code>.</p>
 <p>One natural way to express the columns you want to partition on is to use the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> method:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>This will write files to a directory tree that looks like this:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"tree nyc-taxi/feather"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## feather</span>
 <span class="co">## ├── payment_type=1</span>
@@ -388,12 +428,12 @@
 <span class="co">## 18 directories, 23 files</span></code></pre>
 <p>Note that the directory names are <code>payment_type=Cash</code> and similar: this is the Hive-style partitioning described above. This means that when you call <code><a href="../reference/open_dataset.html">open_dataset()</a></code> on this directory, you don’t have to declare what the partitions are because they can be read from the file paths. (To instead write bare values for partition segments, i.e. <code>Cash</code> rather than <code>payment_type=Cash</code>, call <code><a href="../reference/write_dataset.html">write_dataset()</a></code> with <code>hive_style = FALSE</code>.)</p>
 <p>Perhaps, though, <code>payment_type == "Cash"</code> is the only data you ever care about, and you just want to drop the rest and have a smaller working set. For this, you can <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> them out when writing:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">payment_type</span> <span class="op">==</span> <span class="st">"Cash"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>The other thing you can do when writing datasets is select a subset of columns or reorder them. Suppose you never care about <code>vendor_id</code>, and being a string column, it can take up a lot of space when you read it in, so let’s drop it:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">vendor_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>

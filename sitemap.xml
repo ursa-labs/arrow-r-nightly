@@ -331,6 +331,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/reexports.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/register_binding.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/repeat_value_as_array.html</loc>
   </url>
   <url>

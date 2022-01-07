@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20211228</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1.20220106</span>
       </span>
     </div>
 
@@ -141,6 +141,7 @@
 </ul></li>
 <li>Added <code><a href="../reference/data-type.html">decimal128()</a></code> (<del>identical to <code><a href="../reference/data-type.html">decimal()</a></code></del>) as the name is more explicit and updated docs to encourage its use.</li>
 <li>Source builds now by default use <code>pkg-config</code> to search for system dependencies (such as <code>libz</code>) and link to them if present. To retain the previous behaviour of downloading and building all dependencies, set <code>ARROW_DEPENDENCY_SOURCE=BUNDLED</code>.</li>
+<li>Opening datasets now use async scanner by default which resolves a deadlock issues related to reading in large multi-CSV datasets</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="6.0.1" id="arrow-601">arrow 6.0.1<small>2021-11-20</small><a class="anchor" aria-label="anchor" href="#arrow-601"></a></h2>
