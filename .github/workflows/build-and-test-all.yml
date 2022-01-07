@@ -234,7 +234,7 @@ jobs:
       - name: Create symlink to Rscript
         # A bug in CRAN installers < 4.1
         # https://github.com/r-lib/actions/issues/412
-        if: contains(matrix.r_version, '4.0') & contains(matrix.platform, 'macos')
+        if: contains(matrix.r_version, '4.0') && contains(matrix.platform, 'macos')
         run: |
           cd /usr/local/bin
           if [ ! -f ./Rscript ]; then
