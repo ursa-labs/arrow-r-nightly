@@ -255,10 +255,9 @@ jobs:
           - "rhub/ubuntu-gcc-release" # ubuntu-20.04 (focal)
           - "rstudio/r-base:4.1-bionic"
           - "rstudio/r-base:4.1-centos7"
-          - "rstudio/r-base:4.1-centos8"
           - "rocker/r-ver:3.6.3" # for debian:buster (10)
           - "rocker/r-ver" # ubuntu-20.04
-          - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to centos-8
+          - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to ubuntu-18.04
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
