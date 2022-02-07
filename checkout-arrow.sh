@@ -31,7 +31,3 @@ cp ../dev/tasks/homebrew-formulae/autobrew/apache-arrow.rb tools/apache-arrow.rb
 cd tools
 sed -i.bak -E -e 's/arrow.git"$/arrow.git", :revision => "'"$(git rev-list -n 1 HEAD)"'"/' apache-arrow.rb
 rm -f apache-arrow.rb.bak
-
-# Temporary: download distro-map.csv from this branch
-sed -i.bak -E -e 's/master/rm-centos-8/' nixlibs.R
-rm -f nixlibs.R.bak
