@@ -238,6 +238,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/flight_connect.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/flight_disconnect.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/flight_get.html</loc>
   </url>
   <url>
