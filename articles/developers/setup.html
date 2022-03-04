@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Arrow R Package</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.0.20220302</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.0.20220303</span>
       </span>
     </div>
 
@@ -224,26 +224,25 @@
 </h5>
 <p>The package can be built on Windows using <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools 4</a>. It can be built for mingw32 (i386), mingw64 (x64), or ucrt64 (UCRT x64). mingw64 is the recommended 64-bit installation.</p>
 <p>Open the corresponding RTools Bash, for example “Rtools MinGW 64-bit” for mingw64.</p>
-<p>Install CMake and Ninja with:</p>
+<p>Install CMake, ccache, and Ninja with:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">pacman</span> --sync --refresh --noconfirm \</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-cmake \</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-ninja \</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-openssl</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="bu">export</span> <span class="va">CMAKE_GENERATOR=</span>Ninja</span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-<span class="dt">{ccache,cmake,ninja,openssl}</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">export</span> <span class="va">CMAKE_GENERATOR=</span>Ninja</span></code></pre></div>
 <p>You will need to add R to your path. For a user-level installation, R will be at something like <code>~/Documents/R/R-4.1.2/bin</code>. For a global installation, R will be at something like <code>/c/Program\ Files/R/R-4.1.2/bin</code>. The R on your path needs to match the architecture you are compiling for, so if you are compiling on 32-bit specify <code>.../bin/i386</code> instead of <code>.../bin/x64</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents/R/R-4.1.2/bin/x64:<span class="va">$PATH</span></span></code></pre></div>
 <p>You can install additional dependencies like so. Note that you are limited to the packages in <a href="https://github.com/r-windows/rtools-packages" class="external-link">the RTools repo</a>, which does not contain every dependency used by Arrow.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pacman</span> --sync --refresh --noconfirm \</span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-boost \</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-lz4 \</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-protobuf \</span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-snappy \</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-thrift \</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zlib \</span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zstd \</span>
-<span id="cb8-9"><a href="#cb8-9"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-aws-sdk-cpp \</span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-re2 \</span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-libutf8proc</span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-brotli \</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-lz4 \</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-protobuf \</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-snappy \</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-thrift \</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zlib \</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-zstd \</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-aws-sdk-cpp \</span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-re2 \</span>
+<span id="cb8-12"><a href="#cb8-12"></a>  <span class="va">${MINGW_PACKAGE_PREFIX}</span>-libutf8proc</span></code></pre></div>
 </div>
 </div>
 <div class="section level4">
@@ -296,19 +295,12 @@
 <span id="cb14-6"><a href="#cb14-6"></a>  -DARROW_DATASET=ON \</span>
 <span id="cb14-7"><a href="#cb14-7"></a>  -DARROW_EXTRA_ERROR_CONTEXT=ON \</span>
 <span id="cb14-8"><a href="#cb14-8"></a>  -DARROW_FILESYSTEM=ON \</span>
-<span id="cb14-9"><a href="#cb14-9"></a>  -DARROW_INSTALL_NAME_RPATH=OFF \</span>
+<span id="cb14-9"><a href="#cb14-9"></a>  -DARROW_MIMALLOC=ON \</span>
 <span id="cb14-10"><a href="#cb14-10"></a>  -DARROW_JSON=OFF \</span>
 <span id="cb14-11"><a href="#cb14-11"></a>  -DARROW_PARQUET=ON \</span>
-<span id="cb14-12"><a href="#cb14-12"></a>  -DARROW_WITH_LZ4=OFF \</span>
-<span id="cb14-13"><a href="#cb14-13"></a>  -DARROW_WITH_SNAPPY=OFF \</span>
-<span id="cb14-14"><a href="#cb14-14"></a>  -DARROW_WITH_ZLIB=ON \</span>
-<span id="cb14-15"><a href="#cb14-15"></a>  -DARROW_MIMALLOC=OFF \</span>
-<span id="cb14-16"><a href="#cb14-16"></a>  -DARROW_S3=OFF \</span>
-<span id="cb14-17"><a href="#cb14-17"></a>  -DARROW_WITH_BROTLI=ON \</span>
-<span id="cb14-18"><a href="#cb14-18"></a>  -DARROW_WITH_BZ2=ON \</span>
-<span id="cb14-19"><a href="#cb14-19"></a>  -DARROW_WITH_SNAPPY=ON \</span>
-<span id="cb14-20"><a href="#cb14-20"></a>  -DARROW_WITH_ZSTD=ON \</span>
-<span id="cb14-21"><a href="#cb14-21"></a>  ..</span></code></pre></div>
+<span id="cb14-12"><a href="#cb14-12"></a>  -DARROW_WITH_SNAPPY=OFF \</span>
+<span id="cb14-13"><a href="#cb14-13"></a>  -DARROW_WITH_ZLIB=ON \</span>
+<span id="cb14-14"><a href="#cb14-14"></a>  ..</span></code></pre></div>
 </div>
 </div>
 <div class="section level5">
