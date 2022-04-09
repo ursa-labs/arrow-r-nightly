@@ -88,6 +88,12 @@
     <loc>https://arrow.apache.org/docs/r/reference/Expression.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/ExtensionArray.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/ExtensionType.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/FeatherReader.html</loc>
   </url>
   <url>
@@ -292,6 +298,9 @@
     <loc>https://arrow.apache.org/docs/r/reference/mmap_open.html</loc>
   </url>
   <url>
+    <loc>https://arrow.apache.org/docs/r/reference/new_extension_type.html</loc>
+  </url>
+  <url>
     <loc>https://arrow.apache.org/docs/r/reference/open_dataset.html</loc>
   </url>
   <url>
@@ -362,6 +371,9 @@
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/value_counts.html</loc>
+  </url>
+  <url>
+    <loc>https://arrow.apache.org/docs/r/reference/vctrs_extension_array.html</loc>
   </url>
   <url>
     <loc>https://arrow.apache.org/docs/r/reference/write_arrow.html</loc>
