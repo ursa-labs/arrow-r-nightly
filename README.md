@@ -27,4 +27,3 @@ Additional distribution-versions are supported by mapping them to binary builds 
 
 All Linux binaries except for `centos-7` include support for connecting to AWS S3, so they have additional system requirements--`libcurl` and `openssl`--that must be installed prior to installing `arrow`. The `aws-sdk-cpp` requires gcc >= 4.9 so is not supported in the gcc 4.8 build.
 
-The `pkgdown` documentation site is also built daily. See https://ursalabs.org/arrow-r-nightly/.
