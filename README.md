@@ -15,8 +15,8 @@ These daily package builds are not official Apache releases and are not recommen
 
 We currently build binary R packages for the following OS and versions:
 
-* macOS: R 4.0, 4.1
-* Windows: R 4.0, 4.1
+* macOS: R 4.1, 4.2
+* Windows: R 4.1, 4.2
 
 We also build a couple of versions of C++ static binaries for Linux:
 
