@@ -81,7 +81,7 @@ jobs:
       - name: Install Boto
         run: python -m pip install boto3
       - name: Install R
-        uses: r-lib/actions/setup-r@master
+        uses: r-lib/actions/setup-r@v2
         with:
           install-r: false
       - name: Build and upload R source package
@@ -170,7 +170,7 @@ jobs:
           DATE: ${{needs.setup.outputs.date}}
         shell: bash
         run: source checkout-arrow.sh
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v2
         with:
           rtools-version: 40
           r-version: "4.0"
