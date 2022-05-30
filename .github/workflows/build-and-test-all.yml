@@ -111,7 +111,8 @@ jobs:
         config:
         # Ubuntu 22.04 uses openssl3 so needs it's own binary
         # https://issues.apache.org/jira/browse/ARROW-16678
-          - { os: ubuntu, version: ["18.04", "22.04"] }
+          - { os: ubuntu, version: "18.04" }
+          - { os: ubuntu, version: "22.04" }
           - { os: centos, version: "7" }
     env:
       VERSION: ${{ matrix.config.version }}
