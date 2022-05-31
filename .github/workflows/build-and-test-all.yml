@@ -108,7 +108,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        # Ubuntu 22.04 uses openssl3 so needs its own binary
+        # https://issues.apache.org/jira/browse/ARROW-16678
           - { os: ubuntu, version: "18.04" }
+          - { os: ubuntu, version: "22.04" }
           - { os: centos, version: "7" }
     env:
       VERSION: ${{ matrix.config.version }}
@@ -248,6 +251,7 @@ jobs:
           - "rocker/r-ver:3.6.3" # for debian:buster (10)
           - "rocker/r-ver" # ubuntu-20.04
           - "rhub/fedora-clang-devel" # tests distro-map.csv, mapped to ubuntu-18.04
+          - "rocker/r-ubuntu:22.04" # tests openssl3 compatibility
     steps:
       - name: Checkout arrow-r-nightly
         uses: actions/checkout@v1
