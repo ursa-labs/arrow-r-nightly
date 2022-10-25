@@ -2,6 +2,10 @@
 
 [![Build and test](https://github.com/ursa-labs/arrow-r-nightly/actions/workflows/build-and-test-all.yml/badge.svg)](https://github.com/ursa-labs/arrow-r-nightly/actions/workflows/build-and-test-all.yml)
 
+> This project is defunct. Binary R packaging has been moved to `apache/arrow` and binaries are published to https://nightlies.apache.org/arrow/r. See https://arrow.apache.org/docs/r/#installing-a-development-version.
+
+-----
+
 This repository holds build scripts that pull the [`apache/arrow`](https://github.com/apache/arrow) repository and build and test the R package across several versions of R on macOS and Windows. They also build static `libarrow` C++ libraries for several Linux distributions and for Windows.
 These builds are triggered daily and are pushed to a package repository at https://arrow-r-nightly.s3.amazonaws.com.
 
